@@ -271,21 +271,7 @@ def gtag_jsonld(obj):
 NAV_ITEMS = [
     ("home", "Home", ""),
     ("classes", "Classes", "classes/"),
-    ("pairing", "Pairing Scheme", "pairing-scheme/"),
-    ("guess", "Guess Papers", "guess-papers/"),
-    ("past", "Past Papers", "past-papers/"),
-    ("results", "Results", "results/"),
-    ("mdcat", "MDCAT", "mdcat/"),
-    ("css", "CSS", "css/"),
-    ("ebooks", "eBooks", "ebooks/"),
-    ("blog", "Blog", "blog/"),
-]
-
-# every main option, always visible under the header (horizontal swipe on mobile)
-SUBNAV_ITEMS = [
-    ("home", "Home", ""),
-    ("classes", "Classes", "classes/"),
-    ("smart", "Smart Syllabus ✦", "smart-syllabus/"),
+    ("smart", "Smart Syllabus \u2726", "smart-syllabus/"),
     ("pairing", "Pairing Scheme", "pairing-scheme/"),
     ("guess", "Guess Papers", "guess-papers/"),
     ("past", "Past Papers", "past-papers/"),
@@ -295,14 +281,8 @@ SUBNAV_ITEMS = [
     ("mdcat", "MDCAT", "mdcat/"),
     ("css", "CSS", "css/"),
     ("ebooks", "eBooks", "ebooks/"),
-    ("updates", "Updates", "updates/"),
     ("blog", "Blog", "blog/"),
 ]
-
-def subnav_html(R, page_key):
-    links = "".join(
-        f'<a href="{R}{p}"{" class=active" if k == page_key else ""}>{l}</a>' for k, l, p in SUBNAV_ITEMS)
-    return f'<nav class="subnav" aria-label="All sections"><div class="container">{links}</div></nav>'
 
 def ticker_html(R):
     items = "".join(
@@ -323,7 +303,7 @@ def mega_menu(R):
     return cols
 
 def header_html(R, page_key):
-    nav = f'<li><a href="{R}" data-nav="home">{icon("home",14)} Home</a></li>'
+    nav = ""
     nav += (f'<li class="has-mega"><button class="nav-btn" data-nav="classes" type="button">Classes '
             f'<svg class="caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></button>'
             f'<div class="mega"><div class="mega-grid">{mega_menu(R)}</div></div></li>')
@@ -520,7 +500,6 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
 <a class="skip-link" href="#main">Skip to content</a>
 {ticker_html(R)}
 {header_html(R, page_key)}
-{subnav_html(R, page_key)}
 {drawer_html(R)}
 {search_overlay()}
 <main id="main">
