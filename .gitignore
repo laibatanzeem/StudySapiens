@@ -1,0 +1,21 @@
+# ---- build output (regenerate anytime with: python3 build.py) ----
+site/
+
+# ---- QA screenshots (not part of the product) ----
+shots/
+
+# ---- Python cache ----
+__pycache__/
+*.pyc
+*.pyo
+
+# ---- rolling backup made by scripts/new_update.py (git history replaces it) ----
+scripts/data_backup.py
+
+# ---- local preview leftovers ----
+messages.csv
+*.log
+
+# ---- OS junk ----
+.DS_Store
+Thumbs.db
