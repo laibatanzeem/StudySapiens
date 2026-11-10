@@ -1,0 +1,39 @@
+{
+  "slug": "study-skills-basics",
+  "title": "Study Skills: Are You Exam-Ready?",
+  "cls": "All classes",
+  "subject": "Study Skills",
+  "desc": "A quick 5-question warm-up that also shows how our new test engine works: instant scoring, explanation after every answer, unlimited retakes.",
+  "questions": [
+    {
+      "q": "You just finished reading a new chapter for the first time. When is the best moment for your FIRST revision of it?",
+      "opts": ["The night before the exam", "Within 24 hours of first reading", "After one full week", "Only when the teacher takes a test"],
+      "ans": 1,
+      "e": "Memory fades fastest in the first day. One short revision within 24 hours locks in most of the chapter for far longer."
+    },
+    {
+      "q": "Your board paper has NO negative marking. You do not know the answer to 3 MCQs. What should you do?",
+      "opts": ["Leave them blank to stay safe", "Attempt them anyway with your best guess", "Copy a nearby answer pattern", "Spend 20 minutes worrying about them"],
+      "ans": 1,
+      "e": "With no negative marking, a blank answer is a guaranteed zero while a guess has a real chance. Attempt every single question."
+    },
+    {
+      "q": "What is the smartest way to use a past paper during preparation?",
+      "opts": ["Read the questions and answers like notes", "Memorise the answers word for word", "Solve it in one sitting with the real time limit, then check", "Only read the questions you already know"],
+      "ans": 2,
+      "e": "A timed attempt trains exactly the skill the exam tests: producing answers under pressure. Reading solved papers feels productive but builds little exam skill."
+    },
+    {
+      "q": "A topic completely confuses you two weeks before boards. What is the best move?",
+      "opts": ["Skip it and hope it does not come", "Read the whole book again from page one", "Panic quietly and study nothing that day", "Break it into small parts, learn one part, and ask your teacher about the rest"],
+      "ans": 3,
+      "e": "Skipping whole topics is how easy marks are lost. Small chunks plus one honest question to a teacher fixes almost any topic in a day or two."
+    },
+    {
+      "q": "Which daily habit gives the biggest return in board-exam preparation?",
+      "opts": ["Highlighting every line of the book", "Writing answers by hand, a little every day", "Watching long study videos at 2x speed", "Studying only in the last month"],
+      "ans": 1,
+      "e": "Board marks are earned by the hand, not the eye. Daily written practice builds speed, presentation and memory together."
+    }
+  ]
+}
