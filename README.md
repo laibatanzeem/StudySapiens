@@ -902,3 +902,20 @@ yet.** These two are deliberately deferred — flip them only when:
   files. 609 published files; forms-verify 61.
 - Day total (14 Nov): 276 new files across 7 subjects; site 289 → 347 pages,
   333 → 609 published files.
+
+## Hotfix: live site 500 after first full upload (14 Nov 2026)
+
+- Symptom: every page returned HTTP 500 after uploading the full zip; only
+  edge-cached assets (old CSS) still served — origin broken for all requests.
+- Cause: the `.htaccess` canonical-redirect block. The previously live site
+  (base-commit build) shipped **no .htaccess at all**, so these rules had never
+  run on Hostooze. Behind their edge cache the origin can see plain HTTP, making
+  `RewriteCond %{HTTPS} off` always true → 301 loop → 500 on everything.
+- Fix: `.htaccess` v2 (compatibility-first) — the whole mod_rewrite block is
+  removed. Force HTTPS via the Hostooze panel toggle instead (right layer, no
+  loop); canonical tags already handle www consolidation for SEO. Kept:
+  DirectoryIndex, 404 page, security + cache headers (all inside IfModule).
+  Dropped until the host is understood better: CSP-Report-Only,
+  Permissions-Policy, PDF Content-Disposition.
+- Recovery order for the user: (1) rename .htaccess → .htaccess.off to confirm,
+  (2) upload the v2 zip (or just its .htaccess), (3) purge Edge Caching.
