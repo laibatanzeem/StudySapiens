@@ -832,7 +832,7 @@ def build_home(posts=None):
         <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:12px">Know Your Aggregate Before UHS Tells You</h2>
         <p class="muted" style="margin-bottom:8px">Matric 10% + FSc 40% + MDCAT 50%. Enter your marks and see your exact aggregate, a live breakdown, and whether you clear the 55% MBBS eligibility mark.</p>
         <ul style="margin-bottom:22px;color:var(--ink-soft)">
-          <li>{icon("check",15)} Latest PMDC pattern: 200 MCQs, no negative marking</li>
+          <li>{icon("check",15)} Official PMDC pattern: 180 MCQs, no negative marking</li>
           <li>{icon("check",15)} Subject-wise MDCAT syllabus & prep strategy</li>
           <li>{icon("check",15)} Chapter-wise free MCQ practice from our test bank</li>
         </ul>
@@ -1489,7 +1489,8 @@ def build_ebooks():
 def build_mdcat():
     R = "../"
     W = MDCAT["weights"]
-    pattern_rows = "".join(f'<tr><td style="font-weight:700">{esc(s)}</td><td>{m}</td><td>{round(m/2)}%</td></tr>' for s, m in MDCAT["pattern"])
+    mdcat_total = sum(m for _, m in MDCAT["pattern"])
+    pattern_rows = "".join(f'<tr><td style="font-weight:700">{esc(s)}</td><td>{m}</td><td>{round(m*100/mdcat_total)}%</td></tr>' for s, m in MDCAT["pattern"])
     syl = "".join(f"""
 <div class="qa">
   <button class="qa-head" aria-expanded="false"><span class="q-tag" style="background:var(--navy-700)">{icon('book',11)} {subj}</span> {len(topics)} topic areas
@@ -1505,7 +1506,7 @@ def build_mdcat():
     body += f"""
 <section class="section" style="padding-top:26px;padding-bottom:0">
   <div class="container" style="max-width:880px">{answer_box("What is the MDCAT aggregate formula for MBBS admission?",
-    "Public-sector colleges in Punjab (through UHS) use: <b>Matric 10% + FSc 40% + MDCAT 50%</b>. Each percentage is weighted and added. You also need at least 55% in MDCAT for MBBS and 50% for BDS to stay eligible. Example: Matric 90%, FSc 85%, MDCAT 170/200 (85%) gives 9 + 34 + 42.5 = <b>85.5% aggregate</b>.",
+    "Public-sector colleges in Punjab (through UHS) use: <b>Matric 10% + FSc 40% + MDCAT 50%</b>. Each percentage is weighted and added. You also need at least 55% in MDCAT for MBBS and 50% for BDS to stay eligible. Example: Matric 90%, FSc 85%, MDCAT 153/180 (85%) gives 9 + 34 + 42.5 = <b>85.5% aggregate</b>.",
     "Weights are from the official PMDC / UHS admission policy. Confirm the current year's advertisement before applying; we update this page whenever policy changes.")}</div>
 </section>
 <section class="section" id="calculator" style="padding-top:26px">
@@ -1534,8 +1535,8 @@ def build_mdcat():
         <div class="calc-row">
           <label>MDCAT Score <span class="wt">weight {W['mdcat']}%</span></label>
           <div class="calc-inputs">
-            <input id="mdcatObt" type="number" inputmode="numeric" min="0" max="200" placeholder="Obtained e.g. 178">
-            <input id="mdcatTot" type="number" inputmode="numeric" min="1" max="200" value="200" placeholder="Total">
+            <input id="mdcatObt" type="number" inputmode="numeric" min="0" max="180" placeholder="Obtained e.g. 153">
+            <input id="mdcatTot" type="number" inputmode="numeric" min="1" max="180" value="180" placeholder="Total">
           </div>
         </div>
         <p class="calc-note">Tip: you can estimate with expected MDCAT marks too. Totals are editable in case your year differs.</p>
@@ -1566,10 +1567,11 @@ def build_mdcat():
         <h2 style="margin-bottom:14px">MDCAT at a Glance</h2>
         <table class="asp" style="background:#fff;border-radius:12px;overflow:hidden">
           <thead><tr><th>Section</th><th>MCQs</th><th>Weight</th></tr></thead>
-          <tbody>{pattern_rows}<tr style="font-weight:800"><td>Total</td><td>200</td><td>100%</td></tr></tbody>
+          <tbody>{pattern_rows}<tr style="font-weight:800"><td>Total</td><td>{mdcat_total}</td><td>100%</td></tr></tbody>
         </table>
+        <p class="small" style="color:#CCCDB4;margin-top:12px">Last verified against PMDC's official MDCAT-2026 notices on 13 November 2026: <a style="color:var(--gold-300)" href="https://pmdc.pk/Documents/Others/Public%20Notice%20Regarding%20Opening%20of%20Online%20Registration%20Portal%20for%20MDCAT-2026.pdf" target="_blank" rel="noopener">pattern &amp; registration notice (PDF)</a> &middot; <a style="color:var(--gold-300)" href="https://pmdc.pk/Documents/Others/MDCAT-2026%20Rescheduling%20Public%20Notice.pdf" target="_blank" rel="noopener">rescheduling notice (PDF)</a>. MDCAT 2026 was held on 20 September 2026. MDCAT 2027 details will appear here the day PMDC announces them.</p>
         <ul style="margin-top:18px;color:#CCCDB4">
-          <li>{icon("check",15)} Duration: 180 minutes (about 54 sec/MCQ)</li>
+          <li>{icon("check",15)} Paper-based test in English. Difficulty mix: 15% easy, 70% moderate, 15% difficult</li>
           <li>{icon("check",15)} No negative marking. Attempt everything</li>
           <li>{icon("check",15)} Passing: 55% for MBBS, 50% for BDS</li>
           <li>{icon("check",15)} Valid nationwide; NUMS uses MDCAT score too</li>

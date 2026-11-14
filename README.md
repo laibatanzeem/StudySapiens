@@ -291,3 +291,14 @@ Made with 💛 for Pakistan's students.
 
 ## Content progress
 Now owner-driven: content = the files you upload. See "How to upload notes / papers" above.
+
+## Corrections & policy changelog
+- **13 Nov 2026 - MDCAT pattern corrected (critical):** earlier pages showed the old
+  200-MCQ pattern (Bio 68 / Chem 54 / Phy 54 / Eng 18 / LR 6). PMDC's official MDCAT-2026
+  notices confirm **180 MCQs: Biology 81, Chemistry 45, Physics 36, English 9, Logical
+  Reasoning 9**, no negative marking, difficulty mix 15/70/15; exam held 20 Sep 2026
+  (rescheduled from 16 Aug). Fixed on /mdcat/ (pattern table + calculator defaults, now
+  out of 180), the MDCAT-2026 guide article, homepage promo, journey timeline and the
+  blog-guide example. Added "last verified" lines linking both PMDC PDFs, calculator test
+  cases (180 / 99 / 90 / decimals / zero / invalid), and a public correction notice at
+  /updates/mdcat-2026-pattern-correction/. MDCAT 2027 content waits for the official notice.

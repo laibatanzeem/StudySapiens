@@ -108,6 +108,27 @@ BOARDS = ["Lahore", "Gujranwala", "Multan", "Faisalabad", "Rawalpindi",
 # ------------------------------------------------------------------
 UPDATES = [
     {
+        "slug": "mdcat-2026-pattern-correction",
+        "title": "Correction: Official MDCAT 2026 Pattern Is 180 MCQs",
+        "date": "November 13, 2026",
+        "tag": "MDCAT",
+        "excerpt": "The official PMDC MDCAT-2026 pattern is 180 MCQs (Biology 81, Chemistry 45, Physics 36, English 9, Logical Reasoning 9). Exam held 20 September 2026.",
+        "sources": [("PMDC: MDCAT-2026 registration & pattern notice (PDF)", "https://pmdc.pk/Documents/Others/Public%20Notice%20Regarding%20Opening%20of%20Online%20Registration%20Portal%20for%20MDCAT-2026.pdf"),
+                    ("PMDC: MDCAT-2026 rescheduling notice (PDF)", "https://pmdc.pk/Documents/Others/MDCAT-2026%20Rescheduling%20Public%20Notice.pdf")],
+        "body": """
+<p>Some of our pages earlier showed the previous MDCAT pattern of 200 MCQs. That was wrong, and it is now corrected everywhere on StudySapiens, including the <a href="/mdcat/#calculator">aggregate calculator</a>, which now uses the official total of 180.</p>
+<h2>The official MDCAT-2026 pattern (PMDC)</h2>
+<ul>
+<li><b>Total:</b> 180 MCQs, no negative marking</li>
+<li><b>Subject split:</b> Biology 81, Chemistry 45, Physics 36, English 9, Logical Reasoning 9</li>
+<li><b>Difficulty mix:</b> 15% easy, 70% moderate, 15% difficult</li>
+<li><b>Exam date:</b> held on 20 September 2026 (rescheduled from 16 August 2026)</li>
+</ul>
+<p>These numbers come directly from PMDC's public notices, linked in the sources below. If you ever spot a figure on this site that does not match an official notice, <a href="/contact/">tell us</a> and it will be corrected within a day.</p>
+<h2>What about MDCAT 2027?</h2>
+<p>PMDC has not yet announced MDCAT 2027 dates or its pattern. The <a href="/mdcat/">MDCAT Corner</a> will be updated the day the official notice appears, and not before. No guessing.</p>""",
+    },
+    {
         "slug": "class-10-new-books-2026",
         "title": "Class 10 New PECTAA Books 2026-27: What Students Should Know",
         "date": "July 22, 2026",
@@ -135,15 +156,18 @@ UPDATES = [
         "title": "MDCAT 2026: Paper Pattern, Syllabus & Aggregate Formula Explained",
         "date": "July 15, 2026",
         "tag": "MDCAT",
-        "excerpt": "200 MCQs, 3 hours, no negative marking. But the real battle is the 50% MDCAT + 40% FSc + 10% Matric aggregate. A simple guide for pre-medical students and their parents.",
-        "sources": [("PMDC: Pakistan Medical & Dental Council", "https://pmdc.pk/"),
+        "excerpt": "180 MCQs, no negative marking (official PMDC notice). Merit = 50% MDCAT + 40% FSc + 10% Matric. A calm guide for pre-medical students and their parents.",
+        "sources": [("PMDC: MDCAT-2026 registration & pattern notice (PDF)", "https://pmdc.pk/Documents/Others/Public%20Notice%20Regarding%20Opening%20of%20Online%20Registration%20Portal%20for%20MDCAT-2026.pdf"),
+                    ("PMDC: MDCAT-2026 rescheduling notice (PDF)", "https://pmdc.pk/Documents/Others/MDCAT-2026%20Rescheduling%20Public%20Notice.pdf"),
+                    ("PMDC: Pakistan Medical & Dental Council", "https://pmdc.pk/"),
                     ("UHS: University of Health Sciences, Lahore", "https://www.uhs.edu.pk/")],
         "body": """
 <p>MDCAT (Medical & Dental College Admission Test) is mandatory for admission to all MBBS and BDS programmes in Pakistan. It is conducted under <b>PMDC</b> rules and is accepted by public and private medical colleges across the country, including NUMS-affiliated admissions that use the national MDCAT.</p>
-<h2>Paper pattern (latest)</h2>
+<div class="callout"><b>Verified &amp; updated (13 November 2026):</b> MDCAT 2026 was held on <b>20 September 2026</b> (rescheduled from 16 August). The pattern below is the official PMDC MDCAT-2026 pattern, taken from <a href="https://pmdc.pk/Documents/Others/Public%20Notice%20Regarding%20Opening%20of%20Online%20Registration%20Portal%20for%20MDCAT-2026.pdf" target="_blank" rel="noopener">PMDC's registration &amp; pattern notice (PDF)</a> and the <a href="https://pmdc.pk/Documents/Others/MDCAT-2026%20Rescheduling%20Public%20Notice.pdf" target="_blank" rel="noopener">rescheduling notice (PDF)</a>. MDCAT 2027 dates and pattern will appear here only when PMDC announces them.</div>
+<h2>Paper pattern (official PMDC notice)</h2>
 <ul>
-<li><b>Total MCQs:</b> 200 (Biology 68, Chemistry 54, Physics 54, English 18, Logical Reasoning 6)</li>
-<li><b>Time:</b> 3 hours (180 minutes), about 54 seconds per MCQ</li>
+<li><b>Total MCQs:</b> 180 (Biology 81, Chemistry 45, Physics 36, English 9, Logical Reasoning 9)</li>
+<li><b>Difficulty mix:</b> 15% easy, 70% moderate, 15% difficult (per the PMDC notice)</li>
 <li><b>Negative marking:</b> none, so attempt every single question</li>
 <li><b>Minimum pass marks:</b> 55% for MBBS, 50% for BDS</li>
 </ul>
@@ -160,7 +184,7 @@ UPDATES = [
 <ol>
 <li><b>Master your FSc books first</b>. MDCAT MCQs come from the same concepts, just asked in tricky language.</li>
 <li><b>Practice chapter-wise MCQs daily</b>. Free downloadable MCQ banks for Class 11 &amp; 12 physics, chemistry and biology are being added on the subject pages.</li>
-<li><b>Mock-test every weekend</b> in the last 8 weeks, strictly in one 3-hour sitting.</li>
+<li><b>Mock-test every weekend</b> in the last 8 weeks, strictly in one timed sitting.</li>
 </ol>""",
     },
     {
@@ -277,8 +301,8 @@ FAQS = [
 MDCAT = {
     "weights": {"matric": 10, "fsc": 40, "mdcat": 50},
     "pattern": [
-        ("Biology", 68), ("Chemistry", 54), ("Physics", 54),
-        ("English", 18), ("Logical Reasoning", 6),
+        ("Biology", 81), ("Chemistry", 45), ("Physics", 36),
+        ("English", 9), ("Logical Reasoning", 9),
     ],
     "syllabus": {
         "Biology": ["Biodiversity & classification", "Cell structure and function", "Biological molecules & enzymes",
@@ -297,7 +321,7 @@ MDCAT = {
     "timeline": [
         ("Register online", "PMDC opens registration on its portal a few weeks before the test. You need your CNIC/B-form and a photo."),
         ("Download roll number slip", "Print your admit card. It shows your test city and reporting time. No slip, no entry."),
-        ("Test day", "200 MCQs in 180 minutes. No negative marking, so attempt everything. Reach the centre at least an hour early."),
+        ("Test day", "180 MCQs, paper-based, in English. No negative marking, so attempt everything. Reach the centre at least an hour early."),
         ("Result (same week)", "MDCAT results are announced within days. Your result card is used by all provinces and by NUMS."),
         ("Apply to colleges", "In Punjab, UHS opens admissions after FSc results; your aggregate (50/40/10) decides your merit position."),
         ("Merit lists & admission", "Public colleges publish 2-3 merit lists; private colleges have their own merit calculations. Closing merits are highest in the first list."),

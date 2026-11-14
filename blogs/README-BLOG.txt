@@ -77,7 +77,7 @@ clearly. When writing a post, follow this:
    the full answer in 2-4 short sentences (about 40-60 words). Then add
    the longer explanation below. AI engines quote that first block.
 3. ONE IDEA PER SENTENCE. Short sentences are quoted more accurately.
-4. NUMBERS AND STEPS WIN. Exact figures ("200 MCQs, 180 minutes, no
+4. NUMBERS AND STEPS WIN. Exact figures ("180 MCQs, no
    negative marking") and numbered steps get picked up far more than
    vague advice.
 5. TABLES FOR COMPARISONS. Use a small markdown table when comparing

@@ -70,18 +70,40 @@ try {
   }
 } catch (e) { log('faq accordion', false, String(e).slice(0, 90)) }
 
-// 6. MDCAT calculator
+// 6. MDCAT calculator (official PMDC 2026 pattern: 180 MCQs)
 try {
   await page.goto(BASE + '/mdcat/', { waitUntil: 'domcontentloaded' });
   const inputs = await page.locator('#mdcatCalc input').count();
   if (inputs < 3) log('mdcat calculator', null, `inputs=${inputs}`);
   else {
+    const read = () => page.evaluate(() => ({
+      agg: (document.querySelector('#gaugeNum') || { textContent: '' }).textContent.trim(),
+      elig: (document.querySelector('#eligibility') || { textContent: '' }).textContent.trim()
+    }));
+    for (const [name, val, want] of [
+      ['180/180', '180', '50.00%'],
+      ['99/180', '99', '27.50%'],
+      ['90/180', '90', '25.00%'],
+      ['decimals 153.5/180', '153.5', '42.64%'],
+      ['zero 0/180', '0', '0%'],
+    ]) {
+      await page.fill('#matricObt', '');
+      await page.fill('#fscObt', '');
+      await page.fill('#mdcatTot', '180');
+      await page.fill('#mdcatObt', val);
+      const r = await read();
+      log(`mdcat calc ${name}`, r.agg === want, `agg=${r.agg}`);
+    }
+    // full aggregate: matric 1080/1100, fsc 1040/1100, mdcat 153/180 -> 90.14%
     await page.fill('#matricObt', '1080');
     await page.fill('#fscObt', '1040');
-    await page.fill('#mdcatObt', '178');
-    await page.waitForTimeout(500);
-    const txt = await page.evaluate(() => { const el = document.querySelector('#eligibility'); const g = document.querySelector('.gauge-num, .gauge text, .g-num'); return { elig: el ? el.textContent.trim().slice(0, 70) : 'NO-ELIG', gauge: g ? g.textContent.trim().slice(0, 20) : 'NO-GAUGE' } });
-    log('mdcat calculator computes', /[0-9]/.test(txt.elig), JSON.stringify(txt));
+    await page.fill('#mdcatObt', '153');
+    const full = await read();
+    log('mdcat calc full 1080+1040+153', full.agg === '90.14%' && /55% MBBS/.test(full.elig), `agg=${full.agg} elig=${full.elig.slice(0, 60)}`);
+    // invalid: obtained > total
+    await page.fill('#mdcatObt', '181');
+    const inv = await read();
+    log('mdcat calc invalid 181/180', /check the MDCAT marks/i.test(inv.elig), inv.elig.slice(0, 70));
   }
 } catch (e) { log('mdcat calculator', false, String(e).slice(0, 90)) }
 
