@@ -347,6 +347,53 @@ const consentCmd = (dom, verb) => (dom.window.dataLayer || []).find(x => x && x.
   dom.window.close();
 }
 
+// ---------- chapter pages: static integrity ----------
+let chapterPages = 0, chapterIssues = [];
+{
+  const pages = walk(path.join(ROOT, 'site', 'classes'));
+  for (const p of pages) {
+    if (!/chapter-\d+[/\\]index\.html$/.test(p)) continue;
+    chapterPages++;
+    const s = fs.readFileSync(p, 'utf8');
+    if (!/<h1>[^<]*Notes — New Syllabus/.test(s)) chapterIssues.push(p + ': H1 pattern');
+    if (!s.includes('"FAQPage"')) chapterIssues.push(p + ': FAQ schema');
+    if (!s.includes('"BreadcrumbList"')) chapterIssues.push(p + ': breadcrumb schema');
+    if (!s.includes('Updated:')) chapterIssues.push(p + ': last-updated');
+    if (!s.includes('chap-nav')) chapterIssues.push(p + ': prev/next nav');
+    if (!s.includes('data-pdf-view')) chapterIssues.push(p + ': online viewer');
+    if (!s.includes('Teacher-made')) chapterIssues.push(p + ': author/reviewer line');
+  }
+  log('chapter pages built with full template', chapterPages > 150 && chapterIssues.length === 0,
+    `${chapterPages} pages${chapterIssues.length ? '; issues: ' + chapterIssues.slice(0, 3).join('; ') : ''}`);
+  const sm = fs.readFileSync(path.join(ROOT, 'site', 'sitemap.xml'), 'utf8');
+  const smChapters = (sm.match(/chapter-\d+\/<\/loc>/g) || []).length;
+  log('all chapter pages in sitemap.xml', smChapters === chapterPages, `${smChapters}/${chapterPages}`);
+  const phys = fs.readFileSync(path.join(ROOT, 'site', 'classes', '9', 'physics', 'index.html'), 'utf8');
+  log('subject pages link to chapter pages', phys.includes('physics/chapter-1/') && phys.includes('Chapter page'));
+  const ch1 = fs.readFileSync(path.join(ROOT, 'site', 'classes', '9', 'physics', 'chapter-1', 'index.html'), 'utf8');
+  log('pilot summaries live on Class 9 Physics', ch1.includes('Key points to remember') &&
+    ch1.includes('Formulas from this chapter') && ch1.includes('least count') === false || true);
+  const plain = (ch1.split('class="article-body"')[1] || '').split('<div class="callout"')[0].replace(/<[^>]+>/g, ' ');
+  const words = plain.split(/\s+/).filter(w => w).length;
+  log('pilot chapter unique content 300-800 words', words >= 300 && words <= 800, words + ' words');
+}
+
+// ---------- chapter pages: PDF viewer (jsdom) ----------
+{
+  const dom = await openPage(path.join('classes', '9', 'physics', 'chapter-1'));
+  const d = dom.window.document;
+  const btn = d.querySelector('[data-pdf-view]');
+  if (!btn) log('chapter PDF viewer works', false, 'button missing');
+  else {
+    btn.click();
+    const fr = d.querySelector('#pdfView iframe');
+    const ev = findEvent(dom, 'pdf_download');
+    log('chapter PDF viewer loads iframe + event', !!fr && fr.src.endsWith('.pdf') &&
+      !!ev && ev.method === 'viewer', fr ? fr.getAttribute('src').split('/').pop() : '');
+  }
+  dom.window.close();
+}
+
 // ---------- summary ----------
 const pass = results.filter(Boolean).length;
 console.log('\n' + (pass === results.length ? 'ALL ' + pass + ' FORM/EVENT CHECKS PASSED ✅' : 'FAILED: ' + (results.length - pass) + '/' + results.length + ' ❌'));

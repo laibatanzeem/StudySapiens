@@ -596,6 +596,24 @@ function ssTrack(name, params) {
     $$("[data-cookie-settings]").forEach(btn => btn.addEventListener("click", () => openBar(true)));
   })();
 
+  /* ---------------- Chapter pages: click-to-load PDF viewer ---------------- */
+  $$("[data-pdf-view]").forEach(btn => btn.addEventListener("click", () => {
+    const box = document.getElementById(btn.dataset.pdfView);
+    if (!box || !btn.dataset.src) return;
+    const wrap = document.createElement("div");
+    wrap.className = "pdf-frame";
+    const fr = document.createElement("iframe");
+    fr.src = btn.dataset.src;
+    fr.title = "Chapter PDF";
+    fr.setAttribute("loading", "lazy");
+    wrap.appendChild(fr);
+    box.innerHTML = "";
+    box.appendChild(wrap);
+    let url = btn.dataset.src;
+    try { url = new URL(url, location.href).href; } catch (e) {}
+    ssTrack("pdf_download", { file_name: btn.dataset.name || "", link_url: url, method: "viewer" });
+  }));
+
   /* ---------------- PDF download tracking (GTM) ---------------- */
   document.addEventListener("click", e => {
     const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;

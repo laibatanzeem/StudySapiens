@@ -374,6 +374,27 @@ Now owner-driven: content = the files you upload. See "How to upload notes / pap
   the site map, and sitemap.xml. Service worker bumped to ss-v15. forms-verify.mjs
   extended to 33 checks (consent defaults on every page, banner accept/reject/custom/
   returning-visitor flows, legal pages built + linked + in sitemap).
+- **14 Nov 2026 - chapter-level SEO pages (P1):** the site had subject hubs linking to
+  PDFs, while competitors rank with chapter-specific pages. Added
+  /classes/{cid}/{sid}/chapter-{n}/ — **197 new pages**, one per chapter that has at
+  least one live file (site: 92 → 289 pages, all in sitemap.xml at priority 0.55 and
+  in search.json). Each page: H1 "Class X Subject Chapter N Notes — New Syllabus
+  {session}", unique meta description, breadcrumb + prev/next chapter navigation,
+  author/reviewer line ("Teacher-made · expert-reviewed"), last-updated date from the
+  newest file, all of that chapter's downloads (notes / solved exercises / MCQs /
+  numericals) with category headers, a click-to-load **online PDF viewer** (fires
+  pdf_download like a normal download), an honest structured overview, FAQ block with
+  FAQPage + BreadcrumbList JSON-LD, share row, and the review-promise callout.
+  Verified chapter titles come from the existing CHAPTERS table; chapter numbers are
+  parsed from file names the same way subject-page cards do (Tarjuma pages use Surah
+  names, e.g. "Class 9 Tarjuma-tul-Quran Surah Maryam Notes"). NEW
+  **chapter_content.py** holds hand-written summaries — pilot: all 9 Class 9 Physics
+  chapters (summary + key points + formulas table + exam tips + 2 custom FAQs each,
+  ~340 words of unique content per page). Chapters without hand content get an honest
+  structured overview (~330 words: what the chapter is, which files are live, how to
+  study it, correction promise) — never fabricated definitions. Subject-page chapter
+  cards now link to each chapter page. forms-verify.mjs extended to 39 checks. To
+  enrich more chapters: add entries to chapter_content.py and re-run sync_files.py.
 
 ## Pre-publish QA checklist (run for every PDF before it goes live)
 1. **File name** follows the convention and names the right subject and class
@@ -537,3 +558,31 @@ class pages and keep personalised ads off where unsure.
 Verification: `node scripts/forms-verify.mjs` (33 checks — includes consent defaults
 on all pages, accept/reject/customize/returning-visitor banner flows, and the legal
 pages) + `node scripts/calc-verify.mjs` (18/18).
+
+## Chapter pages (long-tail SEO) — how they work
+
+`/classes/{cid}/{sid}/chapter-{n}/` exists for **every chapter that has at least one
+live file** (197 pages as of 14 Nov 2026). Titles/names come from the verified
+`CHAPTERS` table in data.py; the file→chapter matching is the same one the subject
+pages use, so a new PDF upload automatically gets its chapter page on the next
+`python3 sync_files.py`.
+
+Each page contains: H1 "Class X Subject Chapter N Notes — New Syllabus {session}",
+unique meta description, breadcrumbs + prev/next chapter links, teacher/expert
+byline + last-updated date (from the newest file), all downloads for that chapter
+(notes / solved exercises / MCQs / numericals), a click-to-load online PDF viewer
+(tracked as pdf_download), FAQ block with FAQPage + BreadcrumbList JSON-LD, share
+row, and the correction-promise callout. Sitemap priority 0.55 / weekly; also added
+to search.json.
+
+**Hand-written summaries** live in `chapter_content.py` (pilot: all 9 Class 9
+Physics chapters — summary, key points, formulas table, exam tips, 2 custom FAQs;
+~340 unique words per page). Chapters without an entry get an honest structured
+overview (~330 words) instead — we never fabricate definitions. To enrich a chapter,
+add an entry and rebuild; to cover a whole subject next, copy the Class 9 Physics
+pattern. Best order to expand: Class 9 Mathematics → Class 9 Biology/Chemistry →
+Class 11 Biology (they have the most files).
+
+Verification: `node scripts/forms-verify.mjs` (39 checks — includes chapter template
+integrity on all pages, sitemap coverage, subject-page links, pilot word count, and
+the PDF viewer behaviour).

@@ -137,6 +137,7 @@ def scan_files():
                         "ch": chapter_of(os.path.splitext(fn)[0]),
                         "url": f"files/{cls_dir}/{sid}/{cat}/{fn}",
                         "size": os.path.getsize(os.path.join(cat_p, fn)),
+                        "mtime": os.path.getmtime(os.path.join(cat_p, fn)),
                         "ext": FILE_EXT[ext]})
     return out
 
@@ -1159,10 +1160,12 @@ def build_subject(cid, sid):
             mine.sort(key=lambda x: (cats_for.index(x[0]), x[1]["label"]))
             rows = dl_rows(R, [{**f, "label": chapter_file_label(f["label"], num, cat_titles[k])} for k, f in mine])
             t_disp = f"Chapter {num}: {esc(title)}" if title else f"Chapter {num}"
+            page_link = (f'<a class="btn btn-ghost btn-sm" style="margin-left:auto" '
+                         f'href="{R}classes/{cid}/{sid}/chapter-{num}/">{icon("book",13)} Chapter page</a>') if rows else ""
             cards += f"""
 <div class="file-slot chap-card reveal">
   <div class="file-slot-head"><span class="chap-no">Ch {num}</span>
-    <div><b>{t_disp}</b><span>{chap_sub}</span></div>{f'<span class="badge badge-new" style="margin-left:auto">live</span>' if rows else ''}</div>
+    <div><b>{t_disp}</b><span>{chap_sub}</span></div>{page_link}{f'<span class="badge badge-new" style="margin-left:auto">live</span>' if rows else ''}</div>
   {rows if rows else f'<div class="file-empty compact">{icon("clock",14)} <span>Uploading soon. Goes live after matching the printed book.</span></div>'}
 </div>"""
         first_n, last_n = chaps[0][0], chaps[-1][0]
@@ -1276,6 +1279,189 @@ def resource_filter(cid_list=True):
             f'<button class="chip active" data-group="cls" data-filter="all">All</button>{cls}'
             f'<span class="filter-sep"></span><span class="fb-label">Subject</span>'
             f'<button class="chip active" data-group="sub" data-filter="all">All</button>{subs}</div>')
+
+
+# ------------------------------------------------------------------
+# CHAPTER PAGES: /classes/{cid}/{sid}/chapter-{n}/
+# One long-tail SEO page per chapter that has at least one live file.
+# Hand-written summaries come from chapter_content.py (pilot: Class 9 Physics);
+# chapters without hand content get an honest structured overview instead.
+# ------------------------------------------------------------------
+try:
+    from chapter_content import CHAPTER_CONTENT
+except Exception:
+    CHAPTER_CONTENT = {}
+
+def chapter_files_for(cid, sid, num):
+    """[(cat, file)] for one chapter, in the display order used on subject pages."""
+    cats_for = [k for k in CHAPTER_CATS if k != "numericals" or sid in NUMERICAL_SUBJECTS]
+    mine = []
+    for k in cats_for:
+        for f in FILES.get((cid, sid), {}).get(k, []):
+            if f.get("ch") == num:
+                mine.append((k, f))
+    mine.sort(key=lambda x: (cats_for.index(x[0]), x[1]["label"]))
+    return mine
+
+def build_chapter_pages(cid, sid):
+    chaps = CHAPTERS.get((cid, sid)) or []
+    if not chaps:
+        return
+    c, s = CLASSES[cid], SUBJECTS[sid]
+    cat_titles = {k: t for k, _i, t, _sub in FILE_CATEGORIES}
+    sub_names = {"notes": "notes", "solutions": "solved exercises", "mcq": "MCQ banks", "numericals": "numericals"}
+    page_list = [(num, title, chapter_files_for(cid, sid, num)) for num, title in chaps]
+    page_list = [p for p in page_list if p[2]]
+    if not page_list:
+        return
+    is_tarjuma = sid == "tarjuma-tul-quran"
+    for idx, (num, title, mine) in enumerate(page_list):
+        prev = page_list[idx - 1] if idx > 0 else None
+        nxt = page_list[idx + 1] if idx + 1 < len(page_list) else None
+        R = "../../../../"
+        chap_word = "Surah" if is_tarjuma else "Chapter"
+        display = title if is_tarjuma else f"Chapter {num}: {esc(title)}"
+        h1 = (f"{c['name']} {s['name']} {title} Notes — New Syllabus {c['session']}" if is_tarjuma
+              else f"{c['name']} {s['name']} Chapter {num} Notes — New Syllabus {c['session']}")
+        title_tag = h1 + " | StudySapiens"
+        desc = (f"{c['name']} {s['name']} {chap_word} {num} ({title}): free notes, solved exercise & MCQs, "
+                f"new {c['session']} syllabus. Download, read online, exam tips. All Punjab boards.")
+        if len(desc) > 168:
+            desc = (f"{c['name']} {s['name']} {chap_word} {num}: free notes, solved exercise & MCQs, new "
+                    f"{c['session']} syllabus. Download, read online, exam tips. All Punjab boards.")
+        content = CHAPTER_CONTENT.get((cid, sid, num)) or {}
+        cats_present = []
+        for k, _f in mine:
+            if k not in cats_present:
+                cats_present.append(sub_names.get(k, k))
+
+        # ---- intro / summary ----
+        if content.get("summary"):
+            summary_html = content["summary"]
+        else:
+            summary_html = (
+                f"<p><b>{esc(title)}</b> is {chap_word} {num} of the new {c['name']} {s['name']} book "
+                f"(PCTB / PECTAA, session {c['session']}) used by all nine Punjab boards. Everything we have "
+                f"for this {chap_word.lower()} is collected on this page: {', '.join(cats_present)} — uploaded "
+                f"file by file, and nothing goes live until it has been checked against the printed book.</p>"
+                "<p><b>How to study this chapter:</b> read it once in your textbook so you meet the ideas in "
+                "their own words, then open the solved exercise below and write every answer with your own hand "
+                "— copying never sticks. Finish with the MCQ bank, note every question you got wrong, and revise "
+                "only that list the next day. Read → solve → test: one order, every chapter.</p>"
+                f"<p>Looking for another {chap_word.lower()}? Use the previous / next links below, or open the "
+                f"full chapter list on the <a href=\"../\">{esc(s['name'])} subject page</a>. And if any file here "
+                f"mismatches your book, <a href=\"{R}contact/\">tell us</a> — it is fixed or removed within a day.</p>")
+        kp = content.get("key_points") or []
+        kp_html = (f'<div class="card chap-box"><h3>{icon("check",16)} Key points to remember</h3>'
+                   f'<ul>{"".join(f"<li>{x}</li>" for x in kp)}</ul></div>') if kp else ""
+        fs = content.get("formulas") or []
+        fs_html = ""
+        if fs:
+            rows = "".join(f'<tr><td style="padding:8px 10px;border-bottom:1px solid var(--line);font-weight:700">{f}</td>'
+                           f'<td style="padding:8px 10px;border-bottom:1px solid var(--line);color:var(--ink-soft)">{m}</td></tr>'
+                           for f, m in fs)
+            fs_html = (f'<div class="card chap-box"><h3>{icon("sigma",16)} Formulas from this chapter</h3>'
+                       f'<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.92rem">{rows}</table></div></div>')
+        tips_html = (f'<div class="callout"><b>{icon("bulb",15)} Exam tip:</b> {content["tips"]}</div>'
+                     if content.get("tips") else "")
+
+        # ---- downloads + online viewer ----
+        prim = None
+        for k in ("notes", "solutions", "mcq", "numericals"):
+            hit = next(((kk, f) for kk, f in mine if kk == k), None)
+            if hit:
+                prim = hit
+                break
+        viewer_html = ""
+        if prim:
+            pf = prim[1]
+            pfn = pf["url"].rsplit("/", 1)[-1]
+            plabel = chapter_file_label(pf["label"], num, cat_titles.get(prim[0], "File"))
+            viewer_html = (
+                f'<div class="card chap-box" id="pdfView" style="text-align:center">'
+                f'<button class="btn btn-primary" type="button" data-pdf-view="pdfView" '
+                f'data-src="{R}{pf["url"]}" data-name="{esc(pfn)}">{icon("book",16)} Read online'
+                f'{(" — " + esc(plabel)) if plabel else ""}</button>'
+                f'<p class="muted small" style="margin-top:10px">Opens right here in your browser. '
+                f'Or use the download links below.</p></div>')
+        dl_html = ""
+        last_cat = None
+        for k, f in mine:
+            if k != last_cat:
+                dl_html += f'<div class="chap-dl-head">{icon("download",13)} {cat_titles.get(k, k.title())}</div>'
+                last_cat = k
+            dl_html += dl_rows(R, [{**f, "label": chapter_file_label(f["label"], num, cat_titles.get(k, "File"))}])
+
+        # ---- prev / next ----
+        prev_html = (f'<a class="btn btn-light-outline btn-sm" href="../chapter-{prev[0]}/">← '
+                     f'{chap_word} {prev[0]}: {esc(prev[1])}</a>') if prev else '<span></span>'
+        nxt_html = (f'<a class="btn btn-light-outline btn-sm" href="../chapter-{nxt[0]}/">{chap_word} {nxt[0]}: '
+                    f'{esc(nxt[1])} →</a>') if nxt else '<span></span>'
+
+        # ---- FAQ ----
+        faqs = list(content.get("faqs") or [])
+        faqs += [
+            (f"Are these {s['name']} {chap_word} {num} files really free?",
+             "Yes — every file on StudySapiens is free, with no sign-up and no paywall. Open, read, download, print."),
+            (f"Is this the new {c['session']} syllabus?",
+             f"Yes. This page follows the new PCTB / PECTAA {c['name']} {s['name']} book (session {c['session']}) "
+             f"used by all Punjab boards. A file goes live only after it has been matched to the printed book."),
+            ("Can I download and print the files?",
+             f"Yes, for your own study or to share with classmates. Republishing them on another website is not "
+             f"allowed — our <a href=\"{R}terms/\">Terms of Use</a> explain in simple words."),
+            ("I found a mistake, or a file does not match my book.",
+             f"Please <a href=\"{R}contact/\">tell us</a> — a teacher reads every message and genuine corrections "
+             f"are fixed within a day."),
+        ]
+        last_mod = max(f.get("mtime", 0) for _k, f in mine)
+        date_txt = datetime.datetime.fromtimestamp(last_mod).strftime("%d %b %Y")
+        n_files = len(mine)
+
+        body = crumbs_html(R, [("Classes", "classes/"), (c["name"], f"classes/{cid}/"),
+                               (s["name"], f"classes/{cid}/{sid}/"),
+                               (f"{chap_word} {num}", f"classes/{cid}/{sid}/chapter-{num}/")]) + f"""
+<section class="section">
+  <div class="container article" style="max-width:880px">
+    <h1>{esc(h1)}</h1>
+    <div class="art-meta">
+      <span>{icon("teacher",14)} Teacher-made · expert-reviewed</span>
+      <span>{icon("cal",14)} Updated: {date_txt}</span>
+      <span>{icon("doc",14)} {n_files} file{'s' if n_files != 1 else ''} live</span>
+    </div>
+    <div class="article-body">
+      {summary_html}
+      {kp_html}
+      {fs_html}
+      {tips_html}
+      <h2 id="downloads">Downloads: {display}</h2>
+      {viewer_html}
+      {dl_html}
+      <nav class="chap-nav" aria-label="Chapters">
+        {prev_html}
+        <a class="btn btn-ghost btn-sm" href="../#chapters">{icon("grid",13)} All chapters</a>
+        {nxt_html}
+      </nav>
+      <h2>Frequently asked questions</h2>
+      {faq_items_html(faqs)}
+      <div class="callout"><b>{icon("shield",15)} Our review promise:</b> these files are prepared by working
+      Punjab teachers and checked by our subject-expert panel against the printed book. Spotted an error?
+      <a href="{R}contact/">Email us</a> — genuine corrections are made within a day and credited in our updates.</div>
+    </div>
+    {share_row()}
+  </div>
+</section>"""
+        ld = [breadcrumb_json([("Classes", "classes/"), (c["name"], f"classes/{cid}/"),
+                               (s["name"], f"classes/{cid}/{sid}/"),
+                               (f"{chap_word} {num}", f"classes/{cid}/{sid}/chapter-{num}/")]),
+              faq_schema(faqs)]
+        w(f"classes/{cid}/{sid}/chapter-{num}/index.html",
+          layout(page_key="chapter", depth=4, title=title_tag, desc=desc,
+                 path=f"classes/{cid}/{sid}/chapter-{num}/", body=body, extra_ld=ld),
+          priority="0.55", changefreq="weekly")
+        SEARCH.append({"t": f"{c['name']} {s['name']} {chap_word} {num}: {title}",
+                       "s": "chapter notes · solved exercise · MCQs",
+                       "u": f"classes/{cid}/{sid}/chapter-{num}/", "c": "Chapter", "pop": 1,
+                       "k": f"{c['alt']} {sid} chapter {num} {title} notes solved exercise mcqs pdf"})
 
 
 def build_pairing():
@@ -3386,6 +3572,7 @@ def main():
         build_class(cid)
         for sid in subjects_for(cid):
             build_subject(cid, sid)
+            build_chapter_pages(cid, sid)
     build_pairing()
     build_guess(); build_past(); build_datesheet()
     build_ebooks(); build_mdcat(); build_css_page()
