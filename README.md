@@ -813,3 +813,11 @@ yet.** These two are deliberately deferred — flip them only when:
 - Every physics-11 chapter page now carries the solved exercise + practice model
   paper; viewer opens solutions first; wording auto-upgraded to "Chapter N Notes".
 - 465 published files; forms-verify 61.
+
+## Upload: Class 11 Physics complete notes (14 Nov 2026)
+
+- **12 complete-notes PDFs** (Ch 1–12, 4–5 pages each) →
+  `files/class-11/physics/notes/`, titles verified.
+- Every physics-11 chapter page now has the full stack: **Chapter Notes + Exercise
+  Solutions + Model Papers** (viewer opens notes first). 477 published files;
+  forms-verify 61.
