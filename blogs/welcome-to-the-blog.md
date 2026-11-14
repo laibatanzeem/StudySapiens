@@ -26,6 +26,6 @@ We will never post copied content from other websites. Freeilm and IlmKiDunya al
 
 ## Tell us what to write next
 
-This blog grows with your questions. If a topic confuses you, email us at admin.studysapiens@gmail.com and a teacher may turn it into a full guide.
+This blog grows with your questions. If a topic confuses you, email us at admin@studysapiens.com and a teacher may turn it into a full guide.
 
 While you wait, you can try an [online MCQ test](/tests/) or open your [class page](/classes/) to see the latest verified uploads.

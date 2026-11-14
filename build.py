@@ -426,11 +426,13 @@ def footer_html(R):
     <div><h4>Exam Resources</h4><ul class="f-links">{res}</ul></div>
     <div><h4>StudySapiens</h4><ul class="f-links">{comp}</ul>
       <div style="margin-top:18px">
-        <form data-mailto="{EMAIL}" data-subject="Subscribe. StudySapiens Updates" style="display:flex;gap:8px">
-          <input type="email" name="email" required placeholder="Email for updates" style="flex:1;min-width:0;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);border-radius:10px;padding:.6rem .8rem;color:#fff;font-size:.85rem">
+        <form data-mailto="{EMAIL}" data-subject="Subscribe. StudySapiens Updates" data-ss="newsletter" data-location="footer" style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="email" name="email" required placeholder="Email for updates" aria-label="Your email address" style="flex:1;min-width:0;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);border-radius:10px;padding:.6rem .8rem;color:#fff;font-size:.85rem">
           <button class="btn btn-primary btn-sm" type="submit">Notify me</button>
+          <input type="text" name="website" class="ss-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="ss-consent ss-consent-footer"><input type="checkbox" name="consent" required> Email me new notes &amp; schemes. <a href="{R}privacy-policy/">Privacy</a> · <a href="{R}privacy-policy/#unsubscribe">unsubscribe anytime</a></label>
+          <div class="form-success" style="width:100%"></div>
         </form>
-        <div class="form-success">Opening your email app. Press Send to subscribe ✔</div>
       </div>
     </div>
   </div>
@@ -521,6 +523,7 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
 {footer_html(R)}
 <div style="display:none" id="site-mail">{EMAIL}</div>
 <script>window.SITE_ROOT = "{R}";</script>
+<script src="{R}assets/js/ss-config.js" defer></script>
 <script src="{R}assets/js/main.js" defer></script>
 </body>
 </html>"""
@@ -624,11 +627,13 @@ def share_row():
 
 def join_updates_form(R, small=False):
     return f"""
-<form data-mailto="{EMAIL}" data-subject="Notify me. New content upload" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
-  <input type="email" name="email" required placeholder="Your email address"
+<form data-mailto="{EMAIL}" data-subject="Notify me. New content upload" data-ss="newsletter" data-location="inline" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+  <input type="email" name="email" required placeholder="Your email address" aria-label="Your email address"
     style="flex:1;min-width:220px;max-width:340px;border:1.5px solid var(--line);border-radius:12px;padding:.75rem 1rem;font:inherit;background:#fff">
   <button class="btn btn-primary" type="submit">{icon("bell",16)} Notify Me Free</button>
-  <div class="form-success" style="width:100%">Opening your email app. Just press Send ✔</div>
+  <input type="text" name="website" class="ss-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+  <label class="ss-consent" style="text-align:center"><input type="checkbox" name="consent" required> Email me when new schemes &amp; papers go live. <a href="{R}privacy-policy/">Privacy</a> · unsubscribe anytime.</label>
+  <div class="form-success" style="width:100%"></div>
 </form>"""
 
 # ------------------------------------------------------------------
@@ -1285,7 +1290,7 @@ def build_guess():
   </div>
   <div class="res-cta">{'' if rows else f'''
     <a class="btn btn-ghost btn-sm" href="{R}classes/{cid}/{sid}/">{icon("grid",13)} Subject page</a>
-    <a class="btn btn-dark btn-sm" href="mailto:{EMAIL}?subject={cid}th {SUBJECTS[sid]['name']} guess paper. Notify me">{icon("bell",13)} Notify me</a>'''}
+    <button type="button" class="btn btn-dark btn-sm" data-notify="{cid}th {SUBJECTS[sid]['name']} guess paper">{icon("bell",13)} Notify me</button>'''}
   </div>
 </article>"""
     body = crumbs_html(R, [("Guess Papers", "guess-papers/")]) + page_hero(R,
@@ -1932,7 +1937,7 @@ def build_model_papers():
     <p>{blurb}</p>
     {rows}
   </div>
-  <div class="res-cta">{'' if rows else f'<a class="btn btn-ghost btn-sm" href="{R}classes/{cid}/{sid}/">{icon("grid",13)} Subject page</a><a class="btn btn-dark btn-sm" href="mailto:{EMAIL}?subject={cid}th%20{SUBJECTS[sid]["name"].replace(" ","%20")}%20model%20paper%20request">{icon("bell",13)} Notify me</a>'}</div>
+  <div class="res-cta">{'' if rows else f'<a class="btn btn-ghost btn-sm" href="{R}classes/{cid}/{sid}/">{icon("grid",13)} Subject page</a><button type="button" class="btn btn-dark btn-sm" data-notify="{cid}th {SUBJECTS[sid]["name"]} model paper">{icon("bell",13)} Notify me</button>'}</div>
 </article>"""
     body = crumbs_html(R, [("Model Papers", "model-papers/")]) + page_hero(R,
         badge="The Exact Exam Pattern, On Paper",
@@ -2230,7 +2235,7 @@ def build_test_player(q):
     w(f"tests/{q['slug']}/index.html", layout(page_key="tests", depth=2,
         title=t, desc=(q.get("desc", f"Free self-scoring online test: {n} MCQs with instant results and explanations."))[:160],
         path=f"tests/{q['slug']}/", body=body, extra_ld=ld,
-        head_extra=f"<script>window.QUIZ={qjson};</script>"), priority="0.6")
+        head_extra=f"<script>window.QUIZ={qjson};window.QUIZ_META={json.dumps({'slug': q['slug'], 'title': q['title']}, ensure_ascii=False)};</script>"), priority="0.6")
     SEARCH.append({"t": f"Test: {q['title']}", "s": f"{q.get('cls','all classes')} · {n} questions · self-scoring",
                    "u": f"tests/{q['slug']}/", "c": "Test", "k": f"online test mcq quiz {q.get('subject','')} {q.get('cls','')}"})
 
@@ -2788,8 +2793,8 @@ def build_contact():
     <div class="calc-wrap">
       <div class="form-card reveal-l">
         <h2 style="font-size:1.3rem;margin-bottom:6px">Send a Message</h2>
-        <p class="muted small" style="margin-bottom:20px">Fill this in. Your email app will open with everything written. Just press send.</p>
-        <form data-mailto="{EMAIL}" data-subject="StudySapiens. Contact Form">
+        <p class="muted small" style="margin-bottom:20px">Fill this in and press Send — it goes straight to a teacher's inbox. No email app needed.</p>
+        <form data-mailto="{EMAIL}" data-subject="StudySapiens. Contact Form" data-ss="contact">
           <div class="f-2col">
             <div class="f-row"><label>Your name *</label><input name="name" required placeholder="e.g. Ayesha Khan"></div>
             <div class="f-row"><label>Your email *</label><input type="email" name="reply_email" required placeholder="you@example.com"></div>
@@ -2799,9 +2804,10 @@ def build_contact():
             <div class="f-row"><label>Topic *</label><select name="topic">{topics}</select></div>
           </div>
           <div class="f-row"><label>Message *</label><textarea name="message" rows="5" required placeholder="Write clearly, e.g. 'In Class 9 Physics Chapter 1 MCQ 6, I think…'"></textarea></div>
-          <button class="btn btn-primary btn-lg" type="submit" style="width:100%">{icon("mail",17)} Compose Email</button>
-          <div class="form-success">Your email app opened. Press Send there and we'll reply, InshaAllah ✔</div>
-          <p class="form-note">By sending, you agree to a reply at your given email. We reply within 1-2 working days (faster in exam season).</p>
+          <input type="text" name="website" class="ss-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button class="btn btn-primary btn-lg" type="submit" style="width:100%">{icon("mail",17)} Send Message</button>
+          <div class="form-success"></div>
+          <p class="form-note">By sending, you agree to our <a href="{R}privacy-policy/">Privacy Policy</a>. We reply within 1-2 working days (faster in exam season).</p>
         </form>
       </div>
       <div>
@@ -2830,7 +2836,7 @@ def build_contact():
     ld = [breadcrumb_json([("Contact", "contact/")])]
     w("contact/index.html", layout(page_key="contact", depth=1,
         title="Contact StudySapiens: Corrections, Requests & Feedback",
-        desc="Contact the StudySapiens team: report a mistake, request notes or papers, or suggest an improvement. Email admin.studysapiens@gmail.com. Real teachers reply.",
+        desc="Contact the StudySapiens team: report a mistake, request notes or papers, or suggest an improvement. Email admin@studysapiens.com. Real teachers reply.",
         path="contact/", body=body, extra_ld=ld), priority="0.6")
     SEARCH.append({"t": "Contact Us", "s": "corrections, requests, feedback", "u": "contact/", "c": "Page", "k": "email help support"})
 
@@ -2840,23 +2846,33 @@ def build_privacy():
 <section class="section">
   <div class="container article" style="max-width:820px">
     <h1>Privacy Policy</h1>
-    <div class="art-meta"><span>{icon("cal",14)} Last updated: July 2026</span></div>
+    <div class="art-meta"><span>{icon("cal",14)} Last updated: November 2026</span></div>
     <div class="article-body">
       <p>StudySapiens ("we", "our site") is a free educational website for students of Punjab boards. This page explains, in simple words, what information we handle and what we never do with it.</p>
       <h2>What we collect</h2>
       <ul>
-        <li><b>Information you type:</b> if you email us or use a contact or subscribe form, we receive your name, email and message. The quiz and calculator run entirely in your browser. Answers and marks never leave your device.</li>
-        <li><b>Basic analytics:</b> we may use privacy-respecting analytics (e.g. page counts) to know which chapters students need most. No personal profiles are built.</li>
+        <li><b>Information you type:</b> if you use the contact form or subscribe to email updates, we receive your name (contact form only), email address and message. The quizzes and calculators run entirely in your browser — answers and marks never leave your device.</li>
+        <li><b>Basic analytics:</b> we use Google Tag Manager (and, through it, Google Analytics if enabled) to count page views, file downloads and feature use in aggregate. This may set cookies. No personal profiles are built and nothing is used to identify you personally.</li>
       </ul>
+      <h2>Email updates (newsletter)</h2>
+      <p id="unsubscribe">If you subscribe, your email address is passed to our email platform (the service that manages our subscriber list) so we can send you updates about new notes, schemes and papers. Subscribing uses <b>double opt-in</b>: you receive one confirmation email and are only added after you click the link in it. Every email we send carries an <b>unsubscribe link</b> — one click and you are off the list. We send study updates only, never unrelated marketing.</p>
+      <h2>Contact form</h2>
+      <p>Messages from the contact form are delivered to our inbox through a form-handling service (Web3Forms). It sees your name, email and message only in order to pass them on. If the form cannot send, it falls back to opening your own email app instead. Nothing is stored on our servers.</p>
       <h2>What we never do</h2>
       <ul>
         <li>We never sell, rent or share your personal information with advertisers.</li>
         <li>We don't require accounts, and we don't store test scores.</li>
       </ul>
-      <h2>Cookies & third parties</h2>
-      <p>External sites we link to (eLearn Punjab, PMDC, FPSC and education boards) have their own privacy policies. We will update this policy if the site adds features that change how information is handled.</p>
+      <h2>Cookies &amp; third parties</h2>
+      <p>The site may set cookies for analytics (Google) and uses your browser's own storage for the offline "save chapter" feature (that stays on your device). External sites we link to (eLearn Punjab, PMDC, FPSC and education boards) have their own privacy policies.</p>
+      <h2>Your choices</h2>
+      <ul>
+        <li><b>Unsubscribe</b> from emails using the link at the bottom of any email we sent, or write to us.</li>
+        <li><b>Ask us to delete</b> your email address or a message you sent: email <b>{EMAIL}</b> and we will remove it.</li>
+        <li><b>Block cookies</b> in your browser — the site keeps working (offline saving just turns off).</li>
+      </ul>
       <h2>Students under 13</h2>
-      <p>Our content is safe for all ages. Younger students should use the contact forms with a parent/guardian's email.</p>
+      <p>Our content is safe for all ages. Younger students should use the contact and subscribe forms with a parent/guardian's email.</p>
       <h2>Contact</h2>
       <p>Questions about privacy? Email <b>{EMAIL}</b>.</p>
     </div>
@@ -2893,10 +2909,10 @@ def build_sitemap_page():
 
 SW_JS = r"""
 /* StudySapiens service worker. V1 */
-const VERSION = 'ss-v13';
+const VERSION = 'ss-v14';
 const CORE = [
   './', 'classes/', 'pairing-scheme/', 'mdcat/', 'date-sheet/', 'offline/',
-  'assets/css/style.css', 'assets/js/main.js',
+  'assets/css/style.css', 'assets/js/main.js', 'assets/js/ss-config.js',
   'assets/img/logo-trim-light.png', 'assets/img/mark.png', 'assets/img/favicon-32.png',
   'assets/img/favicon-64.png', 'assets/img/favicon-180.png', 'assets/img/hero-1300.webp',
   'assets/img/og-image.jpg', 'site.webmanifest'
@@ -2922,6 +2938,17 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
+
+  // ss-config.js (site settings: form keys etc): network-first, so an edited
+  // config on the server applies on the NEXT page view, not a day later.
+  if (url.pathname.endsWith('/assets/js/ss-config.js')) {
+    e.respondWith(fetch(req).then(res => {
+      const copy = res.clone();
+      caches.open(VERSION).then(c => c.put(req, copy));
+      return res;
+    }).catch(() => caches.match(req)));
+    return;
+  }
 
   // Pages: network-first, fall back to cache, then the offline page
   if (req.mode === 'navigate') {
@@ -3028,7 +3055,7 @@ def write_seo():
 ## Trust policy (why our answers are citable)
 - Every downloadable file is checked by a teacher against the printed official book before it goes live.
 - Dates and schedules are published only after an official announcement. Until then they are clearly labelled "Expected".
-- Corrections by email within a day: admin.studysapiens@gmail.com.
+- Corrections by email within a day: admin@studysapiens.com.
 
 ## Key facts (canonical answers)
 - MDCAT aggregate formula (UHS, public sector): Matric 10% + FSc 40% + MDCAT 50%. Eligibility: 55% MDCAT for MBBS, 50% for BDS.
@@ -3045,7 +3072,7 @@ def write_seo():
 - [eBooks: official free PDFs]({DOM}/ebooks/), [Online MCQ tests]({DOM}/tests/)
 
 ## Contact
-- Email: admin.studysapiens@gmail.com
+- Email: admin@studysapiens.com
 - Contact page: {DOM}/contact/
 """
     with open(os.path.join(OUT, "llms.txt"), "w", encoding="utf-8") as f:

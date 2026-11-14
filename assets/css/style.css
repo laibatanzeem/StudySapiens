@@ -527,6 +527,13 @@ li:hover>.mega,li:focus-within>.mega,li.nav-item-open>.mega,.mega.open{opacity:1
 .f-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .form-note{font-size:.8rem;color:var(--muted);margin-top:12px}
 .form-success{display:none;background:#EFF5EA;border:1px solid #B7E4CC;color:#166844;border-radius:12px;padding:14px 18px;font-size:.92rem;margin-top:14px}
+.form-success.form-error{background:#FBECEC;border-color:#F0B9B9;color:#9E2F2F}
+.ss-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.ss-consent{display:block;width:100%;margin-top:10px;font-size:.78rem;color:var(--muted);line-height:1.5;text-align:left}
+.ss-consent input{margin-right:6px;accent-color:var(--navy-800)}
+.ss-consent a{font-weight:700;text-decoration:underline}
+.ss-consent-footer{color:rgba(255,255,255,.68)}
+.ss-consent-footer a{color:var(--gold-300)}
 
 
 /* ---------- CTA banner ---------- */

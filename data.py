@@ -15,7 +15,7 @@ SITE = {
     "name": "StudySapiens",
     "domain": "https://www.studysapiens.com",
     "tagline": "New PCTB Syllabus, Made Simple",
-    "email": "admin.studysapiens@gmail.com",
+    "email": "admin@studysapiens.com",
     "description": "Class 9-12 Punjab board notes and solved exercises, made by teachers and verified by subject experts. New PCTB/PECTAA syllabus + MDCAT tools.",
 }
 
@@ -328,7 +328,7 @@ FAQS = [
     ("Which boards are covered?",
      "All nine BISE boards of Punjab: Lahore, Gujranwala, Multan, Faisalabad, Rawalpindi, Sargodha, Bahawalpur, DG Khan and Sahiwal. They are all covered because PCTB books and pairing schemes are common to every board."),
     ("I found a mistake in a note. What should I do?",
-     "Please tell us! StudySapiens is made by teachers and verified by subject experts. Student feedback also helps keep it accurate. Email a screenshot to admin.studysapiens@gmail.com. Genuine corrections are fixed quickly and credited in our updates."),
+     "Please tell us! StudySapiens is made by teachers and verified by subject experts. Student feedback also helps keep it accurate. Email a screenshot to admin@studysapiens.com. Genuine corrections are fixed quickly and credited in our updates."),
     ("Can I get notes in Urdu medium?",
      "Content is currently in easy English, with Urdu translations for English-subject lessons in progress. A full Urdu-medium track for science subjects is on our roadmap. Join the update list to know when it launches."),
     ("Is everything on StudySapiens free?",

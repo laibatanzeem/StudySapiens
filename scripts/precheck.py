@@ -42,6 +42,7 @@ NOINDEX_OK = {"404.html", "offline/index.html"}      # pages allowed to be noind
 REQUIRED_FILES = ["index.html", "sitemap.xml", "robots.txt", "feed.xml",
                   "llms.txt", "sw.js", "site.webmanifest",
                   "assets/css/style.css", "assets/js/main.js",
+                  "assets/js/ss-config.js",
                   "assets/img/og-image.jpg", "assets/img/favicon-32.png",
                   "assets/img/logo-trim-light.png", "404.html"]
 SKIP_SCHEMES = ("http://", "https://", "mailto:", "tel:", "sms:", "whatsapp:", "data:", "javascript:")

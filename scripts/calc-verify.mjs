@@ -24,7 +24,7 @@ async function openPage(rel) {
   // Strip remote scripts (GTM) and the deferred main.js tag; inline main.js before
   // </body> instead — same effective timing as defer, but zero network fetching.
   html = html.replace(/<script[^>]*src="https?:[^"]*"[^>]*><\/script>\s*/g, '');
-  html = html.replace(/<script src="[^"]*assets\/js\/main\.js" defer><\/script>\s*/g, '');
+  html = html.replace(/<script src="[^"]*assets\/js\/(?:main|ss-config)\.js" defer><\/script>\s*/g, '');
   if (/<script[^>]*src="https?:/.test(html)) throw new Error('remote script survived strip');
   html = html.replace('</body>', () => '<script>' + MAIN_JS + '</script></body>');
   const dom = new JSDOM(html, {

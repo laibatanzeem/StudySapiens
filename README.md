@@ -331,6 +331,27 @@ Now owner-driven: content = the files you upload. See "How to upload notes / pap
   Tarjuma cards revert to Coming Soon, and the static pairing-scheme page was updated.
   Added a pre-publish QA checklist (below) and the automated deploy gate
   scripts/pdf_audit.py, wired into sync_files.py.
+- **14 Nov 2026 - forms go server-side + GTM event tracking (monetization/retention):**
+  every "Notify me"/subscribe form and the contact form only opened the visitor's email
+  app - no list building, and many mobile users have no configured mail client. All
+  forms now submit server-side once configured (newsletter -> your ESP endpoint,
+  contact -> Web3Forms), with a required consent checkbox, privacy + unsubscribe links,
+  double opt-in messaging, a hidden honeypot spam trap, and inline success/error states.
+  Until keys are pasted into the new site/assets/js/ss-config.js they automatically fall
+  back to the old mailto behaviour, so nothing breaks while setup is pending. "Notify me"
+  buttons on coming-soon cards (pairing schemes, guess & model papers) now focus the
+  subscribe form and pass an `interest` value for segmentation. Added GTM dataLayer
+  events: newsletter_signup, contact_submit, pdf_download, calculator_use, quiz_start,
+  quiz_complete (quiz engine now tags slug/score/total/percent). Privacy policy
+  rewritten to match reality (newsletter + ESP, form backend, analytics cookies,
+  your-choices section with an #unsubscribe anchor). Site email switched from
+  admin.studysapiens@gmail.com to **admin@studysapiens.com** everywhere (footer, contact
+  page + meta, FAQ, blogs, JSON-LD, pairing-scheme page). Service worker bumped to
+  ss-v14 (precaches ss-config.js but fetches it network-first, so an edited key applies
+  on the next page view). New automated gate scripts/forms-verify.mjs (20 checks: form
+  integrity across all 91 built pages, Web3Forms payload, ESP submit + CORS-blocked
+  fallback, honeypot drop, mailto fallback, all six events) - run it after every rebuild
+  alongside scripts/calc-verify.mjs (still 18/18).
 
 ## Pre-publish QA checklist (run for every PDF before it goes live)
 1. **File name** follows the convention and names the right subject and class
@@ -393,3 +414,65 @@ got 200).
 - If a challenge is ever served to a real visitor: capture time + URL + their network
   and send it to Hostooze support asking for a WAF exception for the site.
 
+
+## Newsletter & contact forms — one-time setup (ESP + Web3Forms)
+
+Why: the old forms only opened the visitor's email app (many mobile users have none, and
+no addresses were ever collected). Since 14 Nov 2026 every form submits server-side and
+falls back to the email-app behaviour only while your keys are still missing - the site
+never breaks while setup is pending.
+
+**Already built and verified (nothing to do):**
+- Footer subscribe form + "Notify Me Free" forms on every page -> your ESP, with consent
+  checkbox, privacy link and unsubscribe mention.
+- "Notify me" buttons on coming-soon cards (pairing schemes, guess & model papers) focus
+  the nearest subscribe form and remember what the student asked for (`interest` field).
+- Contact form (/contact/) -> Web3Forms with a hidden honeypot field + provider-side spam
+  filtering; inline success/error messages, no page reload.
+- Privacy policy updated (newsletter, contact form, analytics, "your choices" section).
+- Site email switched everywhere to admin@studysapiens.com.
+- GTM events (table below) verified by scripts/forms-verify.mjs (20/20).
+
+**Step 1 - contact form (5 minutes, no account):**
+1. Open https://web3forms.com , enter admin@studysapiens.com and submit.
+2. Check that inbox for their "Access Key" email.
+3. Edit `site/assets/js/ss-config.js` (Hostooze File Manager) and paste the key into
+   `contactAccessKey: ""`. Or send the key here and it gets baked in and rebuilt.
+   Submissions then arrive in the admin@studysapiens.com inbox.
+
+**Step 2 - newsletter / ESP:**
+1. Sign up at MailerLite (recommended, free up to 1,000 subscribers) using
+   admin@studysapiens.com. Brevo / Buttondown / Kit also work.
+2. Create a sign-up form and turn DOUBLE OPT-IN **on** in its settings.
+3. Copy the form action URL from the embed code (`<form action="...">`) into
+   `newsletterEndpoint: ""` in ss-config.js. For MailerLite also change
+   `newsletterEmailField` to `"fields[email]"` and copy any hidden inputs from the embed
+   into `newsletterFields`.
+4. Optional segmentation: "Notify me" buttons send an `interest` value (e.g. "12th
+   Physics pairing scheme"). Create a text custom field named `interest` in the ESP if
+   you want to see it; otherwise it is harmlessly ignored.
+5. Deliverability (when comfortable): ask Hostooze to add the ESP's SPF/DKIM DNS records
+   for studysapiens.com so confirmation emails do not land in spam.
+
+> Never paste a secret API key into ss-config.js - only public form URLs and website
+> access keys. Everything in that file is visible in the visitor's browser by design.
+
+**Events pushed to the GTM dataLayer (container GTM-5ZRS53MF):**
+
+| Event              | Fires when                              | Extra data                                  |
+|--------------------|-----------------------------------------|---------------------------------------------|
+| newsletter_signup  | subscribe form sent (ESP or fallback)   | method, location (footer/inline), interest  |
+| contact_submit     | contact form sent                       | method                                      |
+| pdf_download       | any PDF link clicked                    | file_name, link_url                         |
+| calculator_use     | first valid aggregate computed          | calculator: mdcat / ecat                    |
+| quiz_start         | "Start the Test" clicked                | quiz slug                                   |
+| quiz_complete      | last question answered                  | quiz, score, total, percent                 |
+
+To see the events: use GTM Preview mode, or create a GA4 property and add a GA4
+configuration tag in GTM - the events then appear under Reports > Engagement > Events
+(file_name etc. arrive as event parameters).
+
+**Automated tests:** `node scripts/forms-verify.mjs` - 20 checks (form integrity across
+all built pages, Web3Forms payload, ESP submit + CORS-blocked fallback, honeypot drop,
+mailto fallback, all six events). Run after every rebuild, alongside
+`node scripts/calc-verify.mjs`.

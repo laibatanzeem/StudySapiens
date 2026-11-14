@@ -1,8 +1,20 @@
 /* ==========================================================================
    StudySapiens · main.js
    Navigation, search, tabs, accordions, quiz engine, MDCAT calculator,
-   filters, forms (mailto), reveals, share. Dependency-free vanilla JS.
+   filters, forms (newsletter/contact server-side with mailto fallback),
+   GTM event tracking, reveals, share. Dependency-free vanilla JS.
    ========================================================================== */
+
+/* Analytics: push an event into the GTM dataLayer (GTM snippet lives in <head>).
+   Events fired: newsletter_signup, contact_submit, pdf_download,
+   calculator_use, quiz_start, quiz_complete. */
+function ssTrack(name, params) {
+  try {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(Object.assign({ event: name }, params || {}));
+  } catch (err) { /* tracking must never break the page */ }
+}
+
 (function () {
   "use strict";
   const $ = (s, c) => (c || document).querySelector(s);
@@ -197,6 +209,7 @@
     if (!shell || !window.QUIZ || !window.QUIZ.length) return;
     if (window.__quizStarted) return;
     window.__quizStarted = true;
+    ssTrack("quiz_start", { quiz: (window.QUIZ_META && window.QUIZ_META.slug) || "" });
     const data = window.QUIZ;
     const opts = ["A", "B", "C", "D", "E", "F"];
     let cur = 0, score = 0, answered = 0, done = false, tInt = null;
@@ -255,6 +268,7 @@
       const res = $("#quizResult");
       res.classList.add("show");
       const pct = Math.round((score / data.length) * 100);
+      ssTrack("quiz_complete", { quiz: (window.QUIZ_META && window.QUIZ_META.slug) || "", score: score, total: data.length, percent: pct });
       const ring = $("#scoreRingVal");
       const C = 2 * Math.PI * 64;
       ring.style.strokeDasharray = C;
@@ -291,6 +305,7 @@
   if (calc) {
     const ids = ["matric", "fsc", "mdcat"];
     const names = { matric: "Matric (SSC)", fsc: "Intermediate (FSc / HSSC)", mdcat: "MDCAT" };
+    let calcUsed = false;
     function num(id) { return parseFloat($("#" + id).value) || 0; }
     function compute() {
       let total = 0, html = "", anyInput = false, invalid = null;
@@ -322,6 +337,7 @@
         else { elig.classList.add("warn"); elig.innerHTML = "✖ MDCAT " + mPct.toFixed(1) + "%. That is below the 50% minimum. You can improve, InshaAllah. Check our MDCAT prep plan below."; }
       }
       if (invalid) { elig.classList.add("warn"); elig.innerHTML = "⚠ Please check the " + invalid + " marks. Obtained marks should not be more than total marks."; }
+      if (anyInput && !invalid && !calcUsed) { calcUsed = true; ssTrack("calculator_use", { calculator: "mdcat" }); }
     }
     ["input", "change"].forEach(ev => calc.addEventListener(ev, e => { if (e.target.matches("input")) compute(); }));
     compute();
@@ -379,21 +395,146 @@
     toastT = setTimeout(() => toastEl.classList.remove("show"), 2600);
   }
 
-  /* ---------------- Forms → mailto compose ---------------- */
-  $$("form[data-mailto]").forEach(form => form.addEventListener("submit", e => {
-    e.preventDefault();
+  /* ---------------- Forms: newsletter & contact (server-side, mailto fallback) -------------
+     Every form keeps data-mailto as the zero-config fallback (opens the email app).
+     With values in window.SS_CONFIG (assets/js/ss-config.js) they submit server-side:
+       data-ss="newsletter" -> your ESP endpoint (MailerLite / Brevo / Buttondown / Kit…)
+       data-ss="contact"    -> Web3Forms (https://api.web3forms.com/submit)
+     Both paths push GTM events: newsletter_signup / contact_submit. */
+  function formNote(form) {
+    const inside = $(".form-success", form);
+    if (inside) return inside;
+    if (form.nextElementSibling && form.nextElementSibling.classList.contains("form-success")) return form.nextElementSibling;
+    return null;
+  }
+  function formDone(form, msg, isErr, toastMsg) {
+    const el = formNote(form);
+    if (el) {
+      el.textContent = msg;
+      el.classList.toggle("form-error", !!isErr);
+      el.style.display = "block";
+    }
+    toast(toastMsg || (isErr ? "Could not send — please try again" : "Sent ✔"));
+  }
+  function setBusy(form, busy) {
+    const b = $('button[type="submit"]', form);
+    if (b) { b.disabled = busy; b.style.opacity = busy ? ".6" : ""; }
+  }
+  function nlEvent(form, method) {
+    ssTrack("newsletter_signup", {
+      method: method,
+      location: form.dataset.location || "",
+      interest: form.dataset.interest || ""
+    });
+  }
+  function mailtoCompose(form, fd) {
     const to = form.dataset.mailto;
-    const fd = new FormData(form);
     let subject = form.dataset.subject || "StudySapiens: Website Message";
     let lines = [];
-    fd.forEach((v, k) => { if (String(v).trim()) lines.push(k.replace(/[_-]/g, " ").replace(/\b\w/g, m => m.toUpperCase()) + ": " + v); });
-    if (!lines.length) return;
-    const body = encodeURIComponent(lines.join("\n") + "\n\nSent from studysapiens.com");
-    window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent(subject) + "&body=" + body;
-    const ok = $(".form-success", form);
-    if (ok) ok.style.display = "block";
-    toast("Opening your email app… just press Send ✉️");
+    fd.forEach((v, k) => {
+      if (k === "consent" || k === "website") return;
+      if (String(v).trim()) lines.push(k.replace(/[_-]/g, " ").replace(/\b\w/g, m => m.toUpperCase()) + ": " + v);
+    });
+    if (lines.length) {
+      const body = encodeURIComponent(lines.join("\n") + "\n\nSent from studysapiens.com");
+      window.location.href = "mailto:" + to + "?subject=" + encodeURIComponent(subject) + "&body=" + body;
+    }
+    if (form.dataset.ss === "newsletter") {
+      nlEvent(form, "mailto");
+      formDone(form, "Opening your email app. Press Send to subscribe ✔", false, "Opening your email app… just press Send ✉️");
+    } else {
+      ssTrack("contact_submit", { method: "mailto" });
+      formDone(form, "Your email app opened. Press Send there and we'll reply, InshaAllah ✔", false, "Opening your email app… just press Send ✉️");
+    }
+  }
+  function newsletterDone(form) {
+    nlEvent(form, "esp");
+    formDone(form, "Almost done ✔ Check your inbox (and spam folder) for a confirmation email — click it to finish subscribing.");
+  }
+  function sendNewsletter(form, fd, CFG) {
+    setBusy(form, true);
+    const params = new URLSearchParams();
+    params.set(CFG.newsletterEmailField || "email", String(fd.get("email") || "").trim());
+    Object.keys(CFG.newsletterFields || {}).forEach(k => params.set(k, CFG.newsletterFields[k]));
+    if (form.dataset.interest) params.set("interest", form.dataset.interest);
+    const body = params.toString();
+    const post = noCors => fetch(CFG.newsletterEndpoint, {
+      method: "POST",
+      mode: noCors ? "no-cors" : undefined,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body
+    });
+    post(false).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); })
+      .then(() => { setBusy(form, false); newsletterDone(form); })
+      .catch(() => {
+        // The ESP may not allow reading its response cross-origin; the POST usually
+        // still arrived. Retry fire-and-forget, then let the double opt-in email
+        // (which the student must click) be the real proof of subscription.
+        post(true).then(() => { setBusy(form, false); newsletterDone(form); })
+          .catch(() => { setBusy(form, false); mailtoCompose(form, fd); });
+      });
+  }
+  function sendContact(form, fd, CFG) {
+    setBusy(form, true);
+    const payload = {
+      access_key: CFG.contactAccessKey,
+      subject: "StudySapiens website: " + (fd.get("topic") || "Contact form"),
+      from_name: "StudySapiens Contact Form",
+      name: String(fd.get("name") || ""),
+      email: String(fd.get("reply_email") || fd.get("email") || ""),
+      message: (fd.get("class") ? "[Class: " + fd.get("class") + "]\n" : "") + String(fd.get("message") || ""),
+      botcheck: ""
+    };
+    fetch(CFG.contactEndpoint || "https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(r => r.json().catch(() => ({})))
+      .then(res => {
+        setBusy(form, false);
+        if (res && res.success === false) throw new Error(res.message || "rejected");
+        ssTrack("contact_submit", { method: "web3forms" });
+        formDone(form, "Message sent ✔ We reply within 1–2 working days. If our reply is not in your inbox, check your spam folder.");
+      })
+      .catch(() => {
+        setBusy(form, false);
+        formDone(form, "Could not send right now. Please email us directly at " + (form.dataset.mailto || "admin@studysapiens.com") + " — we reply to every message.", true);
+      });
+  }
+  $$("form[data-mailto]").forEach(form => form.addEventListener("submit", e => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    // Honeypot: humans never see this hidden field. Bots that fill it are
+    // dropped silently (they see a fake success message, no data is sent).
+    if (String(fd.get("website") || "").trim()) { formDone(form, "Thanks! We got it ✔"); return; }
+    const CFG = window.SS_CONFIG || {};
+    if (form.dataset.ss === "contact" && CFG.contactAccessKey) return sendContact(form, fd, CFG);
+    if (form.dataset.ss === "newsletter" && CFG.newsletterEndpoint) return sendNewsletter(form, fd, CFG);
+    mailtoCompose(form, fd);
   }));
+
+  /* "Notify me" buttons on coming-soon cards -> focus the nearest subscribe form
+     and remember WHAT the student asked to be notified about (interest). */
+  $$("[data-notify]").forEach(btn => btn.addEventListener("click", () => {
+    const target = $('form[data-ss="newsletter"]') || $("form[data-mailto]");
+    if (!target) return;
+    if (btn.dataset.notify) target.dataset.interest = btn.dataset.notify;
+    target.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+    const input = $('input[type="email"]', target);
+    if (input) setTimeout(() => { try { input.focus({ preventScroll: true }); } catch (err) { input.focus(); } }, 400);
+    toast("Leave your email — we'll message you the day it goes live ✉️");
+  }));
+
+  /* ---------------- PDF download tracking (GTM) ---------------- */
+  document.addEventListener("click", e => {
+    const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    if (!/\.pdf(\?|#|$)/i.test(href)) return;
+    const name = decodeURIComponent(href.split("/").pop().split(/[?#]/)[0]);
+    ssTrack("pdf_download", { file_name: name, link_url: a.href });
+  });
 
   /* ---------------- Active nav ---------------- */
   const pageKey = document.body.dataset.page || "";
@@ -595,6 +736,7 @@
   const ids = ["matric", "fsc", "ecat"];
   const names = { matric: "Matric (SSC)", fsc: "HSSC Part-I (First Year)", ecat: "ECAT" };
   const num = id => parseFloat($("#" + id).value) || 0;
+  let calcUsed = false;
   function compute() {
     let total = 0, html = "", anyInput = false, invalid = null;
     ids.forEach(k => {
@@ -625,6 +767,7 @@
       else { elig.classList.add("warn"); elig.innerHTML = "✖ First Year " + fPct.toFixed(1) + "%. Below the usual 50% minimum for the complete Intermediate. Improve now: Part-I carries half your aggregate."; }
     }
     if (invalid) { elig.classList.add("warn"); elig.innerHTML = "⚠ Please check the " + invalid + " marks. Obtained marks should not be more than total marks."; }
+    if (anyInput && !invalid && !calcUsed) { calcUsed = true; ssTrack("calculator_use", { calculator: "ecat" }); }
   }
   ["input", "change"].forEach(ev => calc.addEventListener(ev, e => { if (e.target.matches("input")) compute(); }));
   compute();

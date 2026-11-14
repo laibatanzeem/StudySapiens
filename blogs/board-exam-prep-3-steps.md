@@ -48,4 +48,4 @@ Follow this for 12 weeks and your notebook will tell you exactly how ready you a
 
 ## Final words
 
-Board exams reward students who practice, not students who read the most pages. Start with Step 1 today; it takes only twenty minutes. If you want a plan for a specific subject, email us at admin.studysapiens@gmail.com and we may write a full guide for it.
+Board exams reward students who practice, not students who read the most pages. Start with Step 1 today; it takes only twenty minutes. If you want a plan for a specific subject, email us at admin@studysapiens.com and we may write a full guide for it.
