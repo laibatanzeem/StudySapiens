@@ -312,3 +312,14 @@ Now owner-driven: content = the files you upload. See "How to upload notes / pap
   prospectus and portal, notes for A-Level / DAE / B.Tech streams (UET's own calculator
   tracks), calculator test cases (400 / 260 / decimals / zero / invalid / full 935+495+280
   = 82.55%), and a public correction notice at /updates/ecat-2026-merit-basis-correction/.
+- **13 Nov 2026 - CSS optional-subject selection clarified (correction):** /css/ showed
+  "choose 200 / choose 100" group cards that could be read as one subject from every group
+  (which would total 900, not the official 600), and Group 3 was missing Town Planning &
+  Urban Management entirely. Replaced with the official Appendix-I selection matrix
+  (Group I: one 200-mark subject, codes 11-15; Group II: one 200-mark subject codes 16-17
+  or two 100-mark subjects codes 18-21; Groups III-VII: one 100-mark subject per group,
+  two of them taken to complete 600), two worked 600-mark examples, the Rule 11(13)/(14)
+  rejection warning, a CE-2027 current-cycle callout (apply by 25 Nov 2026, hard copy by
+  4 Dec 2026, exam ~Jan 2027), Rule-12 passing benchmarks, and "last verified" lines
+  linking the FPSC rules PDF and the CE-2027 public notice. Public notice at
+  /updates/css-optional-selection-rules/.

@@ -108,6 +108,30 @@ BOARDS = ["Lahore", "Gujranwala", "Multan", "Faisalabad", "Rawalpindi",
 # ------------------------------------------------------------------
 UPDATES = [
     {
+        "slug": "css-optional-selection-rules",
+        "title": "Correction: How CSS Optional Subjects Actually Add Up to 600 Marks",
+        "date": "November 13, 2026",
+        "tag": "CSS",
+        "excerpt": "FPSC's official rules: one 200-mark subject from Group I, 200 marks from Group II, then two 100-mark subjects - not one subject from every group. Full matrix, valid examples and the rejection warning.",
+        "sources": [("FPSC: CSS CE Rules 2019 & onwards, Appendix-I (PDF)", "https://cp.fpsc.gov.pk/mpt/Final_Approved_Rules_CE-2019_and_onwards.pdf"),
+                    ("FPSC: CSS CE-2027 public notice / advertisement (PDF)", "https://www.fpsc.gov.pk/uploads/content/1794127244067_CSS_2027_Advertisement.pdf")],
+        "body": """
+<p>Our CSS page earlier showed the seven optional-subject groups as cards labelled "choose 200" or "choose 100". That wording was misleading - it could be read as picking one subject from every group, which is not how the FPSC rules work. While fixing it we also found that <b>Town Planning and Urban Management</b> was missing from our Group 3 list. Both are corrected now.</p>
+<h2>The official selection rules (FPSC Appendix-I)</h2>
+<ul>
+<li>Your optional subjects must total <b>exactly 600 marks</b>.</li>
+<li><b>Group I:</b> one subject of 200 marks (codes 11-15).</li>
+<li><b>Group II:</b> one subject of 200 marks (codes 16-17) <b>or</b> two subjects of 100 marks each (codes 18-21).</li>
+<li><b>Groups III-VII:</b> one subject of 100 marks per group - you take two of these to complete your 600.</li>
+</ul>
+<h2>Worked examples of valid 600-mark combinations</h2>
+<ul>
+<li>International Relations (200) + Physics (200) + History of USA (100) + Gender Studies (100) = 600</li>
+<li>Economics (200) + Applied Mathematics (100) + Statistics (100) + Criminology (100) + Geography (100) = 600</li>
+</ul>
+<p>So you end up with <b>four or five optional subjects</b> depending on your Group II choice. And take the warning seriously: FPSC Rule 11(13) states that wrong selection of optional subjects <b>leads to rejection of candidature</b>, and once submitted the combination cannot be changed (Rule 11(14)). Always verify against the official rules linked below before you apply.</p>""",
+    },
+    {
         "slug": "ecat-2026-merit-basis-correction",
         "title": "Correction: UET Merit Weighs First-Year (Part-I) Marks, Not the Full FSc",
         "date": "November 13, 2026",
@@ -360,14 +384,35 @@ CSS_EXAM = {
         ("Pakistan Affairs", 100, "1857 to date: ideology, history, economy, foreign policy."),
         ("Islamic Studies", 100, "Quranic teachings, Seerah, Islamic thought (Ethics for non-Muslims)."),
     ],
+    # Official FPSC Appendix-I selection matrix (CSS CE Rules 2019 & onwards):
+    # optional subjects must total exactly 600 marks. Verified 13 Nov 2026.
     "groups": [
-        ("Group 1 (choose 200)", "Accounting & Auditing, Economics, Computer Science, Political Science, International Relations"),
-        ("Group 2 (choose 200)", "Physics, Chemistry, Applied Mathematics, Pure Mathematics, Statistics, Geology"),
-        ("Group 3 (choose 100)", "Business Administration, Public Administration, Governance & Public Policies"),
-        ("Group 4 (choose 100)", "History of Pakistan & India, Islamic History & Culture, British History, European History, History of USA"),
-        ("Group 5 (choose 100)", "Gender Studies, Environmental Sciences, Agriculture & Forestry, Botany, Zoology, English Literature, Urdu Literature"),
-        ("Group 6 (choose 100)", "Law, Constitutional Law, International Law, Muslim Law & Jurisprudence, Mercantile Law, Criminology, Philosophy"),
-        ("Group 7 (choose 100)", "Journalism & Mass Communication, Psychology, Geography, Sociology, Anthropology, Punjabi, Sindhi, Pashto, Balochi, Persian, Arabic"),
+        ("Group I", "One 200-mark subject (codes 11-15)", [
+            ("11", "Accountancy & Auditing", 200), ("12", "Economics", 200), ("13", "Computer Science", 200),
+            ("14", "Political Science", 200), ("15", "International Relations", 200)]),
+        ("Group II", "One 200-mark subject (codes 16-17) OR two 100-mark subjects (codes 18-21)", [
+            ("16", "Physics", 200), ("17", "Chemistry", 200), ("18", "Applied Mathematics", 100),
+            ("19", "Pure Mathematics", 100), ("20", "Statistics", 100), ("21", "Geology", 100)]),
+        ("Group III", "One 100-mark subject (codes 22-25)", [
+            ("22", "Business Administration", 100), ("23", "Public Administration", 100),
+            ("24", "Governance & Public Policies", 100), ("25", "Town Planning & Urban Management", 100)]),
+        ("Group IV", "One 100-mark subject (codes 26-30)", [
+            ("26", "History of Pakistan & India", 100), ("27", "Islamic History & Culture", 100),
+            ("28", "British History", 100), ("29", "European History", 100), ("30", "History of USA", 100)]),
+        ("Group V", "One 100-mark subject (codes 31-37)", [
+            ("31", "Gender Studies", 100), ("32", "Environmental Sciences", 100), ("33", "Agriculture & Forestry", 100),
+            ("34", "Botany", 100), ("35", "Zoology", 100), ("36", "English Literature", 100), ("37", "Urdu Literature", 100)]),
+        ("Group VI", "One 100-mark subject (codes 38-44)", [
+            ("38", "Law", 100), ("39", "Constitutional Law", 100), ("40", "International Law", 100),
+            ("41", "Muslim Law & Jurisprudence", 100), ("42", "Mercantile Law", 100), ("43", "Criminology", 100), ("44", "Philosophy", 100)]),
+        ("Group VII", "One 100-mark subject (codes 45-55)", [
+            ("45", "Journalism & Mass Communication", 100), ("46", "Psychology", 100), ("47", "Geography", 100),
+            ("48", "Sociology", 100), ("49", "Anthropology", 100), ("50", "Punjabi", 100), ("51", "Sindhi", 100),
+            ("52", "Pashto", 100), ("53", "Balochi", 100), ("54", "Persian", 100), ("55", "Arabic", 100)]),
+    ],
+    "combos": [
+        ("Valid 4-subject combination", "International Relations (200, Group I) + Physics (200, Group II) + History of USA (100, Group IV) + Gender Studies (100, Group V) = 600 marks"),
+        ("Valid 5-subject combination", "Economics (200, Group I) + Applied Mathematics (100, Group II) + Statistics (100, Group II) + Criminology (100, Group VI) + Geography (100, Group VII) = 600 marks"),
     ],
     "strategy": [
         ("Months 1-2 · Foundation", "Confirm eligibility, read the FPSC rules and past papers, shortlist optional subjects (overlap with your degree = half the work saved), and start daily Dawn reading. Just 30 minutes with a vocabulary diary."),

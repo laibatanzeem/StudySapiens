@@ -1622,9 +1622,21 @@ def build_css_page():
     R = "../"
     comp_rows = "".join(f'<tr><td style="font-weight:700">{esc(s)}</td><td>{m}</td><td class="muted">{esc(d)}</td></tr>'
                         for s, m, d in CSS_EXAM["compulsory"])
-    groups = "".join(f"""
-<div class="syl-item reveal"><div class="syl-ico">{icon("layers",17)}</div>
-  <div><h4>{esc(g)}</h4><p>{esc(s)}</p></div></div>""" for g, s in CSS_EXAM["groups"])
+    opt_rows = ""
+    for gname, rule, items in CSS_EXAM["groups"]:
+        by_marks = {}
+        for code, subj, marks in items:
+            by_marks.setdefault(marks, []).append(f"{esc(subj)} ({code})")
+        if len(by_marks) == 1:
+            m, subs = next(iter(by_marks.items()))
+            cell = ", ".join(subs) + f" &mdash; {m} marks each"
+        else:
+            cell = "; ".join(f"<b>{m} marks:</b> " + ", ".join(subs)
+                             for m, subs in sorted(by_marks.items(), reverse=True))
+        opt_rows += (f'<tr><td style="font-weight:700;white-space:nowrap">{esc(gname)}</td>'
+                     f'<td class="muted">{esc(rule)}</td><td>{cell}</td></tr>')
+    combos = "".join(f'<li>{icon("check",15)} <b>{esc(t)}:</b> {esc(d)}</li>'
+                     for t, d in CSS_EXAM["combos"])
     strat = "".join(f'<div class="tl-item"><h4>{esc(t)}</h4><p>{esc(d)}</p></div>' for t, d in CSS_EXAM["strategy"])
     mats = "".join(f"""
 <article class="res-item reveal"><div class="res-ico" style="background:linear-gradient(135deg,#FFFDF7,#EAE7D3);color:var(--navy-900)">{icon("book",20)}</div>
@@ -1637,6 +1649,10 @@ def build_css_page():
     body += f"""
 <section class="section section-tight">
   <div class="container">
+    <div class="card" style="padding:16px 22px;display:flex;gap:12px;align-items:flex-start;background:var(--gold-100);max-width:980px;margin:0 auto 40px">
+      <span style="color:var(--navy-700)">{icon("cal",20)}</span>
+      <p class="small" style="color:var(--ink-soft);margin:0"><b>Current cycle - CSS CE-2027 (official notice):</b> only candidates who qualified MPT-CE-2027 can apply. Pay the Rs. 2,200 fee via PSID and apply online by <b>25 November 2026</b>; the signed hard copy must reach FPSC by <b>4 December 2026</b>. The written exam tentatively starts in <b>January 2027</b>. Read the <a href="https://www.fpsc.gov.pk/uploads/content/1794127244067_CSS_2027_Advertisement.pdf" target="_blank" rel="noopener">official public notice (PDF)</a> and apply through <a href="https://www.fpsc.gov.pk/" target="_blank" rel="noopener">fpsc.gov.pk</a>.</p>
+    </div>
     <div class="grid grid-4" style="margin-bottom:40px">
       <div class="card center"><div class="icon-tile" style="margin:0 auto 12px;background:linear-gradient(135deg,var(--navy-700),var(--navy-600))">{icon("cap",22)}</div>
         <h3 style="font-size:1rem">Education</h3><p class="muted small">Bachelor's (14-year) degree, minimum 2nd division</p></div>
@@ -1650,17 +1666,26 @@ def build_css_page():
     <div class="sec-head reveal" id="subjects">
       <span class="sec-kicker">{icon("notes",14)} 1200 Written Marks</span>
       <h2>Compulsory Subjects: 600 Marks</h2>
-      <p>Every candidate sits these six papers. Passing benchmark in each compulsory paper is 40%. English Essay fails the most candidates, so start it first.</p>
+      <p>Every candidate sits these six papers. Passing benchmark: 40% in each compulsory paper, 33% in each optional and 50% aggregate to clear the written stage (Rule 12). English Essay fails the most candidates, so start it first.</p>
     </div>
     <div class="card" style="padding:0;overflow:hidden;margin-bottom:40px">
       <table class="asp" style="margin:0"><thead><tr><th>Subject</th><th>Marks</th><th>What's tested</th></tr></thead><tbody>{comp_rows}</tbody></table>
     </div>
     <div class="sec-head reveal">
-      <span class="sec-kicker">{icon("layers",14)} Choose Your Weapons</span>
-      <h2>Optional Subjects: 600 Marks</h2>
-      <p>Pick subjects totalling 600 marks from seven groups. Golden rule: overlap with your degree & interest beats 'high-scoring myths'.</p>
+      <span class="sec-kicker">{icon("layers",14)} The Official Selection Matrix</span>
+      <h2>Optional Subjects: Exactly 600 Marks</h2>
+      <p>You do <b>not</b> pick one subject from every group. Your 600 marks = one 200-mark subject from <b>Group I</b> + <b>200 marks from Group II</b> (one 200-mark subject, or two 100-mark subjects) + <b>two 100-mark subjects from any two of Groups III-VII</b> (at most one per group). Golden rule: overlap with your degree &amp; interest beats 'high-scoring myths'.</p>
     </div>
-    <div class="syl-grid" style="margin-bottom:44px">{groups}</div>
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:26px">
+      <table class="asp" style="margin:0"><thead><tr><th>Group</th><th>Official rule</th><th>Subjects (FPSC code numbers)</th></tr></thead><tbody>{opt_rows}</tbody></table>
+    </div>
+    <ul class="check-list" style="max-width:880px;margin:0 auto 14px">{combos}</ul>
+    <p class="small muted" style="max-width:880px;margin:0 auto 18px">Depending on your Group II choice you end up with four or five optional subjects in total.</p>
+    <div class="card" style="max-width:880px;margin:0 auto;padding:16px 22px;display:flex;gap:12px;align-items:flex-start;background:var(--navy-50)">
+      <span style="color:var(--navy-700)">{icon("shield",20)}</span>
+      <p class="small" style="color:var(--ink-soft);margin:0"><b>Warning: a wrong combination means rejection.</b> FPSC Rule 11(13): optional subjects must be selected carefully, as wrong selection of subjects shall lead to rejection of candidature. The combination you submit - or correct in the hard copy before the closing date - is final, and no request to change subjects is entertained afterwards (Rule 11(14)). Always verify your combination against Appendix-I of the official rules and in the FPSC online application before you submit.</p>
+    </div>
+    <p class="small" style="max-width:880px;margin:14px auto 0;color:var(--ink-soft)">Last verified against FPSC's official <a href="https://cp.fpsc.gov.pk/mpt/Final_Approved_Rules_CE-2019_and_onwards.pdf" target="_blank" rel="noopener">CSS CE Rules 2019 &amp; onwards (Appendix-I)</a> and the <a href="https://www.fpsc.gov.pk/uploads/content/1794127244067_CSS_2027_Advertisement.pdf" target="_blank" rel="noopener">CSS CE-2027 public notice</a> on 13 November 2026.</p>
     <div class="grid grid-2" style="gap:36px;align-items:start" id="plan">
       <div>
         <span class="sec-kicker">{icon("flag",14)} The Roadmap</span>
@@ -1687,7 +1712,7 @@ def build_css_page():
     ld = [breadcrumb_json([("CSS", "css/")])]
     w("css/index.html", layout(page_key="css", depth=1,
         title="CSS Exam Guide: Eligibility, Subjects & Preparation Plan",
-        desc="CSS (FPSC) guide in simple English: eligibility, MPT screening, compulsory & optional subjects with marks, books and a 12-month preparation strategy.",
+        desc="CSS (FPSC) guide in simple English: eligibility, MPT screening, compulsory subjects and the official 600-mark optional selection matrix with examples, books and a 12-month strategy.",
         path="css/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "CSS Corner. Subjects, Syllabus & Strategy", "s": "FPSC exam guide", "u": "css/", "c": "Page", "pop": 1, "k": "civil service fpsc pms"})
 
@@ -2338,7 +2363,7 @@ def build_ecat():
         <p class="pmdc-note">Reference: closing merits at UET vary widely by department and campus, roughly from the low 60s to mid 80s. Always check the current merit lists on UET's own admission portal before deciding.</p>
       </div>
     </div>
-    <p class="small" style="max-width:880px;margin:14px auto 0;color:var(--ink-soft)">Last verified against UET's official <a style="color:var(--gold-300)" href="https://admission.uet.edu.pk/uploads/prospectus/UG-2026-1_78f5bbdf-88d5-4889-b97c-9f0d773d7d6d.pdf" target="_blank" rel="noopener">Undergraduate Prospectus (Fall 2026)</a> and <a style="color:var(--gold-300)" href="https://admission.uet.edu.pk/program/1" target="_blank" rel="noopener">admission portal</a> on 13 November 2026: merit = Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%. A-Level, DAE and B.Tech candidates should use the separate tracks in UET's own merit calculator on that portal.</p>
+    <p class="small" style="max-width:880px;margin:14px auto 0;color:var(--ink-soft)">Last verified against UET's official <a href="https://admission.uet.edu.pk/uploads/prospectus/UG-2026-1_78f5bbdf-88d5-4889-b97c-9f0d773d7d6d.pdf" target="_blank" rel="noopener">Undergraduate Prospectus (Fall 2026)</a> and <a href="https://admission.uet.edu.pk/program/1" target="_blank" rel="noopener">admission portal</a> on 13 November 2026: merit = Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%. A-Level, DAE and B.Tech candidates should use the separate tracks in UET's own merit calculator on that portal.</p>
   </div>
 </section>
 <section class="section section-tight">
