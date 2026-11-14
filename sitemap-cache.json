@@ -64,7 +64,7 @@
 "lastmod": "2026-11-14"
 },
 "classes/": {
-"hash": "49fd5877e25764872c260dcae6001806",
+"hash": "45325d7947974b2baf53979eca302d72",
 "lastmod": "2026-11-14"
 },
 "classes/10/": {
@@ -460,7 +460,7 @@
 "lastmod": "2026-11-14"
 },
 "classes/11/": {
-"hash": "19f15a8a65647c4f6ffcccd42f0cc393",
+"hash": "c0d3c645e81fada2bf7438405c3bd599",
 "lastmod": "2026-11-14"
 },
 "classes/11/biology/": {
@@ -600,7 +600,55 @@
 "lastmod": "2026-11-14"
 },
 "classes/11/physics/": {
-"hash": "3c6dacb780ff3115f67a1a8a4eaf6a2e",
+"hash": "da4613f13f3eb10b0340912023f2205b",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-1/": {
+"hash": "51c7ea600871a1f304a76ce7db8a13e2",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-10/": {
+"hash": "a373651ce00a12df3851f375318d7349",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-11/": {
+"hash": "db831a4cce33f6be7a74c2c83af70bad",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-12/": {
+"hash": "b6a16a7fa7578035f406f9efda53ce70",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-2/": {
+"hash": "e5512f845abdb5611b0c8a471533c63c",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-3/": {
+"hash": "4728a3ead7966998ed7933b209a2a70e",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-4/": {
+"hash": "8325c35112372ad48106ae26641c1989",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-5/": {
+"hash": "1d353e13975436a61fc714882464a9b1",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-6/": {
+"hash": "ef5afb675a4adbe581dd1307ff3a0cce",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-7/": {
+"hash": "2af07798e2e7500621a8474975b29cc3",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-8/": {
+"hash": "869d8bc49deb4aa2331128b904f54fbd",
+"lastmod": "2026-11-14"
+},
+"classes/11/physics/chapter-9/": {
+"hash": "62ede8d7289251a24186748dff801e35",
 "lastmod": "2026-11-14"
 },
 "classes/11/tarjuma-tul-quran/": {
@@ -1120,7 +1168,7 @@
 "lastmod": "2026-11-14"
 },
 "model-papers/": {
-"hash": "9aa6de65243e5c713a35290a6907d4fc",
+"hash": "4f9fe0b7154970686a72d41f7847551e",
 "lastmod": "2026-11-14"
 },
 "pairing-scheme/": {

@@ -794,3 +794,14 @@ yet.** These two are deliberately deferred — flip them only when:
   + MCQ Bank (10) + Model Papers (2) + Pairing Scheme** — 36 files, zero empty
   placeholders, lead/desc list exactly what exists.
 - 441 published files; forms-verify 61 (eng-11 guard: 5 slots, all counts).
+
+## Upload: Class 11 Physics chapter-wise practice tests (14 Nov 2026)
+
+- **12 practice model papers** (Ch 1–12, board pattern) →
+  `files/class-11/physics/model/`, headers verified ("11th Physics").
+- **New chapter set:** `CHAPTERS[("11", "physics")]` with the 12 new-syllabus titles
+  taken from the papers (Measurements → Nuclear and Particle Physics).
+- 12 new chapter pages (`/classes/11/physics/chapter-1/` … `chapter-12/`) with
+  test-paper wording, online viewer, related chapters and next-step links (incl.
+  MDCAT/ECAT calculators). Subject page: 12 live chapter cards. Site now 317 pages,
+  453 published files; forms-verify 61 (225 chapter pages covered by the 4.6 check).
