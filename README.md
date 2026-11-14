@@ -352,3 +352,44 @@ It blocks the deploy when a PDF's file name or page-1 title names a different su
 class than its folder, when a linked PDF is missing, or when a PDF is empty/unreadable, and
 it warns about orphan PDFs. Title checks need pypdf (`pip3 install --break-system-packages
 pypdf`); without it, file-name + link checks still run.
+
+## Hosting, WAF & crawler policy (Hostooze) — ops runbook
+Reviewed 13 Nov 2026 after a "Security Verification" challenge was observed for
+headless-browser clients (some browser-like UAs got 403/401; Googlebot-like and curl
+got 200).
+
+**What the site itself guarantees (verified):**
+- No user-agent sniffing or bot blocking anywhere in our JS/HTML - the site never
+  challenges anyone.
+- robots.txt explicitly allows Googlebot, Bing, and 12 AI/answer-engine crawlers.
+- Every page has the full og:/twitter: meta set, so social scrapers (WhatsApp,
+  Facebook) can build previews the moment the edge lets them through.
+
+**Required policy at the Hostooze edge/WAF (ask support to set/confirm):**
+1. No JavaScript or interstitial "Security Verification" challenge for ordinary
+   desktop/mobile browsers. Challenges should only trigger on clearly malicious
+   traffic.
+2. Verified crawler allowlisting by reverse DNS, not by user-agent string:
+   - Googlebot: forward-confirmed reverse DNS must end in `googlebot.com` or `google.com`
+   - Bingbot: must end in `bingbot.com` or `search.msn.com`
+   - Facebook/DuckDuckGo and other legit bots: same rDNS principle.
+   (UA strings are trivially spoofed; rDNS is the verification Google itself documents.)
+3. Rate limits generous enough for classroom/result-day peaks; normal visitors
+   should never see 429.
+4. Static-file caching (our .htaccess already sets long cache for assets, 1 day for
+   PDFs, no-cache for HTML/sw.js) - keep the edge cache honoring these.
+
+**How to verify after any WAF change:**
+- Google Search Console -> URL Inspection -> Live Test on the homepage and /mdcat/
+  (must render fully, no challenge).
+- Rich Results Test (search.google.com/test/rich-results) on the homepage.
+- Facebook Sharing Debugger -> "Scrape Again" (preview must show title/description/image).
+- Share a link on WhatsApp from a real phone and open it on mobile data.
+- `curl -A "<browser UA>" -I https://www.studysapiens.com/` -> expect 200, not 403.
+
+**Monitoring:**
+- Hostooze panel/server logs: watch 401/403/429/5xx rates; investigate spikes.
+- Search Console -> Settings -> Crawl stats (Googlebot response spikes in 4xx/5xx).
+- If a challenge is ever served to a real visitor: capture time + URL + their network
+  and send it to Hostooze support asking for a WAF exception for the site.
+
