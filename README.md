@@ -732,3 +732,11 @@ yet.** These two are deliberately deferred — flip them only when:
 - Class 11 Chemistry is the first subject with notes + solutions + tests on all 16
   chapters. 381 published files; forms-verify 60 (chem-11 guard now checks all three
   file types per chapter).
+
+## Upload: Class 11 Chemistry board MCQs (14 Nov 2026)
+
+- **16 board-MCQ PDFs** (Ch 1–16, 6 pages each) → `files/class-11/chemistry/mcq/`,
+  titles verified against the chapter set.
+- Every class-11 chemistry chapter page now has all four resource types:
+  **Chapter Notes + Exercise Solutions + MCQ Bank + Model Papers**. 397 published
+  files; forms-verify 60 (chem-11 guard checks all four file types per chapter).

@@ -514,7 +514,8 @@ let chapterPages = 0, chapterIssues = [];
       const s = fs.readFileSync(p, 'utf8');
       if (/<title>[^<]*(Notes|Test Paper)/.test(s) && s.includes('Practice-Model-Paper.pdf') &&
         s.includes('Exercise-Solutions.pdf') && s.includes('Complete-Notes.pdf') &&
-        s.includes('Model Papers') && s.includes('data-pdf-view')) testOk++;
+        s.includes('Board-MCQs.pdf') && s.includes('Model Papers') &&
+        s.includes('data-pdf-view')) testOk++;
     }
     const subj = fs.readFileSync(path.join(chemDir, 'index.html'), 'utf8');
     log('chem-11 chapters: solutions + practice tests on all 16 pages',
