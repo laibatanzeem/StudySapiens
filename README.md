@@ -720,3 +720,15 @@ yet.** These two are deliberately deferred — flip them only when:
 - Wording auto-adapted: with real study content present, titles/H1s are back to
   "Chapter N Notes — New Syllabus 2025-26" and the study-guide paragraph replaces the
   test-only how-to. Site stays at 305 pages, now 365 published files; forms-verify 60.
+
+## Upload: Class 11 Chemistry complete notes (14 Nov 2026)
+
+- **16 complete-notes PDFs** (Ch 1–16, 3–8 pages each) → `files/class-11/chemistry/notes/`,
+  titles verified against the chapter set.
+- Every class-11 chemistry chapter page now carries the full stack: **Chapter Notes +
+  Exercise Solutions + Model Papers** (three download sections), with the online viewer
+  opening the complete notes first. Row labels match the biology convention
+  (Notes / Exercise Solutions / Practice Model Paper).
+- Class 11 Chemistry is the first subject with notes + solutions + tests on all 16
+  chapters. 381 published files; forms-verify 60 (chem-11 guard now checks all three
+  file types per chapter).
