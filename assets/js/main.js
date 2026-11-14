@@ -526,6 +526,76 @@ function ssTrack(name, params) {
     toast("Leave your email — we'll message you the day it goes live ✉️");
   }));
 
+  /* ---------------- Cookie consent banner (Google Consent Mode v2) ----------------
+     First-party banner. Defaults (denied) are set in <head> before GTM loads;
+     this banner records the choice and pushes the consent 'update'.
+     When you adopt a Google-certified CMP (e.g. AdSense "Privacy & messaging"),
+     set SS_CONFIG.consentBanner = false and the certified CMP takes over. */
+  (function () {
+    const KEY = "ss-consent-v1";
+    const CFG = window.SS_CONFIG || {};
+    if (CFG.consentBanner === false) return;
+    function read() { try { return JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { return null; } }
+    function save(analytics, ads) {
+      try { localStorage.setItem(KEY, JSON.stringify({ v: 1, analytics: !!analytics, ads: !!ads, ts: new Date().toISOString() })); } catch (e) {}
+      const args = {
+        ad_storage: ads ? "granted" : "denied",
+        ad_user_data: ads ? "granted" : "denied",
+        ad_personalization: ads ? "granted" : "denied",
+        analytics_storage: analytics ? "granted" : "denied"
+      };
+      if (window.gtag) window.gtag("consent", "update", args);
+      ssTrack("consent_choice", { analytics: !!analytics, ads: !!ads });
+    }
+    const bar = document.createElement("div");
+    bar.className = "cookie-bar no-print";
+    bar.id = "cookieBar";
+    bar.setAttribute("role", "dialog");
+    bar.setAttribute("aria-label", "Cookie settings");
+    bar.innerHTML =
+      '<div class="cb-txt"><b>Cookies, in one line 🍪</b> ' +
+      'We use Google Analytics to count visits anonymously, and (later) ads that keep every note free. ' +
+      'We never sell your data. <a href="' + ROOT + 'privacy-policy/">Privacy</a></div>' +
+      '<div class="cb-btns">' +
+      '<button type="button" class="btn btn-primary btn-sm" data-cb="all">Accept all</button>' +
+      '<button type="button" class="btn btn-light-outline btn-sm" data-cb="necessary">Necessary only</button>' +
+      '<button type="button" class="btn btn-ghost btn-sm" data-cb="custom">Customize</button>' +
+      '</div>' +
+      '<div class="cb-opts" hidden>' +
+      '<label><input type="checkbox" data-cb-opt="analytics"> Anonymous statistics (Google Analytics)</label>' +
+      '<label><input type="checkbox" data-cb-opt="ads"> Advertising (non-personalized unless you allow more)</label>' +
+      '<button type="button" class="btn btn-primary btn-sm" data-cb="save">Save my choice</button>' +
+      '</div>';
+    function openBar(withOpts) {
+      const saved = read();
+      const opts = $(".cb-opts", bar);
+      if (withOpts) {
+        const a = $('input[data-cb-opt="analytics"]', bar), d = $('input[data-cb-opt="ads"]', bar);
+        a.checked = !!(saved && saved.analytics); d.checked = !!(saved && saved.ads);
+        opts.hidden = false;
+      }
+      if (!bar.parentNode) document.body.appendChild(bar);
+      requestAnimationFrame(() => bar.classList.add("show"));
+    }
+    function closeBar() { bar.classList.remove("show"); }
+    bar.addEventListener("click", e => {
+      const b = e.target.closest("[data-cb]");
+      if (!b) return;
+      const act = b.dataset.cb;
+      if (act === "all") { save(true, true); closeBar(); toast("Thanks! You can change this anytime in the footer 🍪"); }
+      else if (act === "necessary") { save(false, false); closeBar(); toast("Saved — only necessary storage used"); }
+      else if (act === "custom") { $(".cb-opts", bar).hidden = false; }
+      else if (act === "save") {
+        save($('input[data-cb-opt="analytics"]', bar).checked, $('input[data-cb-opt="ads"]', bar).checked);
+        closeBar(); toast("Saved — you can change this anytime in the footer");
+      }
+    });
+    // First visit (no choice stored yet): show the banner.
+    if (!read()) setTimeout(openBar, 900);
+    // Footer "Cookie settings": always available to change the choice.
+    $$("[data-cookie-settings]").forEach(btn => btn.addEventListener("click", () => openBar(true)));
+  })();
+
   /* ---------------- PDF download tracking (GTM) ---------------- */
   document.addEventListener("click", e => {
     const a = e.target && e.target.closest ? e.target.closest('a[href]') : null;

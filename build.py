@@ -404,7 +404,9 @@ def footer_html(R):
         ("Latest Updates", "updates/"), ("Site Map", "site-map/")])
     comp = "".join(f'<li><a href="{R}{p}">{l}</a></li>' for l, p in [
         ("About Us", "about/"), ("Contact", "contact/"),
-        ("Privacy Policy", "privacy-policy/"), ("MDCAT Corner", "mdcat/"), ("CSS Corner", "css/"), ("Blog", "blog/"),
+        ("Privacy Policy", "privacy-policy/"), ("Terms of Use", "terms/"),
+        ("Copyright / DMCA", "copyright/"), ("Ad Disclosure", "advertising/"),
+        ("MDCAT Corner", "mdcat/"), ("CSS Corner", "css/"), ("Blog", "blog/"),
         ("Formula Sheets", "formulas/"), ("English Corner", "english-corner/"),
         ("Roll Number Slip", "roll-number-slip/"), ("Boards (All 9 BISE)", "boards/")])
     return f"""
@@ -438,7 +440,7 @@ def footer_html(R):
   </div>
   <div class="container footer-bottom">
     <span>© {YEAR} StudySapiens • Free for every student, forever.</span>
-    <span>Not affiliated with PCTB/PECTAA or any BISE. Made with {icon("sparkle",13)} in Pakistan.</span>
+    <span>Not affiliated with PCTB/PECTAA or any BISE. Made with {icon("sparkle",13)} in Pakistan. <button type="button" class="f-cookie-btn" data-cookie-settings>Cookie settings</button></span>
   </div>
 </footer>
 <button id="backToTop" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5m-6 6l6-6 6 6"/></svg></button>"""
@@ -471,6 +473,19 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
   window.dataLayer = window.dataLayer || [];
   function gtag(){{dataLayer.push(arguments);}}
   gtag('js', new Date());
+  /* Google Consent Mode v2 — defaults reflect the visitor's saved choice (banner in
+     main.js). Everything is DENIED until the visitor accepts. Runs before the async
+     gtm.js executes, so the signals apply to every tag in the container. */
+  var ssConsent = null;
+  try {{ ssConsent = JSON.parse(localStorage.getItem("ss-consent-v1") || "null"); }} catch (e) {{}}
+  var ssA = !!(ssConsent && ssConsent.analytics), ssD = !!(ssConsent && ssConsent.ads);
+  gtag('consent', 'default', {{
+    'ad_storage': ssD ? 'granted' : 'denied',
+    'ad_user_data': ssD ? 'granted' : 'denied',
+    'ad_personalization': ssD ? 'granted' : 'denied',
+    'analytics_storage': ssA ? 'granted' : 'denied',
+    'wait_for_update': 500
+  }});
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2848,33 +2863,64 @@ def build_privacy():
     <h1>Privacy Policy</h1>
     <div class="art-meta"><span>{icon("cal",14)} Last updated: November 2026</span></div>
     <div class="article-body">
-      <p>StudySapiens ("we", "our site") is a free educational website for students of Punjab boards. This page explains, in simple words, what information we handle and what we never do with it.</p>
+      <p>StudySapiens ("we", "our site") is a free educational website for students of Punjab boards. This page explains, in simple words, what information we handle, why, for how long, and what you can do about it.</p>
       <h2>What we collect</h2>
       <ul>
-        <li><b>Information you type:</b> if you use the contact form or subscribe to email updates, we receive your name (contact form only), email address and message. The quizzes and calculators run entirely in your browser — answers and marks never leave your device.</li>
-        <li><b>Basic analytics:</b> we use Google Tag Manager (and, through it, Google Analytics if enabled) to count page views, file downloads and feature use in aggregate. This may set cookies. No personal profiles are built and nothing is used to identify you personally.</li>
+        <li><b>Information you type:</b> the contact form sends us your name, email, class and message. The subscribe forms send us your email address (plus which resource you asked to be notified about). The quizzes and calculators run entirely in your browser — answers and marks never leave your device, and we keep no scores.</li>
+        <li><b>Analytics:</b> we use <b>Google Tag Manager</b> to manage tags and, through it, <b>Google Analytics 4</b> to count page views, PDF downloads, calculator and quiz use in aggregate. Google may set cookies and may collect your IP address (truncated where supported), device and browser information. We use this only to learn which chapters students need most. No advertising profiles are built by us, and we do not use analytics to identify you personally.</li>
+        <li><b>Server logs:</b> our hosting provider (Hostooze) records standard technical logs (IP address, pages requested, time) for security and abuse prevention, as any web host does.</li>
       </ul>
+      <h2>Cookies and local storage</h2>
+      <p id="cookies">The choice you make in the cookie banner is stored on your device. We set <b>no tracking cookies of our own</b> — everything below is either Google Analytics (only with your consent) or simple preferences your own browser keeps:</p>
+      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.9rem">
+        <tr style="text-align:left"><th style="padding:8px;border-bottom:2px solid var(--line)">Name</th><th style="padding:8px;border-bottom:2px solid var(--line)">Set by</th><th style="padding:8px;border-bottom:2px solid var(--line)">Purpose</th><th style="padding:8px;border-bottom:2px solid var(--line)">Life</th></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid var(--line)">_ga, _ga_*</td><td style="padding:8px;border-bottom:1px solid var(--line)">Google Analytics</td><td style="padding:8px;border-bottom:1px solid var(--line)">Tell returning visitors apart (a random ID, not your name). Set only if you accept analytics.</td><td style="padding:8px;border-bottom:1px solid var(--line)">Up to 2 years</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid var(--line)">ss-consent-v1</td><td style="padding:8px;border-bottom:1px solid var(--line)">Us (browser storage)</td><td style="padding:8px;border-bottom:1px solid var(--line)">Remembers your cookie choice so we do not ask again.</td><td style="padding:8px;border-bottom:1px solid var(--line)">12 months</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid var(--line)">ss-saved-v1</td><td style="padding:8px;border-bottom:1px solid var(--line)">Us (browser storage)</td><td style="padding:8px;border-bottom:1px solid var(--line)">Your saved chapters (offline shelf). Never leaves your device.</td><td style="padding:8px;border-bottom:1px solid var(--line)">Until you clear it</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid var(--line)">ss-et-class</td><td style="padding:8px;border-bottom:1px solid var(--line)">Us (browser storage)</td><td style="padding:8px;border-bottom:1px solid var(--line)">Remembers which class's exam countdown you picked.</td><td style="padding:8px;border-bottom:1px solid var(--line)">Until you clear it</td></tr>
+        <tr><td style="padding:8px">ss-install-hide-until</td><td style="padding:8px">Us (browser storage)</td><td style="padding:8px">Hides the "install app" bar after you press "Not now".</td><td style="padding:8px">14 days</td></tr>
+      </table></div>
+      <p class="small muted" style="margin-top:8px">Blocking or clearing cookies/storage does not break the site — the offline shelf and your countdown choice simply reset.</p>
+      <h2>Why we may use it (legal basis, in plain words)</h2>
+      <ul>
+        <li><b>Your consent:</b> analytics cookies, email updates, and (if ever) personalised advertising. Given via the cookie banner or the subscribe form, withdrawable anytime.</li>
+        <li><b>Legitimate interest:</b> replying to your messages, keeping the service running and secure (server logs, spam filtering), and understanding in aggregate which chapters students need.</li>
+        <li><b>Our legal obligations:</b> responding to valid takedown or information requests.</li>
+      </ul>
+      <p>For visitors from the EEA, UK and Switzerland we voluntarily honour GDPR-style principles (we ask before setting non-essential cookies, we keep data to what is needed, and we honour your requests below).</p>
+      <h2>Third parties we rely on</h2>
+      <ul>
+        <li><b>Google</b> — Google Tag Manager, Google Analytics (and, in future, advertising products). Google processes data under its own policies (policies.google.com); its servers are outside Pakistan.</li>
+        <li><b>Our email platform</b> (the service managing the subscriber list) — receives your email address to send the updates you asked for. See below.</li>
+        <li><b>Web3Forms</b> — delivers contact-form messages to our inbox; sees your name, email and message only in transit.</li>
+        <li><b>Hostooze</b> — hosts the site and keeps the server logs mentioned above.</li>
+        <li><b>Google Fonts</b> — the site loads its typefaces from Google; that request reveals your IP to Google like any font/CDN request.</li>
+      </ul>
+      <p>We never sell, rent or otherwise share your personal information with anyone else, and external sites we link to (eLearn Punjab, PMDC, FPSC, education boards) have their own privacy policies.</p>
       <h2>Email updates (newsletter)</h2>
-      <p id="unsubscribe">If you subscribe, your email address is passed to our email platform (the service that manages our subscriber list) so we can send you updates about new notes, schemes and papers. Subscribing uses <b>double opt-in</b>: you receive one confirmation email and are only added after you click the link in it. Every email we send carries an <b>unsubscribe link</b> — one click and you are off the list. We send study updates only, never unrelated marketing.</p>
-      <h2>Contact form</h2>
-      <p>Messages from the contact form are delivered to our inbox through a form-handling service (Web3Forms). It sees your name, email and message only in order to pass them on. If the form cannot send, it falls back to opening your own email app instead. Nothing is stored on our servers.</p>
-      <h2>What we never do</h2>
+      <p id="unsubscribe">If you subscribe, your email address is passed to our email platform so we can send updates about new notes, schemes and papers. Subscribing uses <b>double opt-in</b>: you get one confirmation email and are only added after you click the link in it. Every email we send carries an <b>unsubscribe link</b> — one click and you are off the list. We send study updates, never unrelated marketing. If advertising ever appears in emails it will be clearly marked (see our <a href="../advertising/">Advertising Disclosure</a>).</p>
+      <h2>How long we keep things</h2>
       <ul>
-        <li>We never sell, rent or share your personal information with advertisers.</li>
-        <li>We don't require accounts, and we don't store test scores.</li>
+        <li><b>Analytics events:</b> if Google Analytics is enabled, Google retains event data for up to 14 months by default (configurable in the GA property); aggregate reports may be kept longer.</li>
+        <li><b>Contact messages:</b> kept in our inbox for up to 24 months so we can follow up, then deleted.</li>
+        <li><b>Newsletter records:</b> kept until you unsubscribe, plus a short suppression period so you are not accidentally re-added.</li>
+        <li><b>Server logs:</b> per our host's standard retention (typically weeks).</li>
       </ul>
-      <h2>Cookies &amp; third parties</h2>
-      <p>The site may set cookies for analytics (Google) and uses your browser's own storage for the offline "save chapter" feature (that stays on your device). External sites we link to (eLearn Punjab, PMDC, FPSC and education boards) have their own privacy policies.</p>
-      <h2>Your choices</h2>
+      <h2>Your rights</h2>
       <ul>
-        <li><b>Unsubscribe</b> from emails using the link at the bottom of any email we sent, or write to us.</li>
-        <li><b>Ask us to delete</b> your email address or a message you sent: email <b>{EMAIL}</b> and we will remove it.</li>
-        <li><b>Block cookies</b> in your browser — the site keeps working (offline saving just turns off).</li>
+        <li><b>Know and access:</b> ask what we hold about you (a name, email and message at most).</li>
+        <li><b>Delete:</b> ask us to remove your email, a message, or a takedown record — email <b>{EMAIL}</b> and we will do it within 7 working days.</li>
+        <li><b>Withdraw consent:</b> change your cookie choice anytime via "Cookie settings" in the footer, or unsubscribe from emails with one click.</li>
+        <li><b>Object / restrict:</b> if you want us to stop a specific processing, write to us and we will sort it out.</li>
       </ul>
-      <h2>Students under 13</h2>
-      <p>Our content is safe for all ages. Younger students should use the contact and subscribe forms with a parent/guardian's email.</p>
+      <h2>Students and children</h2>
+      <p id="children">Our audience is mainly secondary and higher-secondary students (around 13 and above). The site is not directed at children under 13, and we do not knowingly collect their personal information — younger students should use the forms with a parent or guardian's email. If you believe a child's data reached us, email <b>{EMAIL}</b> and we will delete it promptly. When advertising begins, no personalised ads will run without consent and we apply non-personalised treatment where required for child-directed or mixed-audience content (see the <a href="../advertising/">Advertising Disclosure</a>).</p>
+      <h2>Security</h2>
+      <p>The whole site is served over HTTPS. There are no user accounts and no passwords to steal. Forms are protected against bots and messages go to a monitored inbox, not a public page.</p>
+      <h2>Changes to this policy</h2>
+      <p>If the site gains a feature that changes how information is handled, we will update this page and change the date at the top. Significant changes (like advertising going live) will also be announced in the updates section.</p>
       <h2>Contact</h2>
-      <p>Questions about privacy? Email <b>{EMAIL}</b>.</p>
+      <p>Questions about privacy? Email <b>{EMAIL}</b> — a teacher reads every message.</p>
     </div>
   </div>
 </section>"""
@@ -2882,6 +2928,120 @@ def build_privacy():
         title="Privacy Policy | StudySapiens",
         desc="StudySapiens privacy policy. No data selling, no forced sign-ups, no intrusive ads. How we handle your information, in simple words.",
         path="privacy-policy/", body=body), priority="0.3", changefreq="yearly")
+
+# ------------------------------------------------------------------
+
+
+def _legal_page(*, slug, title, desc, h1, body):
+    """Shared builder for the legal pages (terms / copyright / advertising)."""
+    R = "../"
+    html = crumbs_html(R, [(h1, f"{slug}/")]) + f"""
+<section class="section">
+  <div class="container article" style="max-width:820px">
+    <h1>{h1}</h1>
+    <div class="art-meta"><span>{icon("cal",14)} Last updated: November 2026</span></div>
+    <div class="article-body">
+{body}
+    </div>
+  </div>
+</section>"""
+    w(f"{slug}/index.html", layout(page_key=slug, depth=1, title=title, desc=desc,
+        path=f"{slug}/", body=html), priority="0.3", changefreq="yearly")
+
+
+def build_terms():
+    _legal_page(
+        slug="terms", h1="Terms of Use",
+        title="Terms of Use | StudySapiens",
+        desc="The simple rules for using StudySapiens: what is free, what you may do with the notes and papers, and our responsibilities to each other.",
+        body=f"""
+      <p>Welcome to StudySapiens. By using this website you agree to these terms, in plain words. StudySapiens is a free educational resource for students of Punjab boards (BISE) built around the new PCTB / PECTAA syllabus. No account, no payment, no sign-up wall.</p>
+      <h2>What we provide</h2>
+      <ul>
+        <li>Teacher-made notes, solved exercises, MCQ banks, pairing schemes, guess papers and past-paper guidance, free of charge.</li>
+        <li>Quizzes and calculators that run entirely in your browser. Your answers and marks stay on your device.</li>
+        <li>Material is prepared with care and checked by subject experts, but <b>we are not the board</b>. Always confirm dates, patterns and rules with your own board's official announcements and your prescribed textbook. If you find a mistake, tell us and we will correct it.</li>
+      </ul>
+      <h2>What you may do</h2>
+      <ul>
+        <li>Download, print and share our material for your own study, or to help other students — free of cost.</li>
+        <li>Link to our pages from anywhere (WhatsApp groups, school websites, YouTube).</li>
+      </ul>
+      <h2>What you may not do</h2>
+      <ul>
+        <li>Sell our material, or put it behind a paywall or sign-up wall.</li>
+        <li>Republish our files on another website or app as your own work, or remove our name/logo from them.</li>
+        <li>Use automated tools to bulk-download the site or overload it.</li>
+      </ul>
+      <h2>Copyright</h2>
+      <p>Teacher-prepared material on this site is © StudySapiens. Official documents (past papers, schemes, date sheets, notifications) remain the property of their boards and publishers; we host or link them for educational reference. Full details and takedown requests: see our <a href="../copyright/">Copyright / DMCA policy</a>.</p>
+      <h2>Privacy, cookies and ads</h2>
+      <p>How we handle your data is explained in the <a href="../privacy-policy/">Privacy Policy</a>. If we ever show advertising, how it works and your choices are explained in the <a href="../advertising/">Advertising Disclosure</a>. Using the site means you have seen the cookie banner and made your choice there.</p>
+      <h2>No warranty; availability</h2>
+      <p>The site is provided "as is", free of charge. We work hard to keep it accurate and online, but we cannot promise it will always be available, complete or error-free. To the extent permitted by law, StudySapiens is not liable for losses resulting from use of the site (for example, exam results). Your board and your textbooks are always the final authority.</p>
+      <h2>Changes</h2>
+      <p>We may update these terms as the site grows. The date at the top shows the last change; continued use after a change means you accept the updated terms.</p>
+      <h2>Contact &amp; governing law</h2>
+      <p>Questions, permission requests: <b>{EMAIL}</b>. These terms are governed by the laws of Pakistan.</p>""")
+
+
+def build_copyright():
+    _legal_page(
+        slug="copyright", h1="Copyright / DMCA Policy",
+        title="Copyright & DMCA Policy | StudySapiens",
+        desc="How copyright works on StudySapiens, what belongs to the boards, and how to send a takedown request. We act on valid requests within 2 working days.",
+        body=f"""
+      <p>We respect copyright — ours and everyone else's. This page explains who owns what on StudySapiens, what you may reuse, and how to request a takedown.</p>
+      <h2>Who owns what</h2>
+      <ul>
+        <li><b>Teacher-prepared material</b> (notes, solved exercises, MCQ banks, guess papers, calculators, quizzes, articles): © StudySapiens. You may use them freely for study; see <a href="../terms/">Terms of Use</a>.</li>
+        <li><b>Official documents</b> (past papers, pairing schemes, model papers, date sheets, syllabi, notifications): these belong to their respective boards (BISE), PCTB/PECTAA, PMDC, UET, FPSC or the publishers of the textbooks. We host or link them for educational reference and always name the source. If you are a rights holder and prefer we remove or only link your document, just ask.</li>
+      </ul>
+      <h2>Takedown requests (DMCA-style)</h2>
+      <p>If you believe material on this site infringes your copyright, email <b>{EMAIL}</b> with the subject line <b>"Takedown request"</b> and include:</p>
+      <ol>
+        <li>Identification of the original work (title, author/publisher, and where it is published);</li>
+        <li>The exact page URL(s) on studysapiens.com where our material appears;</li>
+        <li>Your name, email and (for formal notices) your address and phone;</li>
+        <li>A statement that you have a good-faith belief that the use is not authorised by the copyright owner, its agent, or the law;</li>
+        <li>A statement, under penalty of perjury, that the information is accurate and that you are the owner or authorised to act for the owner;</li>
+        <li>Your electronic or physical signature.</li>
+      </ol>
+      <p>We <b>remove or disable access within 2 working days</b> of a valid request, and we tell you when it is done. If the uploader disagrees, they may send a counter-notice explaining their basis; we may restore the material after following the proper process.</p>
+      <h2>Repeat infringers</h2>
+      <p>Contributors who repeatedly infringe are removed from the project.</p>
+      <h2>Caution</h2>
+      <p>Knowingly sending a false takedown request can itself create legal liability. When in doubt, talk to us first — we usually fix things the same day.</p>""")
+
+
+def build_advertising():
+    _legal_page(
+        slug="advertising", h1="Advertising & Affiliate Disclosure",
+        title="Advertising & Affiliate Disclosure | StudySapiens",
+        desc="How StudySapiens may earn money while staying free: display ads, affiliate links, what they may and may never do, and what this means for students and parents.",
+        body=f"""
+      <p>Honest answer first: <b>right now (November 2026) StudySapiens runs no advertising at all.</b> Everything is free and there is no paywall. This page explains how we may fund the site in future, so nothing ever arrives as a surprise.</p>
+      <h2>How we may earn later</h2>
+      <ul>
+        <li><b>Display advertising</b> served through networks such as Google AdSense. Ads will be clearly separated from content — labelled "Advertisement" or "Sponsored" — and will never be styled to look like download buttons or part of the notes.</li>
+        <li><b>Affiliate links</b>, for example to books or stationery. If we ever include one, it will be marked, and it costs you nothing extra; we may earn a small commission.</li>
+        <li><b>Sponsored content</b>, only ever clearly labelled as sponsored. Our notes and schemes are never for sale to advertisers.</li>
+      </ul>
+      <h2>What advertising will never do here</h2>
+      <ul>
+        <li>Ads do not influence our notes, quizzes, calculators or corrections. Editorial and commercial content are kept separate.</li>
+        <li>We do not control which specific ads a network shows. If you ever see a misleading or inappropriate ad, send us a screenshot and we will report/block it.</li>
+        <li>No content will be locked behind clicking an ad.</li>
+      </ul>
+      <h2>Personalised vs non-personalised ads</h2>
+      <p>Ads can be <b>non-personalised</b> (based only on the page you are viewing) or <b>personalised</b> (based on your browsing over time, via cookies). Your choice in the cookie banner decides: personalised advertising runs only where you have consented to it, and it stays off by default. In the EEA, UK and Switzerland we will additionally use a Google-certified consent platform before any personalised advertising, as Google requires. See the <a href="../privacy-policy/">Privacy Policy</a> for the data side of this.</p>
+      <h2>Students and children</h2>
+      <p>Most of our audience is secondary and higher-secondary students (around 13 and above). Content is not directed at children under 13, and we do not knowingly collect their data (see the Privacy Policy's children section). When advertising starts, we will apply non-personalised treatment where the law or Google's policies require it for child-directed or mixed-audience content, and we will keep ads away from intrusive formats on study pages. Parents with any concern: email <b>{EMAIL}</b> — a teacher reads every message.</p>
+      <h2>Newsletter</h2>
+      <p>If we send email updates, they may occasionally contain a clearly marked ad or affiliate link. Every email carries an unsubscribe link; using it removes you from the list.</p>
+      <h2>Questions</h2>
+      <p>Anything unclear? Email <b>{EMAIL}</b>.</p>""")
+
 
 def build_sitemap_page():
     R = "../"
@@ -2894,7 +3054,8 @@ def build_sitemap_page():
         ("Date Sheets","date-sheet/"),("MDCAT & Calculator","mdcat/"),("ECAT & Calculator","ecat/"),("CSS Guide","css/"),("eBooks","ebooks/"),
         ("Results","results/"),("Online Tests","tests/"),("Model Papers","model-papers/"),("Formula Sheets","formulas/"),
         ("English Corner","english-corner/"),("Roll Number Slip","roll-number-slip/"),("Boards","boards/"),
-        ("Updates","updates/"),("Blog","blog/"),("About","about/"),("Contact","contact/"),("Privacy Policy","privacy-policy/")])
+        ("Updates","updates/"),("Blog","blog/"),("About","about/"),("Contact","contact/"),("Privacy Policy","privacy-policy/"),
+        ("Terms of Use","terms/"),("Copyright / DMCA","copyright/"),("Ad Disclosure","advertising/")])
     body = crumbs_html(R, [("Site Map","site-map/")]) + page_hero(R, badge="Everything, one page",
         title="Site Map", lead="Every main page of StudySapiens. Looking for notes? Open your subject: the study guide and all downloads live inside.")
     body += f"""
@@ -2909,7 +3070,7 @@ def build_sitemap_page():
 
 SW_JS = r"""
 /* StudySapiens service worker. V1 */
-const VERSION = 'ss-v14';
+const VERSION = 'ss-v15';
 const CORE = [
   './', 'classes/', 'pairing-scheme/', 'mdcat/', 'date-sheet/', 'offline/',
   'assets/css/style.css', 'assets/js/main.js', 'assets/js/ss-config.js',
@@ -3238,7 +3399,7 @@ def main():
     for bi in range(len(BLOGS)): build_blog_post(BLOGS, bi)
     build_updates()
     for p in UPDATES: build_post(p)
-    build_about(); build_contact(); build_privacy(); build_offline(); build_404(); build_sitemap_page()
+    build_about(); build_contact(); build_privacy(); build_terms(); build_copyright(); build_advertising(); build_offline(); build_404(); build_sitemap_page()
     write_seo()
     pages = len(URLS)
     print(f"✅ Done. {pages} pages generated in ./site/  (+search.json {len(SEARCH)} entries, sitemap.xml, robots.txt)")

@@ -256,6 +256,97 @@ for (const [page, id] of [['mdcat', 'mdcat'], ['ecat', 'ecat']]) {
   dom.window.close();
 }
 
+// ---------- consent mode v2: static checks ----------
+{
+  const pages = walk(path.join(ROOT, 'site'));
+  let ok = 0;
+  for (const p of pages) {
+    const s = fs.readFileSync(p, 'utf8');
+    if (s.includes("gtag('consent', 'default'") && s.includes("'ad_user_data'") &&
+        s.includes("'ad_personalization'") && s.includes("'analytics_storage'") && s.includes('wait_for_update')) ok++;
+  }
+  log('consent-mode v2 defaults on every page', ok === pages.length, `${ok}/${pages.length} pages`);
+
+  const need = ['terms', 'copyright', 'advertising'];
+  const exist = need.every(slug => fs.existsSync(path.join(ROOT, 'site', slug, 'index.html')));
+  log('legal pages built (terms, copyright, advertising)', exist);
+  const home = fs.readFileSync(path.join(ROOT, 'site', 'index.html'), 'utf8');
+  log('footer links to legal pages + cookie settings',
+    need.every(slug => home.includes(slug + '/')) && home.includes('data-cookie-settings'));
+  const sm = fs.readFileSync(path.join(ROOT, 'site', 'sitemap.xml'), 'utf8');
+  log('legal pages in sitemap.xml', need.every(slug => sm.includes('/' + slug + '/')));
+  const priv = fs.readFileSync(path.join(ROOT, 'site', 'privacy-policy', 'index.html'), 'utf8');
+  log('privacy policy: GA4/GTM, cookie table, retention, rights, children',
+    priv.includes('Google Analytics 4') && priv.includes('_ga') && priv.includes('14 months') &&
+    priv.includes('Your rights') && priv.includes('children'));
+}
+
+// ---------- consent mode v2: jsdom behaviour ----------
+async function openConsentPage(preStorage) {
+  let html = fs.readFileSync(path.join(ROOT, 'site', 'index.html'), 'utf8');
+  html = html.replace(/<script[^>]*src="https?:[^"]*"[^>]*><\/script>\s*/g, '');
+  html = html.replace(/<script src="[^"]*assets\/js\/(?:main|ss-config)\.js" defer><\/script>\s*/g, '');
+  html = html.replace('</body>', () => '<script>' + MAIN_JS + '</script></body>');
+  const vc = new VirtualConsole();
+  const dom = new JSDOM(html, {
+    url: 'https://www.studysapiens.com/',
+    runScripts: 'dangerously', pretendToBeVisual: true, virtualConsole: vc,
+    beforeParse(window) {
+      window.matchMedia = q => ({ matches: false, media: q, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {}, dispatchEvent() { return false; } });
+      window.IntersectionObserver = class { observe() {} unobserve() {} disconnect() {} };
+      window.scrollTo = () => {};
+      window.HTMLElement.prototype.scrollIntoView = function () {};
+      if (preStorage) window.localStorage.setItem('ss-consent-v1', JSON.stringify(preStorage));
+    },
+  });
+  return dom;
+}
+const consentCmd = (dom, verb) => (dom.window.dataLayer || []).find(x => x && x.length >= 3 && x[0] === 'consent' && x[1] === verb && x[2]);
+
+{
+  const dom = await openConsentPage(null); // fresh visitor
+  await sleep(1400);
+  const def = consentCmd(dom, 'default');
+  log('fresh visit: consent defaults all denied', !!def && def[2].ad_storage === 'denied' &&
+    def[2].ad_user_data === 'denied' && def[2].ad_personalization === 'denied' && def[2].analytics_storage === 'denied');
+  const bar = dom.window.document.querySelector('#cookieBar');
+  log('fresh visit: banner appears', !!bar && bar.classList.contains('show'));
+  bar.querySelector('[data-cb="all"]').click();
+  await sleep(60);
+  const upd = consentCmd(dom, 'update');
+  const stored = JSON.parse(dom.window.localStorage.getItem('ss-consent-v1'));
+  log('accept all: update granted + stored', !!upd && upd[2].analytics_storage === 'granted' && upd[2].ad_storage === 'granted' &&
+    stored.analytics === true && stored.ads === true);
+  log('accept all: banner closes + consent_choice event', !bar.classList.contains('show') && !!findEvent(dom, 'consent_choice'));
+  dom.window.close();
+}
+{
+  const dom = await openConsentPage(null);
+  await sleep(1400);
+  const bar = dom.window.document.querySelector('#cookieBar');
+  bar.querySelector('[data-cb="necessary"]').click();
+  await sleep(60);
+  const upd = consentCmd(dom, 'update');
+  const stored = JSON.parse(dom.window.localStorage.getItem('ss-consent-v1'));
+  log('necessary only: everything stays denied + stored', !!upd && upd[2].analytics_storage === 'denied' &&
+    upd[2].ad_storage === 'denied' && stored.analytics === false && stored.ads === false);
+  dom.window.close();
+}
+{
+  const dom = await openConsentPage({ v: 1, analytics: true, ads: true, ts: '2026-11-13T00:00:00Z' });
+  await sleep(1400);
+  const def = consentCmd(dom, 'default');
+  log('returning visitor: remembered consent grants defaults', !!def && def[2].analytics_storage === 'granted' && def[2].ad_storage === 'granted');
+  let bar = dom.window.document.querySelector('#cookieBar');
+  log('returning visitor: no banner again', !bar || !bar.classList.contains('show'));
+  dom.window.document.querySelector('[data-cookie-settings]').click();
+  await sleep(60);
+  bar = dom.window.document.querySelector('#cookieBar');
+  log('footer cookie settings reopens banner with options', !!bar && bar.classList.contains('show') &&
+    !bar.querySelector('.cb-opts').hidden);
+  dom.window.close();
+}
+
 // ---------- summary ----------
 const pass = results.filter(Boolean).length;
 console.log('\n' + (pass === results.length ? 'ALL ' + pass + ' FORM/EVENT CHECKS PASSED ✅' : 'FAILED: ' + (results.length - pass) + '/' + results.length + ' ❌'));

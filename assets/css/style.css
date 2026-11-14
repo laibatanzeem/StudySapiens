@@ -534,6 +534,21 @@ li:hover>.mega,li:focus-within>.mega,li.nav-item-open>.mega,.mega.open{opacity:1
 .ss-consent a{font-weight:700;text-decoration:underline}
 .ss-consent-footer{color:rgba(255,255,255,.68)}
 .ss-consent-footer a{color:var(--gold-300)}
+.f-cookie-btn{background:none;border:none;padding:0 0 0 6px;font:inherit;font-size:inherit;color:inherit;cursor:pointer;text-decoration:underline}
+.f-cookie-btn:hover{opacity:.8}
+
+/* Cookie consent banner (Google Consent Mode v2) */
+.cookie-bar{position:fixed;left:16px;right:16px;bottom:16px;z-index:1200;max-width:680px;margin:0 auto;background:#fff;border:1.5px solid var(--line);border-radius:16px;box-shadow:0 18px 48px rgba(30,35,20,.22);padding:16px 18px;transform:translateY(24px);opacity:0;pointer-events:none;transition:transform .35s var(--ease),opacity .35s var(--ease)}
+.cookie-bar.show{transform:none;opacity:1;pointer-events:auto}
+.cookie-bar .cb-txt{font-size:.88rem;line-height:1.55;color:var(--ink-soft)}
+.cookie-bar .cb-txt b{color:var(--ink)}
+.cookie-bar .cb-txt a{font-weight:700;text-decoration:underline}
+.cookie-bar .cb-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.cookie-bar .cb-opts{margin-top:12px;display:flex;flex-direction:column;gap:8px;font-size:.85rem;color:var(--ink-soft);border-top:1px dashed var(--line);padding-top:12px}
+.cookie-bar .cb-opts label{display:flex;align-items:center;gap:8px;cursor:pointer}
+.cookie-bar .cb-opts .btn{align-self:flex-start;margin-top:4px}
+@media (max-width:600px){.cookie-bar{left:10px;right:10px;bottom:10px;padding:14px}}
+@media print{.cookie-bar{display:none!important}}
 
 
 /* ---------- CTA banner ---------- */

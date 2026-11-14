@@ -6,6 +6,18 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+  /* Google Consent Mode v2 — defaults reflect the visitor's saved choice (banner in
+     main.js). Everything is DENIED until the visitor accepts. */
+  var ssConsent = null;
+  try { ssConsent = JSON.parse(localStorage.getItem("ss-consent-v1") || "null"); } catch (e) {}
+  var ssA = !!(ssConsent && ssConsent.analytics), ssD = !!(ssConsent && ssConsent.ads);
+  gtag('consent', 'default', {
+    'ad_storage': ssD ? 'granted' : 'denied',
+    'ad_user_data': ssD ? 'granted' : 'denied',
+    'ad_personalization': ssD ? 'granted' : 'denied',
+    'analytics_storage': ssA ? 'granted' : 'denied',
+    'wait_for_update': 500
+  });
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -455,7 +467,7 @@
     </div>
     <div><h4>Popular Notes</h4><ul class="f-links"><li><a href="../classes/9/physics/">Class 9 Physics</a></li><li><a href="../classes/9/chemistry/">Class 9 Chemistry</a></li><li><a href="../classes/9/biology/">Class 9 Biology</a></li><li><a href="../classes/11/physics/">1st Year Physics</a></li><li><a href="../classes/11/chemistry/">1st Year Chemistry</a></li><li><a href="../classes/11/biology/">1st Year Biology</a></li></ul></div>
     <div><h4>Exam Resources</h4><ul class="f-links"><li><a href="../smart-syllabus/">Smart Syllabus</a></li><li><a href="../pairing-scheme/">Pairing Schemes</a></li><li><a href="../guess-papers/">Guess Papers</a></li><li><a href="../past-papers/">Past Papers</a></li><li><a href="../date-sheet/">Date Sheets</a></li><li><a href="../results/">Results</a></li><li><a href="../tests/">Online Tests</a></li><li><a href="../model-papers/">Model Papers</a></li><li><a href="../mdcat/#calculator">MDCAT Calculator</a></li><li><a href="../ecat/#calculator">ECAT Calculator</a></li><li><a href="../ebooks/">eBooks (Official)</a></li><li><a href="../updates/">Latest Updates</a></li><li><a href="../site-map/">Site Map</a></li></ul></div>
-    <div><h4>StudySapiens</h4><ul class="f-links"><li><a href="../about/">About Us</a></li><li><a href="../contact/">Contact</a></li><li><a href="../privacy-policy/">Privacy Policy</a></li><li><a href="../mdcat/">MDCAT Corner</a></li><li><a href="../css/">CSS Corner</a></li><li><a href="../blog/">Blog</a></li><li><a href="../formulas/">Formula Sheets</a></li><li><a href="../english-corner/">English Corner</a></li><li><a href="../roll-number-slip/">Roll Number Slip</a></li><li><a href="../boards/">Boards (All 9 BISE)</a></li></ul>
+    <div><h4>StudySapiens</h4><ul class="f-links"><li><a href="../about/">About Us</a></li><li><a href="../contact/">Contact</a></li><li><a href="../privacy-policy/">Privacy Policy</a></li><li><a href="../terms/">Terms of Use</a></li><li><a href="../copyright/">Copyright / DMCA</a></li><li><a href="../advertising/">Ad Disclosure</a></li><li><a href="../mdcat/">MDCAT Corner</a></li><li><a href="../css/">CSS Corner</a></li><li><a href="../blog/">Blog</a></li><li><a href="../formulas/">Formula Sheets</a></li><li><a href="../english-corner/">English Corner</a></li><li><a href="../roll-number-slip/">Roll Number Slip</a></li><li><a href="../boards/">Boards (All 9 BISE)</a></li></ul>
       <div style="margin-top:18px">
         <form data-mailto="admin@studysapiens.com" data-subject="Subscribe. StudySapiens Updates" data-ss="newsletter" data-location="footer" style="display:flex;gap:8px;flex-wrap:wrap">
           <input type="email" name="email" required placeholder="Email for updates" aria-label="Your email address" style="flex:1;min-width:0;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);border-radius:10px;padding:.6rem .8rem;color:#fff;font-size:.85rem">
@@ -469,7 +481,7 @@
   </div>
   <div class="container footer-bottom">
     <span>© 2026 StudySapiens • Free for every student, forever.</span>
-    <span>Not affiliated with PCTB/PECTAA or any BISE. Made with <svg class="svg " width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9z"/></svg> in Pakistan.</span>
+    <span>Not affiliated with PCTB/PECTAA or any BISE. Made with <svg class="svg " width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16l.9 2.1L22 19l-2.1.9L19 22l-.9-2.1L16 19l2.1-.9z"/></svg> in Pakistan. <button type="button" class="f-cookie-btn" data-cookie-settings>Cookie settings</button></span>
   </div>
 </footer>
 <button id="backToTop" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 19V5m-6 6l6-6 6 6"/></svg></button>

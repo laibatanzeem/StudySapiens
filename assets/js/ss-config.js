@@ -40,5 +40,14 @@ window.SS_CONFIG = {
   newsletterFields: {},            // e.g. { "groups[]": "1234567890" }
 
   /* Fallback address used when the values above are still empty: */
-  notifyEmail: "admin@studysapiens.com"
+  notifyEmail: "admin@studysapiens.com",
+
+  /* ---- COOKIE BANNER (Google Consent Mode v2) --------------------------
+     true  = our first-party banner asks visitors and sets Consent Mode
+             signals (analytics + ads, with a "necessary only" option).
+     false = you have switched to a Google-certified CMP (e.g. the free
+             "Privacy & messaging" CMP inside AdSense, or CookieYes/Cookiebot).
+             Set this to false on the SAME DAY you enable that CMP so
+             visitors do not see two banners.                                  */
+  consentBanner: true
 };

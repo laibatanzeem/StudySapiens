@@ -352,6 +352,28 @@ Now owner-driven: content = the files you upload. See "How to upload notes / pap
   integrity across all 91 built pages, Web3Forms payload, ESP submit + CORS-blocked
   fallback, honeypot drop, mailto fallback, all six events) - run it after every rebuild
   alongside scripts/calc-verify.mjs (still 18/18).
+- **14 Nov 2026 - ads-readiness privacy/consent stack:** GTM/GA4 loaded with no consent
+  banner, thin privacy wording, and no terms/copyright/ad-disclosure pages - a blocker
+  for AdSense. Implemented **Google Consent Mode v2** on every page (ad_storage,
+  ad_user_data, ad_personalization, analytics_storage all DENIED by default, set from
+  the visitor's saved choice in a synchronous head script that runs before gtm.js;
+  the GTM tag itself is untouched and still first in <head>). Added a first-party
+  cookie banner (main.js): Accept all / Necessary only / Customize (separate analytics
+  and ads toggles), choice stored 12 months in ss-consent-v1, reopenable anytime via
+  "Cookie settings" in every footer, pushes consent 'update' + a consent_choice GTM
+  event. Disable it in one line (SS_CONFIG.consentBanner=false) when switching to a
+  Google-certified CMP - see the runbook below. Privacy policy fully rewritten: GA4/GTM
+  disclosure, a cookie/local-storage table (_ga, ss-consent-v1, ss-saved-v1,
+  ss-et-class, ss-install-hide-until), legal basis in plain words, third parties
+  (Google, ESP, Web3Forms, Hostooze, Google Fonts), retention periods (analytics 14
+  months, contact messages 24, newsletter until unsubscribe), user rights, and a
+  children's-data section (13+, parent email, non-personalised ads stance). New legal
+  pages: /terms/ (Terms of Use), /copyright/ (DMCA-style takedown, 2-working-day
+  promise), /advertising/ (honest "no ads yet" + future display/affiliate rules,
+  personalised-ads-only-with-consent, child treatment). All linked from every footer,
+  the site map, and sitemap.xml. Service worker bumped to ss-v15. forms-verify.mjs
+  extended to 33 checks (consent defaults on every page, banner accept/reject/custom/
+  returning-visitor flows, legal pages built + linked + in sitemap).
 
 ## Pre-publish QA checklist (run for every PDF before it goes live)
 1. **File name** follows the convention and names the right subject and class
@@ -476,3 +498,42 @@ configuration tag in GTM - the events then appear under Reports > Engagement > E
 all built pages, Web3Forms payload, ESP submit + CORS-blocked fallback, honeypot drop,
 mailto fallback, all six events). Run after every rebuild, alongside
 `node scripts/calc-verify.mjs`.
+
+## Ads readiness: consent (CMP), cookies & legal pages
+
+Built 14 Nov 2026 so the site can pass AdSense/Ad Manager review when ads are enabled.
+What is already live: Consent Mode v2 on every page (all denied by default), the
+first-party cookie banner, the rewritten Privacy Policy, and /terms/, /copyright/
+(DMCA), /advertising/ pages — all linked in every footer, site map and sitemap.xml.
+
+**The one thing Google additionally requires for personalised ads in the EEA/UK/
+Switzerland: a Google-CERTIFIED consent management platform (IAB TCF).** Our
+first-party banner is NOT certified. Decision tree when ads are enabled:
+
+1. **AdSense route (recommended, free, no code):** in the AdSense console open
+   *Privacy & messaging* and create an EEA/UK/CH consent message. Google serves its
+   own certified CMP to those regions only. Then set `consentBanner: false` in
+   site/assets/js/ss-config.js the SAME DAY, so EEA visitors never see two banners
+   (visitors elsewhere see none either way — Google's CMP geo-targets).
+2. **Third-party certified CMP route (CookieYes / Cookiebot / etc.):** paste their
+   script per their instructions, then again set `consentBanner: false`.
+3. **Never** enable personalised ads for EEA/UK/CH traffic before one of the above.
+
+Consent Mode v2 wiring (for reference): the inline script right after the GTM tag in
+`<head>` reads `ss-consent-v1` from localStorage and calls
+`gtag('consent','default',{ad_storage, ad_user_data, ad_personalization,
+analytics_storage, wait_for_update:500})` — denied until the visitor accepts, granted
+per their saved choice on return visits. The banner pushes `gtag('consent','update')`
+plus a `consent_choice` dataLayer event when the visitor decides. In GTM, consent
+types map to Google's built-in consent variables; GA4 already respects them
+(cookieless pings while analytics consent is denied).
+
+Children: the audience is secondary/higher-secondary (≈13+); the site is declared
+NOT child-directed, the privacy policy forbids knowingly collecting under-13 data,
+and the Advertising Disclosure commits to non-personalised treatment where required.
+When AdSense is enabled, review Google's child-directed guidance for the junior
+class pages and keep personalised ads off where unsure.
+
+Verification: `node scripts/forms-verify.mjs` (33 checks — includes consent defaults
+on all pages, accept/reject/customize/returning-visitor banner flows, and the legal
+pages) + `node scripts/calc-verify.mjs` (18/18).
