@@ -517,6 +517,24 @@ CHAPTERS = {
         (11, "Human Circulatory System"),
         (12, "Human Skeletal and Muscular Systems"),
     ],
+    ("11", "chemistry"): [
+        (1, "Periodic Table and Periodic Properties"),
+        (2, "Atomic Structure"),
+        (3, "Chemical Bonding"),
+        (4, "Stoichiometry"),
+        (5, "States and Phases of Matter"),
+        (6, "Chemical Energetics"),
+        (7, "Reaction Kinetics"),
+        (8, "Chemical Equilibrium"),
+        (9, "Acid-Base Chemistry"),
+        (10, "Electrochemistry"),
+        (11, "Hydrocarbons"),
+        (12, "Nitrogen and Sulfur"),
+        (13, "Halogens"),
+        (14, "Atmosphere"),
+        (15, "Basic Separation Techniques"),
+        (16, "Lab Safety and Practical Skills"),
+    ],
     ("10", "chemistry"): [
         (14, "States of Matter and Phase Changes"),
         (15, "Stoichiometry"),
@@ -793,7 +811,7 @@ CHAPTERS = {
     ],
 }
 # categories that become chapter-wise when a chapter set exists
-CHAPTER_CATS = ("notes", "solutions", "mcq", "numericals")
+CHAPTER_CATS = ("notes", "solutions", "mcq", "numericals", "model", "testpapers")
 
 # ---- the 9 BISE boards of Punjab, with verified contact data ---------
 BOARDS = [

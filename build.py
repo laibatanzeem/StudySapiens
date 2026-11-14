@@ -1154,8 +1154,11 @@ def build_subject(cid, sid):
     chap_section = ""
     if chaps:
         cats_for = [k for k in CHAPTER_CATS if k != "numericals" or sid in NUMERICAL_SUBJECTS]
-        sub_names = {"notes": "notes", "solutions": "solved exercise", "mcq": "MCQs", "numericals": "numericals"}
-        chap_sub = ", ".join(sub_names[k] for k in cats_for)
+        sub_names = {"notes": "notes", "solutions": "solved exercise", "mcq": "MCQs", "numericals": "numericals",
+                     "model": "practice model papers", "testpapers": "test papers"}
+        have_cats = [k for k in cats_for
+                     if any(f.get("ch") in chap_nums for f in FILES.get((cid, sid), {}).get(k, []))]
+        chap_sub = ", ".join(sub_names[k] for k in have_cats) or "chapter files"
         cards = ""
         for num, title in chaps:
             mine = []
@@ -1314,7 +1317,8 @@ def build_chapter_pages(cid, sid):
         return
     c, s = CLASSES[cid], SUBJECTS[sid]
     cat_titles = {k: t for k, _i, t, _sub in FILE_CATEGORIES}
-    sub_names = {"notes": "notes", "solutions": "solved exercises", "mcq": "MCQ banks", "numericals": "numericals"}
+    sub_names = {"notes": "notes", "solutions": "solved exercises", "mcq": "MCQ banks", "numericals": "numericals",
+                 "model": "practice model papers", "testpapers": "test papers"}
     page_list = [(num, title, chapter_files_for(cid, sid, num)) for num, title in chaps]
     page_list = [p for p in page_list if p[2]]
     if not page_list:
@@ -1326,12 +1330,18 @@ def build_chapter_pages(cid, sid):
         R = "../../../../"
         chap_word = "Surah" if is_tarjuma else "Chapter"
         display = title if is_tarjuma else f"Chapter {num}: {esc(title)}"
+        test_only = not ({"notes", "solutions", "mcq", "numericals"} & {k for k, _f in mine})
+        kind = "Test Paper" if test_only else "Notes"
         h1 = (f"{c['name']} {s['name']} {title} Notes — New Syllabus {c['session']}" if is_tarjuma
-              else f"{c['name']} {s['name']} Chapter {num} Notes — New Syllabus {c['session']}")
+              else f"{c['name']} {s['name']} Chapter {num} {kind} — New Syllabus {c['session']}")
         title_tag = (ttl(f"{c['name']} Tarjuma-tul-Quran {title} Notes") if is_tarjuma
-                     else ttl(f"{c['name']} {s['name']} Chapter {num} Notes — {c['session']}"))
-        desc = (f"{c['name']} {s['name']} {chap_word} {num} ({title}): free notes, solved exercise & MCQs, "
-                f"new {c['session']} syllabus. Download, read online, exam tips. All Punjab boards.")
+                     else ttl(f"{c['name']} {s['name']} Chapter {num} {kind} — {c['session']}"))
+        if test_only:
+            desc = (f"{c['name']} {s['name']} {chap_word} {num} practice test paper: MCQs, short & long "
+                    f"questions, board pattern, new {c['session']} syllabus. Free PDF, read online. All Punjab boards.")
+        else:
+            desc = (f"{c['name']} {s['name']} {chap_word} {num} ({title}): free notes, solved exercise & MCQs, "
+                    f"new {c['session']} syllabus. Download, read online, exam tips. All Punjab boards.")
         if len(desc) > 160:
             desc = (f"{c['name']} {s['name']} {chap_word} {num}: free notes, solved exercise & MCQs, new "
                     f"{c['session']} syllabus. Download, read online, exam tips. All Punjab boards.")
@@ -1356,10 +1366,14 @@ def build_chapter_pages(cid, sid):
                 f"(PCTB / PECTAA, session {c['session']}) used by all nine Punjab boards. Everything we have "
                 f"for this {chap_word.lower()} is collected on this page: {', '.join(cats_present)} — uploaded "
                 f"file by file, and nothing goes live until it has been checked against the printed book.</p>"
-                "<p><b>How to study this chapter:</b> read it once in your textbook so you meet the ideas in "
-                "their own words, then open the solved exercise below and write every answer with your own hand "
-                "— copying never sticks. Finish with the MCQ bank, note every question you got wrong, and revise "
-                "only that list the next day. Read → solve → test: one order, every chapter.</p>"
+                + (("<p><b>How to use this paper:</b> study the chapter in your textbook first, then sit "
+                    "this paper in one go — timed, book closed. Mark it honestly, write out every answer you "
+                    "got wrong, and revise only that list the next day. Test → mark → revise: one order, every "
+                    "chapter.</p>") if test_only
+                   else ("<p><b>How to study this chapter:</b> read it once in your textbook so you meet the ideas in "
+                         "their own words, then open the solved exercise below and write every answer with your own hand "
+                         "— copying never sticks. Finish with the MCQ bank, note every question you got wrong, and revise "
+                         "only that list the next day. Read → solve → test: one order, every chapter.</p>"))
                 + link_para)
         kp = content.get("key_points") or []
         kp_html = (f'<div class="card chap-box"><h3>{icon("check",16)} Key points to remember</h3>'
@@ -1377,7 +1391,7 @@ def build_chapter_pages(cid, sid):
 
         # ---- downloads + online viewer ----
         prim = None
-        for k in ("notes", "solutions", "mcq", "numericals"):
+        for k in ("notes", "solutions", "mcq", "numericals", "model", "testpapers"):
             hit = next(((kk, f) for kk, f in mine if kk == k), None)
             if hit:
                 prim = hit

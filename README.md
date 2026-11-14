@@ -691,3 +691,20 @@ yet.** These two are deliberately deferred — flip them only when:
   `frame-src` += `https://*.doubleclick.net https://td.doubleclick.net` and the certified
   CMP's frame origin; `consent` is handled client-side (Consent Mode v2 already
   installed). Re-run a Report-Only pass with the ad tags live before enforcing.
+
+## Upload: Class 11 Chemistry chapter-wise practice tests (14 Nov 2026)
+
+- **16 practice model papers** (Ch 1–16, one page each: 8 MCQs + 6 short + 2 long
+  questions in board pattern) → `files/class-11/chemistry/model/`.
+- **New chapter set:** `CHAPTERS[("11", "chemistry")]` with the 16 titles of the new
+  syllabus book (Periodic Table → Lab Safety), taken from the papers themselves.
+- **Chapter pages now include test categories:** `CHAPTER_CATS` extended with `model`
+  and `testpapers`, so practice papers / test papers show inside chapter cards and on
+  chapter pages (download row + online PDF viewer). Class 11 Biology's existing model
+  papers moved into their chapter cards too.
+- **Test-only chapters get honest wording:** title/H1 say "Chapter N Test Paper"
+  (not "Notes"), the description and how-to paragraph are test-specific
+  ("sit this paper in one go — timed, book closed"), and the study-guide wording stays
+  on chapters that actually have notes/solutions/MQCs.
+- 16 new pages (`/classes/11/chemistry/chapter-1/` … `chapter-16/`), site now 305 pages,
+  349 published files; forms-verify 60 checks (adds a chem-11 upload guard).
