@@ -892,3 +892,13 @@ yet.** These two are deliberately deferred — flip them only when:
   `files/class-12/chemistry/testpapers/`, titles verified.
 - Every chem-12 chapter page now shows **Chapter Notes + MCQ Bank + Test Papers**
   (viewer opens notes first). 592 published files; forms-verify 61.
+
+## Upload: Class 12 Chemistry exercise solutions — subject complete (14 Nov 2026)
+
+- **17 exercise-solved PDFs** (Ch 17–33, 11–12 pages each) →
+  `files/class-12/chemistry/solutions/`, titles verified.
+- Chemistry 12 complete: every chapter page has all four resource types
+  (**Chapter Notes + Exercise Solutions + MCQ Bank + Test Papers**) — 68 chapter
+  files. 609 published files; forms-verify 61.
+- Day total (14 Nov): 276 new files across 7 subjects; site 289 → 347 pages,
+  333 → 609 published files.
