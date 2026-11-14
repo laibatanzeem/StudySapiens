@@ -107,6 +107,48 @@ try {
   }
 } catch (e) { log('mdcat calculator', false, String(e).slice(0, 90)) }
 
+// 6b. ECAT calculator (UET: Matric 17% + HSSC Part-I 50% + ECAT 33%)
+try {
+  await page.setViewportSize({ width: 1400, height: 900 });
+  await page.goto(BASE + '/ecat/', { waitUntil: 'domcontentloaded' });
+  const inputs = await page.locator('#ecatCalc input').count();
+  if (inputs < 3) log('ecat calculator', null, `inputs=${inputs}`);
+  else {
+    const read = () => page.evaluate(() => ({
+      agg: (document.querySelector('#gaugeNum') || { textContent: '' }).textContent.trim(),
+      elig: (document.querySelector('#eligibility') || { textContent: '' }).textContent.trim()
+    }));
+    // official basis: Part-I label + default total 550 (Punjab boards), not 1100
+    const lbl = await page.evaluate(() => Array.from(document.querySelectorAll('#ecatCalc label')).map(l => l.textContent.replace(/\s+/g, ' ').trim()).join(' | '));
+    log('ecat Part-I label', /HSSC Part-I \/ First Year Marks/.test(lbl), lbl.slice(0, 80));
+    const tot = await page.evaluate(() => (document.querySelector('#fscTot') || {}).value);
+    log('ecat Part-I default total 550', tot === '550', `fscTot=${tot}`);
+    for (const [name, val, want] of [
+      ['400/400', '400', '33.00%'],
+      ['260/400', '260', '21.45%'],
+      ['decimals 310.5/400', '310.5', '25.62%'],
+      ['zero 0/400', '0', '0%'],
+    ]) {
+      await page.fill('#matricObt', '');
+      await page.fill('#fscObt', '');
+      await page.fill('#ecatTot', '400');
+      await page.fill('#ecatObt', val);
+      const r = await read();
+      log(`ecat calc ${name}`, r.agg === want, `agg=${r.agg}`);
+    }
+    // full: matric 935/1100 (85%), first year 495/550 (90%), ECAT 280/400 (70%) -> 82.55%
+    await page.fill('#matricObt', '935');
+    await page.fill('#fscObt', '495');
+    await page.fill('#ecatObt', '280');
+    const full = await read();
+    log('ecat calc full 935+495+280', full.agg === '82.55%' && /First Year/.test(full.elig), `agg=${full.agg} elig=${full.elig.slice(0, 60)}`);
+    // invalid: Part-I obtained 600 > total 550
+    await page.fill('#fscObt', '600');
+    const inv = await read();
+    log('ecat calc invalid 600/550', /check the HSSC Part-I/i.test(inv.elig), inv.elig.slice(0, 70));
+  }
+} catch (e) { log('ecat calculator', false, String(e).slice(0, 90)) }
+
 // 7. Quiz: start + answer flow
 try {
   await page.goto(BASE + '/tests/study-skills-basics/', { waitUntil: 'domcontentloaded' });

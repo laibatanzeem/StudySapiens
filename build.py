@@ -2283,20 +2283,20 @@ def build_ecat():
     body = crumbs_html(R, [("ECAT", "ecat/")]) + page_hero(R,
         badge="For Pre-Engineering Students",
         title="ECAT Corner: UET Aggregate Calculator & Guide",
-        lead="The engineering entry test, minus the confusion: live UET aggregate calculator (Matric 17% + FSc 50% + ECAT 33%), the paper pattern, and the road from registration to merit list.",
+        lead="The engineering entry test, minus the confusion: live UET aggregate calculator (Matric 17% + First Year 50% + ECAT 33%), the paper pattern, and the road from registration to merit list.",
         actions=f'<a class="btn btn-primary btn-sm" href="#calculator">{icon("calc",15)} Calculate Aggregate</a> <a class="btn btn-light-outline btn-sm" href="#journey">Admission Roadmap</a>')
     body += f"""
 <section class="section" style="padding-top:26px;padding-bottom:0">
   <div class="container" style="max-width:880px">{answer_box("What is the ECAT / UET aggregate formula for engineering admission?",
-    "UET calculates merit as: <b>Matric 17% + FSc 50% + ECAT 33%</b>. The ECAT paper is out of 400 marks; convert it to a percentage before weighting. Example: Matric 88%, FSc 82%, ECAT 280/400 (70%) gives 14.96 + 41 + 23.1 = <b>79.06% aggregate</b>.",
-    "Formula is from UET's official admission policy. Other universities (NUST, FAST, GIKI) use their own formulas; this calculator follows UET Lahore.")}</div>
+    "UET calculates merit as: <b>Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%</b> - the 50% share is your first-year percentage, not the full FSc. The ECAT paper is out of 400 marks; convert it to a percentage before weighting. Example: Matric 88%, First Year 82%, ECAT 280/400 (70%) gives 14.96 + 41 + 23.1 = <b>79.06% aggregate</b>.",
+    "Formula is from UET's official Undergraduate Prospectus (Fall 2026) and admission portal. Other universities (NUST, FAST, GIKI) use their own formulas; this calculator follows UET Lahore.")}</div>
 </section>
 <section class="section" id="calculator" style="padding-top:26px">
   <div class="container">
     <div class="sec-head reveal">
       <span class="sec-kicker">{icon("calc",14)} Aggregate Calculator</span>
       <h2>Where Would You Stand on the Merit List?</h2>
-      <p>Current UET formula: <b>Matric 17% + FSc 50% + ECAT 33%</b> (ECAT out of 400). Enter your marks and watch the gauge.</p>
+      <p>Current UET formula: <b>Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%</b> (ECAT out of 400). Enter your marks and watch the gauge.</p>
     </div>
     <div class="calc-wrap" id="ecatCalc" data-wmatric="{W['matric']}" data-wfsc="{W['fsc']}" data-wecat="{W['ecat']}">
       <div class="calc-card reveal-l">
@@ -2308,10 +2308,10 @@ def build_ecat():
           </div>
         </div>
         <div class="calc-row">
-          <label>FSc / ICS Marks <span class="wt">weight {W['fsc']}%</span></label>
+          <label>HSSC Part-I / First Year Marks <span class="wt">weight {W['fsc']}%</span></label>
           <div class="calc-inputs">
-            <input id="fscObt" type="number" inputmode="numeric" min="0" max="1200" placeholder="Obtained e.g. 990">
-            <input id="fscTot" type="number" inputmode="numeric" min="1" max="1200" value="1100" placeholder="Total">
+            <input id="fscObt" type="number" inputmode="numeric" min="0" max="600" placeholder="Obtained e.g. 495">
+            <input id="fscTot" type="number" inputmode="numeric" min="1" max="600" value="{ECAT['totals']['fsc']}" placeholder="Total">
           </div>
         </div>
         <div class="calc-row">
@@ -2321,7 +2321,7 @@ def build_ecat():
             <input id="ecatTot" type="number" inputmode="numeric" min="1" max="400" value="400" placeholder="Total">
           </div>
         </div>
-        <p class="calc-note">Tip: totals are editable in case your year or board totals differ. You can also estimate with your expected ECAT score.</p>
+        <p class="calc-note">Tip: UET weighs your <b>first-year</b> result (Punjab boards: out of 550; the full FSc is 1100). Totals are editable if your board or year differs, and you can estimate with your expected ECAT score.</p>
         <div id="eligibility" class="eligibility" style="margin-top:0"></div>
       </div>
       <div class="gauge-card reveal-r">
@@ -2338,6 +2338,7 @@ def build_ecat():
         <p class="pmdc-note">Reference: closing merits at UET vary widely by department and campus, roughly from the low 60s to mid 80s. Always check the current merit lists on UET's own admission portal before deciding.</p>
       </div>
     </div>
+    <p class="small" style="max-width:880px;margin:14px auto 0;color:var(--ink-soft)">Last verified against UET's official <a style="color:var(--gold-300)" href="https://admission.uet.edu.pk/uploads/prospectus/UG-2026-1_78f5bbdf-88d5-4889-b97c-9f0d773d7d6d.pdf" target="_blank" rel="noopener">Undergraduate Prospectus (Fall 2026)</a> and <a style="color:var(--gold-300)" href="https://admission.uet.edu.pk/program/1" target="_blank" rel="noopener">admission portal</a> on 13 November 2026: merit = Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%. A-Level, DAE and B.Tech candidates should use the separate tracks in UET's own merit calculator on that portal.</p>
   </div>
 </section>
 <section class="section section-tight">
@@ -2367,7 +2368,7 @@ def build_ecat():
   <div class="container" style="max-width:880px">
     <div class="card" style="padding:16px 22px;display:flex;gap:12px;align-items:flex-start;background:var(--navy-50)">
       <span style="color:var(--navy-700)">{icon("shield",20)}</span>
-      <p class="small" style="color:var(--ink-soft)"><b>Honest note:</b> the 17/50/33 formula is the current UET Lahore pattern (verified October 2026). Other universities (NUST, GIKI, FAST, NED) run their own tests and formulas, and UET itself can revise weightages any year. Always confirm the final formula on the official admission portal of the university you apply to.</p>
+      <p class="small" style="color:var(--ink-soft)"><b>Honest notes:</b> for the intermediate stream UET weighs <b>Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%</b> - even if you have already completed Part-II (verified 13 November 2026). A-Level, DAE and B.Tech candidates: UET's portal has separate merit-calculator tracks for those streams. Your complete Intermediate must still meet the eligibility minimum (60% for engineering and architecture; 50% for computing, science and business programmes). Other universities (NUST, GIKI, FAST, NED) run their own tests and formulas, and UET itself can revise weightages any year. Always confirm the final formula on the official admission portal of the university you apply to.</p>
     </div>
     <div class="card" style="margin-top:26px;background:var(--gold-100);text-align:center;padding:28px">
       <h3 style="font-size:1.1rem;margin-bottom:8px">{icon("zap",20)} ECAT prep = your Class 11 & 12 books</h3>
@@ -2386,7 +2387,7 @@ def build_ecat():
     ld = [breadcrumb_json([("ECAT", "ecat/")])]
     w("ecat/index.html", layout(page_key="ecat", depth=1,
         title="ECAT Corner: UET Aggregate Calculator (17/50/33) & Pattern",
-        desc="Free ECAT aggregate calculator using the current UET formula (Matric 17% + FSc 50% + ECAT 33%), paper pattern, eligibility rules and admission roadmap.",
+        desc="Free ECAT aggregate calculator using the official UET formula (Matric 17% + First Year 50% + ECAT 33%), paper pattern, eligibility rules and admission roadmap.",
         path="ecat/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "ECAT Corner: Calculator & Guide", "s": "UET 17/50/33 aggregate · pattern · roadmap",
                    "u": "ecat/", "c": "Resource", "pop": 1, "k": "ecat uet engineering entry test aggregate calculator merit formula"})
@@ -3006,7 +3007,7 @@ def write_seo():
 
 ## Key facts (canonical answers)
 - MDCAT aggregate formula (UHS, public sector): Matric 10% + FSc 40% + MDCAT 50%. Eligibility: 55% MDCAT for MBBS, 50% for BDS.
-- ECAT / UET aggregate formula: Matric 17% + FSc 50% + ECAT 33%. The ECAT paper is out of 400 marks.
+- ECAT / UET aggregate formula: Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%. The ECAT paper is out of 400 marks, and the 50% share uses first-year marks, not the full FSc.
 - New syllabus rollout: Class 9 and Class 11 from 2025-26, Class 10 and Class 12 from 2026-27 (PECTAA books).
 
 ## Core pages

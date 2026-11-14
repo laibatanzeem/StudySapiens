@@ -584,7 +584,7 @@
 })();
 
 /* ==========================================================================
-   ECAT / UET aggregate calculator (17% Matric + 50% FSc + 33% ECAT)
+   ECAT / UET aggregate calculator (17% Matric + 50% HSSC Part-I + 33% ECAT)
    Lives only on the ECAT corner page; same pattern as the MDCAT calculator.
    ========================================================================== */
 (function () {
@@ -593,7 +593,7 @@
   const calc = $("#ecatCalc");
   if (!calc) return;
   const ids = ["matric", "fsc", "ecat"];
-  const names = { matric: "Matric (SSC)", fsc: "Intermediate (FSc / HSSC)", ecat: "ECAT" };
+  const names = { matric: "Matric (SSC)", fsc: "HSSC Part-I (First Year)", ecat: "ECAT" };
   const num = id => parseFloat($("#" + id).value) || 0;
   function compute() {
     let total = 0, html = "", anyInput = false, invalid = null;
@@ -620,9 +620,9 @@
     elig.className = "eligibility";
     if (anyInput && !invalid && fo > 0 && ft > 0) {
       const fPct = (fo / ft) * 100;
-      if (fPct >= 60) { elig.classList.add("ok"); elig.innerHTML = "✔ FSc " + fPct.toFixed(1) + "%. Meets the usual 60% FSc minimum for engineering programmes."; }
-      else if (fPct >= 50) { elig.classList.add("warn"); elig.innerHTML = "⚠ FSc " + fPct.toFixed(1) + "%. Usually enough for computing programmes (50%), but engineering asks for 60%."; }
-      else { elig.classList.add("warn"); elig.innerHTML = "✖ FSc " + fPct.toFixed(1) + "%. Below the usual 50% minimum. Improve FSc first: your aggregate starts there."; }
+      if (fPct >= 60) { elig.classList.add("ok"); elig.innerHTML = "✔ First Year " + fPct.toFixed(1) + "%. Merit is built on Part-I; eligibility still needs the complete Intermediate: 60% for engineering, 50% for computing."; }
+      else if (fPct >= 50) { elig.classList.add("warn"); elig.innerHTML = "⚠ First Year " + fPct.toFixed(1) + "%. Fine for computing programmes (50%), but engineering needs the complete Intermediate at 60%."; }
+      else { elig.classList.add("warn"); elig.innerHTML = "✖ First Year " + fPct.toFixed(1) + "%. Below the usual 50% minimum for the complete Intermediate. Improve now: Part-I carries half your aggregate."; }
     }
     if (invalid) { elig.classList.add("warn"); elig.innerHTML = "⚠ Please check the " + invalid + " marks. Obtained marks should not be more than total marks."; }
   }

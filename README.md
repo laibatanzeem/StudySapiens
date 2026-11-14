@@ -302,3 +302,13 @@ Now owner-driven: content = the files you upload. See "How to upload notes / pap
   blog-guide example. Added "last verified" lines linking both PMDC PDFs, calculator test
   cases (180 / 99 / 90 / decimals / zero / invalid), and a public correction notice at
   /updates/mdcat-2026-pattern-correction/. MDCAT 2027 content waits for the official notice.
+- **13 Nov 2026 - ECAT merit basis corrected (critical):** the /ecat/ calculator asked for
+  FSc marks out of 1100, implying merit uses the combined FSc. UET's official Undergraduate
+  Prospectus (Fall 2026) and admission portal confirm the intermediate-stream merit is
+  **Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%**. Fixed the calculator label
+  ("HSSC Part-I / First Year Marks"), default Part-I total (550, Punjab boards; editable),
+  worked example, journey timeline and facts; eligibility wording now states the 50/60%
+  minimums apply to the complete Intermediate. Added "last verified" lines linking UET's
+  prospectus and portal, notes for A-Level / DAE / B.Tech streams (UET's own calculator
+  tracks), calculator test cases (400 / 260 / decimals / zero / invalid / full 935+495+280
+  = 82.55%), and a public correction notice at /updates/ecat-2026-merit-basis-correction/.

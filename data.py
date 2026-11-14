@@ -108,6 +108,26 @@ BOARDS = ["Lahore", "Gujranwala", "Multan", "Faisalabad", "Rawalpindi",
 # ------------------------------------------------------------------
 UPDATES = [
     {
+        "slug": "ecat-2026-merit-basis-correction",
+        "title": "Correction: UET Merit Weighs First-Year (Part-I) Marks, Not the Full FSc",
+        "date": "November 13, 2026",
+        "tag": "ECAT",
+        "excerpt": "UET's official prospectus and admission portal confirm merit = Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%. Our ECAT calculator now defaults to first-year totals (550 on Punjab boards).",
+        "sources": [("UET Lahore: Undergraduate Prospectus, Fall 2026 (PDF)", "https://admission.uet.edu.pk/uploads/prospectus/UG-2026-1_78f5bbdf-88d5-4889-b97c-9f0d773d7d6d.pdf"),
+                    ("UET Lahore: admission portal (merit basis and official calculator)", "https://admission.uet.edu.pk/program/1")],
+        "body": """
+<p>Our ECAT calculator earlier asked for FSc marks out of 1100 and described the formula as "Matric 17% + FSc 50% + ECAT 33%". That was misleading: UET Lahore's official prospectus and its admission portal make clear that for the intermediate stream, the 50% share is your <b>First Year (HSSC Part-I) percentage</b>, not the combined FSc of both years.</p>
+<h2>What UET actually uses</h2>
+<ul>
+<li><b>Matric / SSC:</b> 17%</li>
+<li><b>First Year (HSSC Part-I) or equivalent:</b> 50%</li>
+<li><b>ECAT (out of 400):</b> 33%</li>
+</ul>
+<p>On Punjab boards, first-year totals are normally out of <b>550</b> (the full FSc is 1100), so the <a href="/ecat/#calculator">ECAT calculator</a> now labels the field "HSSC Part-I / First Year Marks" and defaults its total to 550. Totals stay editable if your board or year differs.</p>
+<h2>Other streams and eligibility</h2>
+<p>UET's admission portal has separate merit-calculator tracks for <b>A-Level, DAE and B.Tech</b> candidates - use the official calculator for your stream. And remember: merit may be built on Part-I, but eligibility requires the <b>complete</b> Intermediate or equivalent qualification (60% for engineering and architecture, 50% for computing, science and business programmes). If you spot any figure on this site that does not match UET's official documents, <a href="/contact/">tell us</a> and it will be corrected within a day.</p>""",
+    },
+    {
         "slug": "mdcat-2026-pattern-correction",
         "title": "Correction: Official MDCAT 2026 Pattern Is 180 MCQs",
         "date": "November 13, 2026",
@@ -770,10 +790,10 @@ RESULT_WINDOWS = {
     "11": "Expected: late October 2027",
 }
 
-# ---- ECAT corner data (UET: 17% Matric + 50% FSc + 33% ECAT, out of 400) ---
+# ---- ECAT corner data (UET 2026: Matric 17% + HSSC Part-I 50% + ECAT 33%; ECAT out of 400) ---
 ECAT = {
     "weights": {"matric": 17, "fsc": 50, "ecat": 33},
-    "totals":  {"matric": 1100, "fsc": 1100, "ecat": 400},
+    "totals":  {"matric": 1100, "fsc": 550, "ecat": 400},  # fsc = HSSC Part-I (First Year) total, Punjab boards
     "pattern": [
         ("Mathematics", "30", "120"),
         ("Physics", "30", "120"),
@@ -786,14 +806,15 @@ ECAT = {
         "Computer-based test, conducted by UET at assigned centres",
         "No negative marking, so attempt everything",
         "Used by UET Lahore, UET Taxila and UET-affiliated colleges; other universities (NUST, GIKI, FAST) run their own tests",
-        "Minimum FSc to sit it: usually 60% for engineering programmes, 50% for computing programmes",
+        "Merit: Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33% - UET weighs first-year marks, not the full FSc",
+        "Eligibility needs the complete Intermediate: 60% for engineering and architecture; 50% for computing, science and business programmes",
     ],
     "journey": [
         ("Register online", "UET opens ECAT registration on its admission portal a few weeks before the test. You need your CNIC or B-form and a recent photo."),
         ("Choose your test centre", "Pick the nearest UET centre when you register. Print the admit card as soon as it appears in your portal."),
         ("Test day", "100 MCQs in 100 minutes on a computer. No negative marking, so attempt everything. Reach the centre early with your admit card and original ID."),
         ("Result within days", "UET announces ECAT results quickly on the same portal. Your score stays valid for that admission cycle."),
-        ("Apply for admission", "After FSc results, apply through the UET admission portal. Your aggregate (17/50/33) decides your merit position."),
+        ("Apply for admission", "Apply through the UET admission portal once applications open. Merit = Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%, so your Part-I result carries half the weight."),
         ("Merit lists", "UET publishes several merit lists; each department and campus closes at its own aggregate. Apply to multiple programmes to stay safe."),
     ],
 }
