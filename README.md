@@ -708,3 +708,15 @@ yet.** These two are deliberately deferred — flip them only when:
   on chapters that actually have notes/solutions/MQCs.
 - 16 new pages (`/classes/11/chemistry/chapter-1/` … `chapter-16/`), site now 305 pages,
   349 published files; forms-verify 60 checks (adds a chem-11 upload guard).
+
+## Upload: Class 11 Chemistry exercise solutions (14 Nov 2026)
+
+- **16 exercise-solutions PDFs** (Ch 1–16, 5–10 pages each) →
+  `files/class-11/chemistry/solutions/`. Chapter titles on the PDFs match the
+  chapter set added with the practice tests.
+- Every class-11 chemistry chapter page now carries **both** the solved exercise and
+  the practice model paper: two download sections, and the online viewer opens the
+  solutions first (notes → solutions → mcq → numericals → model → testpapers priority).
+- Wording auto-adapted: with real study content present, titles/H1s are back to
+  "Chapter N Notes — New Syllabus 2025-26" and the study-guide paragraph replaces the
+  test-only how-to. Site stays at 305 pages, now 365 published files; forms-verify 60.

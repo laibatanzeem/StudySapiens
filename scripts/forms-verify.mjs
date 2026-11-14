@@ -504,7 +504,7 @@ let chapterPages = 0, chapterIssues = [];
   }
   log('4.6: chapter pages: contextual links + related chapters + next steps', chBad.length === 0,
     chCount + ' chapter pages, ' + chBad.length + ' bad');
-  // upload guard: class-11 chemistry chapter-wise practice tests
+  // upload guard: class-11 chemistry chapter-wise solutions + practice tests
   {
     const chemDir = path.join(ROOT, 'site', 'classes', '11', 'chemistry');
     let testPages = 0, testOk = 0;
@@ -512,11 +512,12 @@ let chapterPages = 0, chapterIssues = [];
       if (!p.includes('chapter-')) continue;
       testPages++;
       const s = fs.readFileSync(p, 'utf8');
-      if (/<title>[^<]*Test Paper/.test(s) && s.includes('Practice-Model-Paper.pdf') &&
-        s.includes('Model Papers') && s.includes('How to use this paper')) testOk++;
+      if (/<title>[^<]*(Notes|Test Paper)/.test(s) && s.includes('Practice-Model-Paper.pdf') &&
+        s.includes('Exercise-Solutions.pdf') && s.includes('Model Papers') &&
+        s.includes('data-pdf-view')) testOk++;
     }
     const subj = fs.readFileSync(path.join(chemDir, 'index.html'), 'utf8');
-    log('chem-11 chapter tests: 16 test-paper pages + subject chapter cards',
+    log('chem-11 chapters: solutions + practice tests on all 16 pages',
       testPages === 16 && testOk === 16 && (subj.match(/Chapter page/g) || []).length === 16,
       testOk + '/' + testPages + ' pages, ' + (subj.match(/Chapter page/g) || []).length + ' cards');
   }
