@@ -868,3 +868,13 @@ yet.** These two are deliberately deferred — flip them only when:
 - Note: a sandbox session reset hit mid-batch (local repo back to base); recovered
   via git reset --hard to origin (no work lost — remote had the notes commit, the
   untracked MCQ files survived in the working tree).
+
+## Upload: Class 12 Chemistry chapter MCQs (14 Nov 2026)
+
+- **17 chapter-MCQ PDFs** (Ch 17–33, 11–20 pages each) →
+  `files/class-12/chemistry/mcq/`, headers verified ("12th Chemistry (New Book)").
+- **New chapter set:** `CHAPTERS[("12", "chemistry")]` — chapters 17–33 with
+  continuous numbering from the class-11 book (Group 2 Elements → Water), titles
+  from the papers (Spectroscopy normalized to "Spectroscopy — 1 / — 2: NMR").
+- 17 new chapter pages with MCQ Bank downloads + viewer; subject page shows 17
+  live chapter cards. Site now 347 pages, 558 published files; forms-verify 61.

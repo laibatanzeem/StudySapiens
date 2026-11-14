@@ -64,7 +64,7 @@
 "lastmod": "2026-11-14"
 },
 "classes/": {
-"hash": "9c8116d2eec1e6d1a39b0d6cb36023b7",
+"hash": "52cb9e431600cbb4dd31b848faaa658f",
 "lastmod": "2026-11-14"
 },
 "classes/10/": {
@@ -660,7 +660,7 @@
 "lastmod": "2026-11-14"
 },
 "classes/12/": {
-"hash": "53a83697df10f044c0540a813d7e7ed2",
+"hash": "3238533fc02d3d387164dac811b9ff7e",
 "lastmod": "2026-11-14"
 },
 "classes/12/biology/": {
@@ -720,7 +720,75 @@
 "lastmod": "2026-11-14"
 },
 "classes/12/chemistry/": {
-"hash": "1b7b70f5920f394daee56f72e562388d",
+"hash": "d16f054fbca0d2a0d7462b3fa92bd99d",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-17/": {
+"hash": "5fe23cb4e6eb914de6d7a03ab66b6f4e",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-18/": {
+"hash": "12506e382eb11ca374a12fbb9faccee6",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-19/": {
+"hash": "c32db7f716095e04998b927417952a12",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-20/": {
+"hash": "ad82735a8797d357fc86e872f7f0440e",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-21/": {
+"hash": "edb97879b2889b6e75a582d66975e46b",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-22/": {
+"hash": "eff10cb7847d70fc97fd147b4921ad9c",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-23/": {
+"hash": "6d97d8d248d61d53181801b97c932794",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-24/": {
+"hash": "eeae4a5a22678f3b479a66be51ee7947",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-25/": {
+"hash": "e407a2ff0a8a280faa63f08e2cec6497",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-26/": {
+"hash": "407eded763a4952b5549e90210c44909",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-27/": {
+"hash": "550ffc7d3d7d8542d858e7f9bc594432",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-28/": {
+"hash": "5c968b7ab996d3e307e206b7b3791c23",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-29/": {
+"hash": "0937d683ebd00aab4919917141283157",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-30/": {
+"hash": "41f35b3551211c5af383f8d4b40d4f61",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-31/": {
+"hash": "9ccd9299e626d9f2ff685d95113805cc",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-32/": {
+"hash": "32bf6101c35d58fac029be88b88f2e77",
+"lastmod": "2026-11-14"
+},
+"classes/12/chemistry/chapter-33/": {
+"hash": "63d9bec22b4f6e582f18787ece23862a",
 "lastmod": "2026-11-14"
 },
 "classes/12/computer-science/": {
