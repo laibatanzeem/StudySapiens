@@ -525,19 +525,27 @@ let chapterPages = 0, chapterIssues = [];
   // policy guard: hide-empty-slots subjects advertise only what exists
   {
     const policy = [
-      { dir: 'computer-science', files: 9, pat: 'CS11_Unit\\d+_Exercise-Solutions\\.pdf' },
-      { dir: 'english', files: 14, pat: 'English11_Unit\\d+_Exercise-Solutions\\.pdf' },
+      { dir: 'computer-science', slots: 2, pats: ['CS11_Unit\\d+_Exercise-Solutions\\.pdf:9'] },
+      { dir: 'english', slots: 4, pats: ['English11_Unit\\d+_Exercise-Solutions\\.pdf:14',
+        'English11_Unit\\d+_MCQ-Bank\\.pdf:10',
+        'English11_(Unit\\d+_Stanza-Explanations|Application-Models|Letter-Models)\\.pdf:7'] },
     ];
     let bad = [];
-    for (const { dir, files, pat } of policy) {
+    for (const { dir, slots, pats } of policy) {
       const cs = fs.readFileSync(path.join(ROOT, 'site', 'classes', '11', dir, 'index.html'), 'utf8');
-      const slots = (cs.match(/file-slot-head">[^\n]*\n\s*<div><b>([^<]*)<\/b>/g) || []);
-      const n = (cs.match(new RegExp(pat, 'g')) || []).length;
-      if (!(slots.length === 2 && cs.includes('Exercise Solutions') && cs.includes('Pairing Scheme') &&
-        !cs.includes('Uploading soon.') && n === files)) bad.push(dir + ' (' + slots.length + ' slots, ' + n + ' files)');
+      const nslots = (cs.match(/file-slot-head">[^\n]*\n\s*<div><b>([^<]*)<\/b>/g) || []).length;
+      let ok = nslots === slots && !cs.includes('Uploading soon.');
+      const bits = [];
+      for (const spec of pats) {
+        const [pat, want] = spec.split(':');
+        const n = (cs.match(new RegExp(pat, 'g')) || []).length;
+        bits.push(n + '/' + want);
+        if (n !== Number(want)) ok = false;
+      }
+      if (!ok) bad.push(dir + ' (' + nslots + ' slots; ' + bits.join(', ') + ')');
     }
     log('hide-empty policy: cs-11 + eng-11 show only live slots', bad.length === 0,
-      bad.length ? bad.join('; ') : '2 slots each, 9 + 14 solution files');
+      bad.length ? bad.join('; ') : 'cs-11: 2 slots; eng-11: 4 slots (7 notes, 14 solutions, 10 MCQs)');
   }
 }
 

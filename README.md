@@ -771,3 +771,15 @@ yet.** These two are deliberately deferred — flip them only when:
   `HIDE_EMPTY_SLOTS` now includes ("11", "english"). The subject page shows
   **Exercise Solutions (14 files) + Pairing Scheme** only; lead/desc/guide adapt.
 - 420 published files; forms-verify 61 (policy guard now covers both subjects).
+
+## Upload: Class 11 English notes, stanza explanations & MCQ banks (14 Nov 2026)
+
+- **5 stanza-explanation PDFs** (poem units 3, 6, 9, 11, 13 — stanza-by-stanza
+  meaning, devices, themes, board questions) + **application-models** and
+  **letter-models** PDFs → `files/class-11/english/notes/`.
+- **10 unit MCQ-bank PDFs** (units 1, 2, 3, 5, 6, 8, 10, 11, 13, 14) →
+  `files/class-11/english/mcq/`. Headers verified ("11th English").
+- The English 11 page now shows four live slots — **Chapter Notes (7) + Exercise
+  Solutions (14) + MCQ Bank (10) + Pairing Scheme** — still zero empty
+  placeholders; the show-only-what-exists policy reveals slots as files arrive.
+- 437 published files; forms-verify 61 (eng-11 guard covers all four categories).
