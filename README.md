@@ -842,3 +842,11 @@ yet.** These two are deliberately deferred — flip them only when:
   test-paper wording + viewer; subject page shows 13 live chapter cards. First
   class-12 content on the site. Site now 330 pages, 502 published files;
   forms-verify 61.
+
+## Upload: Class 12 Biology exercise solutions (14 Nov 2026)
+
+- **13 exercise-solved PDFs** (Ch 13–25, 11–16 pages each) →
+  `files/class-12/biology/solutions/`, titles verified.
+- Every bio-12 chapter page now shows **Exercise Solutions + Test Papers**; viewer
+  opens solutions first; wording upgraded to "Chapter N Notes". 515 published
+  files; forms-verify 61.
