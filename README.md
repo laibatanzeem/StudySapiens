@@ -821,3 +821,11 @@ yet.** These two are deliberately deferred — flip them only when:
 - Every physics-11 chapter page now has the full stack: **Chapter Notes + Exercise
   Solutions + Model Papers** (viewer opens notes first). 477 published files;
   forms-verify 61.
+
+## Upload: Class 11 Physics board MCQs — subject complete (14 Nov 2026)
+
+- **12 board-MCQ PDFs** (Ch 1–12, 6 pages each) → `files/class-11/physics/mcq/`,
+  titles verified.
+- Physics 11 complete: every chapter page has all four resource types
+  (**Chapter Notes + Exercise Solutions + MCQ Bank + Model Papers**) — 48 chapter
+  files plus the pairing scheme. 489 published files; forms-verify 61.
