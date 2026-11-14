@@ -464,6 +464,12 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-5ZRS53MF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){{dataLayer.push(arguments);}}
+  gtag('js', new Date());
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(title)}</title>
@@ -3145,7 +3151,7 @@ def write_seo():
         "  Referrer-Policy: strict-origin-when-cross-origin\n"
         "  Permissions-Policy: camera=(), microphone=(), geolocation=()\n"
         "  X-Frame-Options: SAMEORIGIN\n"
-        "  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'\n"
+        "  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'\n"
         "/assets/*\n"
         "  Cache-Control: public, max-age=31536000, immutable\n"
         "/files/*\n"
@@ -3166,7 +3172,7 @@ def write_seo():
         "  Header always set Referrer-Policy \"strict-origin-when-cross-origin\"\n"
         "  Header always set Permissions-Policy \"camera=(), microphone=(), geolocation=()\"\n"
         "  Header always set X-Frame-Options \"SAMEORIGIN\"\n"
-        "  Header always set Content-Security-Policy-Report-Only \"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'\"\n"
+        "  Header always set Content-Security-Policy-Report-Only \"default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'\"\n"
         "  <FilesMatch \"\\.(css|js|jpg|jpeg|png|webp|svg|ico|woff2?)$\">\n"
         "    Header set Cache-Control \"public, max-age=31536000, immutable\"\n"
         "  </FilesMatch>\n"
