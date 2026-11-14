@@ -16,7 +16,7 @@ SITE = {
     "domain": "https://www.studysapiens.com",
     "tagline": "New PCTB Syllabus, Made Simple",
     "email": "admin.studysapiens@gmail.com",
-    "description": "Free notes, solved exercises, pairing schemes, guess papers & MCQ tests for Class 9-12 (new PCTB/PECTAA syllabus) + MDCAT calc. Made by teachers, no popup ads.",
+    "description": "Class 9-12 Punjab board notes and solved exercises, made by teachers and verified by subject experts. New PCTB/PECTAA syllabus + MDCAT tools.",
 }
 
 # ------------------------------------------------------------------
@@ -93,7 +93,7 @@ FILE_CATEGORIES = [
     ("solutions", "check",   "Exercise Solutions", "Step-by-step solved exercises (PDF / DOC)"),
     ("mcq",       "zap",     "MCQ Bank",           "Chapter-wise MCQs with answer keys"),
     ("guess",     "target",  "Guess Paper",        "Expected questions for the annual exam"),
-    ("scheme",    "layers",  "Pairing Scheme",     "Official paper scheme when boards issue it"),
+    ("scheme",    "layers",  "Pairing Scheme",     "Pairing-scheme file or clearly labelled StudySapiens summary"),
 ]
 EXTRA_CATEGORIES = {"past": "Past Papers"}   # listed on the past-papers hub
 
@@ -178,7 +178,7 @@ UPDATES = [
 <li>If you are a <b>repeater or improver</b> on the old syllabus, confirm your board's policy first. Your paper may follow the old course, and mixing the two is the costliest mistake of the year.</li>
 </ol>
 <h2>How StudySapiens handles the new books</h2>
-<p>We do not guess chapter lists. Notes, solved exercises and MCQ banks are written by teachers directly from the printed books and uploaded file by file, and only after a second teacher checks them. That is why uploads arrive steadily instead of all at once; quality over speed, always.</p>
+<p>We do not guess chapter lists. Notes, solved exercises and MCQ banks are made by teachers from the printed books and verified by subject experts before upload. Files arrive steadily so each resource can be checked carefully.</p>
 <h2>Timing your preparation</h2>
 <p>Boards usually hold intermediate exams in May-June. A safe plan: finish syllabus coverage by January, revise in February-March (pairing schemes help here), and dedicate April to timed practice. Everything we upload lands on your subject page first, so check it weekly.</p>""",
     },
@@ -254,13 +254,13 @@ UPDATES = [
 # ------------------------------------------------------------------
 FAQS = [
     ("Is StudySapiens completely free?",
-     "Yes. Every note, exercise solution, MCQ test, pairing scheme and calculator on StudySapiens is 100% free for students. No sign-up, no paywall, no popup ads that waste your time."),
+     "Yes. Every note, exercise solution, MCQ test, pairing scheme and calculator on StudySapiens is 100% free for students. No sign-up or paywall."),
     ("Which syllabus do your notes follow?",
      "Only the NEW PCTB / PECTAA syllabus (National Curriculum). Class 9 and 11 follow the 2025-26 books; Class 10 and 12 follow the 2026-27 books. We do not re-label old-syllabus content as new. A file goes live only after it is checked against the printed book."),
     ("Which boards are covered?",
      "All nine BISE boards of Punjab: Lahore, Gujranwala, Multan, Faisalabad, Rawalpindi, Sargodha, Bahawalpur, DG Khan and Sahiwal. They are all covered because PCTB books and pairing schemes are common to every board."),
     ("I found a mistake in a note. What should I do?",
-     "Please tell us! StudySapiens is made by teachers, and students' feedback keeps it accurate. Email a screenshot to admin.studysapiens@gmail.com. Genuine corrections are fixed quickly and credited in our updates."),
+     "Please tell us! StudySapiens is made by teachers and verified by subject experts. Student feedback also helps keep it accurate. Email a screenshot to admin.studysapiens@gmail.com. Genuine corrections are fixed quickly and credited in our updates."),
     ("Can I get notes in Urdu medium?",
      "Content is currently in easy English, with Urdu translations for English-subject lessons in progress. A full Urdu-medium track for science subjects is on our roadmap. Join the update list to know when it launches."),
     ("Is everything on StudySapiens free?",
@@ -268,7 +268,7 @@ FAQS = [
     ("How often is the website updated?",
      "New files are uploaded on a rolling schedule throughout the session. Pairing schemes and date sheets appear the moment boards release them. The gold “NEW” badge on any page means it was added in the last 30 days."),
     ("Can I download notes as PDF?",
-     "Yes. That is exactly how StudySapiens works now. Every subject page has download boxes for notes, solved exercises, MCQ banks, guess papers and pairing schemes. Clean PDF/DOC files, no ad walls, one click, yours to keep and print."),
+     "Yes. That is exactly how StudySapiens works now. Every subject page has download boxes for notes, solved exercises, MCQ banks, guess papers and pairing schemes. PDF/DOC files open in your browser with one click and can be saved or printed."),
 ]
 
 # ------------------------------------------------------------------
@@ -363,8 +363,8 @@ SUBJECT_ORDER += ["urdu", "islamiat", "pak-studies", "tarjuma-tul-quran"]
 # anything not listed here applies to all four classes)
 SUBJECT_CLASSES = {
     "urdu":              ["9", "10", "11", "12"],
-    "islamiat":          ["9", "10", "11"],
-    "pak-studies":       ["10", "12"],
+    "islamiat":          ["9", "11"],       # no prescribed Class 10 book
+    "pak-studies":       ["10", "12"],      # no prescribed Class 9 book
     "tarjuma-tul-quran": ["9", "10", "11", "12"],
 }
 

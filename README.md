@@ -177,9 +177,9 @@ minification (risk > reward at our file sizes).
 1. Create Google Search Console → verify domain → submit `sitemap.xml`.
 2. Create Bing Webmaster Tools → same.
 3. Register Google Analytics (optional).
-4. AdSense later: we already have Privacy Policy, About, Contact pages (required),
-   and the design is intentionally **ad-popup-free** per your brand promise — you can
-   serve light AdSense placements without ruining UX.
+4. Ads are not currently configured or planned. Do not make public promises about
+   whether ads will or will not appear. Any future ad integration needs explicit
+   owner approval plus privacy-policy and CSP review.
 
 ---
 
@@ -269,8 +269,8 @@ Made with 💛 for Pakistan's students.
 - Subject pages gained ItemList schema; hub titles trimmed; site-wide meta author; og/twitter image dimensions; `_headers` caching + security rules for Netlify/Cloudflare.
 
 ## Round 6 — Honest Content Reset → File-Download Model (Aug 2026)
-> Owner decision: all AI-drafted textbook content was potentially inaccurate, so the site
-> switched from "AI-written chapter pages" to "**verified files uploaded by the owner**".
+> Owner decision: earlier unverified textbook drafts were removed. Current study resources
+> are **made by teachers and verified by subject experts**, then uploaded file by file.
 
 - **Removed:** all 288 chapter pages, the 15 demo chapters, the 5 hard-coded pairing-scheme
   detail pages, all chapter lists/unit numbers from data, and every specific syllabus claim

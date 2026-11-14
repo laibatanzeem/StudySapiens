@@ -16,8 +16,9 @@
               scheme/       ← pairing / assessment schemes
               past/         ← past board papers
 
-      (same for class-10, class-11, class-12 and the 6 subjects:
-       physics, chemistry, biology, mathematics, computer-science, english)
+      (same for class-10, class-11 and class-12, for available subjects:
+       physics, chemistry, biology, mathematics, computer-science, english,
+       urdu, islamiat, pak-studies, tarjuma-tul-quran)
 
    2. Name the file what students should read, e.g.
         Chapter 1 - Physical Quantities.pdf

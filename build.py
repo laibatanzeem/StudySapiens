@@ -126,8 +126,14 @@ def scan_files():
                     ext = os.path.splitext(fn)[1].lower()
                     if ext not in FILE_EXT:
                         continue
+                    if (cat == "scheme" and "studySapiens-reference-alp-pairing-scheme-annual-exam-2026".lower() in fn.lower()):
+                        file_label = "StudySapiens reference scheme · Annual Exam 2026"
+                    elif cat == "scheme" and fn.startswith("StudySapiens_Pairing-Scheme_2026-27_Grade10_"):
+                        file_label = "StudySapiens scheme summary · Annual Exam 2027"
+                    else:
+                        file_label = pretty_label(os.path.splitext(fn)[0])
                     out.setdefault((cid, sid), {}).setdefault(cat, []).append({
-                        "label": pretty_label(os.path.splitext(fn)[0]),
+                        "label": file_label,
                         "ch": chapter_of(os.path.splitext(fn)[0]),
                         "url": f"files/{cls_dir}/{sid}/{cat}/{fn}",
                         "size": os.path.getsize(os.path.join(cat_p, fn)),
@@ -366,7 +372,7 @@ def drawer_html(R):
     <div class="drawer-cta">
       <button class="btn btn-light-outline" data-open-search>{icon("search",16)} Search notes & papers</button>
     </div>
-    <p class="drawer-note">100% free • no popup ads • made by teachers for Punjab students</p>
+    <p class="drawer-note">Made by teachers • verified by subject experts • for Punjab students</p>
   </nav>
 </div>"""
 
@@ -406,7 +412,7 @@ def footer_html(R):
   <div class="container footer-top">
     <div class="footer-brand">
       <img src="{R}assets/img/logo-trim-light.png" alt="StudySapiens logo" width="140" height="46" loading="lazy" decoding="async">
-      <p>Free study material for the new PCTB / PECTAA syllabus, no popup ads. Made by a teacher who knows exactly where students struggle.</p>
+      <p>Free study material for the new PCTB / PECTAA syllabus. Made by teachers and verified by subject experts.</p>
       <div class="f-contact">
         <a href="mailto:{EMAIL}">{icon("mail",15)} {EMAIL}</a>
         <span>{icon("globe",15)} Serving all 9 BISE boards of Punjab</span>
@@ -554,7 +560,7 @@ def subject_faqs(cid, sid):
     boards = ", ".join(b["short"] for b in BOARDS[:-1]) + f" and {BOARDS[-1]['short']}"
     faqs = [
         (f"Where can I download {c['alt']} {s['name']} notes for the new syllabus?",
-         f"Right here on this page, free, with no ad walls. Click any file and it opens in your browser to read instantly: the files section above holds "
+         f"Right here on this page, free. Click any file and it opens in your browser to read instantly: the files section above holds "
          f"{c['name']} {s['name']} notes, solved exercises, MCQ bank, guess paper and pairing "
          f"scheme for the new {c['session']} book. Each file goes live only after a teacher "
          f"checks it against the printed book; anything not ready yet is honestly "
@@ -669,9 +675,9 @@ def build_home(posts=None):
 </div>"""
     # ---- why us
     features = [
-        ("shield", "Zero Popup Ads", "Read any note the second you click. No 30-second ad walls, no fake download buttons. Knowledge without the headache."),
+        ("teacher", "Made by Teachers", "Study materials are created by teachers and verified by subject experts against the current printed books."),
         ("flag", "New Syllabus First", "Built for the NEW PCTB/PECTAA books only. Files go live only after matching the printed book. Never old content with a '2026' sticker."),
-        ("teacher", "Made by a Teacher", "Not copied blogs. Notes, solutions and MCQ banks are written and checked by a working teacher who marks board-paper-style answers daily."),
+        ("check", "Verified by Experts", "Subject experts check notes, solutions and MCQ banks against current PCTB/PECTAA books before publication."),
         ("zap", "Simple English", "Written for Pakistani students whose first language is not English. Short sentences, easy words, exam-focused key points."),
         ("calc", "Smart Free Tools", "MDCAT aggregate calculator, downloadable MCQ banks with answer keys, and live exam countdowns. All free."),
         ("zap", "Fast, Even on 3G", "Built for the phone in your pocket. Light pages that open in seconds on patchy connections. Notes on the bus, in the van, anywhere."),
@@ -683,7 +689,7 @@ def build_home(posts=None):
 </div>""" for i, (ic, t, d) in enumerate(features))
     # ---- resources
     res = [
-        ("zap", "Smart Syllabus ✦", "All four classes, one tap away. Smart/reduced (ALP) syllabus uploads when boards notify.", "smart-syllabus/"),
+        ("zap", "Smart Syllabus ✦", "Official PECTAA ALP PDFs for Classes 9 and 11. Classes 10 and 12 are awaiting notices.", "smart-syllabus/"),
         ("layers", "Pairing Schemes", "Official & teacher-prepared paper schemes for every class and subject.", "pairing-scheme/"),
         ("target", "Guess Papers", "High-probability questions for annual exams, prepared from board trends.", "guess-papers/"),
         ("doc", "Past Papers", "New-syllabus board papers with clear, printable PDFs. Board-wise.", "past-papers/"),
@@ -746,14 +752,14 @@ def build_home(posts=None):
       <h1>Free
         <span class="rotator"><span>Notes</span><span>Pairing Schemes</span><span>Guess Papers</span><span>MCQ Tests</span><span>Notes</span></span><br>
         for Class 9-12, Made <span class="grad">Simple</span>.</h1>
-      <p class="lead">Tired of sites with 30-second ad popups and old-syllabus notes labelled as new? StudySapiens is built by a teacher for Punjab board students. Every file checked against your new printed book, in easy English, 100% free.</p>
+      <p class="lead">Looking for dependable study materials for the new syllabus? StudySapiens is made by teachers and verified by subject experts for Punjab board students. Every file is checked against the printed book, in easy English, and free.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary btn-lg" href="#classes">{icon("cap",18)} Explore Classes</a>
         <a class="btn btn-light-outline btn-lg" href="{R}mdcat/#calculator">{icon("calc",18)} MDCAT Calculator</a>
       </div>
       <div class="hero-mini">
         <span>{icon("check",15)} 100% free</span>
-        <span>{icon("shieldx",15)} No popup ads</span>
+        <span>{icon("teacher",15)} Made by teachers</span>
         <span>{icon("flag",15)} New syllabus only</span>
       </div>
     </div>
@@ -763,7 +769,7 @@ def build_home(posts=None):
         <img src="{R}assets/img/hero-1300.jpg" srcset="{R}assets/img/hero-640.jpg 640w, {R}assets/img/hero-900.jpg 900w, {R}assets/img/hero-1300.jpg 1300w, {R}assets/img/hero-1600.jpg 1600w" sizes="(max-width: 900px) 96vw, 52vw" alt="Pakistani students studying with the new PCTB syllabus on StudySapiens" width="960" height="540" fetchpriority="high" decoding="async">
       </picture>
       <div class="float-card fc-1">{icon("check",16)} Verified against printed books</div>
-      <div class="float-card fc-2">{icon("shield",16)} No popup ads, ever</div>
+      <div class="float-card fc-2">{icon("teacher",16)} Made by teachers</div>
     </div>
   </div>
 </section>
@@ -932,7 +938,7 @@ def build_classes():
     body = crumbs_html(R, [("Classes", "classes/")]) + page_hero(R,
         badge="New Syllabus 2025-27",
         title="Classes: Matric & Intermediate",
-        lead="Pick your class. Inside every class: six subjects. Each with a short exam-focused study guide plus free note, solution and MCQ downloads uploaded file by file.",
+        lead="Pick your class. Browse every available subject, with a short study guide plus free notes, solved exercises and MCQ downloads uploaded file by file.",
         actions=f'<a class="btn btn-primary" href="{R}pairing-scheme/">{icon("layers",15)} Pairing Schemes</a> <a class="btn btn-light-outline" href="{R}past-papers/">Past Papers</a>')
     body += f'<section class="section"><div class="container"><div class="grid grid-2" style="gap:26px">{cards}</div></div></section>'
     ld = [breadcrumb_json([("Classes", "classes/")])]
@@ -941,42 +947,67 @@ def build_classes():
         desc="Class-wise notes, solved exercises, MCQ tests, pairing schemes, guess and past papers for Classes 9, 10, 11 & 12 following the new PCTB/PECTAA syllabus.",
         path="classes/", body=body, extra_ld=ld), priority="0.9")
 
+ALP_OFFICIAL = {
+    "9": {
+        "url": "https://pectaa.edu.pk/wp-content/uploads/2026/11/ALP-9-Notification-06.11.2026-F.pdf",
+        "notification": "PECTAA/C&C Unit/2026/1238",
+    },
+    "11": {
+        "url": "https://pectaa.edu.pk/wp-content/uploads/2026/11/ALP-Notification-Grade-11.pdf",
+        "notification": "PECTAA/C&C Unit/2026/1239",
+    },
+}
+PECTAA_COMPLIANCE_URL = "https://pectaa.edu.pk/curriculum-compliance/"
+ALP_CHECKED_DATE = "10 November 2026"
+
 def build_smart_syllabus():
     R = "../"
     cards = ""
     for i, (cid, c) in enumerate(CLASSES.items()):
-        chips = "".join(f'<a class="chip" href="{R}classes/{cid}/{s}/">{SUBJECTS[s]["name"]}</a>' for s in subjects_for(cid))
+        notice = ALP_OFFICIAL.get(cid)
+        if notice:
+            status = '<span class="badge badge-live">Official PECTAA ALP available</span>'
+            detail = (f"Official notification {notice['notification']}, dated 6 November 2026. "
+                      "For the 2026-27 session and Annual Examination 2027.")
+            action = (f'<a class="btn btn-primary btn-sm" href="{notice["url"]}" '
+                      f'target="_blank" rel="noopener noreferrer">Open official PECTAA PDF {icon("external",14)}</a>')
+        else:
+            status = '<span class="badge badge-gold">Awaiting official PECTAA notice</span>'
+            detail = (f"PECTAA had not posted a Class {cid} ALP notice as of {ALP_CHECKED_DATE}. "
+                      "Until it is published, follow the full textbook syllabus.")
+            action = '<span class="muted small">Official PDF link will appear here when published.</span>'
         cards += f"""
 <div class="class-card reveal" data-delay="{i}">
-  <div class="class-num" aria-hidden="true">{['09','10','11','12'][i]}</div>
-  <h3>{c['name']} <span class="badge badge-gold">New {c['session']}</span></h3>
-  <div class="cls-sub">{c['level']} • {c['first_exam']}</div>
-  <div class="subject-chips" style="margin-top:14px">{chips}</div>
-  <div class="class-foot"><span class="badge badge-navy">{len(subjects_for(cid))} subjects</span>
-  <a class="c-link" href="{R}classes/{cid}/">Open {c['name']} {icon("arrow",14)}</a></div>
+  <div class="class-num" aria-hidden="true">{cid.zfill(2)}</div>
+  <h3>{c['name']}</h3>
+  <div class="cls-sub">{c['level']} · Academic Session 2026-27 · Annual Exam 2027</div>
+  <div style="margin:14px 0 8px">{status}</div>
+  <p class="muted small">{detail}</p>
+  <div class="class-foot">{action}</div>
 </div>"""
     body = crumbs_html(R, [("Smart Syllabus", "smart-syllabus/")]) + page_hero(R,
-        badge="Smart / ALP Syllabus",
-        title="Smart Syllabus: All Four Classes (9, 10, 11, 12)",
-        lead="Pick your class and open any subject. Study guide plus free notes, solutions, MCQ banks and pairing schemes for the new PCTB/PECTAA books, valid for all Punjab boards.",
-        actions=f'<a class="btn btn-primary btn-sm" href="#classes">{icon("layers",15)} Choose Your Class</a>')
+        badge="PECTAA · Accelerated Learning Programme",
+        title="Smart Syllabus (ALP): Classes 9 and 11",
+        lead="Official PECTAA ALP notices for the 2026-27 session and Annual Examination 2027. Classes 9 and 11 are available. Notices for Classes 10 and 12 are pending.",
+        actions=f'<a class="btn btn-primary btn-sm" href="#classes">{icon("layers",15)} Check class status</a>')
     body += f"""
 <section class="section section-tight" id="classes">
   <div class="container">
-    <div class="card" style="margin-bottom:24px;padding:16px 22px;display:flex;gap:12px;align-items:flex-start;background:var(--navy-50)">
-      <span style="color:var(--navy-700)">{icon("bulb",20)}</span>
-      <p class="small" style="color:var(--ink-soft)"><b>What is a "smart syllabus"?</b> Sometimes boards officially notify a reduced syllabus (also called ALP, the Accelerated Learning Programme). Right now the <b>full new syllabus</b> applies for all four classes. The moment any board issues an official smart/reduced syllabus, we upload it here and on your subject page, clearly labelled. We never publish rumours as syllabus.</p>
+    <div class="card" style="margin-bottom:24px;padding:18px 22px;background:var(--navy-50)">
+      <h2 style="font-size:1.15rem;margin:0 0 8px">What does Smart Syllabus mean?</h2>
+      <p class="small" style="color:var(--ink-soft);margin-bottom:8px">The Smart Syllabus is PECTAA's official Accelerated Learning Programme (ALP). It lists topics and exercise questions excluded from the regular textbook syllabus. The notification may also include pairing schemes and model papers. It is not a replacement textbook or a separate set of notes.</p>
+      <p class="small" style="color:var(--ink-soft);margin:0">Use the official ALP for your class. ALP links are shown at class level only, not on individual subject pages. Check <a href="{PECTAA_COMPLIANCE_URL}" target="_blank" rel="noopener noreferrer">PECTAA Curriculum and Compliance</a> for official updates.</p>
     </div>
     <div class="grid grid-2" style="gap:26px">{cards}</div>
   </div>
 </section>"""
     ld = [breadcrumb_json([("Smart Syllabus", "smart-syllabus/")])]
     w("smart-syllabus/index.html", layout(page_key="smart", depth=1,
-        title="Smart Syllabus: Class 9, 10, 1st & 2nd Year (New PCTB/PECTAA)",
-        desc="Smart syllabus for all four classes. Free notes, solved exercises, MCQ banks & pairing schemes. Official reduced (ALP) syllabus uploads the day boards notify.",
+        title="PECTAA Smart Syllabus (ALP): Classes 9 and 11",
+        desc="Official PECTAA ALP PDFs for Classes 9 and 11, Annual Exam 2027. Class 10 and 12 notices are pending.",
         path="smart-syllabus/", body=body, extra_ld=ld), priority="0.85")
-    SEARCH.append({"t": "Smart Syllabus. All Four Classes", "s": "class 9 · 10 · 1st year · 2nd year · ALP / reduced syllabus",
-                   "u": "smart-syllabus/", "c": "Resource", "pop": 1, "k": "smart syllabus alp reduced syllabus class nine ten first second year"})
+    SEARCH.append({"t": "PECTAA Smart Syllabus / ALP", "s": "official class 9 and 11 notices; class 10 and 12 awaiting upload",
+                   "u": "smart-syllabus/", "c": "Resource", "pop": 1, "k": "PECTAA smart syllabus ALP reduced syllabus class 9 10 11 12"})
 
 # ------------------------------------------------------------------
 # CLASS page
@@ -1007,6 +1038,23 @@ def build_class(cid):
         title=f"{c['name']}: Notes, Solutions & Tests ({c['level']})",
         lead=f"All {c['name']} subjects from the new {c['session']} books. Every subject page has a short study guide plus free downloadable notes, solved exercises and MCQ banks. {c['first_exam']}.",
         actions=f'<a class="btn btn-primary btn-sm" href="#subjects">{icon("book",15)} View Subjects</a> <a class="btn btn-light-outline btn-sm" href="{R}pairing-scheme/">Pairing Scheme {cid}th</a>' )
+    notice = ALP_OFFICIAL.get(cid)
+    if notice:
+        alp_status = (f'<span class="badge badge-live">Official PECTAA ALP available</span>'
+                      f'<p class="muted small" style="margin:8px 0 12px">Notification {notice["notification"]}, dated 6 November 2026. Applies to Annual Examination 2027.</p>'
+                      f'<a class="btn btn-primary btn-sm" href="{notice["url"]}" target="_blank" rel="noopener noreferrer">Open official PECTAA PDF {icon("external",14)}</a>')
+    else:
+        alp_status = (f'<span class="badge badge-gold">Awaiting official PECTAA notice</span>'
+                      f'<p class="muted small" style="margin:8px 0 0">As of {ALP_CHECKED_DATE}, PECTAA has not posted an ALP notice for this class. Follow the full textbook syllabus until an official notice is published.</p>')
+    alp_banner = f"""
+<section class="section section-tight" style="padding-bottom:0">
+  <div class="container"><div class="card" style="padding:18px 22px;background:var(--navy-50)">
+    <h2 style="font-size:1.15rem;margin:0 0 10px">Smart Syllabus (ALP) · {c['name']}</h2>
+    {alp_status}
+    <a class="small" href="{R}smart-syllabus/">Check ALP status for all classes</a>
+  </div></div>
+</section>"""
+    body += alp_banner
     body += f"""
 <section class="section section-tight" id="subjects">
   <div class="container">
@@ -1023,7 +1071,7 @@ def build_class(cid):
     ld = [breadcrumb_json([("Classes", "classes/"), (c["name"], f"classes/{cid}/")])]
     w(f"classes/{cid}/index.html", layout(page_key="classes", depth=2,
         title=f"{c['name']} Notes New Syllabus {c['session']}: All Subjects | StudySapiens",
-        desc=f"{c['alt']} {c['level']} notes, solved exercises, MCQ tests, schemes & guess papers. All subjects, new {c['session']} books, free, no popups.",
+        desc=f"{c['alt']} {c['level']} notes, solved exercises, MCQ tests, schemes & guess papers. All subjects, new {c['session']} books. Made by teachers, verified by experts.",
         path=f"classes/{cid}/", body=body, extra_ld=ld), priority="0.9")
     SEARCH.append({"t": f"{c['name']}. All Subjects & Notes", "s": f"{c['level']} · {c['session']} · pairing, past papers, tests",
                    "u": f"classes/{cid}/", "c": "Class", "pop": 1, "k": f"{c['alt']} class"})
@@ -1109,16 +1157,36 @@ def build_subject(cid, sid):
     for cat, ic, t, sub in FILE_CATEGORIES:
         if cat == "numericals" and sid not in NUMERICAL_SUBJECTS:
             continue
-        items = FILES.get((cid, sid), {}).get(cat, [])
+        all_items = FILES.get((cid, sid), {}).get(cat, [])
+        chapter_items = []
+        items = all_items
         if chaps and cat in CHAPTER_CATS:
-            items = [f for f in items if f.get("ch") not in chap_nums]
+            chapter_items = [f for f in all_items if f.get("ch") in chap_nums]
+            items = [f for f in all_items if f.get("ch") not in chap_nums]
         rows = dl_rows(R, items)
-        slots += f"""
-<div class="file-slot reveal">
-  <div class="file-slot-head"><span class="file-slot-ic" style="background:{s['hue']}">{icon(ic,17)}</span>
-    <div><b>{t}</b><span>{sub}</span></div>{f'<span class="badge badge-new" style="margin-left:auto">live</span>' if rows else ''}</div>
-  {rows if rows else f'''<div class="file-empty">{icon("clock",15)} <span><b>Uploading soon.</b> Being prepared by teachers right now. <a href="mailto:{EMAIL}?subject={c['name']}%20{s['name']}%20{t.replace(" ", "%20")}%20request">Email us and we'll send it to you first</a>.</span></div>'''}
-</div>"""
+        if rows:
+            slot_content = rows
+        elif chapter_items:
+            n_chapter_files = len(chapter_items)
+            file_word = "file is" if n_chapter_files == 1 else "files are"
+            slot_content = (
+                f'<div class="file-empty">{icon("check",15)} '
+                f'<span><b>{n_chapter_files} chapter exercise {file_word} available above.</b> '
+                f'Open the chapter cards to find each solution. '
+                f'<a href="#chapters">Browse chapter files</a>.</span></div>')
+        else:
+            slot_content = (
+                f'<div class="file-empty">{icon("clock",15)} '
+                f'<span><b>Uploading soon.</b> Being prepared by teachers right now. '
+                f'<a href="mailto:{EMAIL}">Request this file</a>.</span></div>')
+        slot_live = bool(rows or chapter_items)
+        slot_badge = '<span class="badge badge-new" style="margin-left:auto">live</span>' if slot_live else ''
+        slots += (
+            f'\n<div class="file-slot reveal">\n'
+            f'  <div class="file-slot-head"><span class="file-slot-ic" style="background:{s["hue"]}">{icon(ic,17)}</span>\n'
+            f'    <div><b>{t}</b><span>{sub}</span></div>{slot_badge}</div>\n'
+            f'  {slot_content}\n'
+            f'</div>\n')
     any_files = file_count(cid, sid) > 0
     live_chip = (f'<span class="badge badge-live">{icon("check",11)} {file_count(cid, sid)} file(s) live</span>' if any_files
                  else f'<span class="badge badge-gold">{icon("clock",11)} uploads in progress</span>')
@@ -1189,29 +1257,50 @@ def build_pairing():
     cards = ""
     for cid in CLASSES:
         for sid in subjects_for(cid):
+            scheme_files = FILES.get((cid, sid), {}).get("scheme", [])
             rows = file_rows(R, cid, sid, "scheme")
-            if rows:
+            is_2026_reference = any("reference-alp-pairing-scheme-annual-exam-2026" in f["url"].lower()
+                                    for f in scheme_files)
+            is_g10_summary = (cid == "10" and any(
+                os.path.basename(f["url"]).startswith("StudySapiens_Pairing-Scheme_2026-27_Grade10_")
+                for f in scheme_files))
+            scheme_year = "Annual Exam 2026" if is_2026_reference else ("Annual Exam 2027" if is_g10_summary else CLASSES[cid]["session"])
+            if rows and is_2026_reference:
                 cta = rows
-                status = '<span class="badge badge-live" style="margin-left:6px">✓ live</span>'
-                blurb = "Official / board-issued pairing scheme PDF. Download below."
+                status = '<span class="badge badge-gold" style="margin-left:6px">2026 reference</span>'
+                blurb = ("StudySapiens reference copy. Its PDF is labelled Annual Examination 2026; "
+                         "it is not confirmed as the current 2027 scheme. Check the latest PECTAA notice before using it.")
+                if (cid, sid) == ("9", "computer-science"):
+                    blurb += " Computer Science is not listed in the current Grade 9 PECTAA ALP annex."
+                elif (cid, sid) == ("11", "islamiat"):
+                    blurb += " Islamiyat is not listed in the current Grade 11 PECTAA ALP annex."
+            elif rows and is_g10_summary:
+                cta = rows
+                status = '<span class="badge badge-live" style="margin-left:6px">StudySapiens summary · 2027</span>'
+                blurb = ("StudySapiens-prepared summary for Annual Exam 2027. The branded PDF is not an original PECTAA document; "
+                         "check current PECTAA or board instructions for final guidance.")
+            elif rows:
+                cta = rows
+                status = '<span class="badge badge-live" style="margin-left:6px">file available</span>'
+                blurb = "Pairing-scheme file available. Check the PDF source and exam session before using it."
             else:
                 cta = (f'<a class="btn btn-dark btn-sm" href="mailto:{EMAIL}?subject={cid}th%20{SUBJECTS[sid]["name"].replace(" ","%20")}%20pairing%20scheme%20request">{icon("bell",13)} Notify me</a>'
                        f'<a class="btn btn-ghost btn-sm" href="{R}classes/{cid}/{sid}/">{icon("grid",13)} Subject page</a>')
                 status = '<span class="badge badge-gold" style="margin-left:4px">expected</span>'
-                blurb = "Published here the day boards issue it. Objective + subjective pattern, unit-wise MCQ spread & long-question pairing."
+                blurb = "No pairing-scheme file has been added yet. We will label the source and exam session when one is available."
             cards += f"""
 <article class="res-item reveal" data-filter-item data-cls="{cid}" data-sub="{sid}">
   <div class="res-ico" style="background:{SUBJECTS[sid]['hue']}">{icon("layers",22)}</div>
-  <div><h3>{CLASSES[cid]['name']} {SUBJECTS[sid]['name']} Pairing Scheme {CLASSES[cid]['session']}{status}</h3>
+  <div><h3>{CLASSES[cid]['name']} {SUBJECTS[sid]['name']} Pairing Scheme {scheme_year}{status}</h3>
     <p>{blurb}</p>
     {rows}
   </div>
   <div class="res-cta">{'' if rows else cta}</div>
 </article>"""
     body = crumbs_html(R, [("Pairing Scheme", "pairing-scheme/")]) + page_hero(R,
-        badge="Updated for New Syllabus",
-        title="Pairing Schemes: All Classes & Subjects (Punjab Boards)",
-        lead="The official assessment schemes for the new books, plus teacher-prepared practice schemes. Class-wise and subject-wise. Valid for all 9 BISE boards of Punjab.",
+        badge="StudySapiens schemes and reference PDFs",
+        title="Pairing Schemes: Check the source and exam year",
+        lead="Browse pairing-scheme PDFs by class and subject. Grade 10 summaries are for Annual Exam 2027. Earlier files are labelled by their exam year; check the current PECTAA or board notice before relying on them.",
         actions=f'<a class="btn btn-primary btn-sm" href="#resGrid">{icon("layers",15)} Browse Schemes</a>')
     body += f"""
 <section class="section section-tight">
@@ -1220,9 +1309,15 @@ def build_pairing():
     <div class="grid" id="resGrid" style="gap:12px">{cards}
       <div class="card filter-empty" style="display:none;text-align:center">No scheme matches that filter yet. Try another class/subject.</div>
     </div>
-    <div class="card" style="margin-top:28px;padding:18px 22px;display:flex;gap:12px;align-items:flex-start;background:var(--navy-50)">
-      <span style="color:var(--navy-700)">{icon("shield",20)}</span>
-      <p class="small" style="color:var(--ink-soft)"><b>Our honesty rule:</b> we never publish guessed or fan-made "schemes" as official ones. A pairing scheme appears here only after it is issued by the boards / PECTAA or clearly marked as a teacher-prepared practice scheme. Until then the slots above stay marked <b>expected</b>.</p>
+    <div class="card" style="margin-top:28px;padding:18px 22px;background:var(--navy-50)">
+      <h2 style="font-size:1.15rem;margin:0 0 8px">Source and exam-year notes</h2>
+      <p class="small" style="color:var(--ink-soft);margin-bottom:8px">The new Grade 10 PDFs are StudySapiens-prepared summaries for the 2026-27 session / Annual Exam 2027. They are not original PECTAA PDFs. Their marks and question distributions were checked against published paper-setting instructions, but check the current PECTAA or board notice before relying on them.</p>
+      <p class="small" style="color:var(--ink-soft);margin-bottom:10px">Grade 9 and 11 files marked 2026 are previous-year references. For ALP, use the current PECTAA notices: Grade 9 Computer Science and Grade 11 Islamiyat are not listed in those ALP annexes.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn btn-primary btn-sm" href="{ALP_OFFICIAL['9']['url']}" target="_blank" rel="noopener noreferrer">PECTAA Grade 9 notice 1238 {icon("external",13)}</a>
+        <a class="btn btn-primary btn-sm" href="{ALP_OFFICIAL['11']['url']}" target="_blank" rel="noopener noreferrer">PECTAA Grade 11 notice 1239 {icon("external",13)}</a>
+        <a class="btn btn-ghost btn-sm" href="{PECTAA_COMPLIANCE_URL}" target="_blank" rel="noopener noreferrer">PECTAA Curriculum and Compliance {icon("external",13)}</a>
+      </div>
     </div>
     <div class="grid grid-3" style="margin-top:40px">
       <div class="feature-card"><div class="icon-tile" style="background:linear-gradient(135deg,var(--navy-700),var(--navy-600))">{icon("doc",22)}</div>
@@ -1380,7 +1475,7 @@ def build_datesheet():
     body = crumbs_html(R, [("Date Sheet", "date-sheet/")]) + page_hero(R,
         badge="Session 2026-27",
         title="Date Sheets: Matric & Intermediate (Punjab Boards)",
-        lead="Expected schedule for 2027 based on recent years plus the official date sheets the minute any BISE releases them. Downloadable PDF, no popup ads.",
+        lead="Expected schedule for 2027 based on recent years, plus official date sheets as soon as a BISE releases them. Expected and confirmed dates are clearly labelled.",
         actions=f'<a class="btn btn-primary btn-sm" href="#tbl">{icon("cal",15)} View Expected Timeline</a>')
     body += f"""
 <section class="section section-tight" style="padding-bottom:0">
@@ -1857,7 +1952,7 @@ def build_roll_slip():
     ld = [breadcrumb_json([("Roll Number Slip", "roll-number-slip/")])]
     w("roll-number-slip/index.html", layout(page_key="datesheet", depth=1,
         title="Roll Number Slip 2027: Matric & Inter, All Punjab Boards",
-        desc="When roll number slips are issued (expected Feb/Apr 2027), how regular & private candidates download them, and every board's official portal. Free guide, no popups.",
+        desc="When roll number slips are issued, learn how regular and private candidates can get them from each Punjab board's official portal.",
         path="roll-number-slip/", body=body, extra_ld=ld), priority="0.8")
     SEARCH.append({"t": "Roll Number Slip 2027", "s": "when & how to download · all 9 boards",
                    "u": "roll-number-slip/", "c": "Resource", "k": "roll number slip admit card matric inter download bise"})
@@ -1920,7 +2015,7 @@ def build_model_papers():
     ld = [breadcrumb_json([("Model Papers", "model-papers/")])]
     w("model-papers/index.html", layout(page_key="past", depth=1,
         title="Model & Sample Papers 2027: Class 9-12, New Syllabus Pattern",
-        desc="Official model papers & sample papers for the new PCTB/PECTAA books, class 9 to 12, all subjects. Uploaded as boards issue them, clearly labelled. Free PDF, no popups.",
+        desc="Official model papers & sample papers for the new PCTB/PECTAA books, class 9 to 12, all subjects. Uploaded as boards issue them, clearly labelled. Free PDF.",
         path="model-papers/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "Model Papers: All Classes", "s": "official sample papers · new pattern · all subjects",
                    "u": "model-papers/", "c": "Resource", "pop": 1, "k": "model paper sample paper pattern paper new syllabus 9th 10th 1st 2nd year"})
@@ -2136,7 +2231,7 @@ def build_test_player(q):
           <div class="icon-tile" style="margin:0 auto 14px;background:linear-gradient(135deg,#FFFDF7,#EAE7D3);color:var(--navy-900)">{icon("zap",26)}</div>
           <h2 style="margin-bottom:8px">Ready when you are</h2>
           <p class="muted" style="max-width:460px;margin:0 auto 6px">{n} questions, one at a time. You see the correct answer and a short explanation right after each question. No timer pressure: the clock only counts up.</p>
-          <p class="muted small" style="margin-bottom:18px">Answers are written and checked by our teachers. {icon("shield",12)} No login, no popups, free forever.</p>
+          <p class="muted small" style="margin-bottom:18px">Answers are made by teachers and verified by subject experts. No login required; free to use.</p>
           <button class="btn btn-primary btn-lg" type="button" onclick="startQuiz()">{icon("zap",17)} Start the Test</button>
         </div>
       </div>
@@ -2217,7 +2312,7 @@ def build_tests():
     body = crumbs_html(R, [("Online Tests", "tests/")]) + page_hero(R,
         badge="Answer, Score, Review. Right Here",
         title="Online MCQ Tests: Self-Scoring, Instant Explanations",
-        lead="Real practice in your browser: attempt questions one by one, get your score instantly, and review every answer with a teacher-written explanation. Free, no login, no popups.",
+        lead="Real practice in your browser: attempt questions one by one, get your score instantly, and review every answer with a teacher-written explanation. Free to use, with no login required.",
         actions=f'<a class="btn btn-primary btn-sm" href="#tests">{icon("zap",15)} Take a Test</a>')
     body += f"""
 <section class="section section-tight" id="tests">
@@ -2241,7 +2336,7 @@ def build_tests():
     ld = [breadcrumb_json([("Online Tests", "tests/")])]
     w("tests/index.html", layout(page_key="tests", depth=1,
         title="Online MCQ Tests: Class 9-12, Self-Scoring & Free | StudySapiens",
-        desc="Free self-scoring online MCQ tests for Class 9, 10, 1st & 2nd year (new PCTB/PECTAA syllabus). Instant results with teacher-written explanations. No login, no popups.",
+        desc="Free self-scoring online MCQ tests for Class 9, 10, 1st & 2nd year (new PCTB/PECTAA syllabus). Instant results with teacher-written explanations. No login required.",
         path="tests/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "Online Tests: Self-Scoring MCQs", "s": "instant score · explanations · all classes",
                    "u": "tests/", "c": "Resource", "pop": 1, "k": "online mcq test practice quiz self assessment class 9 10 1st 2nd year"})
@@ -2363,7 +2458,7 @@ def build_ecat():
     ld = [breadcrumb_json([("ECAT", "ecat/")])]
     w("ecat/index.html", layout(page_key="ecat", depth=1,
         title="ECAT Corner: UET Aggregate Calculator (17/50/33) & Pattern",
-        desc="Free ECAT aggregate calculator using the current UET formula (Matric 17% + FSc 50% + ECAT 33%), paper pattern, eligibility rules and admission roadmap. No popups.",
+        desc="Free ECAT aggregate calculator using the current UET formula (Matric 17% + FSc 50% + ECAT 33%), paper pattern, eligibility rules and admission roadmap.",
         path="ecat/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "ECAT Corner: Calculator & Guide", "s": "UET 17/50/33 aggregate · pattern · roadmap",
                    "u": "ecat/", "c": "Resource", "pop": 1, "k": "ecat uet engineering entry test aggregate calculator merit formula"})
@@ -2677,7 +2772,7 @@ def build_about():
     R = "../"
     body = crumbs_html(R, [("About", "about/")]) + page_hero(R,
         badge="Our Story",
-        title="A Teacher Who Got Tired of Bad Websites",
+        title="Teachers Building Better Study Resources",
         lead="StudySapiens started with a simple frustration: when Punjab changed the syllabus, students deserved honest, updated study material. And couldn't find it anywhere.",
         actions=f'<a class="btn btn-primary btn-sm" href="{R}contact/">{icon("mail",15)} Say Salaam to Us</a>')
     body += f"""
@@ -2687,11 +2782,10 @@ def build_about():
       <h2 style="font-size:1.5rem;margin-bottom:14px">Why StudySapiens exists</h2>
       <p>When PCTB (now PECTAA) introduced the new books for matric and intermediate, everything students relied on turned upside down overnight. Searching for notes of the <i>new</i> books meant clicking through websites that:</p>
       <ul>
-        <li>opened a fullscreen ad that wouldn't close for 30-60 seconds,</li>
         <li>slapped “New Syllabus 2026” on articles that still taught the old books,</li>
         <li>mixed up chapter numbers so badly that even teachers got confused.</li>
       </ul>
-      <p>As a working teacher, I watched my own students waste precious exam-season hours on junk. So I did what teachers do. I made the thing myself. StudySapiens is my promise: <b>right book, right chapter, simple words, zero ad walls, free forever.</b></p>
+      <p>As teachers, we saw students struggle to find clear material that matched the new books. We built StudySapiens to help. Our resources are <b>made by teachers and verified by subject experts</b>, with the right book, right chapter and simple words. Study materials are free for every student.</p>
       <div class="callout">Every note here is written or checked by a teacher before publishing. If a chapter is not ready yet, we say so honestly instead of uploading filler.</div>
       <h2 style="font-size:1.5rem;margin:30px 0 16px">What we stand for</h2>
     </div>
@@ -2699,7 +2793,7 @@ def build_about():
       <div class="feature-card center"><div class="icon-tile" style="margin:0 auto 12px;background:linear-gradient(135deg,#FFFDF7,#EAE7D3);color:var(--navy-900)">{icon("check",22)}</div>
         <h3 style="font-size:1rem">Accuracy</h3><p class="small">Chapter numbers always match your printed book.</p></div>
       <div class="feature-card center"><div class="icon-tile" style="margin:0 auto 12px;background:linear-gradient(135deg,#FFFDF7,#EAE7D3);color:var(--navy-900)">{icon("shieldx",22)}</div>
-        <h3 style="font-size:1rem">No Ad Traps</h3><p class="small">Reading starts the instant the page opens.</p></div>
+        <h3 style="font-size:1rem">Made by Teachers</h3><p class="small">Study materials are created by teachers and verified by subject experts.</p></div>
       <div class="feature-card center"><div class="icon-tile" style="margin:0 auto 12px;background:linear-gradient(135deg,#FFFDF7,#EAE7D3);color:var(--navy-900)">{icon("zap",22)}</div>
         <h3 style="font-size:1rem">Easy English</h3><p class="small">Written for students whose first language isn't English.</p></div>
       <div class="feature-card center"><div class="icon-tile" style="margin:0 auto 12px;background:linear-gradient(135deg,#FFFDF7,#EAE7D3);color:var(--navy-900)">{icon("money",22)}</div>
@@ -2721,8 +2815,8 @@ def build_about():
 </section>"""
     ld = [breadcrumb_json([("About", "about/")])]
     w("about/index.html", layout(page_key="about", depth=1,
-        title="About StudySapiens: Teacher Notes, No Popup Ads",
-        desc="Why a Pakistani teacher built StudySapiens: honest, updated notes, schemes and tests for the new PCTB/PECTAA syllabus. Free for every student.",
+        title="About StudySapiens: Made by Teachers",
+        desc="StudySapiens resources are made by teachers and verified by subject experts for Punjab board students.",
         path="about/", body=body, extra_ld=ld), priority="0.6")
     SEARCH.append({"t": "About StudySapiens", "s": "our story & mission", "u": "about/", "c": "Page", "k": "teacher mission story"})
 
@@ -2773,7 +2867,7 @@ def build_contact():
         <div class="card reveal-r" data-delay="2">
           <div class="icon-tile" style="background:linear-gradient(135deg,var(--teal),#0E8C8A)">{icon("shield",22)}</div>
           <h3 style="font-size:1.05rem">Quick answers</h3>
-          <p class="muted small">Most questions are already answered on our <a href="{R}#faq"><b>FAQ section</b></a> (no popup ads, is it free, which boards…). Teachers who want to contribute notes: mention your subject & city. We'd love to have you.</p>
+          <p class="muted small">Most questions are already answered on our <a href="{R}#faq"><b>FAQ section</b></a> (is it free, how are resources verified, which boards…). Teachers who want to contribute notes: mention your subject & city. We'd love to have you.</p>
         </div>
       </div>
     </div>
@@ -2804,10 +2898,9 @@ def build_privacy():
       <ul>
         <li>We never sell, rent or share your personal information with advertisers.</li>
         <li>We don't require accounts, and we don't store test scores.</li>
-        <li>No intrusive popup ads, no forced notifications.</li>
       </ul>
       <h2>Cookies & third parties</h2>
-      <p>If we display ads in future (e.g. Google AdSense), those partners may use cookies to serve relevant ads under their own policies. External sites we link to (eLearn Punjab, PMDC, FPSC, boards) have their own privacy policies.</p>
+      <p>External sites we link to (eLearn Punjab, PMDC, FPSC and education boards) have their own privacy policies. We will update this policy if the site adds features that change how information is handled.</p>
       <h2>Students under 13</h2>
       <p>Our content is safe for all ages. Younger students should use the contact forms with a parent/guardian's email.</p>
       <h2>Contact</h2>
@@ -2846,7 +2939,7 @@ def build_sitemap_page():
 
 SW_JS = r"""
 /* StudySapiens service worker. V1 */
-const VERSION = 'ss-v9';
+const VERSION = 'ss-v13';
 const CORE = [
   './', 'classes/', 'pairing-scheme/', 'mdcat/', 'date-sheet/', 'offline/',
   'assets/css/style.css', 'assets/js/main.js',
@@ -2976,7 +3069,7 @@ def write_seo():
     boards_line = ", ".join(b["short"] for b in BOARDS[:-1]) + f" and {BOARDS[-1]['short']}"
     llms = f"""# StudySapiens
 
-> Free study resources, no popup ads, for Pakistani students of Class 9-12 on the new PCTB / PECTAA syllabus: verified notes, solved exercises, MCQ banks, pairing schemes, guess papers, date sheets, results guidance, MDCAT / ECAT / CSS guides. All nine Punjab boards: {boards_line}.
+> Free study resources for Pakistani students of Class 9-12 on the new PCTB / PECTAA syllabus. Made by teachers and verified by subject experts. Includes notes, solved exercises, MCQ banks, pairing schemes, guess papers, date sheets, results guidance, MDCAT / ECAT / CSS guides. All nine Punjab boards: {boards_line}.
 
 ## Trust policy (why our answers are citable)
 - Every downloadable file is checked by a teacher against the printed official book before it goes live.
@@ -3063,8 +3156,8 @@ def write_seo():
         "/sw.js\n"
         "  Cache-Control: no-cache\n")
     with open(os.path.join(OUT, "_headers"), "w") as f: f.write(headers)
-    # Apache / LiteSpeed version of _headers (for cPanel shared hosting, e.g. Hostooze)
-    htaccess = ("# StudySapiens .htaccess - Apache / LiteSpeed (cPanel hosting)\n"
+    # Apache / LiteSpeed version of _headers (for cPanel-style shared hosting)
+    htaccess = ("# StudySapiens .htaccess - Apache / LiteSpeed\n"
         "# Mirrors the Netlify _headers rules and serves the custom 404 page.\n"
         "DirectoryIndex index.html\n"
         "ErrorDocument 404 /404.html\n"
