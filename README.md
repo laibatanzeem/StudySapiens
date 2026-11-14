@@ -850,3 +850,10 @@ yet.** These two are deliberately deferred — flip them only when:
 - Every bio-12 chapter page now shows **Exercise Solutions + Test Papers**; viewer
   opens solutions first; wording upgraded to "Chapter N Notes". 515 published
   files; forms-verify 61.
+
+## Upload: Class 12 Biology chapter notes (14 Nov 2026)
+
+- **13 chapter-notes PDFs** (Ch 13–25, 12–14 pages each) →
+  `files/class-12/biology/notes/`, titles verified.
+- Every bio-12 chapter page: **Chapter Notes + Exercise Solutions + Test Papers**
+  (viewer opens notes first). 528 published files; forms-verify 61.
