@@ -1259,94 +1259,14 @@ def resource_filter(cid_list=True):
 
 
 def build_pairing():
-    R = "../"
-    cards = ""
-    for cid in CLASSES:
-        for sid in subjects_for(cid):
-            scheme_files = FILES.get((cid, sid), {}).get("scheme", [])
-            rows = file_rows(R, cid, sid, "scheme")
-            is_2026_reference = any("reference-alp-pairing-scheme-annual-exam-2026" in f["url"].lower()
-                                    for f in scheme_files)
-            is_g10_summary = (cid == "10" and any(
-                os.path.basename(f["url"]).startswith("StudySapiens_Pairing-Scheme_2026-27_Grade10_")
-                for f in scheme_files))
-            scheme_year = "Annual Exam 2026" if is_2026_reference else ("Annual Exam 2027" if is_g10_summary else CLASSES[cid]["session"])
-            if rows and is_2026_reference:
-                cta = rows
-                status = '<span class="badge badge-gold" style="margin-left:6px">2026 reference</span>'
-                blurb = ("StudySapiens reference copy. Its PDF is labelled Annual Examination 2026; "
-                         "it is not confirmed as the current 2027 scheme. Check the latest PECTAA notice before using it.")
-                if (cid, sid) == ("9", "computer-science"):
-                    blurb += " Computer Science is not listed in the current Grade 9 PECTAA ALP annex."
-                elif (cid, sid) == ("11", "islamiat"):
-                    blurb += " Islamiyat is not listed in the current Grade 11 PECTAA ALP annex."
-            elif rows and is_g10_summary:
-                cta = rows
-                status = '<span class="badge badge-live" style="margin-left:6px">StudySapiens summary · 2027</span>'
-                blurb = ("StudySapiens-prepared summary for Annual Exam 2027. The branded PDF is not an original PECTAA document; "
-                         "check current PECTAA or board instructions for final guidance.")
-            elif rows:
-                cta = rows
-                status = '<span class="badge badge-live" style="margin-left:6px">file available</span>'
-                blurb = "Pairing-scheme file available. Check the PDF source and exam session before using it."
-            else:
-                cta = (f'<a class="btn btn-dark btn-sm" href="mailto:{EMAIL}?subject={cid}th%20{SUBJECTS[sid]["name"].replace(" ","%20")}%20pairing%20scheme%20request">{icon("bell",13)} Notify me</a>'
-                       f'<a class="btn btn-ghost btn-sm" href="{R}classes/{cid}/{sid}/">{icon("grid",13)} Subject page</a>')
-                status = '<span class="badge badge-gold" style="margin-left:4px">expected</span>'
-                blurb = "No pairing-scheme file has been added yet. We will label the source and exam session when one is available."
-            cards += f"""
-<article class="res-item reveal" data-filter-item data-cls="{cid}" data-sub="{sid}">
-  <div class="res-ico" style="background:{SUBJECTS[sid]['hue']}">{icon("layers",22)}</div>
-  <div><h3>{CLASSES[cid]['name']} {SUBJECTS[sid]['name']} Pairing Scheme {scheme_year}{status}</h3>
-    <p>{blurb}</p>
-    {rows}
-  </div>
-  <div class="res-cta">{'' if rows else cta}</div>
-</article>"""
-    body = crumbs_html(R, [("Pairing Scheme", "pairing-scheme/")]) + page_hero(R,
-        badge="StudySapiens schemes and reference PDFs",
-        title="Pairing Schemes: Check the source and exam year",
-        lead="Browse pairing-scheme PDFs by class and subject. Grade 10 summaries are for Annual Exam 2027. Earlier files are labelled by their exam year; check the current PECTAA or board notice before relying on them.",
-        actions=f'<a class="btn btn-primary btn-sm" href="#resGrid">{icon("layers",15)} Browse Schemes</a>')
-    body += f"""
-<section class="section section-tight">
-  <div class="container">
-    {resource_filter()}
-    <div class="grid" id="resGrid" style="gap:12px">{cards}
-      <div class="card filter-empty" style="display:none;text-align:center">No scheme matches that filter yet. Try another class/subject.</div>
-    </div>
-    <div class="card" style="margin-top:28px;padding:18px 22px;background:var(--navy-50)">
-      <h2 style="font-size:1.15rem;margin:0 0 8px">Source and exam-year notes</h2>
-      <p class="small" style="color:var(--ink-soft);margin-bottom:8px">The new Grade 10 PDFs are StudySapiens-prepared summaries for the 2026-27 session / Annual Exam 2027. They are not original PECTAA PDFs. Their marks and question distributions were checked against published paper-setting instructions, but check the current PECTAA or board notice before relying on them.</p>
-      <p class="small" style="color:var(--ink-soft);margin-bottom:10px">Grade 9 and 11 files marked 2026 are previous-year references. For ALP, use the current PECTAA notices: Grade 9 Computer Science and Grade 11 Islamiyat are not listed in those ALP annexes.</p>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn btn-primary btn-sm" href="{ALP_OFFICIAL['9']['url']}" target="_blank" rel="noopener noreferrer">PECTAA Grade 9 notice 1238 {icon("external",13)}</a>
-        <a class="btn btn-primary btn-sm" href="{ALP_OFFICIAL['11']['url']}" target="_blank" rel="noopener noreferrer">PECTAA Grade 11 notice 1239 {icon("external",13)}</a>
-        <a class="btn btn-ghost btn-sm" href="{PECTAA_COMPLIANCE_URL}" target="_blank" rel="noopener noreferrer">PECTAA Curriculum and Compliance {icon("external",13)}</a>
-      </div>
-    </div>
-    <div class="grid grid-3" style="margin-top:40px">
-      <div class="feature-card"><div class="icon-tile" style="background:linear-gradient(135deg,var(--navy-700),var(--navy-600))">{icon("doc",22)}</div>
-        <h3>Objective Part</h3><p>MCQs are spread across every unit of the new book. Our scheme cards mark the exact unit count so you never over-study a unit.</p></div>
-      <div class="feature-card"><div class="icon-tile" style="background:linear-gradient(135deg,var(--navy-700),var(--navy-600))">{icon("notes",22)}</div>
-        <h3>Short Questions</h3><p>Boards give extra choice (e.g. attempt 8 of 12). The scheme shows which units feed each block: prepare blocks, not luck.</p></div>
-      <div class="feature-card"><div class="icon-tile" style="background:linear-gradient(135deg,var(--navy-700),var(--navy-600))">{icon("link",22)}</div>
-        <h3>Long Question Pairing</h3><p>Every long question joins TWO units. Learn the pairs early and practise combined answers: that's how 90+ papers are written.</p></div>
-    </div>
-    <div class="card" style="margin-top:26px;background:var(--gold-100);text-align:center;padding:28px">
-      <h3 style="font-size:1.1rem;margin-bottom:6px">{icon("bell",20)} Schemes go live the moment boards publish them</h3>
-      <p class="muted" style="font-size:.92rem;margin-bottom:14px">Leave your email. We'll send one short message per scheme, nothing else.</p>
-      {join_updates_form(R)}
-    </div>
-  </div>
-</section>"""
-    ld = [breadcrumb_json([("Pairing Scheme", "pairing-scheme/")])]
-    w("pairing-scheme/index.html", layout(page_key="pairing", depth=1,
-        title="Pairing Schemes 2026-27: Class 9, 10, 11, 12 (All Subjects)",
-        desc="Pairing schemes (assessment schemes) for Class 9, 10, 1st & 2nd year. All subjects, new PCTB/PECTAA books, valid for all Punjab boards. Official & free.",
-        path="pairing-scheme/", body=body, extra_ld=ld), priority="0.85")
+    """Custom owner-designed pairing-scheme page: pages/pairing-scheme.html.
+    Edit that file and rebuild. (The old generated layout is retired; git history keeps it.)"""
+    pages_root = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pages")
+    with open(os.path.join(pages_root, "pairing-scheme.html"), encoding="utf-8") as f:
+        w("pairing-scheme/index.html", f.read(), priority="0.85")
     SEARCH.append({"t": "Pairing Schemes: All Classes", "s": "assessment schemes · all subjects · Punjab boards",
                    "u": "pairing-scheme/", "c": "Resource", "pop": 1, "k": "paper scheme assessment combination"})
+
 
 def build_guess():
     R = "../"
