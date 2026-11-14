@@ -878,3 +878,10 @@ yet.** These two are deliberately deferred — flip them only when:
   from the papers (Spectroscopy normalized to "Spectroscopy — 1 / — 2: NMR").
 - 17 new chapter pages with MCQ Bank downloads + viewer; subject page shows 17
   live chapter cards. Site now 347 pages, 558 published files; forms-verify 61.
+
+## Upload: Class 12 Chemistry chapter notes (14 Nov 2026)
+
+- **17 chapter-notes PDFs** (Ch 17–33, 12–18 pages each) →
+  `files/class-12/chemistry/notes/`, titles verified against the chapter set.
+- Every chem-12 chapter page now shows **Chapter Notes + MCQ Bank**; viewer opens
+  the chapter notes first. 575 published files; forms-verify 61.
