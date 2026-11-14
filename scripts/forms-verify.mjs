@@ -427,6 +427,85 @@ let chapterPages = 0, chapterIssues = [];
     Object.keys(cache).length + ' URLs cached');
 }
 
+// ---------- 4.5/4.6/5.1 + a11y batch ----------
+{
+  const pages = walk(path.join(ROOT, 'site'));
+  const unesc = s => s.replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+  // 4.5 titles & descriptions
+  let badT = [], badD = [];
+  for (const p of pages) {
+    const s = fs.readFileSync(p, 'utf8');
+    const t = s.match(/<title>([\s\S]*?)<\/title>/);
+    if (t && unesc(t[1].trim()).length > 62) badT.push(p);
+    const d = s.match(/<meta name="description" content="([^"]*)"/);
+    if (d) { const L = unesc(d[1]).length; if (L > 160 || L < 120) badD.push(p + ' (' + L + ')'); }
+  }
+  log('4.5: every title <= 62 chars (rendered)', badT.length === 0, badT.slice(0, 3).join(', '));
+  log('4.5: every meta description 120-160 chars', badD.length === 0, badD.slice(0, 3).join(', '));
+  // H1 must not carry the pipe-brand suffix
+  let badH1 = [];
+  for (const p of pages) {
+    const s = fs.readFileSync(p, 'utf8');
+    for (const m of s.matchAll(/<h1[^>]*>([\s\S]*?)<\/h1>/g)) if (/\|\s*StudySapiens/.test(m[1])) badH1.push(p);
+  }
+  log('4.5: no "| StudySapiens" suffix inside any H1', badH1.length === 0, badH1.slice(0, 3).join(', '));
+  // 5.1 hero preload candidate == rendered candidate
+  const home = fs.readFileSync(path.join(ROOT, 'site', 'index.html'), 'utf8');
+  const pre = home.match(/<link rel="preload" as="image"[^>]*imagesrcset="([^"]*)"[^>]*>/);
+  const src = home.match(/<source type="image\/webp" srcset="([^"]*)"/);
+  const img = home.match(/<img[^>]*srcset="([^"]*)"/);
+  const norm = x => (x || '').replace(/\s*,\s*/g, ',').replace(/\s+/g, ' ').trim();
+  log('5.1: hero preload imagesrcset == picture WebP source srcset', !!pre && !!src && norm(pre[1]) === norm(src[1]));
+  log('5.1: hero <img> is the JPG fallback (no double WebP)', !!img && /\.jpg/.test(img[1]) && !/\.webp/.test(img[1]));
+  // a11y: drawer inert when closed, everywhere (incl. standalone pairing page)
+  let noInert = [];
+  for (const p of pages) {
+    const s = fs.readFileSync(p, 'utf8');
+    const m = s.match(/<div[^>]*id="drawer"[^>]*>/);
+    if (m && !/\binert\b/.test(m[0])) noInert.push(p);
+  }
+  log('a11y: closed drawer is inert in markup on every page', noInert.length === 0, noInert.slice(0, 3).join(', '));
+  // a11y: contact selects have real label associations
+  const contact = fs.readFileSync(path.join(ROOT, 'site', 'contact', 'index.html'), 'utf8');
+  log('a11y: contact selects have <label for> associations',
+    /<label for="contact-class">/.test(contact) && /<select id="contact-class"/.test(contact) &&
+    /<label for="contact-topic">/.test(contact) && /<select id="contact-topic"/.test(contact));
+  // a11y: exam-timer chips are a group with aria-pressed buttons
+  log('a11y: et-chips role=group + aria-pressed buttons',
+    /<div class="et-chips" role="group"/.test(home) && /<button class="et-chip"[^>]*aria-pressed="false"/.test(home));
+  // 4.6: per-board anchors on hubs + deep links from board pages
+  const results = fs.readFileSync(path.join(ROOT, 'site', 'results', 'index.html'), 'utf8');
+  const roll = fs.readFileSync(path.join(ROOT, 'site', 'roll-number-slip', 'index.html'), 'utf8');
+  const ds = fs.readFileSync(path.join(ROOT, 'site', 'date-sheet', 'index.html'), 'utf8');
+  log('4.6: results & roll-slip hubs anchor all 9 boards (tr id=bise-*)',
+    (results.match(/<tr id="bise-/g) || []).length === 9 && (roll.match(/<tr id="bise-/g) || []).length === 9);
+  log('4.6: date-sheet hub anchors all 9 boards (chip id=bise-*)',
+    (ds.match(/id="bise-/g) || []).length === 9);
+  let boardLinks = 0, boards = 0;
+  for (const p of walk(path.join(ROOT, 'site', 'boards'))) {
+    if (path.basename(p) !== 'index.html' || path.dirname(p).endsWith(path.sep + 'boards')) continue;
+    boards++;
+    boardLinks += (fs.readFileSync(p, 'utf8').match(/href="(?:\.\.\/)+?(?:results|date-sheet|roll-number-slip)\/#bise-/g) || []).length;
+  }
+  log('4.6: every board page deep-links the 3 hubs at its #bise-* anchor', boards === 9 && boardLinks === 27,
+    boards + ' boards, ' + boardLinks + ' deep links');
+  // 4.6: chapter pages carry contextual links + related/next blocks
+  let chBad = [];
+  let chCount = 0;
+  for (const p of walk(path.join(ROOT, 'site', 'classes'))) {
+    if (!p.includes('chapter-') || !p.endsWith('index.html')) continue;
+    chCount++;
+    const s = fs.readFileSync(p, 'utf8');
+    const rel = (s.match(/Related chapters<\/h3><ul>([\s\S]*?)<\/ul>/) || [null, ''])[1];
+    const ok = s.includes('pairing-scheme/') && s.includes('past-papers/') && s.includes('tests/') &&
+      s.includes('Where to go next') && (rel.match(/<li><a /g) || []).length >= 2;
+    if (!ok) chBad.push(p);
+  }
+  log('4.6: chapter pages: contextual links + related chapters + next steps', chBad.length === 0,
+    chCount + ' chapter pages, ' + chBad.length + ' bad');
+}
+
 // ---------- summary ----------
 const pass = results.filter(Boolean).length;
 console.log('\n' + (pass === results.length ? 'ALL ' + pass + ' FORM/EVENT CHECKS PASSED ✅' : 'FAILED: ' + (results.length - pass) + '/' + results.length + ' ❌'));

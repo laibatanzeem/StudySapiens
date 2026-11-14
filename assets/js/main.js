@@ -42,8 +42,8 @@ function ssTrack(name, params) {
 
   /* ---------------- Mobile drawer ---------------- */
   const drawer = $("#drawer");
-  const openDrawer = () => { if (drawer) { drawer.classList.add("open"); document.body.style.overflow = "hidden"; } };
-  const closeDrawer = () => { if (drawer) { drawer.classList.remove("open"); document.body.style.overflow = ""; } };
+  const openDrawer = () => { if (drawer) { drawer.classList.add("open"); drawer.removeAttribute("aria-hidden"); drawer.inert = false; document.body.style.overflow = "hidden"; } };
+  const closeDrawer = () => { if (drawer) { drawer.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); drawer.inert = true; document.body.style.overflow = ""; } };
   $$("[data-open-drawer]").forEach(b => b.addEventListener("click", openDrawer));
   $$("[data-close-drawer]").forEach(b => b.addEventListener("click", closeDrawer));
   if (drawer) $(".drawer-bg", drawer).addEventListener("click", closeDrawer);
@@ -717,7 +717,7 @@ function ssTrack(name, params) {
     }
     const chips = $$("[data-et-class]", box);
     const pad = n => String(n).padStart(2, "0");
-    function paintChips() { chips.forEach(ch => ch.classList.toggle("active", ch.dataset.etClass === cls)); }
+    function paintChips() { chips.forEach(ch => { const on = ch.dataset.etClass === cls; ch.classList.toggle("active", on); ch.setAttribute("aria-pressed", on ? "true" : "false"); }); }
     function paint() {
       const info = exams[cls];
       const target = new Date(info.date + "T09:00:00");

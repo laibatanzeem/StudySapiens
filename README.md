@@ -630,3 +630,64 @@ the PDF viewer behaviour).
 - **Verify after deploying** (user-side): Rich Results Test on a chapter page and a
   blog post (expect: breadcrumb only), and the Schema Markup Validator on the homepage
   (expect: zero errors, one clean graph).
+
+## Batch 4.5 / 4.6 / 5.1 — titles, internal linking, hero preload, a11y (14 Nov 2026)
+
+- **4.5 Titles & meta descriptions (site-wide, 290 pages):** every `<title>` is now
+  ≤ 62 rendered chars, keyword-first, brand appended only while it fits (`ttl()` helper
+  in build.py — never use it for visible H1s, it appends the brand). Home: "Free Notes &
+  Past Papers (New PCTB Syllabus) | StudySapiens". Class pages: "Class 9 Notes: All
+  Subjects — 2025-26". Chapters: "Class 9 Physics Chapter 3 Notes — 2025-26" (session
+  replaces the repeated "New Syllabus"). Updates articles + Tarjuma surah titles trimmed
+  at word boundaries. Every meta description is 120–160 chars (was up to 181).
+- **4.6 Internal linking:** chapter pages now carry contextual links inside the article
+  body (subject hub, pairing scheme, past papers) + two new blocks on all 197 chapter
+  pages: **"Related chapters"** (2–3 nearest siblings, never duplicating prev/next) and
+  **"Where to go next"** (pairing scheme / past papers / MCQ tests, plus MDCAT & ECAT
+  calculators on class 11–12 chapters). Board pages deep-link the results, date-sheet and
+  roll-number-slip hubs at per-board anchors (`#bise-lahore` …) — those hubs now tag all
+  9 board rows/chips with `id="bise-*"`.
+- **5.1 Hero preload = rendered candidate:** the hero ships `<picture>` (WebP source +
+  JPG `<img>` fallback); the preload's `imagesrcset`/`imagesizes` match the WebP source
+  exactly, so modern browsers reuse the preloaded bytes. Locked in by forms-verify.
+- **A11y fixes (from the local axe audit, contrast re-computed to WCAG AA):**
+  - Drawer is `inert` in markup when closed and main.js toggles `inert` + `aria-hidden`
+    together on open/close (it previously stayed `aria-hidden` even when open).
+  - Contact form class/topic selects now have real `<label for>` associations.
+  - Exam-timer chips: `role="tablist"` → `role="group"` (they're filters, not tabs) with
+    `aria-pressed` synced by JS.
+  - Inline links in prose (article bodies, callouts, chapter boxes, FAQ answers, card
+    paragraphs) get underlines with a soft decoration colour — no longer colour-only.
+  - Contrast fixes: `.hero-roto` on the navy hero → #D9DCC2 (was ink-on-navy, 1.56:1 →
+    11:1); `.badge-gold` text → #565A2E (3.24:1 → 6.25:1). The other flagged elements
+    (hero badge, stat labels, `.et-lbl`, gauge muted text, kickers) already pass AA —
+    measured, not guessed.
+- **Service worker bumped to `ss-v16`** (CSS + JS changed this batch).
+- forms-verify now runs **59 checks** (adds: title length, desc length, H1 brand-suffix,
+  preload/picture match, drawer inert, contact labels, et-chip roles, board anchors,
+  board deep links, chapter contextual links).
+
+## Security headers — current state & switch conditions
+
+Current `.htaccess` (already live in the build): security headers with **CSP in
+Report-Only mode**, `frame-ancestors 'self'`, `X-Content-Type-Options nosniff`,
+`Referrer-Policy strict-origin-when-cross-origin`, plus `Permissions-Policy`. **No HSTS
+yet.** These two are deliberately deferred — flip them only when:
+
+- **HSTS (Strict-Transport-Security):** enable only after the canonical redirect is
+  stable and verified — i.e. http→https and any www/non-www redirect resolve in a single
+  hop on every URL (check with `curl -sIL http://studysapiens.com/`), because HSTS pins
+  HTTPS for every visitor and a redirect loop would lock people out. Start with a short
+  `max-age=300` for a week, then raise to `max-age=31536000; includeSubDomains` (add
+  `preload` only if we register at hstspreload.org).
+- **CSP report-only → enforce:** first collect and clear the reports (browser console +
+  any reporting endpoint). Enforcing now would risk breaking GTM/GA4, the PDF viewer or
+  Web3Forms. When enforcing, keep `frame-ancestors 'self'`.
+- **When ads/monetization is switched on**, the enforced CSP must allow the Google ad +
+  CMP stack before enabling it, roughly:
+  `script-src` += `https://pagead2.googlesyndication.com https://*.doubleclick.net https://www.googletagmanager.com`
+  (GTM host is already loaded first-party-async); `img-src`/`connect-src` += the same +
+  `https://googleads.g.doubleclick.net https://*.googleusercontent.com`;
+  `frame-src` += `https://*.doubleclick.net https://td.doubleclick.net` and the certified
+  CMP's frame origin; `consent` is handled client-side (Consent Mode v2 already
+  installed). Re-run a Report-Only pass with the ad tags live before enforcing.

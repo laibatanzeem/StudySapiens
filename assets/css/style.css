@@ -72,6 +72,9 @@ body{
 img{max-width:100%;display:block}
 a{color:var(--navy-600);text-decoration:none}
 a:hover{color:var(--navy-700)}
+/* a11y: inline links in prose get a non-colour indicator (underline) */
+.article-body a:not(.btn):not(.file-row),.callout a:not(.btn),.chap-box a:not(.btn):not(.file-row),.faq-a a:not(.btn),.form-note a:not(.btn),.card p a:not(.btn):not(.chip):not(.res-link):not(.file-row){text-decoration:underline;text-decoration-color:rgba(46,51,36,.4);text-underline-offset:3px}
+.article-body a:not(.btn):not(.file-row):hover,.callout a:not(.btn):hover,.chap-box a:not(.btn):not(.file-row):hover,.faq-a a:not(.btn):hover,.form-note a:not(.btn):hover,.card p a:not(.btn):not(.chip):not(.res-link):not(.file-row):hover{text-decoration-color:currentColor}
 ul,ol{padding-left:1.15em}
 h1,h2,h3,h4,h5{font-family:var(--font-display);line-height:1.2;color:var(--ink);letter-spacing:-.015em}
 ::selection{background:var(--gold-300);color:var(--navy-950)}
@@ -123,7 +126,7 @@ button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
 /* ---------- Badges / chips ---------- */
 .badge{display:inline-flex;align-items:center;gap:.3rem;font-size:.72rem;font-weight:700;padding:.22rem .7rem;border-radius:999px;letter-spacing:.03em}
-.badge-gold{background:var(--gold-100);color:var(--gold-700);border:1px solid var(--gold-300)}
+.badge-gold{background:var(--gold-100);color:#565A2E;border:1px solid var(--gold-300)}
 .badge-new{background:#E7F8F0;color:#0F7B4F;border:1px solid #B9E8D2}
 .badge-navy{background:var(--navy-50);color:var(--navy-700);border:1px solid var(--navy-100)}
 .badge-gray{background:#F1F4FA;color:var(--muted);border:1px solid var(--line)}
@@ -250,7 +253,7 @@ li:hover>.mega,li:focus-within>.mega,li.nav-item-open>.mega,.mega.open{opacity:1
 .hero h1{font-size:clamp(2.1rem,4.6vw,3.6rem);color:#fff;letter-spacing:-.02em;margin-bottom:18px}
 .hero h1 .grad{background:linear-gradient(120deg,var(--gold-300),var(--gold-400) 40%,var(--gold-500));-webkit-background-clip:text;background-clip:text;color:transparent}
 .rotator{display:inline-block;vertical-align:bottom;height:1.22em;overflow:hidden;white-space:nowrap;min-width:0}
-.hero-roto{font-size:1.06rem;font-weight:700;color:var(--ink-soft);margin:4px 0 14px}
+.hero-roto{font-size:1.06rem;font-weight:700;color:#D9DCC2;margin:4px 0 14px}
 .rotator span{display:block;height:1.22em;animation:rotateWord 10s infinite;background:linear-gradient(120deg,var(--gold-300),var(--gold-500));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;padding-right:.15em}
 @keyframes rotateWord{0%,22%{transform:translateY(0)}27%,47%{transform:translateY(-100%)}52%,72%{transform:translateY(-200%)}77%,97%{transform:translateY(-300%)}100%{transform:translateY(-400%)}}
 .hero p.lead{font-size:1.12rem;color:#DBE0C4;max-width:560px;margin-bottom:30px}
@@ -332,7 +335,7 @@ li:hover>.mega,li:focus-within>.mega,li.nav-item-open>.mega,.mega.open{opacity:1
 .page-hero .lead{color:#5A5D49;max-width:680px;font-size:1.03rem}
 .page-hero .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
 .page-hero .badge{margin-bottom:14px}
-.page-hero .badge-gold{background:#fff;border-color:#E2DDC2;color:var(--gold-700);box-shadow:0 2px 8px rgba(46,51,36,.07)}
+.page-hero .badge-gold{background:#fff;border-color:#E2DDC2;color:#565A2E;box-shadow:0 2px 8px rgba(46,51,36,.07)}
 .page-hero .btn-primary{background:var(--navy-900);border-color:var(--navy-900);color:#FFFDF7;box-shadow:0 10px 22px rgba(34,38,26,.25)}
 .page-hero .btn-primary:hover{background:var(--navy-950);border-color:var(--navy-950);color:#fff}
 .page-hero .btn-light-outline{border-color:rgba(46,51,36,.35);color:var(--navy-800);background:rgba(255,255,255,.55)}

@@ -35,6 +35,16 @@ def rel(depth): return "../" * depth
 
 def esc(s): return html.escape(str(s), quote=True)
 
+def ttl(base, brand=" | StudySapiens"):
+    """Title-tag builder: keyword-first base, brand appended only while the
+    total stays <= 62 chars; overlong bases are trimmed at a word boundary."""
+    t = str(base).strip()
+    if len(t) + len(brand) <= 62:
+        return t + brand
+    if len(t) <= 62:
+        return t
+    return t[:61].rsplit(" ", 1)[0] + "…"
+
 # ------------------------------------------------------------------
 # FILE UPLOADS. Drop PDF/DOC files into  files/class-<9-12>/<subject>/<category>/
 # They are auto-listed on the matching subject page & resource hubs. See README.
@@ -353,7 +363,7 @@ def drawer_html(R):
         ("Latest Updates", "updates/"),
         ("About StudySapiens", "about/"), ("Contact Us", "contact/")])
     return f"""
-<div class="drawer" id="drawer" aria-hidden="true">
+<div class="drawer" id="drawer" aria-hidden="true" inert>
   <div class="drawer-bg"></div>
   <nav class="drawer-panel" aria-label="Mobile menu">
     <div class="drawer-head">
@@ -656,7 +666,7 @@ def join_updates_form(R, small=False):
 # HOME
 # ------------------------------------------------------------------
 def exam_timer_html(R):
-    chips = "".join(f'<button class="et-chip" type="button" data-et-class="{cid}">{c["name"]}</button>'
+    chips = "".join(f'<button class="et-chip" type="button" data-et-class="{cid}" aria-pressed="false">{c["name"]}</button>'
                     for cid, c in CLASSES.items())
     exams_js = json.dumps({cid: {"date": c["exam_date"], "label": f'{c["name"]} Annual Exams 2027'}
                            for cid, c in CLASSES.items()})
@@ -667,7 +677,7 @@ def exam_timer_html(R):
       <span class="et-kicker">{icon("cal",14)} Board Exam Countdown</span>
       <h2 id="etTitle">Annual Exams</h2>
       <p class="et-note" id="etNote"></p>
-      <div class="et-chips" role="tablist" aria-label="Choose your class">{chips}</div>
+      <div class="et-chips" role="group" aria-label="Choose your class">{chips}</div>
     </div>
     <div class="et-cells" aria-live="polite">
       <div class="et-cell"><span class="et-num" id="etD">00</span><span class="et-lbl">days</span></div>
@@ -937,7 +947,7 @@ def build_home(posts=None):
                          "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQS]},
     ]
     SEARCH.append({"t": "Home. StudySapiens", "s": "New syllabus notes, schemes & tests", "u": "", "c": "Page", "pop": 1})
-    w("index.html", layout(page_key="home", depth=0, title=f"StudySapiens: New PCTB Syllabus Notes, Schemes & Past Papers",
+    w("index.html", layout(page_key="home", depth=0, title=ttl("Free Notes & Past Papers (New PCTB Syllabus)"),
         desc=SITE["description"], path="", body=body, extra_ld=ld,
         head_extra='<link rel="preload" as="image" href="assets/img/hero-1300.webp" imagesrcset="assets/img/hero-640.webp 640w, assets/img/hero-900.webp 900w, assets/img/hero-1300.webp 1300w, assets/img/hero-1600.webp 1600w" imagesizes="(max-width: 900px) 96vw, 52vw" type="image/webp" fetchpriority="high">'), priority="1.0", changefreq="daily")
 
@@ -966,7 +976,7 @@ def build_classes():
     body += f'<section class="section"><div class="container"><div class="grid grid-2" style="gap:26px">{cards}</div></div></section>'
     ld = [breadcrumb_json([("Classes", "classes/")])]
     w("classes/index.html", layout(page_key="classes", depth=1,
-        title="All Classes (9, 10, 11, 12): New PCTB Syllabus Notes & Resources | StudySapiens",
+        title=ttl("Class 9-12 Notes & Resources — New Syllabus"),
         desc="Class-wise notes, solved exercises, MCQ tests, pairing schemes, guess and past papers for Classes 9, 10, 11 & 12 following the new PCTB/PECTAA syllabus.",
         path="classes/", body=body, extra_ld=ld), priority="0.9")
 
@@ -1027,7 +1037,7 @@ def build_smart_syllabus():
     ld = [breadcrumb_json([("Smart Syllabus", "smart-syllabus/")])]
     w("smart-syllabus/index.html", layout(page_key="smart", depth=1,
         title="PECTAA Smart Syllabus (ALP): Classes 9 and 11",
-        desc="Official PECTAA ALP PDFs for Classes 9 and 11, Annual Exam 2027. Class 10 and 12 notices are pending.",
+        desc="Official PECTAA smart syllabus (ALP) PDFs for Classes 9 and 11, Annual Exam 2027 — what changed and what it means for you. Class 10 and 12 notices pending.",
         path="smart-syllabus/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "PECTAA Smart Syllabus / ALP", "s": "official class 9 and 11 notices; class 10 and 12 awaiting upload",
                    "u": "smart-syllabus/", "c": "Resource", "pop": 1, "k": "PECTAA smart syllabus ALP reduced syllabus class 9 10 11 12"})
@@ -1093,8 +1103,8 @@ def build_class(cid):
 </section>"""
     ld = [breadcrumb_json([("Classes", "classes/"), (c["name"], f"classes/{cid}/")])]
     w(f"classes/{cid}/index.html", layout(page_key="classes", depth=2,
-        title=f"{c['name']} Notes New Syllabus {c['session']}: All Subjects | StudySapiens",
-        desc=f"{c['alt']} {c['level']} notes, solved exercises, MCQ tests, schemes & guess papers. All subjects, new {c['session']} books. Made by teachers, verified by experts.",
+        title=ttl(f"{c['name']} Notes: All Subjects — {c['session']}"),
+        desc=f"{c['alt']} {c['level']} notes, solved exercises, MCQ tests, schemes & guess papers. All subjects, new {c['session']} books. Teacher-made, expert-verified.",
         path=f"classes/{cid}/", body=body, extra_ld=ld), priority="0.9")
     SEARCH.append({"t": f"{c['name']}. All Subjects & Notes", "s": f"{c['level']} · {c['session']} · pairing, past papers, tests",
                    "u": f"classes/{cid}/", "c": "Class", "pop": 1, "k": f"{c['alt']} class"})
@@ -1258,8 +1268,7 @@ def build_subject(cid, sid):
 </section>"""
     ld = [breadcrumb_json([("Classes", "classes/"), (c["name"], f"classes/{cid}/"), (s["name"], f"classes/{cid}/{sid}/")]),
           faq_schema(sub_faqs)]
-    t_base = f"{c['alt']} {s['name']} Notes & Solutions: New {c['session']} Syllabus"
-    if len(t_base) > 66: t_base = f"{c['alt']} {s['name']} Notes: New {c['session']} Syllabus"
+    t_base = ttl(f"{c['name']} {s['name']} Notes — New Syllabus {c['session']}")
     d1 = f"Free {c['alt']} {s['name']} notes, solved exercises, MCQ bank, guess paper & pairing scheme. New PCTB/PECTAA {c['session']} syllabus, all Punjab boards. Open-and-read PDF downloads."
     d2 = f"Free {c['alt']} {s['name']} notes, solved exercises, MCQ bank, guess paper & pairing scheme. New {c['session']} syllabus. Open-and-read PDF downloads."
     w(f"classes/{cid}/{sid}/index.html", layout(page_key="classes", depth=3,
@@ -1319,10 +1328,11 @@ def build_chapter_pages(cid, sid):
         display = title if is_tarjuma else f"Chapter {num}: {esc(title)}"
         h1 = (f"{c['name']} {s['name']} {title} Notes — New Syllabus {c['session']}" if is_tarjuma
               else f"{c['name']} {s['name']} Chapter {num} Notes — New Syllabus {c['session']}")
-        title_tag = h1 + " | StudySapiens"
+        title_tag = (ttl(f"{c['name']} Tarjuma-tul-Quran {title} Notes") if is_tarjuma
+                     else ttl(f"{c['name']} {s['name']} Chapter {num} Notes — {c['session']}"))
         desc = (f"{c['name']} {s['name']} {chap_word} {num} ({title}): free notes, solved exercise & MCQs, "
                 f"new {c['session']} syllabus. Download, read online, exam tips. All Punjab boards.")
-        if len(desc) > 168:
+        if len(desc) > 160:
             desc = (f"{c['name']} {s['name']} {chap_word} {num}: free notes, solved exercise & MCQs, new "
                     f"{c['session']} syllabus. Download, read online, exam tips. All Punjab boards.")
         content = CHAPTER_CONTENT.get((cid, sid, num)) or {}
@@ -1332,8 +1342,14 @@ def build_chapter_pages(cid, sid):
                 cats_present.append(sub_names.get(k, k))
 
         # ---- intro / summary ----
+        link_para = (f"<p>Looking for another {chap_word.lower()}? Use the previous / next links below, or open the "
+                     f"full chapter list on the <a href=\"../\">{esc(s['name'])} subject page</a>. Before the exam, see "
+                     f"how this {chap_word.lower()} combines with others in the <a href=\"{R}pairing-scheme/\">pairing "
+                     f"scheme</a> and practise it against <a href=\"{R}past-papers/\">past papers</a>. And if any file "
+                     f"here mismatches your book, <a href=\"{R}contact/\">tell us</a> — it is fixed or removed within "
+                     f"a day.</p>")
         if content.get("summary"):
-            summary_html = content["summary"]
+            summary_html = content["summary"] + link_para
         else:
             summary_html = (
                 f"<p><b>{esc(title)}</b> is {chap_word} {num} of the new {c['name']} {s['name']} book "
@@ -1344,9 +1360,7 @@ def build_chapter_pages(cid, sid):
                 "their own words, then open the solved exercise below and write every answer with your own hand "
                 "— copying never sticks. Finish with the MCQ bank, note every question you got wrong, and revise "
                 "only that list the next day. Read → solve → test: one order, every chapter.</p>"
-                f"<p>Looking for another {chap_word.lower()}? Use the previous / next links below, or open the "
-                f"full chapter list on the <a href=\"../\">{esc(s['name'])} subject page</a>. And if any file here "
-                f"mismatches your book, <a href=\"{R}contact/\">tell us</a> — it is fixed or removed within a day.</p>")
+                + link_para)
         kp = content.get("key_points") or []
         kp_html = (f'<div class="card chap-box"><h3>{icon("check",16)} Key points to remember</h3>'
                    f'<ul>{"".join(f"<li>{x}</li>" for x in kp)}</ul></div>') if kp else ""
@@ -1394,6 +1408,32 @@ def build_chapter_pages(cid, sid):
         nxt_html = (f'<a class="btn btn-light-outline btn-sm" href="../chapter-{nxt[0]}/">{chap_word} {nxt[0]}: '
                     f'{esc(nxt[1])} →</a>') if nxt else '<span></span>'
 
+        # ---- related chapters (nearest chapters that prev/next do not already cover) ----
+        rel_idx = []
+        for off in (2, -2, 3, -3, 4, -4):
+            j = (idx + off) % len(page_list)
+            if j != idx and j not in ((idx - 1) % len(page_list), (idx + 1) % len(page_list)) and j not in rel_idx:
+                rel_idx.append(j)
+        rel_idx = rel_idx[:3]
+        related_html = ""
+        if len(rel_idx) >= 2:
+            related_html = (f'<div class="card chap-box"><h3>{icon("layers",16)} Related chapters</h3><ul>'
+                            + "".join(f'<li><a href="../chapter-{page_list[j][0]}/">{chap_word} {page_list[j][0]}: '
+                                      f'{esc(page_list[j][1])}</a></li>' for j in rel_idx) + '</ul></div>')
+
+        # ---- where to go next (contextual cross-links, not nav/footer) ----
+        calc_link = (f'<li>Planning ahead after FSc? Estimate your merit before it matters: '
+                     f'<a href="{R}mdcat/">MDCAT aggregate calculator</a> or '
+                     f'<a href="{R}ecat/">ECAT aggregate calculator</a>.</li>') if cid in (11, 12) else ''
+        next_steps_html = (f'<div class="card chap-box"><h3>{icon("target",16)} Where to go next</h3><ul>'
+                           f'<li>Finished this {chap_word.lower()}? Open the full '
+                           f'<a href="../">{esc(s["name"])} subject page</a> — every {chap_word.lower()}, one list.</li>'
+                           f'<li>See how questions combine in the paper: '
+                           f'<a href="{R}pairing-scheme/">{c["name"]} pairing schemes</a>.</li>'
+                           f'<li>Practise the real thing: <a href="{R}past-papers/">{c["name"]} past papers</a>.</li>'
+                           f'<li>Test yourself in ten minutes: <a href="{R}tests/">free online MCQ tests</a> — '
+                           f'instant scoring with explained answers.</li>{calc_link}</ul></div>')
+
         # ---- FAQ ----
         faqs = list(content.get("faqs") or [])
         faqs += [
@@ -1437,11 +1477,13 @@ def build_chapter_pages(cid, sid):
         <a class="btn btn-ghost btn-sm" href="../#chapters">{icon("grid",13)} All chapters</a>
         {nxt_html}
       </nav>
+      {related_html}
       <h2>Frequently asked questions</h2>
       {faq_items_html(faqs)}
       <div class="callout"><b>{icon("shield",15)} Our review promise:</b> these files are prepared by working
       Punjab teachers and checked by our subject-expert panel against the printed book. Spotted an error?
       <a href="{R}contact/">Email us</a> — genuine corrections are made within a day and credited in our updates.</div>
+      {next_steps_html}
     </div>
     {share_row()}
   </div>
@@ -1590,7 +1632,7 @@ def build_past():
 </section>"""
     ld = [breadcrumb_json([("Past Papers", "past-papers/")])]
     w("past-papers/index.html", layout(page_key="past", depth=1,
-        title="Past Papers New Syllabus: Class 9-12, All Punjab Boards (BISE) | StudySapiens",
+        title=ttl("Past Papers: Class 9-12, All Punjab Boards"),
         desc="Past papers of the new PCTB syllabus for Class 9, 10, 1st & 2nd year. Board-wise PDFs from all 9 Punjab BISE boards, correctly labelled, free.",
         path="past-papers/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "Past Papers: All Boards", "s": "new syllabus BISE papers", "u": "past-papers/", "c": "Resource", "pop": 1, "k": "old papers five years"})
@@ -1609,7 +1651,7 @@ def build_datesheet():
 <tr class="res-item" data-filter-item style="display:table-row">
   <td style="font-weight:700;color:var(--navy-800)">{a}</td><td>{e}</td>
   <td><span class="badge badge-gold">{s}</span></td><td class="muted small">{n}</td></tr>""" for a, e, s, n in rows)
-    boards = "".join(f'<a class="chip" href="{R}boards/{b["slug"]}/">{icon("flag",13)} {b["short"]} Board</a>' for b in BOARDS)
+    boards = "".join(f'<a class="chip" id="bise-{b["slug"]}" href="{R}boards/{b["slug"]}/">{icon("flag",13)} {b["short"]} Board</a>' for b in BOARDS)
     body = crumbs_html(R, [("Date Sheet", "date-sheet/")]) + page_hero(R,
         badge="Session 2026-27",
         title="Date Sheets: Matric & Intermediate (Punjab Boards)",
@@ -1644,7 +1686,7 @@ def build_datesheet():
     ld = [breadcrumb_json([("Date Sheet", "date-sheet/")])]
     w("date-sheet/index.html", layout(page_key="datesheet", depth=1,
         title="Date Sheet 2027: Matric & Inter (All Punjab BISE Boards)",
-        desc="Expected & official date sheets for matric and intermediate annual exams 2027. All 9 Punjab BISE boards, free PDF download, announced dates updated instantly.",
+        desc="Expected & official date sheets for matric and inter annual exams 2027. All 9 Punjab BISE boards, free PDF download, updated instantly.",
         path="date-sheet/", body=body, extra_ld=ld), priority="0.8")
     SEARCH.append({"t": "Date Sheets 2027", "s": "matric & inter exam schedules", "u": "date-sheet/", "c": "Resource", "pop": 1, "k": "datesheet exam dates bise"})
 
@@ -1690,7 +1732,7 @@ def build_ebooks():
 </section>"""
     ld = [breadcrumb_json([("eBooks", "ebooks/")])]
     w("ebooks/index.html", layout(page_key="ebooks", depth=1,
-        title="eBooks: New PCTB/PECTAA Textbooks PDF (Class 9-12 All Subjects) | StudySapiens",
+        title=ttl("Official eBooks (PDF): Class 9-12 Textbooks"),
         desc="Official new-syllabus textbook PDFs for Class 9-12. Physics, Chemistry, Biology, Maths, Computer, English. Free via eLearn Punjab, with matching notes.",
         path="ebooks/", body=body, extra_ld=ld), priority="0.8")
     SEARCH.append({"t": "eBooks. Official Textbooks", "s": "new syllabus book PDFs", "u": "ebooks/", "c": "Resource", "pop": 1, "k": "books pdf download pctb"})
@@ -1821,7 +1863,7 @@ def build_mdcat():
 </section>"""
     ld = [breadcrumb_json([("MDCAT", "mdcat/")])]
     w("mdcat/index.html", layout(page_key="mdcat", depth=1,
-        title="MDCAT Aggregate Calculator, Syllabus & Updates 2026 | StudySapiens",
+        title=ttl("MDCAT Calculator, Syllabus & Guide 2026"),
         desc="Free MDCAT aggregate calculator (Matric 10% + FSc 40% + MDCAT 50%). Eligibility rules, latest paper pattern, subject-wise syllabus and admission timeline.",
         path="mdcat/", body=body, extra_ld=ld), priority="0.9")
     SEARCH.append({"t": "MDCAT Corner. Aggregate Calculator & Syllabus", "s": "50/40/10 merit calculator, pattern, prep",
@@ -1924,7 +1966,7 @@ def build_css_page():
     ld = [breadcrumb_json([("CSS", "css/")])]
     w("css/index.html", layout(page_key="css", depth=1,
         title="CSS Exam Guide: Eligibility, Subjects & Preparation Plan",
-        desc="CSS (FPSC) guide in simple English: eligibility, MPT screening, compulsory subjects and the official 600-mark optional selection matrix with examples, books and a 12-month strategy.",
+        desc="CSS exam guide in simple English: eligibility, MPT screening, subjects and the official 600-mark selection matrix, with books and a 12-month plan.",
         path="css/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "CSS Corner. Subjects, Syllabus & Strategy", "s": "FPSC exam guide", "u": "css/", "c": "Page", "pop": 1, "k": "civil service fpsc pms"})
 
@@ -1936,7 +1978,7 @@ def build_css_page():
 # ------------------------------------------------------------------
 def board_table(R):
     rows = "".join(
-        f'<tr><td style="font-weight:700;color:var(--navy-800)"><a href="{R}boards/{b["slug"]}/">{b["name"]}</a></td>'
+        f'<tr id="bise-{b["slug"]}"><td style="font-weight:700;color:var(--navy-800)"><a href="{R}boards/{b["slug"]}/">{b["name"]}</a></td>'
         f'<td><span class="sms-code">{b["sms"]}</span></td>'
         f'<td class="muted small">{b["districts"]}</td>'
         f'<td><a class="res-link" href="{b["site"]}" target="_blank" rel="noopener">{icon("external",12)} Visit</a></td></tr>'
@@ -2061,7 +2103,7 @@ def build_result_class(cid):
 </section>"""
     ld = [breadcrumb_json([("Results", "results/"), (c["name"], f"results/class-{cid}/")])]
     w(f"results/class-{cid}/index.html", layout(page_key="results", depth=2,
-        title=f"{c['alt']} Result 2027: Expected Date, SMS Codes & How to Check",
+        title=ttl(f"{c['alt']} Result 2027: Expected Date & How to Check"),
         desc=f"{c['alt']} result 2027: expected window, how to check by roll number, SMS code or gazette, and official portals for all 9 Punjab boards.",
         path=f"results/class-{cid}/", body=body, extra_ld=ld), priority="0.8")
     SEARCH.append({"t": f"{c['name']} Result 2027", "s": f"{RESULT_WINDOWS[cid]} · SMS codes · official portals",
@@ -2179,8 +2221,8 @@ def build_model_papers():
 </section>"""
     ld = [breadcrumb_json([("Model Papers", "model-papers/")])]
     w("model-papers/index.html", layout(page_key="past", depth=1,
-        title="Model & Sample Papers 2027: Class 9-12, New Syllabus Pattern",
-        desc="Official model papers & sample papers for the new PCTB/PECTAA books, class 9 to 12, all subjects. Uploaded as boards issue them, clearly labelled. Free PDF.",
+        title=ttl("Model Papers 2027: Class 9-12, New Pattern"),
+        desc="Official model & sample papers for the new PCTB/PECTAA books, Class 9-12, all subjects. Free PDF, uploaded as boards issue them.",
         path="model-papers/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "Model Papers: All Classes", "s": "official sample papers · new pattern · all subjects",
                    "u": "model-papers/", "c": "Resource", "pop": 1, "k": "model paper sample paper pattern paper new syllabus 9th 10th 1st 2nd year"})
@@ -2225,7 +2267,7 @@ def build_formulas():
 </section>"""
     ld = [breadcrumb_json([("Formula Sheets", "formulas/")])]
     w("formulas/index.html", layout(page_key="classes", depth=1,
-        title="Formula Sheets: Maths, Physics & Chemistry (Class 9-12, Free PDF)",
+        title=ttl("Formula Sheets: Maths, Physics & Chemistry (9-12)"),
         desc="Chapter-wise formula sheets for Class 9, 10, 1st & 2nd year maths, physics and chemistry. New PCTB/PECTAA books, printable one-pagers, free PDF downloads.",
         path="formulas/", body=body, extra_ld=ld), priority="0.8")
     SEARCH.append({"t": "Formula Sheets: Maths, Physics, Chemistry", "s": "class-wise printable PDFs",
@@ -2271,7 +2313,7 @@ def build_english_corner():
 </section>"""
     ld = [breadcrumb_json([("English Corner", "english-corner/")])]
     w("english-corner/index.html", layout(page_key="classes", depth=1,
-        title="English Essays, Letters & Applications (Class 9-12) | StudySapiens",
+        title=ttl("English Essays, Letters & Applications (9-12)"),
         desc="Board-format English essays, letters, applications and grammar drills for Class 9-12. Simple-English samples written by teachers, free PDF downloads.",
         path="english-corner/", body=body, extra_ld=ld), priority="0.8")
     SEARCH.append({"t": "English Corner: Essays, Letters, Grammar", "s": "board-format writing files",
@@ -2345,9 +2387,9 @@ def build_board(b):
     </div>
     <h3 style="margin-top:28px">Handy for {b['short']} board students</h3>
     <div class="grid grid-2" style="margin-top:12px">
-      <a class="chip" style="justify-content:center" href="{R}results/">{icon("trophy",14)} Result Dates & SMS Codes</a>
-      <a class="chip" style="justify-content:center" href="{R}roll-number-slip/">{icon("doc",14)} Roll Number Slip Guide</a>
-      <a class="chip" style="justify-content:center" href="{R}date-sheet/">{icon("cal",14)} Date Sheet 2027</a>
+      <a class="chip" style="justify-content:center" href="{R}results/#bise-{b['slug']}">{icon("trophy",14)} Result Dates & SMS Codes</a>
+      <a class="chip" style="justify-content:center" href="{R}roll-number-slip/#bise-{b['slug']}">{icon("doc",14)} Roll Number Slip Guide</a>
+      <a class="chip" style="justify-content:center" href="{R}date-sheet/#bise-{b['slug']}">{icon("cal",14)} Date Sheet 2027</a>
       <a class="chip" style="justify-content:center" href="{R}past-papers/">{icon("layers",14)} Past Papers (New Syllabus)</a>
     </div>
     {share_row()}
@@ -2355,7 +2397,7 @@ def build_board(b):
 </section>"""
     ld = [breadcrumb_json([("Boards", "boards/"), (b["short"], f"boards/{b['slug']}/")])]
     w(f"boards/{b['slug']}/index.html", layout(page_key="results", depth=2,
-        title=f"{b['name']} ({b['short']} Board): SMS Code, Districts & Links",
+        title=ttl(f"{b['name']} ({b['short']}): SMS Code & Districts"),
         desc=f"{b['name']}: districts covered, result SMS code {b['sms']}, official website link and exam guidance for {b['short']} board students.",
         path=f"boards/{b['slug']}/", body=body, extra_ld=ld), priority="0.7")
     SEARCH.append({"t": f"{b['name']}: Board Page", "s": f"{b['districts'].split(',')[0]} · SMS {b['sms']}",
@@ -2500,8 +2542,8 @@ def build_tests():
 </section>"""
     ld = [breadcrumb_json([("Online Tests", "tests/")])]
     w("tests/index.html", layout(page_key="tests", depth=1,
-        title="Online MCQ Tests: Class 9-12, Self-Scoring & Free | StudySapiens",
-        desc="Free self-scoring online MCQ tests for Class 9, 10, 1st & 2nd year (new PCTB/PECTAA syllabus). Instant results with teacher-written explanations. No login required.",
+        title=ttl("Free MCQ Tests: Class 9-12, All Subjects"),
+        desc="Free self-scoring MCQ tests for Class 9-12 (new PCTB/PECTAA syllabus). Instant results with teacher-written explanations. No login required.",
         path="tests/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "Online Tests: Self-Scoring MCQs", "s": "instant score · explanations · all classes",
                    "u": "tests/", "c": "Resource", "pop": 1, "k": "online mcq test practice quiz self assessment class 9 10 1st 2nd year"})
@@ -2624,7 +2666,7 @@ def build_ecat():
     ld = [breadcrumb_json([("ECAT", "ecat/")])]
     w("ecat/index.html", layout(page_key="ecat", depth=1,
         title="ECAT Corner: UET Aggregate Calculator (17/50/33) & Pattern",
-        desc="Free ECAT aggregate calculator using the official UET formula (Matric 17% + First Year 50% + ECAT 33%), paper pattern, eligibility rules and admission roadmap.",
+        desc="Free ECAT aggregate calculator with the official UET formula (17/50/33), paper pattern, eligibility rules and the admission roadmap.",
         path="ecat/", body=body, extra_ld=ld), priority="0.85")
     SEARCH.append({"t": "ECAT Corner: Calculator & Guide", "s": "UET 17/50/33 aggregate · pattern · roadmap",
                    "u": "ecat/", "c": "Resource", "pop": 1, "k": "ecat uet engineering entry test aggregate calculator merit formula"})
@@ -2656,7 +2698,7 @@ def build_updates():
 </section>"""
     ld = [breadcrumb_json([("Updates", "updates/")])]
     w("updates/index.html", layout(page_key="updates", depth=1,
-        title="Academic Updates: New Syllabus, Date Sheets, MDCAT & CSS News | StudySapiens",
+        title=ttl("Updates: Date Sheets, Results & Exam News"),
         desc="Latest verified academic updates for Punjab students: new PCTB books, exam schedules, pairing schemes, MDCAT and CSS announcements.",
         path="updates/", body=body, extra_ld=ld), priority="0.7", changefreq="daily")
 
@@ -2709,7 +2751,7 @@ def build_post(p):
                          "logo": {"@type": "ImageObject", "url": f"{DOM}/assets/img/logo.png"}},
            "articleSection": p["tag"], "inLanguage": "en"}]
     w(f"updates/{p['slug']}/index.html", layout(page_key="updates", depth=2,
-        title=f"{p['title']} | StudySapiens",
+        title=ttl(p["title"]),
         desc=(p["excerpt"] if len(p["excerpt"]) <= 158 else p["excerpt"][:152].rsplit(" ", 1)[0] + "…"),
         path=f"updates/{p['slug']}/", body=body, extra_ld=ld), priority="0.6", changefreq="monthly")
     SEARCH.append({"t": p["title"], "s": f"Update · {p['tag']} · {p['date']}", "u": f"updates/{p['slug']}/",
@@ -2925,7 +2967,7 @@ def build_blog_post(blogs, i):
            "publisher": {"@id": f"{DOM}/#org"},
            "articleSection": p["tags"][0], "keywords": ", ".join(p["tags"]), "inLanguage": "en"}]
     w(f"blog/{p['slug']}/index.html", layout(page_key="blog", depth=2,
-        title=f"{p['title']} | StudySapiens",
+        title=ttl(p["title"]),
         desc=p["desc"], path=f"blog/{p['slug']}/", body=body, extra_ld=ld),
         priority="0.7", changefreq="monthly")
     SEARCH.append({"t": p["title"], "s": f"Blog · {p['tags'][0]} · {p['date_h']}",
@@ -2982,7 +3024,7 @@ def build_about():
     ld = [breadcrumb_json([("About", "about/")])]
     w("about/index.html", layout(page_key="about", depth=1,
         title="About StudySapiens: Made by Teachers",
-        desc="StudySapiens resources are made by teachers and verified by subject experts for Punjab board students.",
+        desc="StudySapiens is built by working Punjab teachers and verified by a subject-expert panel, with one promise: every file is checked against the printed book first.",
         path="about/", body=body, extra_ld=ld), priority="0.6")
     SEARCH.append({"t": "About StudySapiens", "s": "our story & mission", "u": "about/", "c": "Page", "k": "teacher mission story"})
 
@@ -3007,8 +3049,8 @@ def build_contact():
             <div class="f-row"><label>Your email *</label><input type="email" name="reply_email" required placeholder="you@example.com"></div>
           </div>
           <div class="f-2col">
-            <div class="f-row"><label>Your class</label><select name="class"><option>Class 9</option><option>Class 10</option><option>Class 11 (1st year)</option><option>Class 12 (2nd year)</option><option>MDCAT</option><option>CSS</option><option>Other/Parent</option></select></div>
-            <div class="f-row"><label>Topic *</label><select name="topic">{topics}</select></div>
+            <div class="f-row"><label for="contact-class">Your class</label><select id="contact-class" name="class"><option>Class 9</option><option>Class 10</option><option>Class 11 (1st year)</option><option>Class 12 (2nd year)</option><option>MDCAT</option><option>CSS</option><option>Other/Parent</option></select></div>
+            <div class="f-row"><label for="contact-topic">Topic *</label><select id="contact-topic" name="topic">{topics}</select></div>
           </div>
           <div class="f-row"><label>Message *</label><textarea name="message" rows="5" required placeholder="Write clearly, e.g. 'In Class 9 Physics Chapter 1 MCQ 6, I think…'"></textarea></div>
           <input type="text" name="website" class="ss-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -3256,13 +3298,13 @@ def build_sitemap_page():
   <div class="card" style="margin-top:26px"><h3 style="margin-bottom:10px">Resources & Company</h3><ul class="f-links" style="columns:2;color:var(--ink-soft)">{other}</ul></div>
 </div></section>"""
     w("site-map/index.html", layout(page_key="sitemap", depth=1,
-        title="Site Map: Every Page of StudySapiens", desc="Full site map of StudySapiens: classes, subjects, resources and company pages.",
+        title="Site Map: Every Page of StudySapiens", desc="The full StudySapiens site map: every class, subject, chapter, resource hub and info page in one list. Handy when you know what you need but not where it lives.",
         path="site-map/", body=body), priority="0.4", changefreq="monthly")
 
 
 SW_JS = r"""
 /* StudySapiens service worker. V1 */
-const VERSION = 'ss-v15';
+const VERSION = 'ss-v16';
 const CORE = [
   './', 'classes/', 'pairing-scheme/', 'mdcat/', 'date-sheet/', 'offline/',
   'assets/css/style.css', 'assets/js/main.js', 'assets/js/ss-config.js',
@@ -3349,7 +3391,7 @@ def build_404():
 </section>"""
     w("404.html", layout(page_key="404", depth=1,
         title="Page Not Found (404) | StudySapiens",
-        desc="The page you requested could not be found. Search free notes, schemes and past papers for Class 9-12 on StudySapiens.",
+        desc="The page you requested could not be found. Use the search or links below to find free notes, pairing schemes and past papers for Class 9-12, all Punjab boards.",
         path="404.html", body=body, noindex=True, abs_paths=True))
 
 def build_offline():
@@ -3375,7 +3417,7 @@ def build_offline():
 </section>"""
     w("offline/index.html", layout(page_key="offline", depth=1,
         title="Offline Mode: StudySapiens",
-        desc="You appear to be offline. Previously visited StudySapiens pages still open without internet.",
+        desc="You are offline. Pages you already visited still open from your browser cache, and files you opened before keep working. Reconnect to load new pages.",
         path="offline/", body=body, noindex=True))
 
 # ------------------------------------------------------------------
