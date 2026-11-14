@@ -1,6 +1,9 @@
 # ---- build output (regenerate anytime with: python3 build.py) ----
 site/
 
+# ---- ready-to-upload package made from site/ (for cPanel / Hostooze) ----
+site.zip
+
 # ---- QA screenshots (not part of the product) ----
 shots/
 

@@ -3063,6 +3063,32 @@ def write_seo():
         "/sw.js\n"
         "  Cache-Control: no-cache\n")
     with open(os.path.join(OUT, "_headers"), "w") as f: f.write(headers)
+    # Apache / LiteSpeed version of _headers (for cPanel shared hosting, e.g. Hostooze)
+    htaccess = ("# StudySapiens .htaccess - Apache / LiteSpeed (cPanel hosting)\n"
+        "# Mirrors the Netlify _headers rules and serves the custom 404 page.\n"
+        "DirectoryIndex index.html\n"
+        "ErrorDocument 404 /404.html\n"
+        "<IfModule mod_headers.c>\n"
+        "  Header always set X-Content-Type-Options \"nosniff\"\n"
+        "  Header always set Referrer-Policy \"strict-origin-when-cross-origin\"\n"
+        "  Header always set Permissions-Policy \"camera=(), microphone=(), geolocation=()\"\n"
+        "  Header always set X-Frame-Options \"SAMEORIGIN\"\n"
+        "  Header always set Content-Security-Policy-Report-Only \"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'\"\n"
+        "  <FilesMatch \"\\.(css|js|jpg|jpeg|png|webp|svg|ico|woff2?)$\">\n"
+        "    Header set Cache-Control \"public, max-age=31536000, immutable\"\n"
+        "  </FilesMatch>\n"
+        "  <FilesMatch \"\\.pdf$\">\n"
+        "    Header set Cache-Control \"public, max-age=86400\"\n"
+        "    Header set Content-Disposition \"inline\"\n"
+        "  </FilesMatch>\n"
+        "  <FilesMatch \"\\.html?$\">\n"
+        "    Header set Cache-Control \"public, max-age=0, must-revalidate\"\n"
+        "  </FilesMatch>\n"
+        "  <FilesMatch \"^sw\\.js$\">\n"
+        "    Header set Cache-Control \"no-cache\"\n"
+        "  </FilesMatch>\n"
+        "</IfModule>\n")
+    with open(os.path.join(OUT, ".htaccess"), "w") as f: f.write(htaccess)
     with open(os.path.join(OUT, "search.json"), "w") as f:
         json.dump(SEARCH, f, ensure_ascii=False)
 
