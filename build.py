@@ -456,8 +456,8 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
     robots = ("noindex, follow" if noindex
               else "index, follow, max-image-preview:large, max-snippet:-1")
     global_ld = {"@context": "https://schema.org", "@context_id": None, "@graph": [
-        {"@type": "Organization", "@id": f"{DOM}/#org", "name": "StudySapiens",
-         "url": f"{DOM}/", "email": SITE["email"],
+        {"@type": "EducationalOrganization", "@id": f"{DOM}/#org", "name": "StudySapiens",
+         "url": f"{DOM}/", "email": SITE["email"], "description": SITE["description"],
          "logo": {"@type": "ImageObject", "url": f"{DOM}/assets/img/logo.png", "width": 1020, "height": 562},
          "address": {"@type": "PostalAddress", "addressRegion": "Punjab", "addressCountry": "PK"}},
         {"@type": "WebSite", "@id": f"{DOM}/#website", "url": f"{DOM}/", "name": "StudySapiens",
@@ -776,9 +776,8 @@ def build_home(posts=None):
   <div class="container">
     <div class="reveal-l">
       <span class="hero-badge"><span class="pulse"></span> Note Bank for the NEW PCTB / PECTAA Syllabus</span>
-      <h1>Free
-        <span class="rotator"><span>Notes</span><span>Pairing Schemes</span><span>Guess Papers</span><span>MCQ Tests</span><span>Notes</span></span><br>
-        for Class 9-12, Made <span class="grad">Simple</span>.</h1>
+      <h1>Free Study Notes for Punjab Board Classes 9–12 — <span class="grad">New PCTB/PECTAA Syllabus</span></h1>
+      <p class="hero-roto" aria-hidden="true"><span class="rotator"><span>Notes</span><span>Pairing Schemes</span><span>Guess Papers</span><span>MCQ Tests</span><span>Notes</span></span>&nbsp;made simple — free forever.</p>
       <p class="lead">Looking for dependable study materials for the new syllabus? StudySapiens is made by teachers and verified by subject experts for Punjab board students. Every file is checked against the printed book, in easy English, and free.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary btn-lg" href="#classes">{icon("cap",18)} Explore Classes</a>
@@ -929,13 +928,10 @@ def build_home(posts=None):
     </div>
   </div>
 </section>"""
+    # Organization + WebSite live ONLY in the layout's single @graph (consolidated).
+    # SearchAction removed 14 Nov 2026: Google retired the sitelinks searchbox and
+    # /?q= was never a real search-results page (search is an overlay on search.json).
     ld = [
-        {"@context": "https://schema.org", "@type": "EducationalOrganization",
-         "name": "StudySapiens", "url": DOM, "logo": f"{DOM}/assets/img/logo.png",
-         "email": EMAIL, "description": SITE["description"],
-         "address": {"@type": "PostalAddress", "addressCountry": "PK", "addressRegion": "Punjab"}},
-        {"@context": "https://schema.org", "@type": "WebSite", "name": "StudySapiens", "url": DOM,
-         "potentialAction": {"@type": "SearchAction", "target": f"{DOM}/?q={{query}}", "query-input": "required name=query"}},
         {"@context": "https://schema.org", "@type": "FAQPage",
          "mainEntity": [{"@type": "Question", "name": q,
                          "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQS]},
@@ -1453,6 +1449,16 @@ def build_chapter_pages(cid, sid):
         ld = [breadcrumb_json([("Classes", "classes/"), (c["name"], f"classes/{cid}/"),
                                (s["name"], f"classes/{cid}/{sid}/"),
                                (f"{chap_word} {num}", f"classes/{cid}/{sid}/chapter-{num}/")]),
+              {"@context": "https://schema.org", "@type": "LearningResource",
+               "name": h1, "url": f"{DOM}/classes/{cid}/{sid}/chapter-{num}/",
+               "about": f"{c['name']} {s['name']} — {title}",
+               "teaches": title,
+               "educationalLevel": f"{c['name']} ({c['level']})",
+               "inLanguage": "en", "isAccessibleForFree": True,
+               "dateModified": datetime.datetime.fromtimestamp(last_mod).date().isoformat(),
+               "author": {"@type": "Organization", "name": "StudySapiens Teachers Panel",
+                          "url": f"{DOM}/about/"},
+               "provider": {"@id": f"{DOM}/#org"}, "publisher": {"@id": f"{DOM}/#org"}},
               faq_schema(faqs)]
         w(f"classes/{cid}/{sid}/chapter-{num}/index.html",
           layout(page_key="chapter", depth=4, title=title_tag, desc=desc,
@@ -3377,8 +3383,36 @@ def build_offline():
 # ------------------------------------------------------------------
 def write_seo():
     today = datetime.date.today().isoformat()
-    urls = "".join(f"  <url><loc>{DOM}/{u}</loc><lastmod>{today}</lastmod><changefreq>{cf}</changefreq><priority>{p}</priority></url>\n"
-                   for u, p, cf in URLS)
+    # Real per-page lastmod: a URL's date is bumped ONLY when its built HTML
+    # actually changed (md5 of site/<url>/index.html vs sitemap-cache.json).
+    # Unchanged pages keep their previous lastmod forever. The cache file is
+    # committed so dates survive rebuilds, new checkouts and session resets.
+    import hashlib
+    cache_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sitemap-cache.json")
+    try:
+        with open(cache_file, encoding="utf-8") as fh:
+            lastmod_cache = json.load(fh)
+    except Exception:
+        lastmod_cache = {}
+    url_set = set()
+    urls = ""
+    for u, p, cf in URLS:
+        url_set.add(u)
+        try:
+            with open(os.path.join(OUT, u, "index.html"), "rb") as fh:
+                digest = hashlib.md5(fh.read()).hexdigest()
+        except Exception:
+            digest = ""
+        prev = lastmod_cache.get(u)
+        if prev and prev.get("hash") == digest and prev.get("lastmod"):
+            lm = prev["lastmod"]                      # unchanged page: keep old date
+        else:
+            lm = today                                # new/changed page: today
+            lastmod_cache[u] = {"hash": digest, "lastmod": lm}
+        urls += f"  <url><loc>{DOM}/{u}</loc><lastmod>{lm}</lastmod><changefreq>{cf}</changefreq><priority>{p}</priority></url>\n"
+    lastmod_cache = {u: v for u, v in lastmod_cache.items() if u in url_set}  # drop removed pages
+    with open(cache_file, "w", encoding="utf-8") as fh:
+        json.dump(lastmod_cache, fh, indent=0, sort_keys=True)
     sitemap = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}</urlset>'
     with open(os.path.join(OUT, "sitemap.xml"), "w") as f: f.write(sitemap)
     # robots.txt: allow classic crawlers AND the reputable AI answer/search bots.

@@ -394,6 +394,39 @@ let chapterPages = 0, chapterIssues = [];
   dom.window.close();
 }
 
+// ---------- 4.2/4.3/4.4: H1, schema cleanup, sitemap lastmod ----------
+{
+  const home = fs.readFileSync(path.join(ROOT, 'site', 'index.html'), 'utf8');
+  const h1 = (home.match(/<h1>([\s\S]*?)<\/h1>/) || [])[1] || '';
+  const h1txt = h1.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  log('home H1 is the single clear keyword H1', h1txt === 'Free Study Notes for Punjab Board Classes 9–12 — New PCTB/PECTAA Syllabus', h1txt);
+  log('rotating words moved out of H1 (aria-hidden subheading)', !h1.includes('rotator') &&
+    /class="hero-roto" aria-hidden="true"/.test(home));
+  let searchAction = 0, eduOrg = 0, webSite = 0;
+  for (const p of walk(path.join(ROOT, 'site'))) {
+    const s = fs.readFileSync(p, 'utf8');
+    searchAction += (s.match(/SearchAction/g) || []).length;
+    eduOrg += (s.match(/"@type": "EducationalOrganization"/g) || []).length;
+    webSite += (s.match(/"@type": "WebSite"/g) || []).length;
+  }
+  log('SearchAction removed site-wide (retired feature)', searchAction === 0, searchAction + ' found');
+  log('exactly one org + one website graph per page', eduOrg >= 290 && webSite >= 290,
+    `${eduOrg} EducationalOrganization / ${webSite} WebSite across ${walk(path.join(ROOT, 'site')).length} pages`);
+  const ch1 = fs.readFileSync(path.join(ROOT, 'site', 'classes', '9', 'physics', 'chapter-1', 'index.html'), 'utf8');
+  log('chapter pages: LearningResource + author + dateModified', ch1.includes('"LearningResource"') &&
+    ch1.includes('"StudySapiens Teachers Panel"') && /"dateModified": "\d{4}-\d{2}-\d{2}"/.test(ch1));
+  const blog = fs.readFileSync(path.join(ROOT, 'site', 'blog', 'welcome-to-the-blog', 'index.html'), 'utf8');
+  const upd = fs.readFileSync(path.join(ROOT, 'site', 'updates', 'mdcat-2026-pattern-correction', 'index.html'), 'utf8');
+  log('articles keep author/publisher schema (BlogPosting/Article)', blog.includes('"BlogPosting"') && blog.includes('"author"') &&
+    upd.includes('"Article"') && upd.includes('"author"'));
+  const sm = fs.readFileSync(path.join(ROOT, 'site', 'sitemap.xml'), 'utf8');
+  const mods = sm.match(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/g) || [];
+  log('sitemap lastmod: ISO dates on every URL', mods.length === (sm.match(/<loc>/g) || []).length);
+  const cache = JSON.parse(fs.readFileSync(path.join(ROOT, 'sitemap-cache.json'), 'utf8'));
+  log('sitemap cache tracks per-page hashes', Object.keys(cache).length === (sm.match(/<loc>/g) || []).length,
+    Object.keys(cache).length + ' URLs cached');
+}
+
 // ---------- summary ----------
 const pass = results.filter(Boolean).length;
 console.log('\n' + (pass === results.length ? 'ALL ' + pass + ' FORM/EVENT CHECKS PASSED ✅' : 'FAILED: ' + (results.length - pass) + '/' + results.length + ' ❌'));

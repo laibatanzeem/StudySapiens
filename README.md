@@ -395,6 +395,26 @@ Now owner-driven: content = the files you upload. See "How to upload notes / pap
   study it, correction promise) — never fabricated definitions. Subject-page chapter
   cards now link to each chapter page. forms-verify.mjs extended to 39 checks. To
   enrich more chapters: add entries to chapter_content.py and re-run sync_files.py.
+- **14 Nov 2026 - SEO fixes 4.2/4.3/4.4 (H1, schema, sitemap):** homepage H1 was
+  keyword-stuffed with rotating words ("Free Notes Pairing Schemes Guess Papers MCQ
+  Tests Notes…"). Replaced with the single clear H1 "Free Study Notes for Punjab
+  Board Classes 9–12 — New PCTB/PECTAA Syllabus"; the rotating word animation moved
+  into a decorative aria-hidden subheading (.hero-roto) so sighted users keep the
+  effect and screen readers get one clean H1. Structured data cleanup: removed the
+  homepage's duplicate EducationalOrganization + WebSite JSON-LD and its SearchAction
+  (Google retired the sitelinks searchbox, and /?q= was never a real results page -
+  site search is an overlay on search.json); the whole site now carries exactly ONE
+  organization node per page (layout @graph, upgraded to EducationalOrganization) and
+  one WebSite node; pairing-scheme.html's static graph matches. Chapter pages gained
+  LearningResource schema with author (StudySapiens Teachers Panel), provider/publisher
+  @id-linked into the site graph, teaches/educationalLevel and dateModified from the
+  newest file. Blog/updates articles already carried BlogPosting/Article author +
+  publisher @id schema (verified). FAQPage markup is KEPT on purpose: Google retired
+  the FAQ rich result, but the markup stays valid and useful for Bing and the AI
+  answer engines the site targets (AEO/GEO). Sitemap lastmod is now real: sitemap.xml
+  dates bump only when a page's built HTML actually changes (md5 hash vs the committed
+  sitemap-cache.json; unchanged pages keep their old date forever; verified by double
+  rebuild producing a byte-identical sitemap). forms-verify.mjs extended to 47 checks.
 
 ## Pre-publish QA checklist (run for every PDF before it goes live)
 1. **File name** follows the convention and names the right subject and class
@@ -586,3 +606,27 @@ Class 11 Biology (they have the most files).
 Verification: `node scripts/forms-verify.mjs` (39 checks — includes chapter template
 integrity on all pages, sitemap coverage, subject-page links, pilot word count, and
 the PDF viewer behaviour).
+
+## Schema & sitemap policy (4.2 / 4.3 / 4.4)
+
+- **One H1 per page with one keyword focus.** The homepage's rotating-word animation
+  is decorative only (`aria-hidden`), never inside the H1.
+- **One schema graph per page.** The layout emits a single @graph: EducationalOrganization
+  (`@id …/#org`) + WebSite + WebPage, plus page-specific nodes (BreadcrumbList, and where
+  relevant FAQPage / Article / BlogPosting / LearningResource) that link to the org via
+  `@id`. No SearchAction anywhere (retired by Google; our search is a client-side
+  overlay on search.json, not a crawlable results page).
+- **FAQPage markup is kept deliberately**: Google retired the FAQ rich result, so do not
+  expect it there — but the markup is valid and helps Bing + AI answer engines (our
+  AEO/GEO strategy). The visible FAQ content stays regardless.
+- **Authorship**: articles use BlogPosting/Article with an Organization author; chapter
+  pages use LearningResource authored by "StudySapiens Teachers Panel" with
+  dateModified from the newest uploaded file. To upgrade to real Person author/reviewer
+  schema, give the teacher/reviewer names and they get their own Person nodes.
+- **sitemap.xml lastmod is real**: build.py hashes each built page and compares with
+  `sitemap-cache.json` (committed); a page's date only changes when its HTML changes.
+  Don't delete that file — losing it bumps every date once. Splitting sitemaps by type
+  (pages/chapters/PDFs/updates) is a later optimisation once we pass ~500 URLs.
+- **Verify after deploying** (user-side): Rich Results Test on a chapter page and a
+  blog post (expect: breadcrumb only), and the Schema Markup Validator on the homepage
+  (expect: zero errors, one clean graph).
