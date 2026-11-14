@@ -526,9 +526,10 @@ let chapterPages = 0, chapterIssues = [];
   {
     const policy = [
       { dir: 'computer-science', slots: 2, pats: ['CS11_Unit\\d+_Exercise-Solutions\\.pdf:9'] },
-      { dir: 'english', slots: 4, pats: ['English11_Unit\\d+_Exercise-Solutions\\.pdf:14',
+      { dir: 'english', slots: 5, pats: ['English11_Unit\\d+_Exercise-Solutions\\.pdf:14',
         'English11_Unit\\d+_MCQ-Bank\\.pdf:10',
-        'English11_(Unit\\d+_Stanza-Explanations|Application-Models|Letter-Models)\\.pdf:7'] },
+        'English11_(Unit\\d+_Stanza-Explanations|Application-Models|Letter-Models|Story-Models|Translation-Practice)\\.pdf:9',
+        'English11_Model-Paper-\\d\\.pdf:2'] },
     ];
     let bad = [];
     for (const { dir, slots, pats } of policy) {
@@ -545,7 +546,7 @@ let chapterPages = 0, chapterIssues = [];
       if (!ok) bad.push(dir + ' (' + nslots + ' slots; ' + bits.join(', ') + ')');
     }
     log('hide-empty policy: cs-11 + eng-11 show only live slots', bad.length === 0,
-      bad.length ? bad.join('; ') : 'cs-11: 2 slots; eng-11: 4 slots (7 notes, 14 solutions, 10 MCQs)');
+      bad.length ? bad.join('; ') : 'cs-11: 2 slots; eng-11: 5 slots (9 notes, 14 sol, 10 MCQ, 2 model)');
   }
 }
 

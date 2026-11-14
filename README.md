@@ -783,3 +783,14 @@ yet.** These two are deliberately deferred — flip them only when:
   Solutions (14) + MCQ Bank (10) + Pairing Scheme** — still zero empty
   placeholders; the show-only-what-exists policy reveals slots as files arrive.
 - 437 published files; forms-verify 61 (eng-11 guard covers all four categories).
+
+## Upload: Class 11 English final batch — model papers, story & translation (14 Nov 2026)
+
+- **2 board-pattern model papers** (100 marks each) → `files/class-11/english/model/`,
+  **story models (Q6, 10 stories with morals)** + **translation practice (Q8, 10
+  passages with Urdu translations)** → `notes/`. Headers verified.
+- English 11 is complete: **five live slots — Chapter Notes (9: stanza explanations,
+  application / letter / story models, translation practice) + Exercise Solutions (14)
+  + MCQ Bank (10) + Model Papers (2) + Pairing Scheme** — 36 files, zero empty
+  placeholders, lead/desc list exactly what exists.
+- 441 published files; forms-verify 61 (eng-11 guard: 5 slots, all counts).
