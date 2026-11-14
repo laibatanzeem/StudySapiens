@@ -857,3 +857,14 @@ yet.** These two are deliberately deferred — flip them only when:
   `files/class-12/biology/notes/`, titles verified.
 - Every bio-12 chapter page: **Chapter Notes + Exercise Solutions + Test Papers**
   (viewer opens notes first). 528 published files; forms-verify 61.
+
+## Upload: Class 12 Biology chapter MCQs — subject complete (14 Nov 2026)
+
+- **13 chapter-MCQ PDFs** (Ch 13–25, 7–10 pages each) →
+  `files/class-12/biology/mcq/`, titles verified.
+- Biology 12 complete: every chapter page has all four resource types
+  (**Chapter Notes + Exercise Solutions + MCQ Bank + Test Papers**) — 52 chapter
+  files. 541 published files; forms-verify 61.
+- Note: a sandbox session reset hit mid-batch (local repo back to base); recovered
+  via git reset --hard to origin (no work lost — remote had the notes commit, the
+  untracked MCQ files survived in the working tree).
