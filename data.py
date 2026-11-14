@@ -503,6 +503,21 @@ NUMERICAL_SUBJECTS = {"physics", "chemistry", "mathematics"}
 # (verified against public Punjab-board listings; add more sets the same way).
 # ------------------------------------------------------------------
 CHAPTERS = {
+    ("12", "biology"): [
+        (13, "Thermoregulation and Osmoregulation"),
+        (14, "Human Urinary System"),
+        (15, "Human Nervous System"),
+        (16, "Human Endocrine System"),
+        (17, "Human Reproductive Systems"),
+        (18, "Inheritance"),
+        (19, "Chromosome and DNA"),
+        (20, "Biotechnology"),
+        (21, "Immunity"),
+        (22, "Biostatistics"),
+        (23, "Pharmacology"),
+        (24, "Evolution"),
+        (25, "Ecology"),
+    ],
     ("11", "biology"): [
         (1, "Biodiversity and Classification"),
         (2, "Bacteria and Viruses"),

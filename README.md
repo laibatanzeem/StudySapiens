@@ -829,3 +829,16 @@ yet.** These two are deliberately deferred — flip them only when:
 - Physics 11 complete: every chapter page has all four resource types
   (**Chapter Notes + Exercise Solutions + MCQ Bank + Model Papers**) — 48 chapter
   files plus the pairing scheme. 489 published files; forms-verify 61.
+
+## Upload: Class 12 Biology chapter-wise tests (14 Nov 2026)
+
+- **13 chapter-test PDFs** (Ch 13–25, one page each: 6 MCQs + short + long, 26 marks,
+  45 minutes) → `files/class-12/biology/testpapers/` — first use of the testpapers
+  category on chapter pages. Headers verified ("12th Biology (New Book)").
+- **New chapter set:** `CHAPTERS[("12", "biology")]` — chapters 13–25 with continuous
+  numbering from the class-11 book (Thermoregulation → Ecology), titles taken from
+  the papers.
+- 13 new chapter pages (`/classes/12/biology/chapter-13/` … `chapter-25/`) with
+  test-paper wording + viewer; subject page shows 13 live chapter cards. First
+  class-12 content on the site. Site now 330 pages, 502 published files;
+  forms-verify 61.

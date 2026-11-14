@@ -64,7 +64,7 @@
 "lastmod": "2026-11-14"
 },
 "classes/": {
-"hash": "8acd9dc74e3fa42dd43d51bec24d0973",
+"hash": "c424f6af840f9eb6240249f396d612db",
 "lastmod": "2026-11-14"
 },
 "classes/10/": {
@@ -660,11 +660,63 @@
 "lastmod": "2026-11-14"
 },
 "classes/12/": {
-"hash": "b1a24ea46e3ed746b1c25c6082b72cc1",
+"hash": "f9d69a98765e4c96d66c82bb8ef94d76",
 "lastmod": "2026-11-14"
 },
 "classes/12/biology/": {
-"hash": "ceebe6857dd8bc9656a39a72ab7ae7d4",
+"hash": "3fbd3411126b566c27f10b9fe12d14b8",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-13/": {
+"hash": "a0dad97f5813729c692a14eaf7a484c0",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-14/": {
+"hash": "849351bfe4f5aa490470d84b3fe540cf",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-15/": {
+"hash": "11391643f779a6bf7756c2ec9b3b2fff",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-16/": {
+"hash": "ca8d5408097a5601e86d40a405ef4324",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-17/": {
+"hash": "4be8106536ffa3eef052684e3fb785a9",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-18/": {
+"hash": "bf378743518c3fece84371440f0e4e65",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-19/": {
+"hash": "92352d216f07f5a2ab7e9de8cee462a9",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-20/": {
+"hash": "a85ab16b87755007e442711b29e87b60",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-21/": {
+"hash": "cc0b6c0ba4b0511287c5bc75415543c5",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-22/": {
+"hash": "2260a1a51be8e613be7ae2347680faf0",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-23/": {
+"hash": "e77c45a455e96d10a1be363f42bf285d",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-24/": {
+"hash": "2c35079e3e1e94b2a64a8a86ba12661a",
+"lastmod": "2026-11-14"
+},
+"classes/12/biology/chapter-25/": {
+"hash": "b45a7b0b976dd9fb7babcded22c25411",
 "lastmod": "2026-11-14"
 },
 "classes/12/chemistry/": {
