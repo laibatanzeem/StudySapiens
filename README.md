@@ -885,3 +885,10 @@ yet.** These two are deliberately deferred — flip them only when:
   `files/class-12/chemistry/notes/`, titles verified against the chapter set.
 - Every chem-12 chapter page now shows **Chapter Notes + MCQ Bank**; viewer opens
   the chapter notes first. 575 published files; forms-verify 61.
+
+## Upload: Class 12 Chemistry chapter tests (14 Nov 2026)
+
+- **17 chapter-test PDFs** (Ch 17–33, one page each, board pattern) →
+  `files/class-12/chemistry/testpapers/`, titles verified.
+- Every chem-12 chapter page now shows **Chapter Notes + MCQ Bank + Test Papers**
+  (viewer opens notes first). 592 published files; forms-verify 61.
