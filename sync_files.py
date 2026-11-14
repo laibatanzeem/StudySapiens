@@ -65,4 +65,14 @@ if os.path.exists(precheck):
         print("\n⛔  Validation FAILED. The site/ folder was built but DO NOT deploy it yet.")
         sys.exit(1)
     print("✅  Validation passed. site/ is safe to upload.")
+
+# automated PDF/link audit gate: subject-class-content match, broken links, orphans
+pdf_audit = os.path.join(HERE, "scripts", "pdf_audit.py")
+if os.path.exists(pdf_audit):
+    print("\n📎  PDF & link audit …")
+    p = subprocess.run([sys.executable, pdf_audit], cwd=HERE)
+    if p.returncode != 0:
+        print("\n⛔  PDF audit FAILED. Fix the issues above; DO NOT deploy site/ yet.")
+        sys.exit(1)
+    print("✅  PDF audit passed.")
 sys.exit(0)

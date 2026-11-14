@@ -323,3 +323,32 @@ Now owner-driven: content = the files you upload. See "How to upload notes / pap
   4 Dec 2026, exam ~Jan 2027), Rule-12 passing benchmarks, and "last verified" lines
   linking the FPSC rules PDF and the CE-2027 public notice. Public notice at
   /updates/css-optional-selection-rules/.
+- **13 Nov 2026 - wrong Tarjuma scheme PDFs fixed (critical):** the Class 10 Tarjuma-tul-Quran
+  page linked a pairing-scheme PDF that was actually "Urdu Compulsory - Grade 10" (2026-27).
+  The new pdf_audit.py also caught the same mistake at Class 9 (title: "Urdu Compulsory -
+  Grade 9"). Both files moved to their correct homes (files/class-9/urdu/scheme/ and
+  files/class-10/urdu/scheme/ - both Urdu pairing-scheme cards are now live), the two
+  Tarjuma cards revert to Coming Soon, and the static pairing-scheme page was updated.
+  Added a pre-publish QA checklist (below) and the automated deploy gate
+  scripts/pdf_audit.py, wired into sync_files.py.
+
+## Pre-publish QA checklist (run for every PDF before it goes live)
+1. **File name** follows the convention and names the right subject and class
+   (e.g. `StudySapiens_Pairing-Scheme_2026-27_Grade10_Urdu-Compulsory.pdf` belongs in
+   `files/class-10/urdu/scheme/`, not in `tarjuma-tul-quran/`).
+2. **PDF title** (open the file, read page 1) matches the subject AND class of the folder
+   it lives in.
+3. **Subject, class and category** in the file name, the PDF's own title, the folder and
+   the target page all agree.
+4. **Session / exam year** in the PDF (e.g. "Session 2026-27 - Annual Examination 2027")
+   matches what the page promises.
+5. **Page count** looks right for the category (a pairing scheme is 1-3 pages; notes are
+   longer). Anything unreadable or 0 pages is rejected.
+6. **Download test**: after `python3 sync_files.py`, open the built page in site/ and click
+   the link - the PDF must open.
+
+Automated safety net: `python3 sync_files.py` now runs `scripts/pdf_audit.py` automatically.
+It blocks the deploy when a PDF's file name or page-1 title names a different subject or
+class than its folder, when a linked PDF is missing, or when a PDF is empty/unreadable, and
+it warns about orphan PDFs. Title checks need pypdf (`pip3 install --break-system-packages
+pypdf`); without it, file-name + link checks still run.
