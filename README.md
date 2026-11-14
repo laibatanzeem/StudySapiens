@@ -760,3 +760,14 @@ yet.** These two are deliberately deferred — flip them only when:
   paragraph and upload note all adapt to list only what exists. Slots reappear
   automatically if files for other categories are ever uploaded.
 - 406 published files; forms-verify 61 checks (adds the cs-11 policy guard).
+
+## Upload: Class 11 English solutions (14 Nov 2026)
+
+- **14 unit exercise-solutions PDFs** (Units 1–14, 5–7 pages each) →
+  `files/class-11/english/solutions/`. Headers verified ("11th English (New
+  Syllabus)" — correct subject this time) and unit titles match the new book
+  (Khatam-un-Nabiyeen → The End of the Beginning).
+- **Same show-only-what-exists treatment as CS** (user: "lets go for english"):
+  `HIDE_EMPTY_SLOTS` now includes ("11", "english"). The subject page shows
+  **Exercise Solutions (14 files) + Pairing Scheme** only; lead/desc/guide adapt.
+- 420 published files; forms-verify 61 (policy guard now covers both subjects).

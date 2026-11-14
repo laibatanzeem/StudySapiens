@@ -522,14 +522,22 @@ let chapterPages = 0, chapterIssues = [];
       testPages === 16 && testOk === 16 && (subj.match(/Chapter page/g) || []).length === 16,
       testOk + '/' + testPages + ' pages, ' + (subj.match(/Chapter page/g) || []).length + ' cards');
   }
-  // policy guard: class-11 computer science advertises only what exists
+  // policy guard: hide-empty-slots subjects advertise only what exists
   {
-    const cs = fs.readFileSync(path.join(ROOT, 'site', 'classes', '11', 'computer-science', 'index.html'), 'utf8');
-    const slots = (cs.match(/file-slot-head">[^\n]*\n\s*<div><b>([^<]*)<\/b>/g) || []);
-    log('cs-11: only live slots shown (solutions + scheme), no empty placeholders',
-      slots.length === 2 && cs.includes('Exercise Solutions') && cs.includes('Pairing Scheme') &&
-      !cs.includes('Uploading soon.') && (cs.match(/CS11_Unit\d+_Exercise-Solutions\.pdf/g) || []).length === 9,
-      slots.length + ' slots, ' + (cs.match(/CS11_Unit\d+_Exercise-Solutions\.pdf/g) || []).length + ' files');
+    const policy = [
+      { dir: 'computer-science', files: 9, pat: 'CS11_Unit\\d+_Exercise-Solutions\\.pdf' },
+      { dir: 'english', files: 14, pat: 'English11_Unit\\d+_Exercise-Solutions\\.pdf' },
+    ];
+    let bad = [];
+    for (const { dir, files, pat } of policy) {
+      const cs = fs.readFileSync(path.join(ROOT, 'site', 'classes', '11', dir, 'index.html'), 'utf8');
+      const slots = (cs.match(/file-slot-head">[^\n]*\n\s*<div><b>([^<]*)<\/b>/g) || []);
+      const n = (cs.match(new RegExp(pat, 'g')) || []).length;
+      if (!(slots.length === 2 && cs.includes('Exercise Solutions') && cs.includes('Pairing Scheme') &&
+        !cs.includes('Uploading soon.') && n === files)) bad.push(dir + ' (' + slots.length + ' slots, ' + n + ' files)');
+    }
+    log('hide-empty policy: cs-11 + eng-11 show only live slots', bad.length === 0,
+      bad.length ? bad.join('; ') : '2 slots each, 9 + 14 solution files');
   }
 }
 
