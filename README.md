@@ -805,3 +805,11 @@ yet.** These two are deliberately deferred — flip them only when:
   test-paper wording, online viewer, related chapters and next-step links (incl.
   MDCAT/ECAT calculators). Subject page: 12 live chapter cards. Site now 317 pages,
   453 published files; forms-verify 61 (225 chapter pages covered by the 4.6 check).
+
+## Upload: Class 11 Physics exercise solutions (14 Nov 2026)
+
+- **12 exercise-solutions PDFs** (Ch 1–12, 6–8 pages each) →
+  `files/class-11/physics/solutions/`, titles verified against the chapter set.
+- Every physics-11 chapter page now carries the solved exercise + practice model
+  paper; viewer opens solutions first; wording auto-upgraded to "Chapter N Notes".
+- 465 published files; forms-verify 61.
