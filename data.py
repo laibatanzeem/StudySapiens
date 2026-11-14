@@ -813,6 +813,10 @@ CHAPTERS = {
 # categories that become chapter-wise when a chapter set exists
 CHAPTER_CATS = ("notes", "solutions", "mcq", "numericals", "model", "testpapers")
 
+# Subjects whose page advertises ONLY what actually exists: empty "uploading soon"
+# slots are hidden (slots reappear automatically once files for them are uploaded).
+HIDE_EMPTY_SLOTS = {("11", "computer-science")}
+
 # ---- the 9 BISE boards of Punjab, with verified contact data ---------
 BOARDS = [
     {"slug": "lahore",      "short": "Lahore",      "name": "BISE Lahore",

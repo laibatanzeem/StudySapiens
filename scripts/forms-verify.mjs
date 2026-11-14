@@ -522,6 +522,15 @@ let chapterPages = 0, chapterIssues = [];
       testPages === 16 && testOk === 16 && (subj.match(/Chapter page/g) || []).length === 16,
       testOk + '/' + testPages + ' pages, ' + (subj.match(/Chapter page/g) || []).length + ' cards');
   }
+  // policy guard: class-11 computer science advertises only what exists
+  {
+    const cs = fs.readFileSync(path.join(ROOT, 'site', 'classes', '11', 'computer-science', 'index.html'), 'utf8');
+    const slots = (cs.match(/file-slot-head">[^\n]*\n\s*<div><b>([^<]*)<\/b>/g) || []);
+    log('cs-11: only live slots shown (solutions + scheme), no empty placeholders',
+      slots.length === 2 && cs.includes('Exercise Solutions') && cs.includes('Pairing Scheme') &&
+      !cs.includes('Uploading soon.') && (cs.match(/CS11_Unit\d+_Exercise-Solutions\.pdf/g) || []).length === 9,
+      slots.length + ' slots, ' + (cs.match(/CS11_Unit\d+_Exercise-Solutions\.pdf/g) || []).length + ' files');
+  }
 }
 
 // ---------- summary ----------

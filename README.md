@@ -740,3 +740,23 @@ yet.** These two are deliberately deferred — flip them only when:
 - Every class-11 chemistry chapter page now has all four resource types:
   **Chapter Notes + Exercise Solutions + MCQ Bank + Model Papers**. 397 published
   files; forms-verify 60 (chem-11 guard checks all four file types per chapter).
+
+## Upload: Class 11 Computer Science solutions + show-only-what-exists (14 Nov 2026)
+
+- **9 unit exercise-solutions PDFs** (Units 1–9, 4–5 pages each) →
+  `files/class-11/computer-science/solutions/`.
+- **Header patch (disclosed):** the uploaded PDFs carried a template leftover — every
+  page header said "11th English (New Syllabus)" while the content is Computer Science
+  (SDLC, software development). The PDF audit blocked deploy (subject mismatch), so the
+  header text was surgically patched in the content streams to "11th Computer Science
+  (New Syllabus)" — 41 headers across the 9 files, each verified by re-extraction.
+  Regenerate the source files at origin when convenient; originals backed up during
+  the fix.
+- **HIDE_EMPTY_SLOTS policy** (user request: "computer 11 has only exercise solution,
+  remove other options, chap wise test and mcq bank on its page"):
+  `data.py HIDE_EMPTY_SLOTS = {("11", "computer-science")}` — that subject page no
+  longer renders empty "Uploading soon" slots. Only **Exercise Solutions (9 files)** +
+  **Pairing Scheme** show. The lead, meta description, guide paragraph, toppers
+  paragraph and upload note all adapt to list only what exists. Slots reappear
+  automatically if files for other categories are ever uploaded.
+- 406 published files; forms-verify 61 checks (adds the cs-11 policy guard).

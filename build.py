@@ -9,7 +9,8 @@
 import os, json, re, shutil, html, datetime, subprocess
 from data import (SITE, CLASSES, SUBJECTS, SUBJECT_ORDER, SUBJECT_INFO, FILE_CATEGORIES,
                   SUBJECT_CLASSES, NUMERICAL_SUBJECTS, RESULT_WINDOWS, ECAT, CHAPTERS, CHAPTER_CATS,
-                  EXTRA_CATEGORIES, BOARDS, UPDATES, FAQS, MDCAT, CSS_EXAM, CONTACT_TOPICS)
+                  EXTRA_CATEGORIES, BOARDS, UPDATES, FAQS, MDCAT, CSS_EXAM, CONTACT_TOPICS,
+                  HIDE_EMPTY_SLOTS)
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "site")
 DOM = SITE["domain"]
@@ -1127,24 +1128,42 @@ def build_subject(cid, sid):
     sub_faqs = subject_faqs(cid, sid)
     upload_note = ("Every file on this page is checked against the printed new book before it goes live. "
                    "If you ever spot a mismatch, one email fixes it.")
+    hide_empty = (cid, sid) in HIDE_EMPTY_SLOTS
+    prose_names = {"notes": "notes", "solutions": "solved exercises", "mcq": "MCQ banks", "guess": "guess paper",
+                   "scheme": "pairing scheme", "numericals": "solved numericals", "model": "model papers",
+                   "testpapers": "test papers"}
+    live_list = ", ".join(prose_names[cat] for cat, _i, _t, _s in FILE_CATEGORIES
+                          if FILES.get((cid, sid), {}).get(cat))
+    if ", " in live_list:
+        live_list = live_list.rsplit(", ", 1)[0] + " and " + live_list.rsplit(", ", 1)[1]
+    if hide_empty:
+        offer_html = f"<b>{c['name']} {s['name']} {live_list}</b> for the new PCTB/PECTAA {c['session']} syllabus"
+        toppers_html = (f"Follow one simple order for every unit: <b>study the unit in your textbook → "
+                        f"write the exercise with your own hand → check every answer against the "
+                        f"solved exercise above</b> before the exam. {info['tip']}")
+        fresh_note = "Fresh uploads appear in the download slots above, file by file."
+    else:
+        offer_html = (f"<b>{c['name']} {s['name']} notes</b>, <b>solved exercises</b>, <b>MCQ banks</b>, "
+                      f"the <b>{c['name']} {s['name']} guess paper</b> and the official <b>pairing scheme</b> "
+                      f"for the new PCTB/PECTAA {c['session']} syllabus")
+        toppers_html = None
+        fresh_note = "Fresh uploads appear in the chapter boxes at the top of this page (chapter by chapter, in order)."
 
     # ---- short keyword-rich blog (unique per class × subject)
     blog = f"""
 <article class="card blog-card reveal" id="guide">
   <h2>{c['name']} {s['name']} Notes: New {c['session']} Syllabus (Free Downloads)</h2>
   <p>Welcome to the cleanest page for <b>{c['alt']} {s['name']}</b> on the internet. This is where we publish free
-     <b>{c['name']} {s['name']} notes</b>, <b>solved exercises</b>, <b>MCQ banks</b>, the <b>{c['name']} {s['name']} guess paper</b>
-     and the official <b>pairing scheme</b> for the new PCTB/PECTAA {c['session']} syllabus. Valid for all nine Punjab boards
+     {offer_html}. Valid for all nine Punjab boards
      (Lahore, Gujranwala, Multan, Faisalabad, Rawalpindi, Sargodha, Bahawalpur, DG Khan and Sahiwal).</p>
   <p>{info['about']}</p>
   <p>{CLASS_ANGLES[cid]}</p>
   <h3>What you get on this page</h3>
   <ul>{''.join(f'<li>{x}</li>' for x in info['skills'])}</ul>
   <h3>How toppers study {s['name']}</h3>
-  <p>Follow one simple order for every chapter: <b>read the notes → write the solved exercise with your own hand → attempt the MCQ bank →
-     revise with the guess paper and pairing scheme</b> before the exam. {info['tip']}</p>
+  <p>{toppers_html if toppers_html else f"Follow one simple order for every chapter: <b>read the notes → write the solved exercise with your own hand → attempt the MCQ bank → revise with the guess paper and pairing scheme</b> before the exam. {info['tip']}"}</p>
   <p class="muted small" style="margin-top:6px">{icon("shield",13)} {upload_note} Files are added on a rolling schedule through the session.
-     Fresh uploads appear in the chapter boxes at the top of this page (chapter by chapter, in order).</p>
+     {fresh_note}</p>
 </article>"""
 
     # ---- chapter-wise cards (only when a chapter set exists for this subject)
@@ -1202,6 +1221,8 @@ def build_subject(cid, sid):
             chapter_items = [f for f in all_items if f.get("ch") in chap_nums]
             items = [f for f in all_items if f.get("ch") not in chap_nums]
         rows = dl_rows(R, items)
+        if hide_empty and not rows and not chapter_items:
+            continue
         if rows:
             slot_content = rows
         elif chapter_items:
@@ -1233,7 +1254,9 @@ def build_subject(cid, sid):
     body += page_hero(R,
         badge=f"{c['name']} • {c['level']} • New Syllabus {c['session']}",
         title=f"{c['name']} {s['name']}: Notes, Solutions & Downloads",
-        lead=f"Free {s['name']} notes, solved exercises, MCQ bank, guess paper and pairing scheme for the new {c['session']} book. Uploaded file by file after teacher verification.",
+        lead=(f"Free {s['name']} {live_list} for the new {c['session']} book. Uploaded file by file after teacher verification."
+              if hide_empty else
+              f"Free {s['name']} notes, solved exercises, MCQ bank, guess paper and pairing scheme for the new {c['session']} book. Uploaded file by file after teacher verification."),
         actions=f'<a class="btn btn-primary btn-sm" href="{("#chapters" if chaps else "#downloads")}">{icon("doc",15)} View Files</a> <a class="btn btn-light-outline btn-sm" href="#guide">{icon("book",15)} Study Guide</a> <a class="btn btn-light-outline btn-sm" href="{R}ebooks/">{icon("external",15)} Official Book (Free)</a>')
     dl_title = f"Files: {c['name']} {s['name']}" if not chaps else f"Whole-Book Files: {c['name']} {s['name']}"
     dl_mt = "34px"
@@ -1272,8 +1295,12 @@ def build_subject(cid, sid):
     ld = [breadcrumb_json([("Classes", "classes/"), (c["name"], f"classes/{cid}/"), (s["name"], f"classes/{cid}/{sid}/")]),
           faq_schema(sub_faqs)]
     t_base = ttl(f"{c['name']} {s['name']} Notes — New Syllabus {c['session']}")
-    d1 = f"Free {c['alt']} {s['name']} notes, solved exercises, MCQ bank, guess paper & pairing scheme. New PCTB/PECTAA {c['session']} syllabus, all Punjab boards. Open-and-read PDF downloads."
-    d2 = f"Free {c['alt']} {s['name']} notes, solved exercises, MCQ bank, guess paper & pairing scheme. New {c['session']} syllabus. Open-and-read PDF downloads."
+    if hide_empty:
+        d1 = f"Free {c['alt']} {s['name']} {live_list}. New PCTB/PECTAA {c['session']} syllabus, all Punjab boards. Open-and-read PDF downloads."
+        d2 = f"Free {c['alt']} {s['name']} {live_list}. New {c['session']} syllabus. Open-and-read PDF downloads."
+    else:
+        d1 = f"Free {c['alt']} {s['name']} notes, solved exercises, MCQ bank, guess paper & pairing scheme. New PCTB/PECTAA {c['session']} syllabus, all Punjab boards. Open-and-read PDF downloads."
+        d2 = f"Free {c['alt']} {s['name']} notes, solved exercises, MCQ bank, guess paper & pairing scheme. New {c['session']} syllabus. Open-and-read PDF downloads."
     w(f"classes/{cid}/{sid}/index.html", layout(page_key="classes", depth=3,
         title=t_base, desc=(d1 if len(d1) <= 160 else d2),
         path=f"classes/{cid}/{sid}/", body=body, extra_ld=ld), priority="0.8")
