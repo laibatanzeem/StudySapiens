@@ -1171,3 +1171,31 @@ yet.** These two are deliberately deferred — flip them only when:
   so neither rule can re-fire.
 - Page HTML unchanged (sitemap-cache clean); only site/.htaccess differs.
   Forms 61/61, calculators 18/18.
+
+## Ops note: WAF blocks browser-UA requests from datacenter IPs (15 Nov 2026)
+
+- External audit observed: desktop/Android Chrome UA -> 403 nginx (edge),
+  Googlebot UA + custom UA -> 200 Apache (origin). The 403 comes from
+  Hostooze's nginx edge/WAF layer — nothing in our stack can produce it
+  (origin is Apache; .htaccess has no deny rules).
+- Most likely mechanism: bot-protection flagging "browser UA with a
+  non-browser fingerprint" (datacenter IP, missing browser headers,
+  non-browser TLS fingerprint) — reasonable anti-bot behaviour that does
+  NOT necessarily affect real users. Platform-side fetches (this repo's
+  live checks) return 200 with full content.
+- Deciding test (owner): real device on mobile data (not home WiFi — the
+  panel IP may be allowlisted) loading the site in Chrome; WhatsApp link
+  preview; GSC URL Inspection live test; Rich Results Test; Facebook
+  Sharing Debugger.
+- If real users ARE blocked: Hostooze panel -> Security/WAF/Bot Protection —
+  relax to default/log-only, and ask support which rule fired (send them the
+  UA/status matrix + source IP + timestamp). Allowlist verified crawlers by
+  rDNS/IP per Google guidance, never by UA alone. Monitor GSC Crawl Stats +
+  host access logs for 401/403/429/5xx.
+- Note: no AdSense on the site yet (no ads.txt). When ads are added, ensure
+  AdsBot (Mediapartners-Google / AdsBot-Google) is not challenged or ad
+  serving will suffer.
+- ALSO FOUND while probing: the live site predates today's afternoon builds
+  (no Statistics subject, urdu pages still live) — the latest zip (29d04da)
+  with statistics + math/CS/English/physics/stats-12 + subject removal +
+  noindex + canonicalization still needs to be uploaded and the edge purged.
