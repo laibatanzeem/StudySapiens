@@ -1354,3 +1354,30 @@ yet.** These two are deliberately deferred — flip them only when:
   other engines/answer surfaces, and the on-page FAQs serve users.
 - Gates: precheck 0/0 (4 info lines), PDF 778/778, forms 61/61 (verifier
   taught to accept ?v= query on main.js), calc 18/18. SW bumped ss-v18.
+
+## Pre-flight checklist round (audit: WAF/canonical/forms/UET/overclaims/noindex) (15 Nov 2026)
+
+- **UET prospectus link FIXED**: UET re-uploaded the Fall 2026 prospectus
+  under a new URL (old 78f5bbdf... 404s). Replaced in build.py (ECAT page)
+  and data.py (correction-article source citation) with the live
+  5d97e4a9... URL; verified the new PDF parses and the portal FAQ still
+  confirms merit = First Year (Part-I) based; "last verified" date bumped
+  to 15 Nov 2026 + a note that UET rotates the prospectus address (current
+  PDF always linked from admission.uet.edu.pk/program/1).
+- **Chapter title/meta overclaims FIXED**: titles/H1 kind is now
+  category-aware (Notes / Solved Exercises / MCQs / Numericals / Test
+  Paper - e.g. math-11 chapters honestly say "Solved Exercises", not
+  "Notes"); meta desc promises only the categories the chapter actually
+  has ("free solved exercises" vs "free notes, solved exercises, MCQs &
+  model papers"); the how-to-study paragraph mentions solved exercises /
+  MCQ bank only when present. Verified ZERO desc overclaims via
+  category-dir audit of all 351 chapter pages.
+- Buglet fixed en route: desc length guard now measures the ESCAPED string
+  (3 english descs were 164-168 chars after &amp;/&#x27; escaping);
+  two-level fallback keeps every chapter desc in the 120-160 window.
+- forms-verify chapter H1 check updated for the new honest kinds.
+- Checklist status: canonical (repo v4, live pending deploy), ss-config
+  (no-cache + configVersion 1.0, live pending deploy), forms connection
+  (owner keys pending), WAF real-user test (owner, mobile data), noindex
+  (done, pending deploy).
+- Gates: precheck 0/0, PDF 778/778, forms 61/61, calc 18/18.

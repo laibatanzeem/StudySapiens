@@ -1428,7 +1428,32 @@ def build_chapter_pages(cid, sid):
         chap_word = "Surah" if is_tarjuma else "Chapter"
         display = title if is_tarjuma else f"Chapter {num}: {esc(title)}"
         test_only = not ({"notes", "solutions", "mcq", "numericals"} & {k for k, _f in mine})
-        kind = "Test Paper" if test_only else "Notes"
+        # Category-aware copy (audit 5: no overclaims): titles, meta desc and
+        # the how-to-study paragraph promise ONLY what this chapter actually has.
+        have = {k for k, _f in mine}
+        _cat_order = [("notes", "notes"), ("solutions", "solved exercises"),
+                      ("numericals", "numericals"), ("mcq", "MCQs"),
+                      ("testpapers", "test papers"), ("model", "model papers")]
+        _phrases = [label for key, label in _cat_order if key in have]
+        cat_list = (", ".join(_phrases[:-1]) + " & " + _phrases[-1]) if len(_phrases) > 1 else (_phrases[0] if _phrases else "study material")
+        # study advice mentions only what is actually on the page (audit 5)
+        _study_steps = []
+        if have & {"solutions", "numericals"}:
+            _study_steps.append("then open the solved exercise below and write every answer with your own hand — copying never sticks")
+        if "mcq" in have:
+            _study_steps.append("finish with the MCQ bank, noting every question you got wrong")
+        if not _study_steps:
+            _study_steps.append("then work through the notes below, writing the key points in your own words — copying never sticks")
+        if test_only:
+            kind = "Test Paper"
+        elif "notes" in have:
+            kind = "Notes"
+        elif "solutions" in have or "numericals" in have:
+            kind = "Solved Exercises"
+        elif "mcq" in have:
+            kind = "MCQs"
+        else:
+            kind = "Notes"
         h1 = (f"{c['name']} {s['name']} {title} Notes — New Syllabus {c['session']}" if is_tarjuma
               else f"{c['name']} {s['name']} Chapter {num} {kind} — New Syllabus {c['session']}")
         title_tag = (ttl(f"{c['name']} Tarjuma-tul-Quran {title} Notes") if is_tarjuma
@@ -1437,11 +1462,14 @@ def build_chapter_pages(cid, sid):
             desc = (f"{c['name']} {s['name']} {chap_word} {num} practice test paper: MCQs, short & long "
                     f"questions, board pattern, new {c['session']} syllabus. Free PDF, read online. All Punjab boards.")
         else:
-            desc = (f"{c['name']} {s['name']} {chap_word} {num} ({title}): free notes, solved exercise & MCQs, "
+            desc = (f"{c['name']} {s['name']} {chap_word} {num} ({title}): free {cat_list}, "
                     f"new {c['session']} syllabus. Download, read online, exam tips. All Punjab boards.")
-        if len(desc) > 160:
-            desc = (f"{c['name']} {s['name']} {chap_word} {num}: free notes, solved exercise & MCQs, new "
+        if len(html.escape(desc)) > 160:
+            desc = (f"{c['name']} {s['name']} {chap_word} {num}: free {cat_list}, new "
                     f"{c['session']} syllabus. Download, read online, exam tips. All Punjab boards.")
+        if len(html.escape(desc)) > 160:
+            desc = (f"{c['name']} {s['name']} {chap_word} {num}: free {cat_list}, new "
+                    f"{c['session']} syllabus. Download or read online. All Punjab boards.")
         content = CHAPTER_CONTENT.get((cid, sid, num)) or {}
         cats_present = []
         for k, _f in mine:
@@ -1469,9 +1497,8 @@ def build_chapter_pages(cid, sid):
                     "got wrong, and revise only that list the next day. Test → mark → revise: one order, every "
                     "chapter.</p>") if test_only
                    else ("<p><b>How to study this chapter:</b> read it once in your textbook so you meet the ideas in "
-                         "their own words, then open the solved exercise below and write every answer with your own hand "
-                         "— copying never sticks. Finish with the MCQ bank, note every question you got wrong, and revise "
-                         "only that list the next day. Read → solve → test: one order, every chapter.</p>"))
+                         "their own words, " + "; ".join(_study_steps) + ". Revise only that list the next day. "
+                         "Read → solve → test: one order, every chapter.</p>"))
                 + link_para)
         kp = content.get("key_points") or []
         kp_html = (f'<div class="card chap-box"><h3>{icon("check",16)} Key points to remember</h3>'
@@ -2738,7 +2765,7 @@ def build_ecat():
         <p class="pmdc-note">Reference: closing merits at UET vary widely by department and campus, roughly from the low 60s to mid 80s. Always check the current merit lists on UET's own admission portal before deciding.</p>
       </div>
     </div>
-    <p class="small" style="max-width:880px;margin:14px auto 0;color:var(--ink-soft)">Last verified against UET's official <a href="https://admission.uet.edu.pk/uploads/prospectus/UG-2026-1_78f5bbdf-88d5-4889-b97c-9f0d773d7d6d.pdf" target="_blank" rel="noopener">Undergraduate Prospectus (Fall 2026)</a> and <a href="https://admission.uet.edu.pk/program/1" target="_blank" rel="noopener">admission portal</a> on 13 November 2026: merit = Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%. A-Level, DAE and B.Tech candidates should use the separate tracks in UET's own merit calculator on that portal.</p>
+    <p class="small" style="max-width:880px;margin:14px auto 0;color:var(--ink-soft)">Last verified against UET's official <a href="https://admission.uet.edu.pk/uploads/prospectus/UG-2026-1_5d97e4a9-e7f2-4410-93d9-4eaef682a273.pdf" target="_blank" rel="noopener">Undergraduate Prospectus (Fall 2026)</a> and <a href="https://admission.uet.edu.pk/program/1" target="_blank" rel="noopener">admission portal</a> on 15 November 2026: merit = Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%. A-Level, DAE and B.Tech candidates should use the separate tracks in UET's own merit calculator on that portal. (UET re-uploads the prospectus under a new address from time to time — if this link ever breaks, the current PDF is always linked from the admission portal page.)</p>
   </div>
 </section>
 <section class="section section-tight">

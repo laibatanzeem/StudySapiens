@@ -137,7 +137,7 @@ UPDATES = [
         "date": "November 13, 2026",
         "tag": "ECAT",
         "excerpt": "UET's official prospectus and admission portal confirm merit = Matric 17% + First Year (HSSC Part-I) 50% + ECAT 33%. Our ECAT calculator now defaults to first-year totals (550 on Punjab boards).",
-        "sources": [("UET Lahore: Undergraduate Prospectus, Fall 2026 (PDF)", "https://admission.uet.edu.pk/uploads/prospectus/UG-2026-1_78f5bbdf-88d5-4889-b97c-9f0d773d7d6d.pdf"),
+        "sources": [("UET Lahore: Undergraduate Prospectus, Fall 2026 (PDF)", "https://admission.uet.edu.pk/uploads/prospectus/UG-2026-1_5d97e4a9-e7f2-4410-93d9-4eaef682a273.pdf"),
                     ("UET Lahore: admission portal (merit basis and official calculator)", "https://admission.uet.edu.pk/program/1")],
         "body": """
 <p>Our ECAT calculator earlier asked for FSc marks out of 1100 and described the formula as "Matric 17% + FSc 50% + ECAT 33%". That was misleading: UET Lahore's official prospectus and its admission portal make clear that for the intermediate stream, the 50% share is your <b>First Year (HSSC Part-I) percentage</b>, not the combined FSc of both years.</p>

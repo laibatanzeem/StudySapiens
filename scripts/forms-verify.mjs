@@ -355,7 +355,7 @@ let chapterPages = 0, chapterIssues = [];
     if (!/chapter-\d+[/\\]index\.html$/.test(p)) continue;
     chapterPages++;
     const s = fs.readFileSync(p, 'utf8');
-    if (!/<h1>[^<]*(Notes|Test Paper) — New Syllabus/.test(s)) chapterIssues.push(p + ': H1 pattern');
+    if (!/<h1>[^<]*(Notes|Solved Exercises|MCQs|Numericals|Test Paper) — New Syllabus/.test(s)) chapterIssues.push(p + ': H1 pattern');
     if (!s.includes('"FAQPage"')) chapterIssues.push(p + ': FAQ schema');
     if (!s.includes('"BreadcrumbList"')) chapterIssues.push(p + ': breadcrumb schema');
     if (!s.includes('Updated:')) chapterIssues.push(p + ': last-updated');
