@@ -10,9 +10,13 @@ import os, json, re, shutil, html, datetime, subprocess
 from data import (SITE, CLASSES, SUBJECTS, SUBJECT_ORDER, SUBJECT_INFO, FILE_CATEGORIES,
                   SUBJECT_CLASSES, NUMERICAL_SUBJECTS, RESULT_WINDOWS, ECAT, CHAPTERS, CHAPTER_CATS,
                   EXTRA_CATEGORIES, BOARDS, UPDATES, FAQS, MDCAT, CSS_EXAM, CONTACT_TOPICS,
-                  HIDE_EMPTY_SLOTS, AUTHORS)
+                  HIDE_EMPTY_SLOTS, AUTHORS, ADSENSE_PUB_ID)
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "site")
+# SW_VERSION: bump on ANY change to style.css / main.js / fonts. It keys the
+# service-worker cache AND versions the asset URLs (?v=...), which is what
+# makes the long-lived immutable HTTP caching safe.
+SW_VERSION = "ss-v18"
 DOM = SITE["domain"]
 EMAIL = SITE["email"]
 YEAR = datetime.date.today().year
@@ -90,8 +94,13 @@ def chapter_file_label(label, num, fallback):
 
 def _minify_js(js):
     """Conservative JS minify: strips /* */ and full-line // comments, trailing
-    whitespace and blank lines. String-aware (handles ' and " + escapes); never
-    touches regex literals or string contents. Verified with node --check by caller."""
+    whitespace and blank lines. String-aware (handles ' and " + escapes) AND
+    regex-literal-aware: a lone / triggers a regex scan that copies the literal
+    VERBATIM (character classes [..] respected, backslash escapes skipped, and
+    a newline aborts back to division interpretation), so a regex containing
+    quotes - like /[&<>"]/g - can never corrupt the string state. Division is
+    safe too: the worst case is a comment not being stripped, never mangled
+    code. Verified with node --check by caller."""
     out, i, n = [], 0, len(js)
     quote = None
     while i < n:
@@ -113,6 +122,26 @@ def _minify_js(js):
             j = js.find("\n", i + 2)
             if j < 0: break
             i = j; continue
+        if ch == "/":
+            j = i + 1
+            in_class = False
+            end = -1
+            while j < n:
+                c = js[j]
+                if c == "\\":
+                    j += 2; continue
+                if c == "\n":
+                    break
+                if in_class:
+                    if c == "]": in_class = False
+                elif c == "[":
+                    in_class = True
+                elif c == "/":
+                    end = j; break
+                j += 1
+            if end < 0:
+                out.append(ch); i += 1; continue
+            out.append(js[i:end + 1]); i = end + 1; continue
         out.append(ch); i += 1
     lines = [ln.rstrip() for ln in "".join(out).split("\n")]
     lines = [ln for ln in lines if ln.strip()]
@@ -498,7 +527,6 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-5ZRS53MF"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){{dataLayer.push(arguments);}}
@@ -516,6 +544,29 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
     'analytics_storage': ssA ? 'granted' : 'denied',
     'wait_for_update': 500
   }});
+  /* Deferred GTM load (perf): the container is ~0.5 MB. It loads after the
+     visitor's first interaction, or 3.5 s as a fallback - whichever comes
+     first. Consent defaults above are queued through the gtag() shim into
+     dataLayer BEFORE the container executes, so Consent Mode v2 still
+     applies to every tag whenever the container initializes; the banner's
+     consent 'update' is queued the same way. Page views still fire for
+     every real visitor (only sub-3.5s non-interacting bounces may be
+     missed). To make the container itself lighter, prune unused tags in
+     the GTM UI. */
+  (function() {{
+    var loaded = false;
+    function loadGTM() {{
+      if (loaded) return; loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-5ZRS53MF';
+      document.head.appendChild(s);
+    }}
+    var evts = ['scroll', 'keydown', 'pointerdown', 'touchstart', 'click'];
+    var fallback = setTimeout(loadGTM, 3500);
+    function arm() {{ loadGTM(); clearTimeout(fallback); evts.forEach(function(x) {{ removeEventListener(x, arm, true); }}); }}
+    evts.forEach(function(x) {{ addEventListener(x, arm, {{ capture: true, passive: true }}); }});
+  }})();
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -547,10 +598,7 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
 <link rel="icon" type="image/png" sizes="32x32" href="{R}assets/img/favicon-32.png">
 <link rel="apple-touch-icon" href="{R}assets/img/favicon-180.png">
 <link rel="manifest" href="{R}site.webmanifest">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{R}assets/css/style.css">
+<link rel="stylesheet" href="{R}assets/css/style.css?v={SW_VERSION}">
 {head_extra}
 {base_ld}
 {ld_script}
@@ -569,7 +617,7 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
 <div style="display:none" id="site-mail">{EMAIL}</div>
 <script>window.SITE_ROOT = "{R}";</script>
 <script src="{R}assets/js/ss-config.js" defer></script>
-<script src="{R}assets/js/main.js" defer></script>
+<script src="{R}assets/js/main.js?v={SW_VERSION}" defer></script>
 </body>
 </html>"""
 
@@ -3564,10 +3612,11 @@ def build_sitemap_page():
 
 SW_JS = r"""
 /* StudySapiens service worker. V1 */
-const VERSION = 'ss-v17';
+const VERSION = '__SW_VERSION__';
 const CORE = [
   './', 'classes/', 'pairing-scheme/', 'mdcat/', 'date-sheet/', 'offline/',
   'assets/css/style.css', 'assets/js/main.js', 'assets/js/ss-config.js',
+  'assets/fonts/inter-var-latin.woff2', 'assets/fonts/fraunces-var-latin.woff2',
   'assets/img/logo-trim-light.png', 'assets/img/mark.png', 'assets/img/favicon-32.png',
   'assets/img/favicon-64.png', 'assets/img/favicon-180.png', 'assets/img/hero-1300.webp',
   'assets/img/og-image.jpg', 'site.webmanifest'
@@ -3615,8 +3664,10 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // Assets (css/js/img/fonts incl. Google Fonts): stale-while-revalidate
-  e.respondWith(caches.match(req).then(cached => {
+  // Assets (css/js/img/fonts): stale-while-revalidate. ignoreSearch lets a
+  // versioned request (style.css?v=ss-v18) match the unversioned precache
+  // entry, so a SW_VERSION bump invalidates cleanly on both layers.
+  e.respondWith(caches.match(req, { ignoreSearch: true }).then(cached => {
     const network = fetch(req).then(res => {
       if (res && (res.ok || res.type === 'opaque')) {
         const copy = res.clone();
@@ -3803,13 +3854,16 @@ def write_seo():
         '  ]\n'
         '}\n')
     with open(os.path.join(OUT, "site.webmanifest"), "w") as f: f.write(manifest)
-    with open(os.path.join(OUT, "sw.js"), "w") as f: f.write(SW_JS)
+    with open(os.path.join(OUT, "sw.js"), "w") as f: f.write(SW_JS.replace("__SW_VERSION__", SW_VERSION))
     headers = ("/*\n"
         "  X-Content-Type-Options: nosniff\n"
         "  Referrer-Policy: strict-origin-when-cross-origin\n"
-        "  Permissions-Policy: camera=(), microphone=(), geolocation=()\n"
+        "  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()\n"
         "  X-Frame-Options: SAMEORIGIN\n"
-        "  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'\n"
+        "  Strict-Transport-Security: max-age=31536000\n"
+        "  Content-Security-Policy-Report-Only: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://*.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://api.web3forms.com; frame-src https://www.googletagmanager.com; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'\n"
+        "/assets/js/ss-config.js\n"
+        "  Cache-Control: no-cache\n"
         "/assets/*\n"
         "  Cache-Control: public, max-age=31536000, immutable\n"
         "/files/*\n"
@@ -3820,8 +3874,17 @@ def write_seo():
         "/sw.js\n"
         "  Cache-Control: no-cache\n")
     with open(os.path.join(OUT, "_headers"), "w") as f: f.write(headers)
+    # ads.txt: only when an ad network is actually authorized (see data.py).
+    # Missing file = correct state until then (audit 5.7); empty file = wrong.
+    if ADSENSE_PUB_ID:
+        with open(os.path.join(OUT, "ads.txt"), "w") as f:
+            f.write(f"google.com, {ADSENSE_PUB_ID}, DIRECT, f08c47fec0942fa0\n")
+        print("   📄 ads.txt written (AdSense publisher ID set)")
     # Apache / LiteSpeed version of _headers (for cPanel-style shared hosting)
-    htaccess = ("# StudySapiens .htaccess - canonicalization, safely (v3, 15 Nov 2026)\n"
+    htaccess = ("# StudySapiens .htaccess - canonicalization + security headers, safely (v4, 15 Nov 2026)\n"
+        "#\n"
+        "# v4 adds: HSTS, Permissions-Policy, CSP (Report-Only), and no-cache for\n"
+        "# ss-config.js. v3 rules (301 consolidation) unchanged below.\n"
         "#\n"
         "# 301 consolidation (Google duplicate-URL guidance):\n"
         "#   1. apex domain        -> https://www.studysapiens.com\n"
@@ -3856,8 +3919,25 @@ def write_seo():
         "  Header always set X-Content-Type-Options \"nosniff\"\n"
         "  Header always set Referrer-Policy \"strict-origin-when-cross-origin\"\n"
         "  Header always set X-Frame-Options \"SAMEORIGIN\"\n"
+        "  # HSTS: site is fully HTTPS (panel Force HTTPS + edge TLS). Kept\n"
+        "  # without includeSubDomains until every subdomain (cpanel etc.) is\n"
+        "  # confirmed HTTPS; add it + preload submission later if desired.\n"
+        "  Header always set Strict-Transport-Security \"max-age=31536000\"\n"
+        "  # Permissions-Policy: nothing on this site needs these APIs.\n"
+        "  Header always set Permissions-Policy \"camera=(), microphone=(), geolocation=(), payment=(), usb=()\"\n"
+        "  # CSP in REPORT-ONLY mode: safe to iterate (check server logs /\n"
+        "  report-uri later). Scripts/styles must allow 'unsafe-inline' while\n"
+        "  the pages carry inline blocks + GTM. Fonts now self-hosted. When\n"
+        "  the ESP endpoint is set, append it to connect-src + form-action.\n"
+        "  Header always set Content-Security-Policy-Report-Only \"default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.googletagmanager.com https://www.google-analytics.com https://*.googlesyndication.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://api.web3forms.com; frame-src https://www.googletagmanager.com; manifest-src 'self'; worker-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'\"\n"
         "  <FilesMatch \"\\.(css|js|jpg|jpeg|png|webp|svg|ico|woff2?)$\">\n"
         "    Header set Cache-Control \"public, max-age=31536000, immutable\"\n"
+        "  </FilesMatch>\n"
+        "  # ss-config.js MUST stay fresh (form keys edited on the server)\n"
+        "  # even for the SW's network-first fetch, so it is exempted from the\n"
+        "  # immutable rule above. Placed AFTER the rule so it wins.\n"
+        "  <FilesMatch \"^ss-config\\.js$\">\n"
+        "    Header set Cache-Control \"no-cache\"\n"
         "  </FilesMatch>\n"
         "  <FilesMatch \"\\.pdf$\">\n"
         "    Header set Cache-Control \"public, max-age=86400\"\n"

@@ -299,6 +299,10 @@ def main():
     else:
         warn("site/assets/js/ss-config.js missing (forms config)")
 
+    # ads.txt: absent is CORRECT until an ad network is authorized (audit 5.7)
+    if not (SITE / "ads.txt").is_file():
+        info("ads.txt absent - expected until AdSense authorizes the site (set data.ADSENSE_PUB_ID then rebuild)")
+
     # ================= summary =================
     print("=" * 64)
     print(f"PRECHECK RESULT: {len(pages)} pages | {len(critical)} critical | {len(warnings)} warnings")

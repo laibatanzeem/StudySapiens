@@ -40,7 +40,7 @@ function walk(dir, out = []) {
   let forms = 0, upgraded = 0, issues = [], cfgOrder = 0;
   for (const p of pages) {
     const s = fs.readFileSync(p, 'utf8');
-    const cfgAt = s.indexOf('assets/js/ss-config.js'), mainAt = s.indexOf('assets/js/main.js"');
+    const cfgAt = s.indexOf('assets/js/ss-config.js'), mainAt = s.indexOf('assets/js/main.js');
     if (mainAt !== -1 && cfgAt !== -1 && cfgAt < mainAt) cfgOrder++;
     for (const m of s.matchAll(/<form[^>]*data-mailto[^>]*>([\s\S]*?)<\/form>/g)) {
       forms++;
@@ -64,7 +64,7 @@ function walk(dir, out = []) {
 async function openPage(rel, { cfg = null, fetchImpl = null } = {}) {
   let html = fs.readFileSync(path.join(ROOT, 'site', rel, 'index.html'), 'utf8');
   html = html.replace(/<script[^>]*src="https?:[^"]*"[^>]*><\/script>\s*/g, '');
-  html = html.replace(/<script src="[^"]*assets\/js\/(?:main|ss-config)\.js" defer><\/script>\s*/g, '');
+  html = html.replace(/<script src="[^"]*assets\/js\/(?:main|ss-config)\.js(?:\?[^"]*)?" defer><\/script>\s*/g, '');
   if (/<script[^>]*src="https?:/.test(html)) throw new Error('remote script survived strip');
   const inject = (cfg ? '<script>window.SS_CONFIG = ' + JSON.stringify(cfg) + ';</script>' : '') +
     '<script>' + MAIN_JS + '</script>';
@@ -285,7 +285,7 @@ for (const [page, id] of [['mdcat', 'mdcat'], ['ecat', 'ecat']]) {
 async function openConsentPage(preStorage) {
   let html = fs.readFileSync(path.join(ROOT, 'site', 'index.html'), 'utf8');
   html = html.replace(/<script[^>]*src="https?:[^"]*"[^>]*><\/script>\s*/g, '');
-  html = html.replace(/<script src="[^"]*assets\/js\/(?:main|ss-config)\.js" defer><\/script>\s*/g, '');
+  html = html.replace(/<script src="[^"]*assets\/js\/(?:main|ss-config)\.js(?:\?[^"]*)?" defer><\/script>\s*/g, '');
   html = html.replace('</body>', () => '<script>' + MAIN_JS + '</script></body>');
   const vc = new VirtualConsole();
   const dom = new JSDOM(html, {

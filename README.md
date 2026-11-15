@@ -1300,3 +1300,57 @@ yet.** These two are deliberately deferred — flip them only when:
   (MailerLite recommended in the config comments); paste BOTH into
   assets/js/ss-config.js, bump configVersion, test submit + unsubscribe.
 - Gates: precheck 0/0 (+2 info), PDF 778/778, forms 61/61, calc 18/18.
+
+## Perf + headers + monetization-prep batch (audit 5.6-5.10) (15 Nov 2026)
+
+- **5.8 Fonts self-hosted** (render-blocking fix): Inter + Fraunces now served
+  as local variable woff2 (assets/fonts/, latin subset, @fontsource-variable)
+  with @font-face + unicode-range in style.css. Google Fonts <link> + 2
+  preconnects removed from every page. One 48KB + one 67KB file cover ALL
+  weights (100-900); Fraunces keeps its opsz axis (optical sizing auto).
+- **5.8 GTM deferred**: the ~0.5MB container now loads on first interaction
+  or after 3.5s (whichever first). Consent Mode v2 defaults still queue via
+  the gtag() shim BEFORE the container executes - verified in place on every
+  page incl. 404. Owner-side follow-up: prune unused tags in the GTM UI to
+  shrink the container itself.
+- **5.8 Immutable caching made safe**: style.css + main.js now carry
+  ?v=SW_VERSION (single constant, ss-v18); SW precache matches versioned
+  requests via ignoreSearch. ss-config.js EXEMPTED from immutable (no-cache)
+  - this also fixes a real bug: the SW's network-first fetch could have been
+  served a year-stale ss-config.js from the browser HTTP cache.
+- **5.8 Headers (.htaccess v4 + _headers synced)**: added HSTS
+  (max-age=31536000, no includeSubDomains until subdomains confirmed HTTPS),
+  Permissions-Policy (camera/mic/geo/payment/usb denied), and CSP in
+  REPORT-ONLY mode (self-hosted fonts, GTM/analytics/web3forms allowed;
+  append ESP endpoint to connect-src+form-action when set; promote to
+  enforcing only after reviewing reports).
+- **5.8 Hero preload "mismatch" = false positive, no change**: <picture> has
+  a WebP <source> + JPG <img> fallback by design; the preload targets the
+  WebP srcset that WebP-capable browsers actually fetch. Making the <img>
+  srcset WebP would BREAK no-WebP browsers (srcset picks by width, not
+  format support). Documented, kept.
+- **BUG FOUND + FIXED (pre-existing)**: _minify_js corrupted main.js since
+  the search feature shipped - the regex /[&<>"]/g contains a quote char,
+  flipping the minifier's string state; node --check then rejected the
+  output and builds silently shipped the RAW main.js. Fixed with
+  regex-literal-aware scanning (verbatim copy, [class] aware, newline
+  aborts to division - can never change semantics). Now: 42KB -> 38KB,
+  node-verified, web3forms URL + esc() intact.
+- **5.7 ads.txt**: build-gated mechanism added - data.ADSENSE_PUB_ID empty
+  (correct until AdSense authorizes; absent file is fine, empty file is
+  not). Setting the ID writes ads.txt with the standard Google DIRECT
+  line; precheck prints an info line while absent.
+- **5.6 CMP**: no code change needed - SS_CONFIG.consentBanner toggle +
+  advertising-page promise already cover it. Runbook: BEFORE enabling
+  personalized ads in EEA/UK/CH, integrate a Google-certified CMP
+  (AdSense Privacy & messaging / CookieYes / Cookiebot) and set
+  consentBanner=false the SAME DAY (double-banner risk).
+- **5.9 Sitemap lastmod**: mechanism is already per-page hash-based
+  (sitemap-cache.json); the current uniform 2026-11-15 is genuine - today's
+  org-schema/footer/head changes touched every page. Mixed dates return
+  on the next content-only build. Split sitemaps only near 50k URLs.
+- **5.10 FAQPage schema on 293 pages**: intentionally KEPT - Google
+  deprecated the FAQ rich result but the markup is harmless, still used by
+  other engines/answer surfaces, and the on-page FAQs serve users.
+- Gates: precheck 0/0 (4 info lines), PDF 778/778, forms 61/61 (verifier
+  taught to accept ?v= query on main.js), calc 18/18. SW bumped ss-v18.
