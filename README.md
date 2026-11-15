@@ -1250,3 +1250,20 @@ yet.** These two are deliberately deferred — flip them only when:
     invented credentials are worse than honest anonymity.
 - Build: 435 pages (+2), search 432 (+2), sitemap 435 URLs. Gates:
   precheck 0/0, PDF audit 778/778, forms 61/61, calc 18/18.
+
+## E-E-A-T follow-up: organisational identity strengthened (15 Nov 2026)
+
+- Owner decision: stay ORGANISATIONAL (no named individuals, anonymous
+  owner). Author/profile machinery stays dormant in data.AUTHORS, ready
+  for real names whenever collected - one data.py edit + rebuild.
+- Canonical #org schema enriched honestly: alternateName "StudySapiens
+  Teachers Panel" (unifies the chapter-schema author with the #org
+  entity), areaServed Punjab/PK, knowsAbout (PCTB-PECTAA syllabus, BISE
+  boards, exam prep, MDCAT, ECAT), editorial contactPoint, and
+  isAccessibleForFree on both Organization and WebSite.
+- About page: added an organisational-bylines transparency note (why
+  files publish under the Teachers Panel name; named profiles will
+  appear there if teachers opt in later).
+- No invented people, credentials, founding dates or social profiles.
+  Gates: precheck 0/0, PDF 778/778, forms 61/61, calc 18/18; sitewide
+  lastmod bump (schema change on every page).

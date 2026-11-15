@@ -480,10 +480,17 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
     global_ld = {"@context": "https://schema.org", "@context_id": None, "@graph": [
         {"@type": "EducationalOrganization", "@id": f"{DOM}/#org", "name": "StudySapiens",
          "url": f"{DOM}/", "email": SITE["email"], "description": SITE["description"],
+         "alternateName": "StudySapiens Teachers Panel",
          "logo": {"@type": "ImageObject", "url": f"{DOM}/assets/img/logo.png", "width": 1020, "height": 562},
-         "address": {"@type": "PostalAddress", "addressRegion": "Punjab", "addressCountry": "PK"}},
+         "address": {"@type": "PostalAddress", "addressRegion": "Punjab", "addressCountry": "PK"},
+         "areaServed": {"@type": "AdministrativeArea", "name": "Punjab, Pakistan"},
+         "knowsAbout": ["PCTB / PECTAA syllabus (classes 9-12)", "Punjab Boards of Intermediate and Secondary Education",
+                        "BISE exam preparation", "MDCAT", "ECAT"],
+         "contactPoint": {"@type": "ContactPoint", "contactType": "editorial",
+                          "email": SITE["email"], "availableLanguage": ["en"]},
+         "isAccessibleForFree": True},
         {"@type": "WebSite", "@id": f"{DOM}/#website", "url": f"{DOM}/", "name": "StudySapiens",
-         "publisher": {"@id": f"{DOM}/#org"}, "inLanguage": "en"},
+         "publisher": {"@id": f"{DOM}/#org"}, "inLanguage": "en", "isAccessibleForFree": True},
         {"@type": "WebPage", "@id": f"{canon}#webpage", "url": canon,
          "name": title, "description": desc, "isPartOf": {"@id": f"{DOM}/#website"},
          "inLanguage": "en", "primaryImageOfPage": {"@type": "ImageObject", "url": og}}]}
@@ -3103,6 +3110,7 @@ def build_about():
         <li><b>Corrected in public.</b> When we get something wrong, we publish the correction as its own article and list it in the <a href="{R}corrections/">Corrections Log</a> - we do not quietly edit mistakes away.</li>
       </ol>
       <div class="callout">Accountability, not just claims: {len([x for x in UPDATES if x['title'].startswith('Correction:')])} corrections published in the open so far. <a href="{R}corrections/">See the log</a> · <a href="{R}editorial-policy/">Read the policy</a></div>
+      <p style="margin-top:16px">Bylines on this site are organisational: files and articles are published under the <b>StudySapiens Teachers Panel</b> name, because every file is reviewed collectively before it goes live. When individual teachers choose to publish under their own names, their profiles and qualifications will appear on this page.</p>
       <h2 style="font-size:1.5rem;margin:30px 0 16px">What's coming next (roadmap)</h2>
       <ul>
         <li><b>Urdu-medium notes</b> for science subjects</li>
