@@ -664,6 +664,20 @@ CHAPTERS = {
         (10, "Solution of Trigonometric Equations"),
         (11, "Vector Valued Functions and Their Differentiations"),
     ],
+    # Class 12 Physics (PCTB / PECTAA 2026-27): chapters 13-21 (numbering
+    # continues from the 11th book), titles verified against the owner's
+    # notes/MCQ PDFs (headers: "Ch.N Title").
+    ("12", "physics"): [
+        (13, "Thermal Physics"),
+        (14, "Simple Harmonic Motion"),
+        (15, "Physical Optics"),
+        (16, "Electrostatics"),
+        (17, "Alternating Current"),
+        (18, "Quantum Physics"),
+        (19, "Nuclear and Particle Physics"),
+        (20, "Medical Physics"),
+        (21, "Space and Environment"),
+    ],
     ("12", "chemistry"): [
         (17, "Group 2 Elements"),
         (18, "Transition Metals"),

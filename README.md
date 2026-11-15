@@ -1059,3 +1059,17 @@ yet.** These two are deliberately deferred — flip them only when:
   Differentiations.
 - Site: 426 → 428 pages, 709 → 714 published files, search.json 421 entries.
   Precheck 0/0, PDF audit 714/714, forms 61/61, calculators 18/18.
+
+## Upload: Class 12 Physics — notes + MCQ banks, Ch 13-21 (15 Nov 2026)
+
+- 12th Physics goes live: chapter list (Ch 13-21, numbering continues from the
+  11th book) with titles verified from the owner's PDF headers: Thermal
+  Physics, Simple Harmonic Motion, Physical Optics, Electrostatics, Alternating
+  Current, Quantum Physics, Nuclear and Particle Physics, Medical Physics,
+  Space and Environment.
+- 18 PDFs published: 9 Chapter-Notes (9-19p) under files/class-12/physics/notes/
+  + 9 Chapter-MCQs under files/class-12/physics/mcq/. Viewer opens notes
+  first; each chapter card shows both rows. Solutions/tests not yet supplied
+  for this subject.
+- Site: 428 → 437 pages, 714 → 732 published files, search.json 430 entries.
+  Precheck 0/0, PDF audit 732/732, forms 61/61, calculators 18/18.

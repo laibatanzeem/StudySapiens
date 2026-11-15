@@ -64,7 +64,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/": {
-"hash": "d42e312297e7e0109fff13188cada00e",
+"hash": "c483679b7fb55f6d9f031c9a5fc9f27d",
 "lastmod": "2026-11-15"
 },
 "classes/10/": {
@@ -848,7 +848,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/": {
-"hash": "4dcaab9109a1e6b0faeb81bc02ae8354",
+"hash": "34c0f9a8335a473126b95cd49a47d869",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/": {
@@ -1128,7 +1128,43 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/": {
-"hash": "76cdebcc3222f33b38b35f5466158cb4",
+"hash": "ef9a5edec533f5aed340db6f03bf0764",
+"lastmod": "2026-11-15"
+},
+"classes/12/physics/chapter-13/": {
+"hash": "abcc3e95a4973e5dab6d90a436f737f9",
+"lastmod": "2026-11-15"
+},
+"classes/12/physics/chapter-14/": {
+"hash": "43493e9ca8e6cca86344c3203e9306e8",
+"lastmod": "2026-11-15"
+},
+"classes/12/physics/chapter-15/": {
+"hash": "573ddf3c73d1cb451b804546785d4b75",
+"lastmod": "2026-11-15"
+},
+"classes/12/physics/chapter-16/": {
+"hash": "be7abb8e6d581b2c2220831dfa92b8d7",
+"lastmod": "2026-11-15"
+},
+"classes/12/physics/chapter-17/": {
+"hash": "ab52e3c0d6a68f77910f8b79b85956e2",
+"lastmod": "2026-11-15"
+},
+"classes/12/physics/chapter-18/": {
+"hash": "ac4fbb933cdc3776698584a1f3ade649",
+"lastmod": "2026-11-15"
+},
+"classes/12/physics/chapter-19/": {
+"hash": "740c71363c69d4609c2a6ffd0a374d02",
+"lastmod": "2026-11-15"
+},
+"classes/12/physics/chapter-20/": {
+"hash": "de39a814731496a5d126e187e4dfb6ba",
+"lastmod": "2026-11-15"
+},
+"classes/12/physics/chapter-21/": {
+"hash": "b0c1de4405ef3d45c915343c02d08e13",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/": {
