@@ -82,7 +82,7 @@ def chapter_file_label(label, num, fallback):
     t = re.sub(r"(?i)\bstudysapiens\b", "", label)
     t = re.sub(r"(?i)\b\d{1,2}(st|nd|rd|th)\b", "", t)
     t = re.sub(r"(?i)\b(?:ch|chapter|unit|surah)\s?\d{1,2}\b", "", t)
-    t = re.sub(r"(?i)\b(chem|chemist|phys|phy|bio|math|maths|comp|cs|eng|isl|tarjuma|quran)\w*\b", "", t)
+    t = re.sub(r"(?i)\b(chem|chemist|phys|phy|bio|math|maths|stats|statistics|comp|cs|eng|isl|tarjuma|quran)\w*\b", "", t)
     t = re.sub(r"(?i)\b(?:pak\s?studies|mutalia)\b", "", t)
     t = re.sub(r"[-_]+", " ", t)
     t = re.sub(r"\s{2,}", " ", t).strip(" -")

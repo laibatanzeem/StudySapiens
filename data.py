@@ -37,7 +37,7 @@ CLASSES = {
            "first_exam": "Annual exams 2027", "exam_date": "2027-05-04"},
 }
 
-SUBJECT_ORDER = ["physics", "chemistry", "biology", "mathematics", "computer-science", "english"]
+SUBJECT_ORDER = ["physics", "chemistry", "biology", "mathematics", "computer-science", "statistics", "english"]
 
 SUBJECTS = {
     "physics":          {"name": "Physics",          "hue": "var(--c-physics)",          "icon": "atom"},
@@ -441,6 +441,7 @@ CONTACT_TOPICS = ["Question about notes", "Correction in content", "Request note
 
 # ---- 4 compulsory subjects we were missing ---------------------------
 SUBJECTS.update({
+    "statistics":       {"name": "Statistics",       "hue": "var(--c-statistics)",  "icon": "layers"},
     "urdu":              {"name": "Urdu",              "hue": "var(--c-urdu)",   "icon": "notes"},
     "islamiat":          {"name": "Islamiat",          "hue": "var(--c-islam)",  "icon": "moon"},
     "pak-studies":       {"name": "Pak Studies",       "hue": "var(--c-pakst)",  "icon": "flag"},
@@ -451,6 +452,7 @@ SUBJECT_ORDER += ["urdu", "islamiat", "pak-studies", "tarjuma-tul-quran"]
 # which classes each subject actually belongs to (boards notify subject sets class by class;
 # anything not listed here applies to all four classes)
 SUBJECT_CLASSES = {
+    "statistics":        ["11", "12"],       # elective, not offered in matric
     "urdu":              ["9", "10", "11", "12"],
     "islamiat":          ["9", "11"],       # no prescribed Class 10 book
     "pak-studies":       ["10", "12"],      # no prescribed Class 9 book
@@ -458,6 +460,11 @@ SUBJECT_CLASSES = {
 }
 
 SUBJECT_INFO.update({
+    "statistics": {
+        "about": "Statistics is the science of data: collecting it, presenting it cleanly, and drawing honest conclusions from it. The new book moves from averages and dispersion to probability and distributions. It is one of the highest-scoring subjects for a careful student — marks come from correct notation, complete tables and clearly drawn diagrams, not from long paragraphs.",
+        "skills": ["Fully solved exercises with every step shown", "Each formula with a when-to-use note", "Diagrams and tables in exam-ready form", "Practice MCQs for the objective part"],
+        "tip": "Write the formula before you substitute values, and end every answer with one line of interpretation in words — examiners award that line, the bare number alone does not earn full marks.",
+    },
     "urdu": {
         "about": "Urdu is the compulsory national-language paper every matric and inter student sits. The new books mix prose and poetry lessons with grammar, letter and application writing, summaries and explanation (tashreeh) practice. Marks hide in presentation: the correct format for letters, neat paragraphing and quoted lines from the lesson.",
         "skills": ["Lesson summaries & question answers in simple wording",
@@ -565,6 +572,19 @@ CHAPTERS = {
         (12, "Limit of Sequences and Continuity"),
         (13, "Differentiation"),
         (14, "Vectors in Space"),
+    ],
+    # Class 11 Statistics (PCTB 2025-26): 9 chapters, titles verified against
+    # the owner's exercise-solutions PDFs (headers: "Chapter N: Title").
+    ("11", "statistics"): [
+        (1, "Introduction to Statistics"),
+        (2, "Representation of Data"),
+        (3, "Measurement of Location"),
+        (4, "Measures of Dispersion"),
+        (5, "Index Numbers"),
+        (6, "Probability"),
+        (7, "Random Variables"),
+        (8, "Probability Distributions"),
+        (9, "Binomial Distribution"),
     ],
     ("12", "chemistry"): [
         (17, "Group 2 Elements"),

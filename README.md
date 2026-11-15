@@ -957,3 +957,23 @@ yet.** These two are deliberately deferred — flip them only when:
 - Site: 355 → 361 pages, 629 → 640 published files, search.json 354 entries.
   Precheck 0/0, PDF audit 640/640, forms 61/61, calculators 18/18; sitemap
   lastmod bumped only for the 6 new unit URLs.
+
+## Upload: NEW SUBJECT — Statistics (11th & 12th) (15 Nov 2026)
+
+- Statistics added as the site's 11th subject, for Class 11 and Class 12 only
+  (SUBJECT_CLASSES: no matric offering). Registered everywhere a subject lives:
+  SUBJECTS meta (icon: layers, colour --c-statistics #4E8BAE), SUBJECT_ORDER
+  (after Computer Science), SUBJECT_INFO guide copy, chapter_file_label token
+  strip ("Stats"), pdf_audit SUBJECT_TOKENS, and the CSS palette var.
+- Class 11: 9-chapter list added (titles verified from the owner's PDF headers:
+  Introduction to Statistics, Representation of Data, Measurement of Location,
+  Measures of Dispersion, Index Numbers, Probability, Random Variables,
+  Probability Distributions, Binomial Distribution) + 9 exercise-solutions
+  PDFs under files/class-11/statistics/solutions/.
+- Class 12: subject page live with guide + "uploading soon" slots; chapter list
+  pending the owner's 12th Stats PDFs (same pattern as 12th Physics etc.).
+- Site: 361 → 372 pages, 640 → 649 published files, search.json 365 entries.
+  Sitemap lastmod bumped sitewide (330 URLs) because the header mega-menu —
+  present on every page — now lists Statistics under Classes 11 & 12; the
+  hash-based cache correctly treats that as a content change.
+  Precheck 0/0, PDF audit 649/649, forms 61/61, calculators 18/18.

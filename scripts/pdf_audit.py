@@ -62,6 +62,7 @@ SUBJECT_TOKENS = {
     "chemistry": ["chemistry"],
     "biology": ["biology"],
     "mathematics": ["mathematics", "maths"],
+    "statistics": ["statistics", "stats"],
     "computer-science": ["computer science", "computer-science"],
     "english": ["english"],
     "urdu": ["urdu"],
