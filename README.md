@@ -1223,3 +1223,30 @@ yet.** These two are deliberately deferred — flip them only when:
 - Action for owner: upload the current zip + purge edge cache; the noindex
   tags only take effect once deployed. GSC coverage will drop the 4 hubs
   and the removed subject URLs after recrawl.
+
+## E-E-A-T: trust pages + author infrastructure (15 Nov 2026)
+
+- Audit item: anonymous E-E-A-T (about ~282 words, org-only bylines, 0
+  Person schema, no editorial policy, no central corrections log,
+  /editorial-policy/ + /corrections/ 404).
+- Shipped:
+  - /editorial-policy/ (priority 0.5): who is behind the site, the 5-step
+    file verification pipeline, sourcing standards (printed PCTB/PECTAA
+    books; official board/PMDC/FPSC/UET sources), public-corrections rule,
+    independence & funding, "what we are not".
+  - /corrections/ (priority 0.6): central, DYNAMIC log - indexes every
+    UPDATES entry whose title starts with "Correction:" (3 today); future
+    corrections auto-appear. Correction posts cross-link back to the log.
+  - About page expanded ~282 -> ~930 words: "How every file reaches you"
+    (5 steps) + live correction count + links to both new pages.
+  - Footer + human site-map now link Editorial Policy + Corrections Log.
+  - Author infrastructure (DORMANT by design): data.AUTHORS registry
+    (empty). While empty: no /teachers/ pages, no Person schema - the
+    site stays honestly organisational. Adding a real person lights up
+    /teachers/ index + profile pages + Person JSON-LD (jobTitle,
+    hasCredential, knowsAbout, address, sameAs) + "Written by / reviewed
+    by" bylines on update posts (per-post "author"/"reviewer" keys) and
+    Person author in Article schema. ONLY real, verifiable people -
+    invented credentials are worse than honest anonymity.
+- Build: 435 pages (+2), search 432 (+2), sitemap 435 URLs. Gates:
+  precheck 0/0, PDF audit 778/778, forms 61/61, calc 18/18.

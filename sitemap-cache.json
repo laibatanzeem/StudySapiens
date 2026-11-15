@@ -1,1642 +1,1650 @@
 {
 "": {
-"hash": "0e6e5cf4b7a27f9c590cc47d39562bb1",
+"hash": "3139a619b037b019fe9cc5a553552ac3",
 "lastmod": "2026-11-15"
 },
 "about/": {
-"hash": "522e46dc555ab4348d68282fc916506c",
+"hash": "7702acda0891f7b5c86feca83564d38b",
 "lastmod": "2026-11-15"
 },
 "advertising/": {
-"hash": "758ea04e3ff198767f06b38256328dd8",
+"hash": "bd46c72e518ee939d11f4314976bef21",
 "lastmod": "2026-11-15"
 },
 "blog/": {
-"hash": "c124fbf44d610a0ca5bdbf70fc4ef444",
+"hash": "0a57ca28758a957eeef98251ce398f73",
 "lastmod": "2026-11-15"
 },
 "blog/board-exam-prep-3-steps/": {
-"hash": "55c52214a734544722e7657af3a08100",
+"hash": "3f84b0f21e649a6110e7b19a45fdd280",
 "lastmod": "2026-11-15"
 },
 "blog/welcome-to-the-blog/": {
-"hash": "b7142627463c131d0af6e3be7e67cf86",
+"hash": "db46aecf52dafd7f40ba56ed69a0dde0",
 "lastmod": "2026-11-15"
 },
 "boards/": {
-"hash": "02be2be96d1d760790193b57b30d4c3a",
+"hash": "28ac23cf9694f5ad4a15c74555f4ba25",
 "lastmod": "2026-11-15"
 },
 "boards/bahawalpur/": {
-"hash": "e0e78ce423214f701e875a822f4f8edf",
+"hash": "1a57258ace22200cafe8fc21f1089abf",
 "lastmod": "2026-11-15"
 },
 "boards/dg-khan/": {
-"hash": "67c83616eb0fdbcecf18619bddea449f",
+"hash": "447fb90dfbedf483b624baed329b926e",
 "lastmod": "2026-11-15"
 },
 "boards/faisalabad/": {
-"hash": "e51db66bb432f9e1cdce94b54ce1cc9e",
+"hash": "48bcfacaf689b8b2f70a459b62bd18fd",
 "lastmod": "2026-11-15"
 },
 "boards/gujranwala/": {
-"hash": "83edc5caede0223c143d200deec9e002",
+"hash": "a5230a4adb68d377826c0eb3523f50af",
 "lastmod": "2026-11-15"
 },
 "boards/lahore/": {
-"hash": "4728d15e4ddf268c6bd4c920d27342fa",
+"hash": "90cf19f36b9c119a747b7159c68a334b",
 "lastmod": "2026-11-15"
 },
 "boards/multan/": {
-"hash": "88a81e41f72f4ce0eaf1aec388a7a4ac",
+"hash": "b64b8b393ec884a50a70c562d5fb0a80",
 "lastmod": "2026-11-15"
 },
 "boards/rawalpindi/": {
-"hash": "a303312949e6128f03692e75363b9546",
+"hash": "e2df6a98eafbd5622cc104860f29be69",
 "lastmod": "2026-11-15"
 },
 "boards/sahiwal/": {
-"hash": "4c17d930d78e5ed33b845c22acb94408",
+"hash": "b2a9cde84ea9a8496ab466b3f4fe719f",
 "lastmod": "2026-11-15"
 },
 "boards/sargodha/": {
-"hash": "04bc3d4e19824d77ea27542b81303f25",
+"hash": "de38e68096f55f244f7cbe1914967baf",
 "lastmod": "2026-11-15"
 },
 "classes/": {
-"hash": "a525c240f9c02b8b8f0aa468813b190d",
+"hash": "a793846c9c3f024d3d18b14fb7dbfefa",
 "lastmod": "2026-11-15"
 },
 "classes/10/": {
-"hash": "acc3f75e9df62319aa2c7f8fa5786d1d",
+"hash": "8972a9083599a2b11fdf47fd17d63d1b",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/": {
-"hash": "9ad28ec48d8df6574e83fcaddd14fc1b",
+"hash": "6d4c0d5163f4c136c26bf10998c57bfa",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-1/": {
-"hash": "ccb866257814894e8fa077e90e7694c8",
+"hash": "1a7b853ffa7e56b67aec8d42a3a8b1f8",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-10/": {
-"hash": "1ea026f1a956d894b62fe406d0805ecc",
+"hash": "e5fb4463f6ac1a7d1367c16ec7b9c250",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-2/": {
-"hash": "08de0e4696ce2584404580b286534d6c",
+"hash": "78f4122af10b68cfc87200e54c645d9c",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-3/": {
-"hash": "e4b7818a5c01bbf65231bd5d0d60a06e",
+"hash": "c5540e08aa52c2225f177ca253b8f99b",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-4/": {
-"hash": "1918176b648a5c74803a7f5cd250db04",
+"hash": "7ae8fc0b0ae09a5e08f01d887ba698f0",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-5/": {
-"hash": "7b723447eda97a6ee3936bf80e6d73f8",
+"hash": "49b204cd3c1545b9eb70fe902c3ce23f",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-6/": {
-"hash": "478fc72c1eed49770f0095a5c9c70e65",
+"hash": "4ef70443020a3648eb484b6a2cdfdded",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-7/": {
-"hash": "f5ce83969fa8db575d5a01f5c469e125",
+"hash": "0c33117df0446a57ec60d76b06a655df",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-8/": {
-"hash": "c441a1e73cb2d55f47cc00edb1a104ed",
+"hash": "e58b39d40d1e9f7eb348e52e241b157a",
 "lastmod": "2026-11-15"
 },
 "classes/10/biology/chapter-9/": {
-"hash": "cfed86e15c48237dc3762d7683ffd0cb",
+"hash": "601018e06547d4fefeba569d4f65163a",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/": {
-"hash": "7b3b0cc53cb151daf1fe7b8596c1eff1",
+"hash": "401ab37ef80ec3a2f252600b42a400d5",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-14/": {
-"hash": "79a9a8a5d64e9d9a6eb146efe19b856f",
+"hash": "2db57857c4b0e3bc0ab1e76ae1c6882b",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-15/": {
-"hash": "119cf770063ada65f2a04a1e6d540ff9",
+"hash": "53e4d830353b598aa561cc7e751d138d",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-16/": {
-"hash": "32ea1def409cea7df90b254e5e66a366",
+"hash": "36e15d43fddb0f76d88ed5b43449c39b",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-17/": {
-"hash": "f4574e13f6ae2787aab85b8dfd010514",
+"hash": "7bc370ba62efe7855d87dc1b941149bb",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-18/": {
-"hash": "a843d09a73ca4d4c75cb26e835ca4d6a",
+"hash": "9c9aaf97f9dedcfe8bf231a8c558953a",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-19/": {
-"hash": "9ec0de387627c442f2332b505581d160",
+"hash": "cfe40d32aff33e4edb2b2dd7d7922ca1",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-20/": {
-"hash": "e747c269f10d72b91ba3d7e7d6288adb",
+"hash": "ec3aef2197576ef69797750e843a3368",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-21/": {
-"hash": "4eb4acd302e54afce21a0d5268601ec7",
+"hash": "f66ae0de0a642019a27dfd19e16a81eb",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-22/": {
-"hash": "7b33bdff4c472972d7e171ea63f58410",
+"hash": "75d63be31ec9b9b099b71d07a32bb5c3",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-23/": {
-"hash": "fd43075eafec02315b802f9de8cc1ea0",
+"hash": "86ec128679227781454194f1f3b1c4e4",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-24/": {
-"hash": "0d6176b9c45a296352764168af3670b9",
+"hash": "c74ff0b1ad9400723815785c6601cd9e",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-25/": {
-"hash": "5198444b8036164a20a7da99cd93f8f9",
+"hash": "f8315e3dec5152bc0314a5dc582fc569",
 "lastmod": "2026-11-15"
 },
 "classes/10/chemistry/chapter-26/": {
-"hash": "03a288d8d1b7e26b8dab2e1dc409274a",
+"hash": "abdadb20af7df62aad9e1f0768f3f90c",
 "lastmod": "2026-11-15"
 },
 "classes/10/computer-science/": {
-"hash": "cbce2f1706d67d281c00169946333191",
+"hash": "3752396c391f802f6f3ab8762249f872",
 "lastmod": "2026-11-15"
 },
 "classes/10/computer-science/chapter-1/": {
-"hash": "419677594f564ccfe16c9825ee6b50a7",
+"hash": "ea2b40536c3c55bd20fd300dd5af2cc3",
 "lastmod": "2026-11-15"
 },
 "classes/10/computer-science/chapter-2/": {
-"hash": "0c828e9b5213f1ec03a86890413393bc",
+"hash": "041cc939cec6ccb72f23612f8594db51",
 "lastmod": "2026-11-15"
 },
 "classes/10/computer-science/chapter-3/": {
-"hash": "af2d11336fe0ba60ebe9c5ba69e95982",
+"hash": "66bd2eae0f617b5b93df7fc9acef69e2",
 "lastmod": "2026-11-15"
 },
 "classes/10/computer-science/chapter-4/": {
-"hash": "f3208a25263a1902501f4f6429e0a3f6",
+"hash": "7381b6408735d0639e4c74bceb087aa4",
 "lastmod": "2026-11-15"
 },
 "classes/10/computer-science/chapter-5/": {
-"hash": "952348b1354480484a622a5c46aeb292",
+"hash": "5a561f3453e75a96856eb4ce78548b9c",
 "lastmod": "2026-11-15"
 },
 "classes/10/computer-science/chapter-6/": {
-"hash": "8e62fcef0516dd214da37a4911d1c28f",
+"hash": "1da429988b302c4bdf6f909cf1ab94fa",
 "lastmod": "2026-11-15"
 },
 "classes/10/computer-science/chapter-7/": {
-"hash": "91ddf262329309ac6830b9a3f281204a",
+"hash": "47dc3bf044305f9fdee4cc94626399be",
 "lastmod": "2026-11-15"
 },
 "classes/10/computer-science/chapter-8/": {
-"hash": "dc696c5514f62a5d2b4e1ff2ae586947",
+"hash": "0917528c9e1a600783af6cc5c2006bf7",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/": {
-"hash": "5df6c28928ef2d68a77d65f65453748c",
+"hash": "069cfa63777e685285e3e595839daeac",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-1/": {
-"hash": "47ba58fab96c77ae2d80f74c2c627a8a",
+"hash": "98951be094223051a9d620b98107db22",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-10/": {
-"hash": "b9e0e82f72e9c56df86d3341eb1f3c27",
+"hash": "66921195ac1d5370ce3c9ec3d78b7a45",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-2/": {
-"hash": "66aa369d0b156a19e3f7ac884cb6b728",
+"hash": "709d98b9bce6cc4e79e8c865aeca2d99",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-3/": {
-"hash": "df2af57db68c9a6145dc6ba35ce38f24",
+"hash": "d6af2cae01544544c808c27c5406a504",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-4/": {
-"hash": "fc8461f2773096b5353e7352586fe95e",
+"hash": "afeb8e9b836c1ee91c533be1dfe5ff08",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-5/": {
-"hash": "6c3afceab80525bf55d3997c74a30fe8",
+"hash": "e6187c8525a243d71c81415afa3bc8b9",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-6/": {
-"hash": "f27b29d297eee3b21ea9de0f968abe7c",
+"hash": "81972447ec003c612473d3e7300115d6",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-7/": {
-"hash": "4f499e8c007dc2ebb0d0c60cb998e1fe",
+"hash": "7a17d00726d5691a22f81f256839d20a",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-8/": {
-"hash": "83baa0d58d8a333269be0d8866ecd138",
+"hash": "41342a87d770e3dbf2119276cd6304ec",
 "lastmod": "2026-11-15"
 },
 "classes/10/english/chapter-9/": {
-"hash": "30c2c0bbdf9dcd5117354e15bc7dc6df",
+"hash": "164f20b9e1006a878222195fc9573cb8",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/": {
-"hash": "4998d3a028f4234e811a60e737366f35",
+"hash": "9b74b729ebc332beb705601547a54010",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-1/": {
-"hash": "22230b7d68bc22c2aa787ba202928d40",
+"hash": "f237a6b3feeedf79ec92d5ac1ac8444b",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-10/": {
-"hash": "8ff205c6af45e6f7da3add0fec461b35",
+"hash": "3a5b4bafbc8c4ae6864668c4adf02369",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-11/": {
-"hash": "2847ffd74f027976879434d428a56e65",
+"hash": "481db9717d385bbdb1b4478a42786847",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-12/": {
-"hash": "8a0384ef23ca4d9fb35adc657d84ed91",
+"hash": "34d95a6ed1edae95e7bb03e4042c6e70",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-2/": {
-"hash": "e4359fe2a25fdbc2d7aa613708d36c6e",
+"hash": "0c70a848c0218c429b26f8f611d75680",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-3/": {
-"hash": "786b55bd61e5a6ad28ab5b62ff2cd05b",
+"hash": "79b719b955d34eeb18665ee86f38017b",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-4/": {
-"hash": "941d54505137427f2af65afc3e2337fa",
+"hash": "a4d9c3231a63d4272d9e55ddce8a8eec",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-5/": {
-"hash": "8804337134708b9126c1e3552411e7e8",
+"hash": "42bd1feae0dc79c00a9aa8e4b6cb5c85",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-6/": {
-"hash": "2b3d7752cae57ac0f28a059a09a1f847",
+"hash": "db07118e2dec1b8419ecca1cc3bee164",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-7/": {
-"hash": "323f98ea98cb0d4f8deed1a3d14af3c4",
+"hash": "5aa1b90b004a5b5014811a00436bcc6b",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-8/": {
-"hash": "87df0d9c9a80c1ab58994b0e05e9af1b",
+"hash": "6a23e998419012ad443668411d7f3e82",
 "lastmod": "2026-11-15"
 },
 "classes/10/mathematics/chapter-9/": {
-"hash": "bbb35c8cec1b25d14eec16bf94c5f7dd",
+"hash": "c5a7f715f80f3e63faadf67c89d3a24b",
 "lastmod": "2026-11-15"
 },
 "classes/10/pak-studies/": {
-"hash": "78508f812402756e2a5fcee1f8fb2920",
+"hash": "1d621c7179e70533136856399ed687f3",
 "lastmod": "2026-11-15"
 },
 "classes/10/pak-studies/chapter-1/": {
-"hash": "3bc7f0e8de3d7fb0d2bf12bc146e153a",
+"hash": "29a1be1b5767c74e040f7919b1aa3d5e",
 "lastmod": "2026-11-15"
 },
 "classes/10/pak-studies/chapter-2/": {
-"hash": "fc4d25ba4fb160205e3b7543355b64f2",
+"hash": "f2dbb9583152e08af664bc237286a781",
 "lastmod": "2026-11-15"
 },
 "classes/10/pak-studies/chapter-3/": {
-"hash": "8c9f1c81a9c0ab0b96ae818fda12d380",
+"hash": "aef61b90bf4625a0212e472b83d474df",
 "lastmod": "2026-11-15"
 },
 "classes/10/pak-studies/chapter-4/": {
-"hash": "1aa8ba5810f658401246660af56a7ccc",
+"hash": "4daea9db580659229d38a18194c9a7ee",
 "lastmod": "2026-11-15"
 },
 "classes/10/pak-studies/chapter-5/": {
-"hash": "273bcfd5ae3c9720b72dad37b792f0ce",
+"hash": "5d43aea70390d896fa6bebf7729e1fd6",
 "lastmod": "2026-11-15"
 },
 "classes/10/pak-studies/chapter-6/": {
-"hash": "977ff8a4faa4d33ac3dc945b06cfe06d",
+"hash": "4b50e816f240a2f1ff10721b483f4876",
 "lastmod": "2026-11-15"
 },
 "classes/10/pak-studies/chapter-7/": {
-"hash": "b4fe7c25e18368f146f5159d7fb974c5",
+"hash": "56f6036b73bf403f7a482a2821466592",
 "lastmod": "2026-11-15"
 },
 "classes/10/pak-studies/chapter-8/": {
-"hash": "e7c27177ed7418641ac0af40a7227327",
+"hash": "1a54b55c2c6f8099834263c305923f1c",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/": {
-"hash": "1977a0759fedd8bf83bf9c4a0d53f258",
+"hash": "dc1e7428506b074ef48668f1d9035482",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-10/": {
-"hash": "38cf74dc84a793c55387eaaf25ea087f",
+"hash": "62b46fde441a53ac261fc796d406ae18",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-11/": {
-"hash": "006b245589fd4581405d93f847881d2e",
+"hash": "0c1cb79a1365c6439c1fa8b32d3cae95",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-12/": {
-"hash": "b94b63a41b27740b027597ccb91a44c6",
+"hash": "eef47cb72c37b71c4dcb8d02c25f8309",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-13/": {
-"hash": "15fd8144555652807ad5394c9c0b8955",
+"hash": "61ef8c57367cd1379b4209e98764162e",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-14/": {
-"hash": "ec3fe6f9fa832826f1dfd991036ba0a2",
+"hash": "958df88416c5c3bd3272677d4ad5f397",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-15/": {
-"hash": "ea8c3ecc0b5025865e85692438de1701",
+"hash": "b4f28c874b00e69f8e2be58f2d79fc22",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-16/": {
-"hash": "ff19a538622d95466e2f905dd28991bf",
+"hash": "9c5432f288ff103193a6535fa5c0162f",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-17/": {
-"hash": "49e5abfcd35a4ca8b7cc63d89c2c1098",
+"hash": "900414d2aac43c017f50734dc19fe336",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-18/": {
-"hash": "3f6e2957b745ada7a165e2a66987f67b",
+"hash": "70f607d93f5637a090911cc110f0ce41",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-19/": {
-"hash": "ca70141240e1ec3cfb99ce8d3f1bdfa2",
+"hash": "c80ba39412ebea9da2a31dfde6892cb0",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-20/": {
-"hash": "0737bd7286825700fa7f6ce1e7f992f8",
+"hash": "ff1bfc9ddd7406455b5c7e6de791f0c0",
 "lastmod": "2026-11-15"
 },
 "classes/10/physics/chapter-21/": {
-"hash": "5456345a23a0e0c69d928220b4015a1c",
+"hash": "1d624c97cc738c8e603da75fc81496ef",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/": {
-"hash": "2cdf313d12e2562199074c0c9cc544db",
+"hash": "d6c6a5a7234407382ba34fe07e9d662d",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-10/": {
-"hash": "a87bb9ee17eb825730ec9e3c2c278cf4",
+"hash": "14374861e52a942024db53c68264570a",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-11/": {
-"hash": "736ede4761066609990fe9d16dbfd260",
+"hash": "467fc5643d8edafc1ff8a99980b30c84",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-13/": {
-"hash": "ef5193e79c18e06f92cc22ede57907a7",
+"hash": "8db73a039f543a3aa759d3b51650491b",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-14/": {
-"hash": "8ad44536e201b78ec5896c4061599329",
+"hash": "84f979196804735f0772ad39d4f4fb5f",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-15/": {
-"hash": "b8114af0025387b340beb8163fdd2408",
+"hash": "8b2cb73523472ae0bc25c5ea85ad6dca",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-16/": {
-"hash": "3661e45cb0140dad0bde9fc6445a0b3d",
+"hash": "d23b5d27b56060544334303e95a4b37f",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-17/": {
-"hash": "8e2e14df5414ca94784cd67781c3dda8",
+"hash": "5a5c105e69569eb70ac79b5797130c6f",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-18/": {
-"hash": "86d6aa10d3bd3bce2e72e085f3e2b4fd",
+"hash": "e36d5a491bcaf94858e141df4bc5e828",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-23/": {
-"hash": "b386b0430692a9bb39bec9be098e1903",
+"hash": "ea37d328a8e1aab42e28b652e769d4c7",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-39/": {
-"hash": "14e7cd269fed9b7da6ba37f77fe553d0",
+"hash": "b6feaff008b24481f30ad81e297d6a92",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-40/": {
-"hash": "315c200742c0b40ef64f2d3940771fc1",
+"hash": "2e8068e431acfc02f8cdec61eb1d4360",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-41/": {
-"hash": "92ab518aeb5a907a23b018f88052703b",
+"hash": "d95001a7442e14d98f8798e3378e36f4",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-42/": {
-"hash": "5d564b32fe84bffc39373ce19bd70627",
+"hash": "8ffc435811480d002b4b96cbac724224",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-6/": {
-"hash": "8816c3ca1853ddb558010ed5eb603c87",
+"hash": "b637570d17ea272abb3410ff756cad7b",
 "lastmod": "2026-11-15"
 },
 "classes/10/tarjuma-tul-quran/chapter-7/": {
-"hash": "4c9e02c7a3e96d6564ee680aa5d038c1",
+"hash": "6e1c9a58d7310de6054c17db87186e4b",
 "lastmod": "2026-11-15"
 },
 "classes/11/": {
-"hash": "b1d62de7d2654e0335a42e6e479fc89f",
+"hash": "b2e006909c2918c5d634c72b832ae3ef",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/": {
-"hash": "ef5f09b6e2a2ee7eb87fcafa5530d030",
+"hash": "3bcb524cf2e3edfcd1ddd9488adb8221",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-1/": {
-"hash": "f7e80119135f6804b18c5a149c35aa22",
+"hash": "1a99996eea91a41afa0984672b341d79",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-10/": {
-"hash": "dd5e9323138e0224dfa8b6b765a7ba1f",
+"hash": "80a61da0622ef69d6a3104152955a54d",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-11/": {
-"hash": "e1a8039920a470649ce07399ad809d06",
+"hash": "9abda3fbaf2830b83eb2b1e39e56b52c",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-12/": {
-"hash": "adb04e79dbec387876b082a812628709",
+"hash": "470d8fca0611ac84f2be828f32d84b51",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-2/": {
-"hash": "42e07f39e789787b6dbb4bad79564d4d",
+"hash": "27f91a4183a60cefd741b5be8a49c45b",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-3/": {
-"hash": "7c68800377bc76830e7f22d0b4e0a8f7",
+"hash": "1d5d890d2a796ea92e0664860e64baa1",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-4/": {
-"hash": "f5768e4cd548bbc7ba5ac25718782d5f",
+"hash": "e5c38f391de9ba62870f0ab3a70b5d46",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-5/": {
-"hash": "ff0cca0493407e380ad7b86707c0caee",
+"hash": "3b27bce5b49e047a4c47148b2e413151",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-6/": {
-"hash": "8b4efdfd3ab8393bd128ce5640687795",
+"hash": "9e7f012752c619248a56a60eb822824f",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-7/": {
-"hash": "b017f5520f0ec4066b9d8a8b5e58aac0",
+"hash": "487362cfd2f6f09f86dbf70ac1819f0f",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-8/": {
-"hash": "ec96223c22d5d00b3601f944f043a7ac",
+"hash": "83c48e96861695ac9b77d9188c8fc7bf",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/chapter-9/": {
-"hash": "595473bdf9370d1e64ec4ff6d140a8af",
+"hash": "eab771f4f75ff7d8d570d930d690eb3d",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/": {
-"hash": "9c8d250d3ec29b9b5ace76fefaf69c8c",
+"hash": "1d0f24cea3a4a5fb9269dddddb0a4fde",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-1/": {
-"hash": "c4b6d7ae4929bf13e612c3743e20e85b",
+"hash": "6fc38982e0f136537ca4e3ec82857488",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-10/": {
-"hash": "19a0f44727e8939d65e9b43d77ed84d2",
+"hash": "830f24a916945626e55ab5dd84120d1d",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-11/": {
-"hash": "68cf92344f401b3671ef0dcbc8116111",
+"hash": "098a97a804a4348442c92fe8fdbbb8a3",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-12/": {
-"hash": "b66a47e67368cf3f35d29cc99a5a4409",
+"hash": "17ec969ce62232d51827094ab599901c",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-13/": {
-"hash": "790200845489232d55d644b9a62a1594",
+"hash": "0e830f8e653c93ca01e24f5ecfc983d9",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-14/": {
-"hash": "07442d9b82573b17a45ea743a93cacda",
+"hash": "d9f925bc84458ef0313cc030eb792e4a",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-15/": {
-"hash": "fcbb8356569db5308383ff57ef7206a9",
+"hash": "f58d47218bb8cabe813d05cd1c62c2c5",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-16/": {
-"hash": "245fa5aa8001b830d34a94219239b533",
+"hash": "34b9b30cf061550c3b70312660c7c562",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-2/": {
-"hash": "ff729660112083a25aae6d8016b68366",
+"hash": "af253384060e98f87211e4d1837915aa",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-3/": {
-"hash": "ad0825dc93d755109b95691d9e1cabf4",
+"hash": "7618864934cac1e7b959e7709fddd74c",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-4/": {
-"hash": "7b3cf4f11f81a28db5894ac333ce0971",
+"hash": "1028e826a69e91b463265c82ced144de",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-5/": {
-"hash": "b6548520e343d88bfef6531a051c7070",
+"hash": "5ac2201f42a6288cbe9d04a4644846f1",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-6/": {
-"hash": "d773834e8dee757570278b3a6eeea0fd",
+"hash": "1524b8439dc36d9c338e4da3701973f0",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-7/": {
-"hash": "421f2fd3f86ccb97499a12bfc7e88b71",
+"hash": "6b7e1d74778341ccc01affa08c3d2285",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-8/": {
-"hash": "efc58b8e70aee89730f3920287a3d9bd",
+"hash": "0ff812998bbf36812ad1b47919c73952",
 "lastmod": "2026-11-15"
 },
 "classes/11/chemistry/chapter-9/": {
-"hash": "8c01f77424e6d0b59e678ed7523f2250",
+"hash": "c340c3445b15b4e71b074ada97f212d8",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/": {
-"hash": "4087a0f23d0673e1d52c2f293df7a928",
+"hash": "b84ea8f3077c0e032accce12262fc8bd",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/chapter-1/": {
-"hash": "e3ba8621fa73a6efc469debd2bbfbae2",
+"hash": "43621b250f7b1329f11b5ed70569d7de",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/chapter-2/": {
-"hash": "62b0be985c880b93c8abbaf8fad9a41b",
+"hash": "6478ae949defda3c428ca2fb489e463a",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/chapter-3/": {
-"hash": "8853124daf82bff5cc4962c427e92c4c",
+"hash": "7447a563222091e94f18c06ccd6f79df",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/chapter-4/": {
-"hash": "340b899022db00402e45dc5be191f0ca",
+"hash": "b4720c155bf568f506c0c24ec91dc5b6",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/chapter-5/": {
-"hash": "43c3c69966982ea80092747cdaefc99d",
+"hash": "7ee8b83b42b502a5bc704dedfb71b115",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/chapter-6/": {
-"hash": "3301608c6bc81469a9bc132719a32b72",
+"hash": "e8f3fcb5cedd9a13f5c06956cd19f66d",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/chapter-7/": {
-"hash": "90fb803a3fb8a6434a69d76217d37773",
+"hash": "3cd41ea46bc760d28872ef6dbebd99eb",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/chapter-8/": {
-"hash": "cd8de9de53b5f403f7065feeaddf27f8",
+"hash": "3be5de7b0dde1b205fd6a7817ee06c97",
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/chapter-9/": {
-"hash": "fa25015cc32105e831b0106e873fc535",
+"hash": "fd6830fb0ab9cccc721177344d66bd53",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/": {
-"hash": "829ba553babeaa850d6c3b533c09ca33",
+"hash": "4983d452f06bc6945ada00a445724850",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-1/": {
-"hash": "b12092143d72ac238f2ce4f79d7fb8b1",
+"hash": "e9e2c793930dc951ea67f25f6d907548",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-10/": {
-"hash": "657514b774393124cd336f2233ffd0d1",
+"hash": "ac3d0da6e7624a8b44ee70438817d67e",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-11/": {
-"hash": "fd0a1798ba51067fd021cbb42951a85c",
+"hash": "9e771ae64d126f199a2ed2217b1ae04e",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-12/": {
-"hash": "40cccd8c399d0676d460e7ac076043b0",
+"hash": "27254bc230339f7f60481e99f4743ce5",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-13/": {
-"hash": "dfe407d53a78c72409acb15f28b4a4fc",
+"hash": "156d1ac4548ac26de175dc8e68842e9c",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-14/": {
-"hash": "e6dd6761794cc564e42db22941c85a4c",
+"hash": "f795b863218946ddc8bb4e320afd4d89",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-2/": {
-"hash": "683119648438b2dd4cb05cfdd668997a",
+"hash": "ac2879b239fbe466c674b65205ee86d0",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-3/": {
-"hash": "038f46cf693590eb02b1bfd257dbde16",
+"hash": "d7f82329c4291c7784e5e41a53fc69dc",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-4/": {
-"hash": "802501b89c3b76ace9fb948de8509ebc",
+"hash": "ad639ceb36c7223bc8927777b3cbebbd",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-5/": {
-"hash": "9ef73fae1d52599286995a76a8705fd5",
+"hash": "56fe27ab3ab22ca6365cb427996360d3",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-6/": {
-"hash": "a6981cb594817098174ac02056699226",
+"hash": "aa3963b42520b77fb480a6ee13a13022",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-7/": {
-"hash": "eb00403955da2a42173a58dccec5e40f",
+"hash": "bb63c765f1c8269ea1c1327ddaf694e6",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-8/": {
-"hash": "546e71912c57823be9446974406d5a35",
+"hash": "91d3ecbd3cffdf26f02556cfcad9a916",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/chapter-9/": {
-"hash": "fb576cdd7abd668a8db62e86df4fb48e",
+"hash": "3224220572c7665fc027c8070348d301",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/": {
-"hash": "30030332a6729a473f8e3f0ae882c1cf",
+"hash": "b66cd883f52b4de34ee399e6aea74d2e",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-1/": {
-"hash": "c3c5b38f157c7611d14b70b4ad0aac6c",
+"hash": "0a0d22c971e1c76b4c968969733c21f1",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-10/": {
-"hash": "5d010ab63aa7a5a959ae6207d5e6a732",
+"hash": "5572ce8f9165a2a658bd4fe03c4b33b7",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-11/": {
-"hash": "3e2b78e834c41d54930e82b7a0525684",
+"hash": "618306d0f05d7921a4920680e5f308f6",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-12/": {
-"hash": "3898373a4b5537fafb62840fa63bed8d",
+"hash": "5ef1bb897b1d6692de44929758b5a574",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-13/": {
-"hash": "e7877bde1cf00e8b44b41d7785784383",
+"hash": "c7af04e63a1e9a5134db669138072a9d",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-14/": {
-"hash": "e6931e82ef5e4dbc3b45ff2797badbcc",
+"hash": "4a634af51886ee0a77ecb3b5949ecaa5",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-2/": {
-"hash": "ce5accf37a6465f2c9566320ee84e9e3",
+"hash": "b8332c9ab87556133b9663b3fa80b3e9",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-3/": {
-"hash": "fbf4131b06043b918efe4e2a1cfce1b9",
+"hash": "cf2d812c6d8acbd9c0936dbf50de1c54",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-4/": {
-"hash": "68ee445044440e498171361ea89fb27d",
+"hash": "6611532e26e2d9a62add36017f2a1b0f",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-5/": {
-"hash": "7ef59923ed8dec41e10cca055464a2ac",
+"hash": "ef1ab5ac52edfd50fd1eb4953f090e5f",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-6/": {
-"hash": "81c1c27cdef0ec7f849d555204dcabd2",
+"hash": "5b92d04f03d8425c4c3eb5ced3a34bc6",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-7/": {
-"hash": "b7c9f0e21039bc0aead57f674782eee3",
+"hash": "2be32a1370a4a8b486867c46c671341d",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-8/": {
-"hash": "78bcb782def323906595befcd8bce2bb",
+"hash": "57ef67c3384c406e8469f3d4b2d2669d",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-9/": {
-"hash": "98c94dfefd09d8b3329afde0a2700b0b",
+"hash": "a28b59ab35c4b77a9449527379867ce6",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/": {
-"hash": "64c66508132d373c3a4cc0bea80429f7",
+"hash": "73d127f2d2ce741033244253f6b874c7",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-1/": {
-"hash": "e343b737f14973d174dad87513290224",
+"hash": "b983d79421530db4ddab29eb2773a497",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-10/": {
-"hash": "59aea78c7df19f1296c0d67f84c81bd7",
+"hash": "fa8ea594b1226a74a7e7b56628bc63c6",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-11/": {
-"hash": "2a769cf2640edb06c97b1482c382ab44",
+"hash": "88f783b843bbcf00d471f6e90e065694",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-12/": {
-"hash": "eae15b4fee8e026b29ce3769332e1c9c",
+"hash": "3881c821b880ca0d952dcfec08271393",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-2/": {
-"hash": "8843b809be1e6ea6b6efe2f747a0e200",
+"hash": "d69a5d636f6b44d0382cd0dfc0a289b0",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-3/": {
-"hash": "40be623286820d9bbc8b1e356965cbae",
+"hash": "fbafd7138e0131597c658cd5dbefb464",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-4/": {
-"hash": "7179e46627ee9284142c74ad0e5a8cc9",
+"hash": "9c45610249ec6baf1e9c245eacdb3c12",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-5/": {
-"hash": "27344308b26938941b1fb33f4e23e49f",
+"hash": "6d391088bc618d726ec4d8d0fab04dd0",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-6/": {
-"hash": "c509a6656ecde04ff0557ef20fc229ae",
+"hash": "80c0d19db0214678f62be2d65bf6aada",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-7/": {
-"hash": "a6ec214c1d06321a6b85337a34a83633",
+"hash": "8afac922d8dbb1425c0f9e5b84329912",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-8/": {
-"hash": "630f56a4e1a7d9f436549c33cfc7a072",
+"hash": "086cfab90dcf1cd071b7647d03f62f28",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/chapter-9/": {
-"hash": "2e471d70de7f5f9cb65ae1e4259b40bd",
+"hash": "4effb52e9dea2e41701f1875026b78f4",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/": {
-"hash": "a86af4dbefc14b8d7618861ac3892518",
+"hash": "fdb358574a7db15478b3e182e2182622",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/chapter-1/": {
-"hash": "afa411b32556df77505ace52e02e1830",
+"hash": "11367f9c8d37a1e945378d900e4038f1",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/chapter-2/": {
-"hash": "433301e372bba0d8d2e127683144ec3e",
+"hash": "b56d719c0093a8de2782b295f7954a56",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/chapter-3/": {
-"hash": "cdf769727a52d527c92f57ab627914cf",
+"hash": "d1df02a19f602c5283d074568074b7a5",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/chapter-4/": {
-"hash": "c38c0f362f7989f27bdaf240e867e378",
+"hash": "aef0e2766552d06bee9864925339cb79",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/chapter-5/": {
-"hash": "e09de46677a10e9152551d318201c639",
+"hash": "43935348ec71542da5d0a1e52b00a7a7",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/chapter-6/": {
-"hash": "9d56fe058eed051f160e998e47aeced9",
+"hash": "8c5e5e349aaa25183aeaecdc8f85a6a5",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/chapter-7/": {
-"hash": "e1daa1f1daabd1faca84a2c4e06e7020",
+"hash": "c8f3a38258b0f2124f8e2db2454bd245",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/chapter-8/": {
-"hash": "0ab82465e9d65e6caab06ad4e20cbca8",
+"hash": "d9c449514671c9211f3bc4ba8b3c1e32",
 "lastmod": "2026-11-15"
 },
 "classes/11/statistics/chapter-9/": {
-"hash": "8193c4540988f996e2773c39b9319ca8",
+"hash": "8b202b39ca7f23551118412045fe85b8",
 "lastmod": "2026-11-15"
 },
 "classes/12/": {
-"hash": "1453bdac02cf8bfb34ae2c073547c716",
+"hash": "46b6aa955e6c1424d173947f08e639fd",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/": {
-"hash": "f8a1f5fc0e7763dbcf2d39d738f41a10",
+"hash": "83519bc60987f4be13d93dd797728dbf",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-13/": {
-"hash": "3a3135c3b0309c07ff0ffa5451d2bf69",
+"hash": "817d88a1eec120f1577d92a783059e76",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-14/": {
-"hash": "104b2667b9a9148c3b42b163e68736a0",
+"hash": "7e61f41b5c4e637fbaed250dba2c24ca",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-15/": {
-"hash": "361d8973d6e7b99df89b1d9b96bd2bd8",
+"hash": "f5eb6f917af74edcd98235b577ef3907",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-16/": {
-"hash": "4e6347463d04083492d1cab8826cca9c",
+"hash": "c975936790df1cbc7de30ddfae31efbc",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-17/": {
-"hash": "384dbe1617143d4c68615cdf087e1cfa",
+"hash": "3dc22308af9e45d51e28ac865ac2eaee",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-18/": {
-"hash": "80776d85eeed0771568432bcb90a9d9c",
+"hash": "2f52e0c7b72e3b7b1f3981b05968ff1a",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-19/": {
-"hash": "869b832dece0d2c7d3738fad41853de0",
+"hash": "51f8d20d4fddb16770eff4391f24f476",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-20/": {
-"hash": "f80d9ddf3915bd9c3ff0369d59e0d3f0",
+"hash": "d7b9c29a0187503ef6cc1f39d6e245ca",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-21/": {
-"hash": "0c9aa51f55a053533d9f1de8685d4567",
+"hash": "fdd75b09994294640e58d60ed72df351",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-22/": {
-"hash": "576ac8546e9f6d358abb3aa1e87f93d9",
+"hash": "25fdd7add0c8bdee55f83afb781047fa",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-23/": {
-"hash": "24a9249460bd920fa005ea5e56c3cfd6",
+"hash": "a14ed47d255f3347da19024e80c35686",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-24/": {
-"hash": "4a348b49ddfa86b5f5cbf74468d11f1a",
+"hash": "4332d2930c530402ac515b0b7533b521",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/chapter-25/": {
-"hash": "e829f3f2856923b2477a9534850882a8",
+"hash": "95b7aaeec1ce6dae92dcacbebdea3503",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/": {
-"hash": "be37c00b266fb1b8106873fa0f4c0647",
+"hash": "d54c199dab198053c4685ff640072b89",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-17/": {
-"hash": "10334fae45ef8647c62872cb747ac128",
+"hash": "799db33c1b11ef13743d6414133c6eb0",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-18/": {
-"hash": "c27aa8daa31d02bcc7d993b961f697da",
+"hash": "35d193c99291fbe6035ebe73c1a885ba",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-19/": {
-"hash": "6dfeae70b143c8e3466d2d9a799f41ed",
+"hash": "4de378fbd34cae890b999fc6662c8a36",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-20/": {
-"hash": "73e408565eb44260dbd962a71e26d880",
+"hash": "ac88cdbf1741daf820f25be70a62c049",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-21/": {
-"hash": "6a34f38e50f3c6299fadb1678505c0cf",
+"hash": "bf395374679eddac8aecf523b2dbb81b",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-22/": {
-"hash": "572151bc7170a12fc58dce9c386ecda5",
+"hash": "017228dc9786acfb982745b941cf8ec0",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-23/": {
-"hash": "2d36f67760b02873b4d28bc044a7d9d5",
+"hash": "985e9ae34a801faf5ffe8b2a87489279",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-24/": {
-"hash": "0d7a33705560eb844dea68b6f185ebbc",
+"hash": "9abe4ca49ffe143118ebe3569ae5e920",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-25/": {
-"hash": "ddffb9e374991b872172938bf23bc503",
+"hash": "3138e0c9fa1a20d4ee9b8686ee0d4451",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-26/": {
-"hash": "31a272aee892ff7c137d6692b3c5cee0",
+"hash": "0b955bc93708aa3a9444ce4e35ea84d5",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-27/": {
-"hash": "57db4ce558dc264f3cb14b68b9ddb0ba",
+"hash": "6229e2e869d85a1c41e71e256dcfec5f",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-28/": {
-"hash": "83ec45adbf14e6a1ff1262920f295d25",
+"hash": "6115316cdd7ca4910b7376e9c3d35474",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-29/": {
-"hash": "fc485a125ab4996ee03ed4e94e3ab562",
+"hash": "7c371a24dbebff8fe0011c7468c9c1ea",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-30/": {
-"hash": "7ed04e2eb710bb5cfca7bdeadd22d704",
+"hash": "81c931f23cff999e19b8d27beac2baab",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-31/": {
-"hash": "d1c51006da3d9ae929fc40e7a5c24a4b",
+"hash": "365325e7707df82a9893bf9b3887a484",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-32/": {
-"hash": "023664eb8755c747ad633cb188576525",
+"hash": "877776305093bfc98b50f5b72542b63a",
 "lastmod": "2026-11-15"
 },
 "classes/12/chemistry/chapter-33/": {
-"hash": "4eb1ad2403ed6298c8b174ca8732a4c7",
+"hash": "334d7a34e84d1477caee55f2cbd48d6c",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/": {
-"hash": "fce276dbf6ecd5970d780d34a5b95ca3",
+"hash": "238c595bba92f9c21b1e15c233a69ea7",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/chapter-1/": {
-"hash": "1a6bddcf6eae0fff2d30f14b902654f6",
+"hash": "8279cfc73fa36d967a2aa150f6e37656",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/chapter-2/": {
-"hash": "5be499b2db5d906b541a9fae3fb51ab6",
+"hash": "ac2b98746b2d25daec9aa3f77306710c",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/chapter-3/": {
-"hash": "c8018bb52d836d9ab8c52fc2a0af75f0",
+"hash": "5229a9c9bbd9fcdd0f8af5c53db0c581",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/chapter-4/": {
-"hash": "0c8a654fe5819e8baa0e5f6df7bd6ce3",
+"hash": "7669f205c63ce1bf4ae6399484402e41",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/chapter-5/": {
-"hash": "45a1fae7308921ecfcb1f79cbec79e00",
+"hash": "38e9bc803f891c99902a2b252b34562b",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/chapter-6/": {
-"hash": "2f805b20e199fa8508481ce8e6a3f073",
+"hash": "badef046aaa86e8513ceb148315cbbce",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/chapter-7/": {
-"hash": "8dcc882902e8584913824a58a0d62bf6",
+"hash": "3037e8f2c3325a0a38a0ec1ec640b55b",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/chapter-8/": {
-"hash": "aa9e1e9ac07c237b9f63dc8f62c23188",
+"hash": "175b38c99359860b4355da961f0ad102",
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/chapter-9/": {
-"hash": "84f01772768938ca64c23ef967a6420e",
+"hash": "cb48c5ded03c6587989b4c50d66d6c44",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/": {
-"hash": "045a812c7a38e7c132a1a593832fb49a",
+"hash": "497c22de7cc62d755f7228b39eee8636",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-1/": {
-"hash": "03829b0af45f22c5f0de002889a3d9e2",
+"hash": "6a210fb21d0e8cc590e33d189c666a91",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-10/": {
-"hash": "1dce2f4e0e99ea6490265bba2245710e",
+"hash": "c7413f394ebbc95f7a1993175fdeeac0",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-11/": {
-"hash": "59fb5d6da0d472ad9405497b9c602bbf",
+"hash": "0e67c5ea729c3891c836f1c76a8abc1f",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-12/": {
-"hash": "d72bc432112eeb322b6c21e9be9cfdf1",
+"hash": "47982ab3c55f80685b6709d3fd138655",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-13/": {
-"hash": "1923b2aa51eb2bb9cc3bbbe4ea436d5a",
+"hash": "f8507dd316da140aea152933c5d9a296",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-2/": {
-"hash": "68f214d13b129e8c4da05f2a82870456",
+"hash": "0670087ab6e09ac928e95a0c839916e8",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-3/": {
-"hash": "e712bb335a6b106d06958ce991fed233",
+"hash": "69bb1262888a88738b69dcc245712981",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-4/": {
-"hash": "765db1655a39c14ae972ea447771c7b6",
+"hash": "cb210e12930c7cc87430b3578104245d",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-5/": {
-"hash": "e84f5aa256a24a157bc993ebad7ad262",
+"hash": "616b2180e3481fbaebe725ab7c76d939",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-6/": {
-"hash": "34ea7bb554d61296d9ba81a23422c892",
+"hash": "9d8ceb780812be14c917ae95c908c62a",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-7/": {
-"hash": "f306dbc07332f7a41d73a95317d60a5f",
+"hash": "7fe7675b20d3419bbbd1bf6fd9750e6f",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-8/": {
-"hash": "1476e72d9baa167be2865c27bc020e15",
+"hash": "1f4b3d837228d5286956fc29720ccd5c",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/chapter-9/": {
-"hash": "c96558486307c61b0d04bb3cea754f09",
+"hash": "3b015995c9a9b7c80d965b7f9467b409",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/": {
-"hash": "a54d2a588b5bd17bb6e7faca3060b5a3",
+"hash": "52973ad09e2937e98b02719c5016dd49",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-1/": {
-"hash": "eed9a4b9a319b23de7738d18f766155d",
+"hash": "863c975a8b22b35a386fe6045ce86385",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-10/": {
-"hash": "aa6a45f717c5b8bfe43dc0ec44bbf1bb",
+"hash": "42f9ef7b9de11231d73a56a5bf3f4941",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-11/": {
-"hash": "0a5113665f2e2739b7fc6246845d2201",
+"hash": "ebeff0444cfb370cd7aabe51e04195d3",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-2/": {
-"hash": "011f10699dd0132e8371c3853f50f4fb",
+"hash": "b0319096746b87476e2c63b62e59f70c",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-3/": {
-"hash": "cb4979f1c66d046b437e011922fa9e97",
+"hash": "13d3667edb268fe0029d4167e5ede7fc",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-4/": {
-"hash": "893e731a16736dc7b3f3a659db037e06",
+"hash": "57b1fa5f83242e621612bb8ce6ab6424",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-5/": {
-"hash": "b300ee0ff98b65a9d7ddb62730da5443",
+"hash": "0589ade657524d89463366acf401a821",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-6/": {
-"hash": "a8ff6497ad18c60ccbaf2a4d3b7031ce",
+"hash": "152640f90eb682381c80f6240f2e10a8",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-7/": {
-"hash": "e61ec2812ae84a662ed666bb3401a5e7",
+"hash": "e74d912b27e8508b1a617a8b7b10ecd2",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-8/": {
-"hash": "c276d68f12bd446f6c07ec5811fc74da",
+"hash": "3314cf443cd2f70ef36f7c62e447fac8",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-9/": {
-"hash": "0516b90323177f8d9066dd671b0ac005",
+"hash": "a6e58eac1bcb8b803c6645a6277d2470",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/": {
-"hash": "ef6697c8a1984f889654289883922940",
+"hash": "ab0780ca80036cd86737e1c1b02e5ab1",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/chapter-13/": {
-"hash": "258c06fc0f6fe4ba87e60a51f85dd9b9",
+"hash": "7a49282821496b7a5bd9036bc2d37ccf",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/chapter-14/": {
-"hash": "692d0a0aad6d2fa88700f1604e6cf5d4",
+"hash": "5095aa278e70e3520b7e8e41833755ac",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/chapter-15/": {
-"hash": "f753e6c070a524a778c3937a8b36d9b0",
+"hash": "003282ddc3ce289ced98c9b03248220c",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/chapter-16/": {
-"hash": "2961911db5b3770536c6d5d3698242d8",
+"hash": "4dc2fc9d390e57b70633440ac4e5a1d5",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/chapter-17/": {
-"hash": "01dd34630b432f7f1c0e45ae63de0635",
+"hash": "084ed58c9dd9a59315377b4fdc51b753",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/chapter-18/": {
-"hash": "212b9c5b68c3765cabc6f59beca5ef2e",
+"hash": "fe42915107089f8be3ad7490329aae45",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/chapter-19/": {
-"hash": "03d9b5aab6bc80ee1154c678fb99a1e1",
+"hash": "78f771294830882aed375ed00be710d8",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/chapter-20/": {
-"hash": "d3a714f905963ae340cfbc19fe4e0e7f",
+"hash": "5bf0af964696e1a719ada14e602d9c79",
 "lastmod": "2026-11-15"
 },
 "classes/12/physics/chapter-21/": {
-"hash": "007295b8d8c67ad0cc7077441e6a93d9",
+"hash": "da5726e50d53ace0203bef679dc78fce",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/": {
-"hash": "4f1dbddf85f99d6b024d11d0b873490e",
+"hash": "8761d4912b568d73aeb0e2195a6cae2b",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/chapter-10/": {
-"hash": "4f2de76a0499d29d5f4345ef9579e6f4",
+"hash": "f2fa2c566e4e49cc665aff55a754533a",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/chapter-11/": {
-"hash": "8fbf9931735c91714a02f2198756b89c",
+"hash": "98ddafb127641149e10b48bc1e13809f",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/chapter-12/": {
-"hash": "0feca31d52726602dc6d5951bf3130df",
+"hash": "e5454b52539a6dbd4ba28c6f695c2d84",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/chapter-13/": {
-"hash": "7ee9fd276403442af54a235b719a5409",
+"hash": "da8649cb7ec2986b74160919d98f6fef",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/chapter-14/": {
-"hash": "2876163e2b39f92a9367185c7a0468ed",
+"hash": "7e0396559565f118dc5b1ed74dcb678f",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/chapter-15/": {
-"hash": "ece74ba547d33c25fedb262c9c089146",
+"hash": "1322c8054981300dd7d5ef86c64574b7",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/chapter-16/": {
-"hash": "d94adc5ff007f60f74b1af9e2c6f1378",
+"hash": "eb0bcf13ce8159842d94f262f82f142a",
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/chapter-17/": {
-"hash": "4478be11ab443cc83d5422ff38cff601",
+"hash": "36f8477e669ea89b4b429803ca65d855",
 "lastmod": "2026-11-15"
 },
 "classes/9/": {
-"hash": "742ba29e09b6deec9aef2cfaf6c580c4",
+"hash": "94d1c222e79ee23cadcfd9eb68fc202a",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/": {
-"hash": "3df7461d0fa9fa14fdb99cf2c2cd3bf5",
+"hash": "a672d536ef58dbd28f25bdebcba00c44",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-1/": {
-"hash": "accb4653146a2dcc1aef249694e9b7ee",
+"hash": "1c215ef5203587297e00d5e87b036623",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-10/": {
-"hash": "d42d62b3bf9951384697f83be9ada89b",
+"hash": "35c2784076e6a8135a2f5242a92f851c",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-11/": {
-"hash": "70ada328794e92b664ee9ee7e3d31bf1",
+"hash": "8cda06b8f10fd96c4d8e95aa46e865dc",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-2/": {
-"hash": "65f00dd5a2685e6b4b25061224b22b27",
+"hash": "2fad8466324b03b1972b99c2e7437716",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-3/": {
-"hash": "76984a0e1941569900f12cdd6fc7cc5c",
+"hash": "420eb815f7b8b3bbd2fff68eff22f2a9",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-4/": {
-"hash": "fa4d16925762c146743a715d8f7a6399",
+"hash": "9c8190415b6178808aa4a19faf52f539",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-5/": {
-"hash": "fc1e81af3e10cbf247a5d0303e15c57e",
+"hash": "e41b0443004f2487762017e0f671e224",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-6/": {
-"hash": "007aefcc688c976e682b4451855d8fb1",
+"hash": "1ccfdedb43cca521f0870d6cab917b77",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-7/": {
-"hash": "bf79e35f2190d76e29b8fe737efcd842",
+"hash": "d02a52e6e67d355da0d655885e2d694e",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-8/": {
-"hash": "dc1a41219f9162961756a6f9b493d7b6",
+"hash": "d751d1d9f785508363f14b51df89348f",
 "lastmod": "2026-11-15"
 },
 "classes/9/biology/chapter-9/": {
-"hash": "afce51b103b4ffa53d6e656485bd4746",
+"hash": "1c57e545453e4de4e7284b2c575f4b49",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/": {
-"hash": "030c96dffa1215112bb2cb99e0956a20",
+"hash": "d16a2de5e04f700eec4eb946d1813089",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-1/": {
-"hash": "f3668f37d01ce07c546f5b8ee4911698",
+"hash": "5c4bcb9dd289060323965c8a3af6ac6a",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-10/": {
-"hash": "e2c6c8a968de72ff02304c3f05a9f107",
+"hash": "138bd60c0178e12a4de62f18685db5e4",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-11/": {
-"hash": "89943bf85cc0745751bbfb7346f2e83c",
+"hash": "cc49eee60b2c21eb266294a36a9e6b82",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-12/": {
-"hash": "d38f25f12e574894b24cf575cbe95796",
+"hash": "56dc305e69157d211ac6b1a4834381d4",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-13/": {
-"hash": "a23f5dbcb24b0477dbee9745f337cf7f",
+"hash": "2d1abcb24ef12481ce52111ee2baead2",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-2/": {
-"hash": "e77b88e8193ca62c68e197196297fe02",
+"hash": "119d642991d0132e4da342f98570bd7e",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-3/": {
-"hash": "7ec75fc566135748bc76e2b141e6fee6",
+"hash": "e2ddfd3346adb2a1135f33584bbec293",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-4/": {
-"hash": "933a2f3d6a161439677031cd75f1d047",
+"hash": "5efceda6594b72091de7ef0f1abc7572",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-5/": {
-"hash": "d8dfe2f9a43f46321b49fdcdb87d2bee",
+"hash": "a9c028ae74c8e2b4bbbae5a321209893",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-6/": {
-"hash": "134fcc2a2d54a84356edef55976bb64a",
+"hash": "d0040066a2d31e76465239ddcd6e7742",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-7/": {
-"hash": "af1979a733c45d94ca3c6ea6d1604182",
+"hash": "fe7e82aac5c75d6fe5a0163773a676a4",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-8/": {
-"hash": "f35e1292de372a0d9dec6f3991387373",
+"hash": "97584db71c66f0bfba265d856a9d27cc",
 "lastmod": "2026-11-15"
 },
 "classes/9/chemistry/chapter-9/": {
-"hash": "0d25c75aa74ae88d15e615da07fcf2a6",
+"hash": "78b1fe8c063f8cdbd61bd7e1d0e45e09",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/": {
-"hash": "5cff72d9c3f752a23f857ef7690c5d14",
+"hash": "452c41153df39a74748e1b6b073bc63c",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/chapter-1/": {
-"hash": "98b3e54c1df35e1226b2443bb9412e5b",
+"hash": "a63e30c5952feaedfb6f5ec3d7848cbb",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/chapter-2/": {
-"hash": "086417436179df14e4fa35ad9ea7337c",
+"hash": "2063ba1cd3dfe2562b7a14bb782d6ad9",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/chapter-3/": {
-"hash": "223795928b58b824c923fc0864155cd2",
+"hash": "5eceae49b8da070f5b9fbd43b38f33f5",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/chapter-4/": {
-"hash": "83431a14c2cc7fd13894c63d9a7dd14b",
+"hash": "485ecb3de31956900b7baceb9a62e515",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/chapter-5/": {
-"hash": "adc2f6a692dd1f12478d36948d56d3a6",
+"hash": "45dde83ac800f0c3eb59eaad5625a661",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/chapter-6/": {
-"hash": "3baeed4f849f867ef8f99f4eb79ec4d2",
+"hash": "8f96d884ba1444a49caa69db2431251f",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/chapter-7/": {
-"hash": "932ba990057c0e9ccdfb15d677a498dc",
+"hash": "7e8bdc94caea42e25326776bff940592",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/chapter-8/": {
-"hash": "5f28fd7e8ae18d5914fe8ec0e8ee8154",
+"hash": "2bdaac2470d95da9f62685407261af85",
 "lastmod": "2026-11-15"
 },
 "classes/9/computer-science/chapter-9/": {
-"hash": "4a4406e3b28b8b8fa0ec7773887362c9",
+"hash": "934838d5df1d2f7267f68dee76f6fd40",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/": {
-"hash": "2ebb4755e39a5cce80e5283b8f9c296f",
+"hash": "31cb258ad664f5f0cfa23db045812ccc",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-1/": {
-"hash": "aff12118bd359985d97c7be7b7562d00",
+"hash": "c83822505475898d4966f2fe3536b867",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-10/": {
-"hash": "c7fef147a47c01a282c2a5d964461ddb",
+"hash": "108d3f4a20e72ff0c4e812a2d062a3fd",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-11/": {
-"hash": "980937bd2a79db2757b4c09a107e37fc",
+"hash": "32ccab2f4cc71bf7460a9efd7b42ba38",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-2/": {
-"hash": "5c62bdf2821a5cbc0cfd0dae594c3cc5",
+"hash": "bbe87e757bbe1c69bca39785cd9f856c",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-3/": {
-"hash": "c3881c2a051d4df6bdc97b02a6b5417b",
+"hash": "64e6573214898e5bc1f204ee25b772aa",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-4/": {
-"hash": "f837f39ef6a35e4e34eb008e8e3d8f51",
+"hash": "4131add8fd64ac21401c9c6fbb7bbe95",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-5/": {
-"hash": "da49caa60835264b6404f31f7b549d6a",
+"hash": "9625b380f4652e03a92b253755c7d756",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-6/": {
-"hash": "f48345e0ea29ac3f249c533cc551f0ad",
+"hash": "015b9765eabac645e7ca303556548af9",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-7/": {
-"hash": "5fb1be0356ec2636f271920c2a24c1f6",
+"hash": "ee27a07ce94e18111bad265a108fdb51",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-8/": {
-"hash": "b76eb905095d0026b2874897951632bb",
+"hash": "b3f2a3418d48cce9a10da8f72021e772",
 "lastmod": "2026-11-15"
 },
 "classes/9/english/chapter-9/": {
-"hash": "b0df7ccda4131dd92d646acdd243d3e5",
+"hash": "d5cf6451a44704ca05513e8e792d14de",
 "lastmod": "2026-11-15"
 },
 "classes/9/islamiat/": {
-"hash": "415ec3bca7529c6cdbdec5e383a85ea4",
+"hash": "aab8781ef3f1c0193955914d0015ac0c",
 "lastmod": "2026-11-15"
 },
 "classes/9/islamiat/chapter-1/": {
-"hash": "4ea9152e774f5f72227e2ed038dffaa7",
+"hash": "f46a69af528188935962dfeae195092c",
 "lastmod": "2026-11-15"
 },
 "classes/9/islamiat/chapter-2/": {
-"hash": "4a42d0ec0fc99fc93b6be0c0fa78b6b8",
+"hash": "9ad2d3a9a643dbdb2843d82f3ea4fc56",
 "lastmod": "2026-11-15"
 },
 "classes/9/islamiat/chapter-3/": {
-"hash": "3bc138deea6c6c79658ba3a9d963ad33",
+"hash": "ca968cc872af5a6ddc5dadaf043f9a3f",
 "lastmod": "2026-11-15"
 },
 "classes/9/islamiat/chapter-4/": {
-"hash": "7f3f991fdd4d56d842ca219e43f6fbfc",
+"hash": "9bea903cb1052662a597d5d9d10079a6",
 "lastmod": "2026-11-15"
 },
 "classes/9/islamiat/chapter-5/": {
-"hash": "a7a0cac68bc7a3d2aeeec83dc7135165",
+"hash": "a17e26ea73bca72f82a341b970a4f87d",
 "lastmod": "2026-11-15"
 },
 "classes/9/islamiat/chapter-6/": {
-"hash": "96babd39e909f4811347fd04c43470aa",
+"hash": "0fe39a74df5a3a181338f28219f32cbb",
 "lastmod": "2026-11-15"
 },
 "classes/9/islamiat/chapter-7/": {
-"hash": "35fb89fce9b44f596603a3b1d89f54f7",
+"hash": "3735109b2cf53b7fa4f785ce491df2a8",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/": {
-"hash": "09923d47ca4b8b9b42e7e81b20b4a11f",
+"hash": "d56c7ea291cc7b014b2f628c195cdb20",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-1/": {
-"hash": "67187096f93f32045dc7cc0b41eec6a2",
+"hash": "c2a497c52f3f5bfc849b5644f3a02135",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-10/": {
-"hash": "8ecaaa19a8ddd5d9964220af53033555",
+"hash": "628609c44efe7579554572559516636a",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-11/": {
-"hash": "f377ebfa812db2ac0698507f355b7538",
+"hash": "ffe35af35a6bc84f8befb6e9ad150c4c",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-12/": {
-"hash": "5edc7fda3489367855b6068843295105",
+"hash": "ca934314baa52d7e7c71e37fe1857e75",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-13/": {
-"hash": "76fe72e3f64c40ea8df2a9870ec342e9",
+"hash": "02bef1f92ea05d0a83e4674a6ffc4211",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-2/": {
-"hash": "cdc8e635fa06ff6b151477e6cf78e409",
+"hash": "f41d0c3feeccc20b77681a5c0a17ce3d",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-3/": {
-"hash": "fbb340da7991b752d3122a610ff2d30e",
+"hash": "9722062a1ab4589ec2cd729d88ba453a",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-4/": {
-"hash": "d5c7439fd3896b1ac471af0d92c55843",
+"hash": "21ea5073a3d22e3c49ff6b66ddc3ea75",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-5/": {
-"hash": "16f6c445efcd0b103826c15e060d43a0",
+"hash": "6138074ad9d9039db17e49108d179cd9",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-6/": {
-"hash": "dd7b87018675abb3466ec34b258d339d",
+"hash": "3079fc7d3f50722794b5d959a9948434",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-7/": {
-"hash": "b3d745ffc4d8fbf1577aac1216c7fcd4",
+"hash": "b6b3dbe66f3e33c144e2563bf28ae6cd",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-8/": {
-"hash": "2f78a0084e55cec23f36cc3eea0cc860",
+"hash": "74e2516161187b8628e115ef50ec5d08",
 "lastmod": "2026-11-15"
 },
 "classes/9/mathematics/chapter-9/": {
-"hash": "71da3d87a7d70ad08dbab09033b8eb0f",
+"hash": "432a5fbf519fa7ef241782e6e5857c67",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/": {
-"hash": "4d9d5ee9ff311b9f573af537b05d9bb6",
+"hash": "ee5ae1a2a7324101e16fe21c4bc1f56a",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/chapter-1/": {
-"hash": "70c5d1b0d6703b53f0b944e77af70542",
+"hash": "3a0ec668ef4446c8fe6a3014e6a0ef46",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/chapter-2/": {
-"hash": "e45183a5ad9978debf466a0c408be06b",
+"hash": "03e5f1e9c883dc3b3813b8dcb12fa0fd",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/chapter-3/": {
-"hash": "2b3c45cbd37ec2286be8f278c709ffc9",
+"hash": "b65f13cf5adabcf910be815ca3d5c72a",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/chapter-4/": {
-"hash": "b5c64778454e38ed265133df69cbfbff",
+"hash": "f6f180e93e46e246a528b9afec72d1c4",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/chapter-5/": {
-"hash": "8cb8fa48cff5de1d912f5b4bfb64a82f",
+"hash": "0c2f38d90591ed4981cab9132b82d7f5",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/chapter-6/": {
-"hash": "ced2f754addbf98fbed06745b6beff10",
+"hash": "4621c0f6d9842bee13a94b71576cebb0",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/chapter-7/": {
-"hash": "a42ed0bb51617d5b6509496fe6b9712d",
+"hash": "899e9cb9dc5b10f075648578cff129df",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/chapter-8/": {
-"hash": "c61688639c04f0269d9958bcd3ab9af2",
+"hash": "1b64eda1b8885e90e1ea665f8aba8db6",
 "lastmod": "2026-11-15"
 },
 "classes/9/physics/chapter-9/": {
-"hash": "7bd87b6b975da5f904c2c522437d553b",
+"hash": "47eee2ff70b467a6f63f35ace84e34a7",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/": {
-"hash": "84e69ecf99ba0d7b76827160b05dca3c",
+"hash": "1ba1dae22beb1fb7729ac3cc9827a376",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-19/": {
-"hash": "1fedb65d9334abecfb50aa84960a7c16",
+"hash": "567ec2f5b33e3a737eef2a48e2255e61",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-20/": {
-"hash": "3e35439a36a85a31e590ffa564497e6e",
+"hash": "35976c08a4ed6fe30c45e3ad7c96037f",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-21/": {
-"hash": "d92e265916ec853492bbf0d77b9d46ca",
+"hash": "6f8bb1f783cef5a78d24237f670a214e",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-22/": {
-"hash": "f4f232b3220fafdd8eb59aa9f17bcd99",
+"hash": "0f93aa5fadbf0c6d87970ec68d243634",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-25/": {
-"hash": "9c576752bde65dc8ad0eed6669506a81",
+"hash": "9ebeb42ec5cf0ed436144dc38a0c60f3",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-26/": {
-"hash": "58963e7db50fedb7241bae1514b90b37",
+"hash": "344139bbed360cdb88f8a8e9692cf87b",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-27/": {
-"hash": "442b18aaaed264cf9e76897f01f2bba5",
+"hash": "35be08160422d74091e6b9ac04c91bb1",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-28/": {
-"hash": "0da6446cf220d1014b1a38f19ba0b2ba",
+"hash": "66293d349727e72ffbf336b8915a45d8",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-29/": {
-"hash": "abdeaa1540e35ebd921c5ea2ad22e19e",
+"hash": "d921b39e5260ecfb095212216abc297c",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-30/": {
-"hash": "e83c6331c207ff58780448b759300aa1",
+"hash": "7a87d55f82b3db3a55258a11be870d3c",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-31/": {
-"hash": "0cfcc02d2f6f2e1c31a51e2169bd1ceb",
+"hash": "440fa198fcd45a52b71ceee5294d8f94",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-32/": {
-"hash": "4475063653477cfe0f5be906a2124bf7",
+"hash": "d362ba843a8598804d5c7da217b4c686",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-34/": {
-"hash": "8045dff89ded6386f90dcc7f64510e25",
+"hash": "c75d56b0431fc3e087a5e139a876f166",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-35/": {
-"hash": "db4afe63e65353e90b3d2c567efcdc4d",
+"hash": "3e6ac3e8a7efca6f9f445f542b5e1bb7",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-36/": {
-"hash": "a6ab249fb441f1fed0b1352097569b11",
+"hash": "c4823a88add756cdb10c2c59a381df7c",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-37/": {
-"hash": "893a37d58faf1b8a35e66a641cc2a043",
+"hash": "8c3cb9c3c219b3eeb03f87a363576b9b",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-38/": {
-"hash": "e272d9abda0c7a8fb3f4f48156d7089e",
+"hash": "fc7dbf3617d32f4335dfb303fbf16804",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-39/": {
-"hash": "e101f28f31318a65fd51dc4b6e6eb1ba",
+"hash": "f6b6c5ac77220fa186aa95ac121f0519",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-40/": {
-"hash": "f7da318b3cf35f5d754805e7da147bc9",
+"hash": "ed7022204a933103757bca5222efb1f6",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-41/": {
-"hash": "af9f93a7350771ddd6819818b8612ade",
+"hash": "e8f49765235cfc19356f084beb0aa036",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-42/": {
-"hash": "d5f567fd52ac26c7fa1a93fc9f3f0200",
+"hash": "b3db0131fc910d3c40d046a222d0654b",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-43/": {
-"hash": "c7036627bb9057f9e2acd4843b56a57c",
+"hash": "069113fe6c69d7556ba41c7c682bcc00",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-44/": {
-"hash": "73e1d3c2c2ac60eb989da33d378043df",
+"hash": "edfe9f2c93f0bc9c181104e5540a5add",
 "lastmod": "2026-11-15"
 },
 "classes/9/tarjuma-tul-quran/chapter-45/": {
-"hash": "8b8d7390f4b586a20e06cb17c897c100",
+"hash": "54a74811b3ee59557f7b91a16130e66b",
 "lastmod": "2026-11-15"
 },
 "contact/": {
-"hash": "b2a52fffd09e92835b96c0dded532528",
+"hash": "10985642aae79028d9f1e5162334947a",
 "lastmod": "2026-11-15"
 },
 "copyright/": {
-"hash": "448382236b07019cc482fa9849e9f9d3",
+"hash": "9dc04d4d35add664a3b6a098077afdcc",
+"lastmod": "2026-11-15"
+},
+"corrections/": {
+"hash": "38ce173712ac1487c10684432ae5a249",
 "lastmod": "2026-11-15"
 },
 "css/": {
-"hash": "1e7454ff4f8898dfcd057c9604f16f97",
+"hash": "4cdd8c086c27c1510434ee98772b1cd1",
 "lastmod": "2026-11-15"
 },
 "date-sheet/": {
-"hash": "7a6d4792c682be51500a6c6f1bff2d66",
+"hash": "2c86a1f9003d706b406f5915814bebcd",
 "lastmod": "2026-11-15"
 },
 "ebooks/": {
-"hash": "e320b8ed6ef7a6533a6fa17f4368ea5b",
+"hash": "199e10fce3c125cdd6b8e529d6de0aef",
 "lastmod": "2026-11-15"
 },
 "ecat/": {
-"hash": "176e34b4fabc8ff7c27c7d4db700bc2d",
+"hash": "28acbbdbf7fd7135961ba0b6c2396c28",
+"lastmod": "2026-11-15"
+},
+"editorial-policy/": {
+"hash": "27c2454d3f235acaa3b729c08ac38f16",
 "lastmod": "2026-11-15"
 },
 "mdcat/": {
-"hash": "2168028fc71a2cb2b61d81674f58afab",
+"hash": "bf767384ca1051026b601f092fb895ea",
 "lastmod": "2026-11-15"
 },
 "model-papers/": {
-"hash": "d906506e893e3f9e418dfa6ab0b67a68",
+"hash": "5dc2516fe3a21a198287f617e2975ada",
 "lastmod": "2026-11-15"
 },
 "pairing-scheme/": {
@@ -1644,91 +1652,91 @@
 "lastmod": "2026-11-15"
 },
 "privacy-policy/": {
-"hash": "740748fc7c462e57b454cd50c55e98fa",
+"hash": "07dde5325ad5b6cab56489fec561a484",
 "lastmod": "2026-11-15"
 },
 "results/": {
-"hash": "38ca28bb1dfe1e72352df706278bf5f8",
+"hash": "429eef101e000fc0b6f6a059bfe6e1fd",
 "lastmod": "2026-11-15"
 },
 "results/class-10/": {
-"hash": "b6f12df29ad72c0c569a03a52922f5b6",
+"hash": "18434b250b7a80b496751319a172c0b8",
 "lastmod": "2026-11-15"
 },
 "results/class-11/": {
-"hash": "dd017abef2c6f6acd3498cc35d2ada8f",
+"hash": "b0ef991d115048d2e05abe4aca0bd1e6",
 "lastmod": "2026-11-15"
 },
 "results/class-12/": {
-"hash": "38d18e2fb3faa85199e1dc189858eb43",
+"hash": "3dd905ccf367d5caff62b1c32343dfb5",
 "lastmod": "2026-11-15"
 },
 "results/class-9/": {
-"hash": "8eb70ceac739498cc052878a35ba5099",
+"hash": "b9e192b4411ddc8b018b7ddf243a4081",
 "lastmod": "2026-11-15"
 },
 "roll-number-slip/": {
-"hash": "116da95b9e92d531e2fa3031e743f688",
+"hash": "ed4793d071f5bfd40240c8f1b9af64b0",
 "lastmod": "2026-11-15"
 },
 "site-map/": {
-"hash": "f2b8a30bd41df2c51ae8b6b3af389b5c",
+"hash": "d4032ac4b341d1d4562391cf54bb7ef1",
 "lastmod": "2026-11-15"
 },
 "smart-syllabus/": {
-"hash": "46ff93a283cf27db3d803c419525c693",
+"hash": "603cdf1b74da67d19ba3b59ce2f703ab",
 "lastmod": "2026-11-15"
 },
 "terms/": {
-"hash": "84ef796d6afbd284c6ebc2b9cfc7858b",
+"hash": "3d70b6e60333ecb9e5cc7db2201a5e5a",
 "lastmod": "2026-11-15"
 },
 "tests/": {
-"hash": "d9a2d6e4ab8e9be05cbfbb0806c1734f",
+"hash": "d771dd6dc25b1b03e61193a4c5b0fae9",
 "lastmod": "2026-11-15"
 },
 "tests/study-skills-basics/": {
-"hash": "7b09d25d00266ebb27f93c8fc706dd3c",
+"hash": "a92e87a2a0f3e7072315d82a0156526e",
 "lastmod": "2026-11-15"
 },
 "updates/": {
-"hash": "603e9ec8656238bc972f13edf1277843",
+"hash": "d44994473997cc966ecf61ad0068a213",
 "lastmod": "2026-11-15"
 },
 "updates/board-exams-timeline-2027/": {
-"hash": "aa514b322715a064717864e0622c021b",
+"hash": "2ef2d2fa2f82d3f1c20b2179f6401f38",
 "lastmod": "2026-11-15"
 },
 "updates/class-10-new-books-2026/": {
-"hash": "f8cfaa218298f19b57ef576923704012",
+"hash": "2ff17ea5ced5e5a57d653c50adb6e3de",
 "lastmod": "2026-11-15"
 },
 "updates/class-12-new-books-2026/": {
-"hash": "09fab55b7ce894d9bb9b1bc25927143d",
+"hash": "70d8b640b13d5e1e9a954320083e0edd",
 "lastmod": "2026-11-15"
 },
 "updates/css-2027-guide/": {
-"hash": "c5d41bde120fd1e8034e71a3d373875a",
+"hash": "d587accc65e054c82dd63147594bcc7d",
 "lastmod": "2026-11-15"
 },
 "updates/css-optional-selection-rules/": {
-"hash": "d25ae6d8881ddaaa005697e4940056fb",
+"hash": "d254ba2a25fbd33557f3a2bc96e88d19",
 "lastmod": "2026-11-15"
 },
 "updates/ecat-2026-merit-basis-correction/": {
-"hash": "16f7f091e099d4e8c3a41ce95042b4be",
+"hash": "10287e113d49e8e04a5a3076f3cbee96",
 "lastmod": "2026-11-15"
 },
 "updates/mdcat-2026-guide/": {
-"hash": "e13fe99fa6e7c1bf8962235e1bdee07c",
+"hash": "7bb982b31579aca9f82beee6f39209fa",
 "lastmod": "2026-11-15"
 },
 "updates/mdcat-2026-pattern-correction/": {
-"hash": "5eaaf0bb08f7622c6528657aa68a2f61",
+"hash": "e56f7a0f04950795cf28332328856c90",
 "lastmod": "2026-11-15"
 },
 "updates/pairing-scheme-guide/": {
-"hash": "f9c025c10afeb36fed35e19093e66b72",
+"hash": "d707247a252ea3048b51824bfae1b488",
 "lastmod": "2026-11-15"
 }
 }

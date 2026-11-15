@@ -1073,3 +1073,30 @@ ECAT = {
         ("Merit lists", "UET publishes several merit lists; each department and campus closes at its own aggregate. Apply to multiple programmes to stay safe."),
     ],
 }
+
+# ---------------------------------------------------------------------------
+# E-E-A-T: named author / reviewer profiles (teachers panel).
+#
+# The site stays honestly ORGANISATIONAL while this dict is empty: no
+# /teachers/ pages are built and no Person schema is emitted. To publish a
+# named profile, add an entry and rebuild - /teachers/, profile pages,
+# bylines ("Written by ...") and Person schema light up automatically.
+#
+# ONLY add real, verifiable people. Invented credentials are worse for
+# Google (E-E-A-T) and for students than honest anonymity.
+#
+# "slug": {
+#     "name":  "Full Name",                 # required
+#     "title": "Teacher, Chemistry",        # jobTitle shown + schema
+#     "qual":  "MSc Chemistry, University of the Punjab",
+#     "subjects": ["Chemistry"],            # subjects they cover
+#     "classes": ["11", "12"],
+#     "years": 12,                          # teaching experience
+#     "city":  "Lahore",
+#     "bio":   "2-3 sentences, first person or third person.",
+#     "photo": "assets/img/team/slug.jpg",  # optional real photo
+#     "same_as": ["https://www.linkedin.com/in/..."],  # optional
+# }
+# Reference an author from an update post with  "author": "slug"  (and
+# optionally  "reviewer": "slug")  in the UPDATES entry.
+AUTHORS = {}

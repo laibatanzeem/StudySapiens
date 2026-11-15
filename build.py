@@ -10,7 +10,7 @@ import os, json, re, shutil, html, datetime, subprocess
 from data import (SITE, CLASSES, SUBJECTS, SUBJECT_ORDER, SUBJECT_INFO, FILE_CATEGORIES,
                   SUBJECT_CLASSES, NUMERICAL_SUBJECTS, RESULT_WINDOWS, ECAT, CHAPTERS, CHAPTER_CATS,
                   EXTRA_CATEGORIES, BOARDS, UPDATES, FAQS, MDCAT, CSS_EXAM, CONTACT_TOPICS,
-                  HIDE_EMPTY_SLOTS)
+                  HIDE_EMPTY_SLOTS, AUTHORS)
 
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "site")
 DOM = SITE["domain"]
@@ -421,6 +421,7 @@ def footer_html(R):
         ("Latest Updates", "updates/"), ("Site Map", "site-map/")])
     comp = "".join(f'<li><a href="{R}{p}">{l}</a></li>' for l, p in [
         ("About Us", "about/"), ("Contact", "contact/"),
+        ("Editorial Policy", "editorial-policy/"), ("Corrections Log", "corrections/"),
         ("Privacy Policy", "privacy-policy/"), ("Terms of Use", "terms/"),
         ("Copyright / DMCA", "copyright/"), ("Ad Disclosure", "advertising/"),
         ("MDCAT Corner", "mdcat/"), ("CSS Corner", "css/"), ("Blog", "blog/"),
@@ -2777,6 +2778,24 @@ def build_post(p):
   <div class="up-body"><p>{esc(x['excerpt'][:110])}…</p>
   <a class="read-more" href="{R}updates/{x['slug']}/">Read {icon("arrow",13)}</a></div></article>""" for x in others)
     body_html = p["body"].replace('href="/', f'href="{R}')
+    # E-E-A-T byline: named author when the post references a registered
+    # profile (data.AUTHORS); honest organisational byline otherwise.
+    a = AUTHORS.get(p.get("author"))
+    rvw = AUTHORS.get(p.get("reviewer"))
+    if a:
+        byline = f'{icon("teacher",14)} Written by <a href="{R}teachers/{p["author"]}/">{esc(a["name"])}</a>'
+        if rvw: byline += f', reviewed by <a href="{R}teachers/{p["reviewer"]}/">{esc(rvw["name"])}</a>'
+    else:
+        byline = f'{icon("teacher",14)} StudySapiens Team'
+    if a:
+        author_ld = {"@type": "Person", "name": a["name"], "url": f"{DOM}/teachers/{p['author']}/"}
+        if a.get("same_as"): author_ld["sameAs"] = a["same_as"]
+    else:
+        author_ld = {"@type": "Organization", "name": "StudySapiens", "url": f"{DOM}/"}
+    corr_note = (f'<div class="card" style="background:var(--navy-50);margin:14px 0 0;padding:16px 22px">'
+                 f'<p class="small muted" style="margin:0">{icon("doc",13)} This correction is part of our '
+                 f'public <a href="{R}corrections/">Corrections Log</a> - every mistake we have fixed, in the open.</p></div>'
+                 if p["title"].startswith("Correction:") else "")
     src_html = ""
     if p.get("sources"):
         links = " &nbsp;&middot;&nbsp; ".join(
@@ -2790,9 +2809,10 @@ def build_post(p):
     <div class="article">
       <span class="badge badge-gold">{esc(p["tag"])}</span>
       <h1 style="margin-top:12px">{esc(p["title"])}</h1>
-      <div class="art-meta"><span>{icon("cal",14)} {esc(p["date"])}</span><span>{icon("teacher",14)} StudySapiens Team</span><span>{icon("clock",14)} 4 min read</span></div>
+      <div class="art-meta"><span>{icon("cal",14)} {esc(p["date"])}</span><span>{byline}</span><span>{icon("clock",14)} 4 min read</span></div>
       <div class="article-body">{body_html}</div>
       {src_html}
+      {corr_note}
       {share_row()}
       <div class="card" style="background:var(--navy-50);margin:26px 0;padding:22px">
         <p class="small muted" style="margin:0">{icon("doc",13)} <b>Disclaimer:</b> schedules and policies are summarised from official announcements for students' convenience. Always confirm the final document from your board / PMDC / FPSC. Have a correction? Email {EMAIL}.</p>
@@ -2811,7 +2831,7 @@ def build_post(p):
            "description": p["excerpt"], "datePublished": iso, "dateModified": iso,
            "citation": [u for _n, u in p.get("sources", [])] or None,
            "image": f"{DOM}/assets/img/og-image.jpg", "mainEntityOfPage": f"{DOM}/updates/{p['slug']}/",
-           "author": {"@type": "Organization", "name": "StudySapiens", "url": f"{DOM}/"},
+           "author": author_ld,
            "publisher": {"@id": f"{DOM}/#org", "name": "StudySapiens",
                          "logo": {"@type": "ImageObject", "url": f"{DOM}/assets/img/logo.png"}},
            "articleSection": p["tag"], "inLanguage": "en"}]
@@ -3073,7 +3093,17 @@ def build_about():
         <h3 style="font-size:1rem">Free Forever</h3><p class="small">Education money shouldn't gatekeep. Every note and tool here stays free.</p></div>
     </div>
     <div class="article" style="margin-top:44px">
-      <h2 style="font-size:1.5rem;margin-bottom:14px">What's coming next (roadmap)</h2>
+      <h2 style="font-size:1.5rem;margin-bottom:14px">How every file reaches you</h2>
+      <p>No file appears on StudySapiens by accident. Each one follows the same five steps, and the rules are public in our <a href="{R}editorial-policy/">Editorial &amp; Verification Policy</a>:</p>
+      <ol>
+        <li><b>Prepared by a teacher</b> from the official PCTB / PECTAA printed book - not from other websites.</li>
+        <li><b>Checked against the printed book</b>, chapter by chapter, before it is published. Chapter numbers must match your book.</li>
+        <li><b>Honest gaps.</b> If something is not ready, the page says <i>“Uploading soon”</i> instead of hiding filler behind a download button.</li>
+        <li><b>Dated.</b> Pages carry an “Updated” date, and exam articles cite their official sources at the top.</li>
+        <li><b>Corrected in public.</b> When we get something wrong, we publish the correction as its own article and list it in the <a href="{R}corrections/">Corrections Log</a> - we do not quietly edit mistakes away.</li>
+      </ol>
+      <div class="callout">Accountability, not just claims: {len([x for x in UPDATES if x['title'].startswith('Correction:')])} corrections published in the open so far. <a href="{R}corrections/">See the log</a> · <a href="{R}editorial-policy/">Read the policy</a></div>
+      <h2 style="font-size:1.5rem;margin:30px 0 16px">What's coming next (roadmap)</h2>
       <ul>
         <li><b>Urdu-medium notes</b> for science subjects</li>
         <li><b>Video explanations</b> of hard chapters</li>
@@ -3092,6 +3122,163 @@ def build_about():
         desc="StudySapiens is built by working Punjab teachers and verified by a subject-expert panel, with one promise: every file is checked against the printed book first.",
         path="about/", body=body, extra_ld=ld), priority="0.6")
     SEARCH.append({"t": "About StudySapiens", "s": "our story & mission", "u": "about/", "c": "Page", "k": "teacher mission story"})
+
+# ------------------------------------------------------------------
+# E-E-A-T trust pages: editorial policy, corrections log, teacher profiles
+# ------------------------------------------------------------------
+def build_editorial_policy():
+    R = "../"
+    body = crumbs_html(R, [("Editorial Policy", "editorial-policy/")]) + page_hero(R,
+        badge="Our Rules, In Public",
+        title="Editorial & Verification Policy",
+        lead="How StudySapiens content is made, checked, sourced and corrected. Written down so students and parents can hold us to it.",
+        actions=f'<a class="btn btn-primary btn-sm" href="{R}corrections/">{icon("doc",15)} See the Corrections Log</a>')
+    body += f"""
+<section class="section section-tight">
+  <div class="container article" style="max-width:820px">
+    <h2>Who is behind StudySapiens</h2>
+    <p>StudySapiens is run by working teachers of Punjab board classes, supported by a panel of subject experts who review material before it goes live. We are <b>not</b> a government body and not affiliated with PCTB, PECTAA or any BISE - we are an independent study resource that follows their official books and announcements. You can reach a human at <b>{EMAIL}</b>.</p>
+    <h2>How study files are made and verified</h2>
+    <ol>
+      <li><b>Prepared from the printed book.</b> Notes, solutions and MCQ banks are prepared by teachers working from the official PCTB / PECTAA printed book for the session, not from other websites.</li>
+      <li><b>Checked before publishing.</b> Every file is checked against the printed book - chapter numbers, exercise numbers and terminology must match what students hold in their hands.</li>
+      <li><b>Honest gaps.</b> Anything not ready yet is labelled <i>“Uploading soon”</i> on the page. We never pad pages with filler to look complete, and empty sections are kept out of search engines until they have real files.</li>
+      <li><b>Dates and sources.</b> Study pages show when they were last updated. News and exam-pattern articles list their official sources (board notices, PMDC, FPSC, UET) at the top of the article.</li>
+      <li><b>Corrected in public.</b> See the next section.</li>
+    </ol>
+    <h2>Corrections</h2>
+    <p>Mistakes happen on every study website. Our rule is what makes us different: <b>a correction is published as its own dated article</b>, the affected page is fixed, and the correction is listed forever in our <a href="{R}corrections/">Corrections Log</a>. We do not silently delete embarrassing mistakes. If you spot an error, email <b>{EMAIL}</b> with the page link - if you are right, you will see your correction published.</p>
+    <h2>Sourcing standards</h2>
+    <ul>
+      <li><b>Study material:</b> the official printed PCTB / PECTAA books are the reference for content and chapter numbering.</li>
+      <li><b>Exam news and patterns:</b> official announcements from boards, PMDC, FPSC and UET, linked in the article. Where an announcement is still pending, we say “expected” and show our reasoning from previous years.</li>
+      <li><b>No invented facts.</b> If we cannot verify something, we say so instead of guessing.</li>
+    </ul>
+    <h2>Independence and funding</h2>
+    <p>Every file and tool on StudySapiens is free: no accounts, no paywalls, no “premium” downloads. The site is funded by its founder-teachers. If advertising appears in future, it will be clearly labelled and covered by our <a href="{R}advertising/">ad disclosure</a> - it will never change what our notes say.</p>
+    <h2>What we are not</h2>
+    <p>We are not a board, not an official noticeboard, and not a substitute for your school or board's final documents. Exam dates, roll number slips and results always come from your own board - our pages exist to explain them, and every exam page says so.</p>
+    <div class="callout">Questions about this policy? Email <b>{EMAIL}</b> - a teacher reads every message.</div>
+  </div>
+</section>"""
+    ld = [breadcrumb_json([("Editorial Policy", "editorial-policy/")])]
+    w("editorial-policy/index.html", layout(page_key="editorial-policy", depth=1,
+        title="Editorial & Verification Policy | StudySapiens",
+        desc="How StudySapiens content is made: teacher-prepared from the printed PCTB/PECTAA books, verified before publishing, honestly dated, and corrected in public.",
+        path="editorial-policy/", body=body, extra_ld=ld), priority="0.5", changefreq="yearly")
+    SEARCH.append({"t": "Editorial & Verification Policy", "s": "how we make & check content", "u": "editorial-policy/", "c": "Page", "k": "editorial policy verification corrections trust"})
+
+def build_corrections():
+    R = "../"
+    fixes = [p for p in UPDATES if p["title"].startswith("Correction:")]
+    cards = "".join(f"""
+<article class="update-card"><div class="up-top"><span class="badge badge-gold">Correction</span>
+  <div class="up-date">{icon("clock",13)} {esc(p["date"])}</div>
+  <h3><a href="{R}updates/{p['slug']}/">{esc(p["title"])}</a></h3></div>
+  <div class="up-body"><p>{esc(p["excerpt"][:170])}…</p>
+  <a class="read-more" href="{R}updates/{p['slug']}/">Read the correction {icon("arrow",13)}</a></div></article>""" for p in fixes)
+    body = crumbs_html(R, [("Corrections Log", "corrections/")]) + page_hero(R,
+        badge="Accountability",
+        title="Corrections Log",
+        lead="Every study site makes mistakes. Few show them in public. This is the complete, dated list of corrections we have published - nothing is quietly edited away.",
+        actions=f'<a class="btn btn-primary btn-sm" href="mailto:{EMAIL}">{icon("mail",15)} Report an Error</a>')
+    body += f"""
+<section class="section section-tight">
+  <div class="container" style="max-width:900px">
+    <div class="article" style="margin-bottom:34px">
+      <h2 style="font-size:1.5rem;margin-bottom:14px">How corrections work here</h2>
+      <p>When a mistake reaches us (by email or our own review), we do three things: <b>fix the affected page</b>, <b>publish the correction as its own dated article</b> explaining what was wrong and what is correct with official sources, and <b>list it here forever</b>. Students who saved the old version deserve to know it changed.</p>
+      <div class="callout">{len(fixes)} correction(s) published in the open since launch. Found something wrong? <a href="mailto:{EMAIL}">Email us</a> - if you are right, your correction appears on this page.</div>
+    </div>
+    <div class="grid grid-3">{cards}</div>
+    <div class="card" style="margin-top:36px;background:var(--navy-50);padding:22px">
+      <p class="small muted" style="margin:0">{icon("shield",14)} The rules behind this log are in our <a href="{R}editorial-policy/">Editorial &amp; Verification Policy</a>.</p>
+    </div>
+  </div>
+</section>"""
+    ld = [breadcrumb_json([("Corrections Log", "corrections/")])]
+    w("corrections/index.html", layout(page_key="corrections", depth=1,
+        title="Corrections Log | StudySapiens",
+        desc="The complete public list of corrections published on StudySapiens: what was wrong, what is correct, with dates and official sources - never quietly edited away.",
+        path="corrections/", body=body, extra_ld=ld), priority="0.6", changefreq="weekly")
+    SEARCH.append({"t": "Corrections Log", "s": "our public mistake log", "u": "corrections/", "c": "Page", "k": "corrections errors accountability fixes"})
+
+def build_team():
+    # Named teacher/reviewer profiles. Dormant while data.AUTHORS is empty:
+    # no pages, no sitemap entries, no Person schema - the site stays
+    # honestly organisational. Add real people in data.py and rebuild.
+    if not AUTHORS:
+        return
+    R = "../"
+    cards = ""
+    for slug, a in AUTHORS.items():
+        subj = ", ".join(a.get("subjects", []))
+        meta = " · ".join(x for x in [a.get("qual"), f'{a.get("years")} years teaching' if a.get("years") else None,
+                                     a.get("city")] if x)
+        cards += f"""
+<article class="update-card"><div class="up-top"><span class="badge badge-gold">{esc(a.get("title", "Teacher"))}</span>
+  <h3><a href="{R}teachers/{slug}/">{esc(a["name"])}</a></h3></div>
+  <div class="up-body"><p class="small muted" style="margin:0 0 6px">{esc(meta)}</p>
+  <p class="small" style="margin:0 0 10px"><b>Subjects:</b> {esc(subj)}</p>
+  <a class="read-more" href="{R}teachers/{slug}/">Profile {icon("arrow",13)}</a></div></article>"""
+    body = crumbs_html(R, [("Teachers", "teachers/")]) + page_hero(R,
+        badge="Our Panel",
+        title="The Teachers Behind StudySapiens",
+        lead="Named, qualified, experienced - the people who prepare and review every file, and stand behind it publicly.",
+        actions=f'<a class="btn btn-primary btn-sm" href="{R}editorial-policy/">{icon("shield",15)} How we verify content</a>')
+    body += f"""
+<section class="section section-tight">
+  <div class="container" style="max-width:900px">
+    <div class="grid grid-3">{cards}</div>
+    <div class="article" style="margin-top:36px">
+      <p class="muted">Every profile lists real qualifications and classroom experience. Our <a href="{R}editorial-policy/">editorial policy</a> explains how their work is checked and corrected.</p>
+    </div>
+  </div>
+</section>"""
+    w("teachers/index.html", layout(page_key="teachers", depth=1,
+        title="Our Teachers & Reviewers | StudySapiens",
+        desc="Meet the named Punjab-board teachers and subject reviewers who prepare and verify StudySapiens material.",
+        path="teachers/", body=body), priority="0.5")
+    SEARCH.append({"t": "Our Teachers", "s": "named profiles & qualifications", "u": "teachers/", "c": "Page", "k": "teachers authors reviewers panel"})
+    for slug, a in AUTHORS.items():
+        profile_page(slug, a)
+
+def profile_page(slug, a):
+    R = "../../"
+    subj = ", ".join(a.get("subjects", []))
+    facts = "".join(f'<li><b>{k}:</b> {esc(v)}</li>' for k, v in [
+        ("Qualification", a.get("qual")), ("Experience", f'{a.get("years")} years teaching' if a.get("years") else None),
+        ("Subjects", subj or None), ("Classes", ", ".join(a.get("classes", [])) or None),
+        ("City", a.get("city"))] if v)
+    body = crumbs_html(R, [("Teachers", "teachers/"), (a["name"], f"teachers/{slug}/")]) + page_hero(R,
+        badge=esc(a.get("title", "Teacher")),
+        title=esc(a["name"]),
+        lead=esc(a.get("bio", "").split(".")[0] if a.get("bio") else "Teacher and contributor at StudySapiens."),
+        actions=f'<a class="btn btn-primary btn-sm" href="mailto:{EMAIL}">{icon("mail",15)} Contact via StudySapiens</a>')
+    body += f"""
+<section class="section section-tight">
+  <div class="container article" style="max-width:780px">
+    <h2>Profile</h2>
+    <ul>{facts}</ul>
+    {f'<p>{esc(a["bio"])}</p>' if a.get("bio") else ''}
+    <div class="callout">This teacher's files follow our <a href="{R}editorial-policy/">Editorial &amp; Verification Policy</a> and appear in the <a href="{R}corrections/">Corrections Log</a> if anything needs fixing.</div>
+  </div>
+</section>"""
+    person = {"@context": "https://schema.org", "@type": "Person", "name": a["name"],
+              "url": f"{DOM}/teachers/{slug}/", "jobTitle": a.get("title"),
+              "worksFor": {"@type": "Organization", "name": "StudySapiens", "url": f"{DOM}/"}}
+    if a.get("qual"): person["hasCredential"] = a["qual"]
+    if a.get("subjects"): person["knowsAbout"] = a["subjects"]
+    if a.get("bio"): person["description"] = a["bio"]
+    if a.get("city"): person["address"] = {"@type": "PostalAddress", "addressLocality": a["city"]}
+    if a.get("photo"): person["image"] = f"{DOM}/{a['photo'].lstrip('/')}"
+    if a.get("same_as"): person["sameAs"] = a["same_as"]
+    ld = [breadcrumb_json([("Teachers", "teachers/"), (a["name"], f"teachers/{slug}/")]), person]
+    w(f"teachers/{slug}/index.html", layout(page_key="teachers", depth=2,
+        title=f'{a["name"]} — {a.get("title", "Teacher")} | StudySapiens',
+        desc=f'{a["name"]}, {a.get("title", "teacher")}: qualification, experience and subjects at StudySapiens.',
+        path=f"teachers/{slug}/", body=body, extra_ld=ld), priority="0.4")
+    SEARCH.append({"t": a["name"], "s": f'{a.get("title", "Teacher")} · profile', "u": f"teachers/{slug}/", "c": "Page", "k": f'{a["name"]} teacher reviewer {subj}'})
 
 def build_contact():
     R = "../"
@@ -3353,7 +3540,7 @@ def build_sitemap_page():
         ("Date Sheets","date-sheet/"),("MDCAT & Calculator","mdcat/"),("ECAT & Calculator","ecat/"),("CSS Guide","css/"),("eBooks","ebooks/"),
         ("Results","results/"),("Online Tests","tests/"),("Model Papers","model-papers/"),("Formula Sheets","formulas/"),
         ("English Corner","english-corner/"),("Roll Number Slip","roll-number-slip/"),("Boards","boards/"),
-        ("Updates","updates/"),("Blog","blog/"),("About","about/"),("Contact","contact/"),("Privacy Policy","privacy-policy/"),
+        ("Updates","updates/"),("Blog","blog/"),("About","about/"),("Editorial Policy","editorial-policy/"),("Corrections Log","corrections/"),("Contact","contact/"),("Privacy Policy","privacy-policy/"),
         ("Terms of Use","terms/"),("Copyright / DMCA","copyright/"),("Ad Disclosure","advertising/")])
     body = crumbs_html(R, [("Site Map","site-map/")]) + page_hero(R, badge="Everything, one page",
         title="Site Map", lead="Every main page of StudySapiens. Looking for notes? Open your subject: the study guide and all downloads live inside.")
@@ -3737,7 +3924,8 @@ def main():
     for bi in range(len(BLOGS)): build_blog_post(BLOGS, bi)
     build_updates()
     for p in UPDATES: build_post(p)
-    build_about(); build_contact(); build_privacy(); build_terms(); build_copyright(); build_advertising(); build_offline(); build_404(); build_sitemap_page()
+    build_about(); build_editorial_policy(); build_corrections(); build_team()
+    build_contact(); build_privacy(); build_terms(); build_copyright(); build_advertising(); build_offline(); build_404(); build_sitemap_page()
     write_seo()
     pages = len(URLS)
     print(f"✅ Done. {pages} pages generated in ./site/  (+search.json {len(SEARCH)} entries, sitemap.xml, robots.txt)")
