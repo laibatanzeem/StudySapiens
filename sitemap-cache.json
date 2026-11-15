@@ -64,7 +64,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/": {
-"hash": "be77bb29583b7b9fedd0ac2d905e79eb",
+"hash": "3cd67f8c5cb5cf875080d06a761e7f54",
 "lastmod": "2026-11-15"
 },
 "classes/10/": {
@@ -848,7 +848,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/": {
-"hash": "052acbf1c5860e7802f47ed937371a05",
+"hash": "52a0997d5f14e460ca5071a52be466db",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/": {
@@ -1076,19 +1076,43 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/": {
-"hash": "52623783fbd804b249ca65972188ad33",
+"hash": "5548c6bd8fefb6275d12bdae7f754124",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-1/": {
-"hash": "cbd5a9663e5a39791e19cc7aae02a790",
+"hash": "a0ba716980c8b7233581441cc1b6c427",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-2/": {
-"hash": "3c57f55f256d7310137526d474a7e6a8",
+"hash": "98dc2c9a3584545a67459cc18b18bcd5",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/chapter-3/": {
-"hash": "e761f6f257493a974c7d3b8008e1b688",
+"hash": "93e32ec26affa7308d8f20d1a4ac24c9",
+"lastmod": "2026-11-15"
+},
+"classes/12/mathematics/chapter-4/": {
+"hash": "9bbcf975880a514e3521afe4021976c8",
+"lastmod": "2026-11-15"
+},
+"classes/12/mathematics/chapter-5/": {
+"hash": "c5c455e2fecebe560367717e0164a6bc",
+"lastmod": "2026-11-15"
+},
+"classes/12/mathematics/chapter-6/": {
+"hash": "5152794e565a61076a9a467236ab8b65",
+"lastmod": "2026-11-15"
+},
+"classes/12/mathematics/chapter-7/": {
+"hash": "184ece0e41104947a7a2f018d4d3fd96",
+"lastmod": "2026-11-15"
+},
+"classes/12/mathematics/chapter-8/": {
+"hash": "a1054fcb1998820d0700b196795237e8",
+"lastmod": "2026-11-15"
+},
+"classes/12/mathematics/chapter-9/": {
+"hash": "32c9ae603556f6ac208e0aaacc9312df",
 "lastmod": "2026-11-15"
 },
 "classes/12/pak-studies/": {

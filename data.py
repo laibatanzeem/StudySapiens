@@ -655,6 +655,12 @@ CHAPTERS = {
         (1, "Graphical Representation of Functions"),
         (2, "Further Differentiation"),
         (3, "Integration"),
+        (4, "Differential Equations"),
+        (5, "Analytical Geometry"),
+        (6, "Conic Section"),
+        (7, "Kinematics"),
+        (8, "Numerical Method"),
+        (9, "Inverse Trigonometric Functions and Their Graphs"),
     ],
     ("12", "chemistry"): [
         (17, "Group 2 Elements"),

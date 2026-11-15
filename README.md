@@ -1037,3 +1037,15 @@ yet.** These two are deliberately deferred — flip them only when:
   when a subject has >= 5 chapter pages.
 - Site: 417 → 420 pages, 671 → 690 published files, search.json 413 entries.
   Precheck 0/0, PDF audit 690/690, forms 61/61, calculators 18/18.
+
+## Upload: Class 12 Mathematics units 4-9 (15 Nov 2026)
+
+- 19 more exercise-solutions PDFs (Ex 4.1-4.3, 5.1-5.3, 6.1-6.6, 7.1, 8.1-8.4,
+  9.1-9.2) under files/class-12/mathematics/solutions/ — 38 math-12 files total.
+- Chapter list extended to 9 units, titles verified from the PDF headers:
+  Differential Equations, Analytical Geometry, Conic Section, Kinematics,
+  Numerical Method, Inverse Trigonometric Functions and Their Graphs.
+  With 9 chapter pages the "Related chapters" block now renders on math-12
+  pages too (size-aware QA check from the previous batch holds).
+- Site: 420 → 426 pages, 690 → 709 published files, search.json 419 entries.
+  Precheck 0/0, PDF audit 709/709, forms 61/61, calculators 18/18.
