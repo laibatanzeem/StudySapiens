@@ -1073,3 +1073,14 @@ yet.** These two are deliberately deferred — flip them only when:
   for this subject.
 - Site: 428 → 437 pages, 714 → 732 published files, search.json 430 entries.
   Precheck 0/0, PDF audit 732/732, forms 61/61, calculators 18/18.
+
+## Upload: Class 12 Physics solutions + tests — subject complete (15 Nov 2026)
+
+- 18 more PDFs: 9 Exercise-Solved (12-15p) under files/class-12/physics/
+  solutions/ + 9 Chapter-Test (1p board pattern) under testpapers/.
+- Physics-12 now has all four resource types on all 9 chapter pages (Ch 13-21):
+  Chapter Notes + Exercise Solved + Chapter MCQs + Chapter Test = 36 files.
+  Viewer opens notes first; no new URLs, existing pages updated (26 cache
+  lines touched: 9 chapter pages + subject/class pages).
+- Site: 437 pages, 750 published files, search.json 430 entries.
+  Precheck 0/0, PDF audit 750/750, forms 61/61, calculators 18/18.
