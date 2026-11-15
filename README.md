@@ -1152,3 +1152,22 @@ yet.** These two are deliberately deferred — flip them only when:
 - Site: 437 disk pages unchanged, sitemap 437 → 433 URLs, search.json 430
   (hubs stay findable in internal search). Precheck 0/0, PDF audit 778/778,
   forms 61/61, calculators 18/18.
+
+## Fix 5.1: canonicalization 301s, loop-proof (.htaccess v3) (15 Nov 2026)
+
+- Audit finding: apex, www and /index.html all served 200 duplicates; only
+  canonical tags hinted at the preferred host. Google recommends 301
+  consolidation (developers.google.com duplicate-URL guidance).
+- .htaccess v3 restores the redirects WITHOUT the 14-Nov outage cause:
+  the old block tested %{HTTPS} off, which is permanently true at the
+  origin behind Hostooze's TLS-terminating edge -> infinite loop -> 500s.
+  v3 conditions are loop-proof by construction:
+  1. /index.html -> clean URL via %{THE_REQUEST} (raw client request line;
+     fires only for literal index.html requests; NE flag, 301).
+  2. apex -> https://www via a POSITIVE %{HTTP_HOST} match on the bare apex
+     only (internal hostnames / edge health-checks pass through; 301, QSA).
+  No rule tests the scheme; HTTP->HTTPS remains with the panel's Force HTTPS
+  toggle, which already works. After one redirect each condition is false,
+  so neither rule can re-fire.
+- Page HTML unchanged (sitemap-cache clean); only site/.htaccess differs.
+  Forms 61/61, calculators 18/18.
