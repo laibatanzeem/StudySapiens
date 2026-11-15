@@ -1049,3 +1049,13 @@ yet.** These two are deliberately deferred — flip them only when:
   pages too (size-aware QA check from the previous batch holds).
 - Site: 420 → 426 pages, 690 → 709 published files, search.json 419 entries.
   Precheck 0/0, PDF audit 709/709, forms 61/61, calculators 18/18.
+
+## Upload: Class 12 Mathematics units 10-11 (15 Nov 2026)
+
+- 5 more exercise-solutions PDFs (Ex 10.1-10.2, 11.1-11.3) under
+  files/class-12/mathematics/solutions/ — 43 math-12 files total.
+- Chapter list extended to 11 units, titles verified from the PDF headers:
+  Solution of Trigonometric Equations, Vector Valued Functions and Their
+  Differentiations.
+- Site: 426 → 428 pages, 709 → 714 published files, search.json 421 entries.
+  Precheck 0/0, PDF audit 714/714, forms 61/61, calculators 18/18.

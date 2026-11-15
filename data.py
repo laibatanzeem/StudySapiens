@@ -661,6 +661,8 @@ CHAPTERS = {
         (7, "Kinematics"),
         (8, "Numerical Method"),
         (9, "Inverse Trigonometric Functions and Their Graphs"),
+        (10, "Solution of Trigonometric Equations"),
+        (11, "Vector Valued Functions and Their Differentiations"),
     ],
     ("12", "chemistry"): [
         (17, "Group 2 Elements"),
