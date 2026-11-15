@@ -471,6 +471,11 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
     og = image or f"{DOM}/assets/img/og-image.jpg"
     robots = ("noindex, follow" if noindex
               else "index, follow, max-image-preview:large, max-snippet:-1")
+    # machine-readable marker so precheck can tell an intentional noindex
+    # (placeholder page waiting for uploads) from an accidental one
+    robots_tag = (f'<meta name="robots" content="{robots}"'
+                  + (' data-ss-reason="placeholder-no-files-yet"' if noindex else "")
+                  + ">")
     global_ld = {"@context": "https://schema.org", "@context_id": None, "@graph": [
         {"@type": "EducationalOrganization", "@id": f"{DOM}/#org", "name": "StudySapiens",
          "url": f"{DOM}/", "email": SITE["email"], "description": SITE["description"],
@@ -508,7 +513,7 @@ def layout(*, page_key, depth, title, desc, path, body, extra_ld=None, image=Non
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
-<meta name="robots" content="{robots}">
+{robots_tag}
 <link rel="canonical" href="{canon}">
 <link rel="alternate" type="application/rss+xml" title="StudySapiens Updates" href="{DOM}/feed.xml">
 <link rel="alternate" hreflang="en" href="{canon}">
@@ -1306,9 +1311,13 @@ def build_subject(cid, sid):
     else:
         d1 = f"Free {c['alt']} {s['name']} notes, solved exercises, MCQ bank, guess paper & pairing scheme. New PCTB/PECTAA {c['session']} syllabus, all Punjab boards. Open-and-read PDF downloads."
         d2 = f"Free {c['alt']} {s['name']} notes, solved exercises, MCQ bank, guess paper & pairing scheme. New {c['session']} syllabus. Open-and-read PDF downloads."
+    # noindex subject pages that have no uploaded files yet (owner request
+    # 15 Nov 2026); they re-enter the sitemap automatically once files land.
+    has_files = file_count(cid, sid) > 0
     w(f"classes/{cid}/{sid}/index.html", layout(page_key="classes", depth=3,
         title=t_base, desc=(d1 if len(d1) <= 160 else d2),
-        path=f"classes/{cid}/{sid}/", body=body, extra_ld=ld), priority="0.8")
+        path=f"classes/{cid}/{sid}/", body=body, extra_ld=ld, noindex=not has_files),
+        priority="0.8" if has_files else None)
     SEARCH.append({"t": f"{c['name']} {s['name']}. Notes, Solutions & Downloads", "s": f"{c['level']} · new {c['session']} syllabus · free PDFs",
                    "u": f"classes/{cid}/{sid}/", "c": "Subject", "pop": 1, "k": f"{c['alt']} {sid} notes solved exercises mcq guess paper pairing scheme pdf"})
 
@@ -1620,10 +1629,13 @@ def build_guess():
   </div>
 </section>"""
     ld = [breadcrumb_json([("Guess Papers", "guess-papers/")])]
+    # noindex while no guess files are uploaded (owner request 15 Nov 2026);
+    # also kept out of the sitemap until then.
+    has = file_count(cat="guess") > 0
     w("guess-papers/index.html", layout(page_key="guess", depth=1,
         title="Guess Papers 2027: Class 9-12, All Subjects (New Syllabus)",
         desc="Guess papers for the new PCTB syllabus, prepared by teachers. Expected MCQs, short & long questions for Class 9-12, all Punjab boards, free.",
-        path="guess-papers/", body=body, extra_ld=ld), priority="0.85")
+        path="guess-papers/", body=body, extra_ld=ld, noindex=not has), priority="0.85" if has else None)
     SEARCH.append({"t": "Guess Papers 2027: All Classes", "s": "expected questions · all subjects", "u": "guess-papers/",
                    "c": "Resource", "pop": 1, "k": "guess important questions"})
 
@@ -1678,10 +1690,12 @@ def build_past():
   </div>
 </section>"""
     ld = [breadcrumb_json([("Past Papers", "past-papers/")])]
+    # noindex while no past papers are uploaded (owner request 15 Nov 2026)
+    has = file_count(cat="past") > 0
     w("past-papers/index.html", layout(page_key="past", depth=1,
         title=ttl("Past Papers: Class 9-12, All Punjab Boards"),
         desc="Past papers of the new PCTB syllabus for Class 9, 10, 1st & 2nd year. Board-wise PDFs from all 9 Punjab BISE boards, correctly labelled, free.",
-        path="past-papers/", body=body, extra_ld=ld), priority="0.85")
+        path="past-papers/", body=body, extra_ld=ld, noindex=not has), priority="0.85" if has else None)
     SEARCH.append({"t": "Past Papers: All Boards", "s": "new syllabus BISE papers", "u": "past-papers/", "c": "Resource", "pop": 1, "k": "old papers five years"})
 
 def build_datesheet():
@@ -2313,10 +2327,12 @@ def build_formulas():
   </div>
 </section>"""
     ld = [breadcrumb_json([("Formula Sheets", "formulas/")])]
+    # noindex while no formula sheets are uploaded (owner request 15 Nov 2026)
+    has = any(v for k, v in EXTRA_FILES.items() if k[0] == "formulas")
     w("formulas/index.html", layout(page_key="classes", depth=1,
         title=ttl("Formula Sheets: Maths, Physics & Chemistry (9-12)"),
         desc="Chapter-wise formula sheets for Class 9, 10, 1st & 2nd year maths, physics and chemistry. New PCTB/PECTAA books, printable one-pagers, free PDF downloads.",
-        path="formulas/", body=body, extra_ld=ld), priority="0.8")
+        path="formulas/", body=body, extra_ld=ld, noindex=not has), priority="0.8" if has else None)
     SEARCH.append({"t": "Formula Sheets: Maths, Physics, Chemistry", "s": "class-wise printable PDFs",
                    "u": "formulas/", "c": "Resource", "k": "formula sheet math physics chemistry important formulas class nine ten 1st 2nd year pdf"})
 
@@ -2359,10 +2375,12 @@ def build_english_corner():
   </div>
 </section>"""
     ld = [breadcrumb_json([("English Corner", "english-corner/")])]
+    # noindex while no English-corner files are uploaded (owner request 15 Nov 2026)
+    has = any(v for k, v in EXTRA_FILES.items() if k[0] == "english")
     w("english-corner/index.html", layout(page_key="classes", depth=1,
         title=ttl("English Essays, Letters & Applications (9-12)"),
         desc="Board-format English essays, letters, applications and grammar drills for Class 9-12. Simple-English samples written by teachers, free PDF downloads.",
-        path="english-corner/", body=body, extra_ld=ld), priority="0.8")
+        path="english-corner/", body=body, extra_ld=ld, noindex=not has), priority="0.8" if has else None)
     SEARCH.append({"t": "English Corner: Essays, Letters, Grammar", "s": "board-format writing files",
                    "u": "english-corner/", "c": "Resource", "k": "english essay letter application grammar translation tenses class 9 10 1st 2nd year"})
 

@@ -1631,18 +1631,6 @@
 "hash": "176e34b4fabc8ff7c27c7d4db700bc2d",
 "lastmod": "2026-11-15"
 },
-"english-corner/": {
-"hash": "4749cfb1931551ac29a09c5b1cfa22a7",
-"lastmod": "2026-11-15"
-},
-"formulas/": {
-"hash": "5daeb374de3c977368be22126fbd9fae",
-"lastmod": "2026-11-15"
-},
-"guess-papers/": {
-"hash": "33ba5c583f3c3fa5877121bb5bfd2e92",
-"lastmod": "2026-11-15"
-},
 "mdcat/": {
 "hash": "2168028fc71a2cb2b61d81674f58afab",
 "lastmod": "2026-11-15"
@@ -1653,10 +1641,6 @@
 },
 "pairing-scheme/": {
 "hash": "a3c32613008b48605ea52942cf6eca2f",
-"lastmod": "2026-11-15"
-},
-"past-papers/": {
-"hash": "00dbf6d5221c2c6c314237e9ac25be3c",
 "lastmod": "2026-11-15"
 },
 "privacy-policy/": {

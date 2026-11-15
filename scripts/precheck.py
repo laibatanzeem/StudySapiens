@@ -164,9 +164,15 @@ def main():
             warn(f"{rel}: no canonical link")
 
         # === noindex guard ===
+        # data-ss-reason="placeholder-no-files-yet" marks an INTENTIONAL
+        # noindex (hub/subject page waiting for its first upload); without
+        # the marker a noindex is still treated as an accident.
         m = ROBOTS_RE.search(html)
         if m and "noindex" in m.group(1) and rel not in NOINDEX_OK:
-            crit(f"{rel}: accidental noindex (robots={m.group(1)})")
+            if 'data-ss-reason="placeholder-no-files-yet"' in html:
+                info(f"{rel}: intentional noindex (placeholder, files pending)")
+            else:
+                crit(f"{rel}: accidental noindex (robots={m.group(1)})")
 
         # === JSON-LD validity ===
         for i, block in enumerate(LD_RE.findall(html), 1):
@@ -235,6 +241,13 @@ def main():
             if rel in ("404.html", "offline/index.html"): continue
             pretty = re.sub(r"(^|/)index\.html$", "", rel)
             if pretty not in sm_paths and pretty + "/" not in sm_paths:
+                # intentional noindex pages are kept out of the sitemap on
+                # purpose (placeholder hubs / empty subjects)
+                try:
+                    if 'data-ss-reason="placeholder-no-files-yet"' in (SITE / rel).read_text(encoding="utf-8"):
+                        continue
+                except OSError:
+                    pass
                 warn(f"page not in sitemap.xml: {rel}")
         info(f"sitemap.xml: {len(locs)} URLs verified")
     else:

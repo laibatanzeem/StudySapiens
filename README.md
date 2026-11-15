@@ -1132,3 +1132,23 @@ yet.** These two are deliberately deferred — flip them only when:
   search.json 430, sitemap dropped exactly those 8 URLs. Zero references to
   removed combos remain anywhere in site/ (grep-verified).
   Precheck 0/0, PDF audit 778/778, forms 61/61, calculators 18/18.
+
+## SEO: noindex placeholder pages waiting for uploads (15 Nov 2026)
+
+- Owner request: pages whose files have not been uploaded yet are marked
+  noindex so Google does not index thin placeholders.
+- Affected now: guess-papers, past-papers, formulas and english-corner hubs
+  (all have zero uploaded files today; model-papers and pairing-scheme have
+  files and stay indexed). Subject pages get the same treatment
+  automatically if they ever have zero files (none today).
+- The rule is dynamic, not a one-off: noindex + sitemap exclusion apply only
+  while file_count == 0; the moment files land, the tag disappears and the
+  page rejoins the sitemap on the next build.
+- Implementation: layout() emits <meta name="robots" content="noindex, follow"
+  data-ss-reason="placeholder-no-files-yet">; w() skips the sitemap when
+  priority is None. precheck learned the marker — intentional noindex is
+  reported as info, a noindex WITHOUT the marker is still a critical error,
+  and marker pages are exempt from the "page not in sitemap" warning.
+- Site: 437 disk pages unchanged, sitemap 437 → 433 URLs, search.json 430
+  (hubs stay findable in internal search). Precheck 0/0, PDF audit 778/778,
+  forms 61/61, calculators 18/18.
