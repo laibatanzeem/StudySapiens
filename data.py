@@ -586,6 +586,33 @@ CHAPTERS = {
         (8, "Probability Distributions"),
         (9, "Binomial Distribution"),
     ],
+    # Class 11 Computer Science (PCTB 2025-26): 9 units, titles verified against
+    # the owner's exercise-solutions PDFs (headers: "Unit N: Title").
+    ("11", "computer-science"): [
+        (1, "Introduction to Software Development"),
+        (2, "Python Programming"),
+        (3, "Algorithms and Problem Solving"),
+        (4, "Computational Structures"),
+        (5, "Data Analytics"),
+        (6, "Emerging Technologies"),
+        (7, "Legal and Ethical Aspects of Computing System"),
+        (8, "Online Research and Digital Literacy"),
+        (9, "Entrepreneurship in Digital Age"),
+    ],
+    # Class 12 Computer Science (PCTB / PECTAA 2026-27): 9 chapters, titles
+    # verified against the owner's exercise-solutions PDFs (headers:
+    # "Chapter N: Title"); "&" normalised to "and" per site convention.
+    ("12", "computer-science"): [
+        (1, "Computer Networks"),
+        (2, "Computational Thinking and Algorithms"),
+        (3, "Object Oriented Programming Using Python"),
+        (4, "Development of Graphical User Interface (GUI)"),
+        (5, "Code Testing and Debugging"),
+        (6, "Data and Analysis"),
+        (7, "Hypothesis Testing"),
+        (8, "Applications of Computer Science"),
+        (9, "Cybersecurity and Safe Digital Collaboration"),
+    ],
     ("12", "chemistry"): [
         (17, "Group 2 Elements"),
         (18, "Transition Metals"),

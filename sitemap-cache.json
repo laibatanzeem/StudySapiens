@@ -64,7 +64,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/": {
-"hash": "8dee3fb4604c3f13259d816da159debf",
+"hash": "93ead07e6b40624af695fb87ed9262e7",
 "lastmod": "2026-11-15"
 },
 "classes/10/": {
@@ -584,7 +584,43 @@
 "lastmod": "2026-11-15"
 },
 "classes/11/computer-science/": {
-"hash": "b9c42ec9a69fb95e8ca53f6776ed2414",
+"hash": "d81dc9c802435fce07193f319d000a0f",
+"lastmod": "2026-11-15"
+},
+"classes/11/computer-science/chapter-1/": {
+"hash": "0dd3606261c12d73a91351327b891e8d",
+"lastmod": "2026-11-15"
+},
+"classes/11/computer-science/chapter-2/": {
+"hash": "852e54383f10e676c297d6e27f8bffba",
+"lastmod": "2026-11-15"
+},
+"classes/11/computer-science/chapter-3/": {
+"hash": "47d14c215dedc2370c721f50d7a9f6ff",
+"lastmod": "2026-11-15"
+},
+"classes/11/computer-science/chapter-4/": {
+"hash": "08bb82e3e5b44ddd593b95a2177c21ad",
+"lastmod": "2026-11-15"
+},
+"classes/11/computer-science/chapter-5/": {
+"hash": "063ea2d54c55ceecde1281248a97d181",
+"lastmod": "2026-11-15"
+},
+"classes/11/computer-science/chapter-6/": {
+"hash": "d12d0ae1430c8ec3f67eddaf2486829b",
+"lastmod": "2026-11-15"
+},
+"classes/11/computer-science/chapter-7/": {
+"hash": "343dab3578eaa48b8d10e6e3278e1130",
+"lastmod": "2026-11-15"
+},
+"classes/11/computer-science/chapter-8/": {
+"hash": "354315d4155b8332d4cedec1b2eebee6",
+"lastmod": "2026-11-15"
+},
+"classes/11/computer-science/chapter-9/": {
+"hash": "146958fea26921ab62c8b841e44cc7bf",
 "lastmod": "2026-11-15"
 },
 "classes/11/english/": {
@@ -756,7 +792,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/": {
-"hash": "107b8ef7eb8729951aa9c92880391ec5",
+"hash": "745c356b00c5a3e083e24637b2632a65",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/": {
@@ -888,7 +924,43 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/computer-science/": {
-"hash": "2b8db1633ba36f98f7a928544af99cd8",
+"hash": "c2441cba3e9c3b4f31c4f98dcf7398ed",
+"lastmod": "2026-11-15"
+},
+"classes/12/computer-science/chapter-1/": {
+"hash": "f2575b8f19d6134261f31c0322ee3f41",
+"lastmod": "2026-11-15"
+},
+"classes/12/computer-science/chapter-2/": {
+"hash": "b6ec9b21e504d1a20fe4ad0609ab304a",
+"lastmod": "2026-11-15"
+},
+"classes/12/computer-science/chapter-3/": {
+"hash": "9e1497963145c7fe3c979ed3c19c69ea",
+"lastmod": "2026-11-15"
+},
+"classes/12/computer-science/chapter-4/": {
+"hash": "32ecf10df025d85ced2e6d72ef474737",
+"lastmod": "2026-11-15"
+},
+"classes/12/computer-science/chapter-5/": {
+"hash": "4dad99bfa79ce27c52ff0810c26a7c5f",
+"lastmod": "2026-11-15"
+},
+"classes/12/computer-science/chapter-6/": {
+"hash": "469176e468967d5f023911a1cc116112",
+"lastmod": "2026-11-15"
+},
+"classes/12/computer-science/chapter-7/": {
+"hash": "2410e1dc20c3c4a2bcd43b7617be67b3",
+"lastmod": "2026-11-15"
+},
+"classes/12/computer-science/chapter-8/": {
+"hash": "ef7e61eb86f4929c6299008b78809bbe",
+"lastmod": "2026-11-15"
+},
+"classes/12/computer-science/chapter-9/": {
+"hash": "eb489fd27c05bee193c57e5d18d7e2fc",
 "lastmod": "2026-11-15"
 },
 "classes/12/english/": {

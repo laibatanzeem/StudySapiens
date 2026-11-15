@@ -977,3 +977,24 @@ yet.** These two are deliberately deferred — flip them only when:
   present on every page — now lists Statistics under Classes 11 & 12; the
   hash-based cache correctly treats that as a content change.
   Precheck 0/0, PDF audit 649/649, forms 61/61, calculators 18/18.
+
+## Upload: Class 12 Computer Science + CS-11 chapter upgrade (15 Nov 2026)
+
+- New: 12th Computer Science exercise solutions — 9 PDFs (Ch 1-9) under
+  files/class-12/computer-science/solutions/ (original filenames kept, matching
+  the CS-11 convention). Chapter list added to data.py, titles verified from
+  the PDF headers ("&" normalised to "and"): Computer Networks, Computational
+  Thinking and Algorithms, Object Oriented Programming Using Python,
+  Development of Graphical User Interface (GUI), Code Testing and Debugging,
+  Data and Analysis, Hypothesis Testing, Applications of Computer Science,
+  Cybersecurity and Safe Digital Collaboration.
+- Consistency upgrade: 11th Computer Science had no CHAPTERS entry (its files
+  rendered as a flat whole-book list). Added its 9-unit list (titles verified
+  from the existing CS11 PDFs' headers), so CS-11 now has proper chapter cards
+  and 9 chapter pages like every other subject. The pairing scheme stays in
+  the whole-book section; hide-empty policy still holds (0 empty slots).
+- forms-verify hide-empty policy check updated for the new CS-11 layout
+  (11 slot heads: 9 chapter cards + solutions pointer + scheme).
+- Site: 372 → 390 pages, 649 → 658 published files, search.json 383 entries.
+  Precheck 0/0, PDF audit 658/658, forms 61/61, calculators 18/18; sitemap
+  lastmod bumped only for the 18 new chapter URLs (+ touched subject/class pages).
