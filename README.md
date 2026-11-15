@@ -1084,3 +1084,15 @@ yet.** These two are deliberately deferred — flip them only when:
   lines touched: 9 chapter pages + subject/class pages).
 - Site: 437 pages, 750 published files, search.json 430 entries.
   Precheck 0/0, PDF audit 750/750, forms 61/61, calculators 18/18.
+
+## Upload: Class 12 Statistics units 10-12 (15 Nov 2026)
+
+- 12th Statistics goes live: chapter list (Ch 10-12, numbering continues from
+  the 11th book's 1-9) with titles verified from the owner's PDF headers:
+  Normal Distribution, Sampling Techniques and Sampling Distributions,
+  Estimation. List extends as more ALP exercises arrive.
+- 14 exercise-solutions PDFs under files/class-12/statistics/solutions/
+  (Ex 10.1-10.3, 11.1-11.5, 12.1-12.6; 12.6 is the objective-questions part
+  and is labelled accordingly on its row).
+- Site: 437 → 440 pages, 750 → 764 published files, search.json 433 entries.
+  Precheck 0/0, PDF audit 764/764, forms 61/61, calculators 18/18.

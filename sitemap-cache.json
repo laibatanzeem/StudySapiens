@@ -64,7 +64,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/": {
-"hash": "4cd8772374959c065affca99ac1b658f",
+"hash": "3001f9baeac54478ebc00ad85846d853",
 "lastmod": "2026-11-15"
 },
 "classes/10/": {
@@ -848,7 +848,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/": {
-"hash": "fab04b879beb9b6484fcd124cbb85b91",
+"hash": "3c780d62dafd77e992a146a03757bc27",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/": {
@@ -1168,7 +1168,19 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/statistics/": {
-"hash": "231e4d592360914abf3c93a23bfebca5",
+"hash": "b67e0d57ecadb6f8e79f9583f644909d",
+"lastmod": "2026-11-15"
+},
+"classes/12/statistics/chapter-10/": {
+"hash": "c998fa49ebcd4fbf288367ba450a8ca2",
+"lastmod": "2026-11-15"
+},
+"classes/12/statistics/chapter-11/": {
+"hash": "115d6a400b27eaa199d9541175127c0f",
+"lastmod": "2026-11-15"
+},
+"classes/12/statistics/chapter-12/": {
+"hash": "7a3ee2904e9f5ee0b68f10f2b777701e",
 "lastmod": "2026-11-15"
 },
 "classes/12/tarjuma-tul-quran/": {

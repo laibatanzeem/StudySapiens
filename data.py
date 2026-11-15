@@ -664,6 +664,15 @@ CHAPTERS = {
         (10, "Solution of Trigonometric Equations"),
         (11, "Vector Valued Functions and Their Differentiations"),
     ],
+    # Class 12 Statistics (PCTB / PECTAA 2026-27): chapters 10-12 (numbering
+    # continues from the 11th book's 1-9), titles verified against the owner's
+    # exercise-solutions PDFs (headers: "Chapter N: Title"). List extends as
+    # more ALP exercises arrive.
+    ("12", "statistics"): [
+        (10, "Normal Distribution"),
+        (11, "Sampling Techniques and Sampling Distributions"),
+        (12, "Estimation"),
+    ],
     # Class 12 Physics (PCTB / PECTAA 2026-27): chapters 13-21 (numbering
     # continues from the 11th book), titles verified against the owner's
     # notes/MCQ PDFs (headers: "Ch.N Title").
