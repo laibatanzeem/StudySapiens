@@ -442,21 +442,22 @@ CONTACT_TOPICS = ["Question about notes", "Correction in content", "Request note
 # ---- 4 compulsory subjects we were missing ---------------------------
 SUBJECTS.update({
     "statistics":       {"name": "Statistics",       "hue": "var(--c-statistics)",  "icon": "layers"},
-    "urdu":              {"name": "Urdu",              "hue": "var(--c-urdu)",   "icon": "notes"},
     "islamiat":          {"name": "Islamiat",          "hue": "var(--c-islam)",  "icon": "moon"},
     "pak-studies":       {"name": "Pak Studies",       "hue": "var(--c-pakst)",  "icon": "flag"},
     "tarjuma-tul-quran": {"name": "Tarjuma-tul-Quran", "hue": "var(--c-tq)",     "icon": "book"},
 })
-SUBJECT_ORDER += ["urdu", "islamiat", "pak-studies", "tarjuma-tul-quran"]
+SUBJECT_ORDER += ["islamiat", "pak-studies", "tarjuma-tul-quran"]
 
 # which classes each subject actually belongs to (boards notify subject sets class by class;
 # anything not listed here applies to all four classes)
 SUBJECT_CLASSES = {
     "statistics":        ["11", "12"],       # elective, not offered in matric
-    "urdu":              ["9", "10", "11", "12"],
-    "islamiat":          ["9", "11"],       # no prescribed Class 10 book
-    "pak-studies":       ["10", "12"],      # no prescribed Class 9 book
-    "tarjuma-tul-quran": ["9", "10", "11", "12"],
+    # 15 Nov 2026: urdu removed entirely; islamiat / pak-studies / tarjuma
+    # kept for matric only (owner decision — inter students are served by
+    # the core + statistics subjects).
+    "islamiat":          ["9"],
+    "pak-studies":       ["10"],
+    "tarjuma-tul-quran": ["9", "10"],
 }
 
 SUBJECT_INFO.update({
@@ -465,13 +466,6 @@ SUBJECT_INFO.update({
         "skills": ["Fully solved exercises with every step shown", "Each formula with a when-to-use note", "Diagrams and tables in exam-ready form", "Practice MCQs for the objective part"],
         "tip": "Write the formula before you substitute values, and end every answer with one line of interpretation in words — examiners award that line, the bare number alone does not earn full marks.",
     },
-    "urdu": {
-        "about": "Urdu is the compulsory national-language paper every matric and inter student sits. The new books mix prose and poetry lessons with grammar, letter and application writing, summaries and explanation (tashreeh) practice. Marks hide in presentation: the correct format for letters, neat paragraphing and quoted lines from the lesson.",
-        "skills": ["Lesson summaries & question answers in simple wording",
-                    "Ghazal and nazm tashreeh with poet names done right",
-                    "Grammar rules, singular-plural, idioms & correction exercises",
-                    "Letters, applications & essays in the exact board format"],
-        "tip": "Board markers reward format as much as content. Practise one letter or application a week until the addresses, salutation and closing lines become automatic."},
     "islamiat": {
         "about": "Islamiat at matric and 1st year level is a short syllabus with a high return: Quranic verses with translation, Ahadith, Seerah topics and short answers. Because questions repeat patterns across boards, a verified question-answer file is one of the fastest ways to secure marks.",
         "skills": ["Ayat & Ahadith with correct translation and references",

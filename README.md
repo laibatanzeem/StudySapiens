@@ -1112,3 +1112,23 @@ yet.** These two are deliberately deferred — flip them only when:
   byte-identical rebuild before this batch was applied.
 - Site: 440 → 445 pages, 764 → 782 published files, search.json 438 entries.
   Precheck 0/0, PDF audit 782/782, forms 61/61, calculators 18/18.
+
+## Subject removal: urdu (all classes) + inter islamiat/pak-studies/tarjuma (15 Nov 2026)
+
+- Owner decision: Urdu removed as a subject site-wide (matric + inter);
+  Islamiat, Pak Studies and Tarjuma-tul-Quran kept for matric only
+  (class 9: islamiat + tarjuma; class 10: pak-studies + tarjuma) and removed
+  from classes 11 & 12.
+- data.py: urdu dropped from SUBJECTS / SUBJECT_ORDER / SUBJECT_INFO;
+  SUBJECT_CLASSES now statistics 11-12, islamiat 9, pak-studies 10,
+  tarjuma 9-10. Class pages now: 9 → 8 subjects, 10 → 9, 11 → 7, 12 → 7.
+- Files: 4 orphaned pairing-scheme PDFs deleted (class-9/urdu, class-10/urdu,
+  class-11/urdu, class-11/islamiat) so the PDF audit stays green.
+- pages/pairing-scheme.html (hand-built): removed the 8 subject cards and
+  their nav/filter-chip entries; added Statistics "Coming Soon" cards for
+  classes 11 & 12 (also refreshed its stale embedded nav, which predated the
+  statistics launch).
+- Site: 445 → 437 pages (8 subject pages removed), 782 → 778 published files,
+  search.json 430, sitemap dropped exactly those 8 URLs. Zero references to
+  removed combos remain anywhere in site/ (grep-verified).
+  Precheck 0/0, PDF audit 778/778, forms 61/61, calculators 18/18.
