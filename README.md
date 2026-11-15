@@ -1381,3 +1381,31 @@ yet.** These two are deliberately deferred — flip them only when:
   (owner keys pending), WAF real-user test (owner, mobile data), noindex
   (done, pending deploy).
 - Gates: precheck 0/0, PDF 778/778, forms 61/61, calc 18/18.
+
+## INCIDENT: v4 .htaccess 500s sitewide after deploy; recovery ladder (15 Nov 2026)
+
+- User deployed the new zip; site 500'd on EVERY URL (incl. robots.txt,
+  sitemap.xml and brand-new URLs like /classes/11/statistics/ - so the
+  ORIGIN was failing, not just cached pages).
+- User isolated: renamed .htaccess -> .htaccess.off; site came back.
+  CONFIRMED: Hostooze's Apache/LiteSpeed rejects something in v4
+  (parse-level failure => 500 for every request in the tree). Not the
+  rewrite loop pattern from 14 Nov (robots.txt would have survived that).
+- Live state after recovery: new build FULLY deployed and serving
+  (editorial-policy, corrections, statistics, honest chapter titles all
+  verified live); .htaccess OFF (default 404 observed); popular URLs
+  (/, robots.txt, sitemap.xml) still serving EDGE-CACHED 500s from the
+  broken window - fixed by one more Purge All.
+- Root cause of the 500 NOT yet identified (need the panel error log
+  line, or bisection). Suspects: HSTS/Permissions-Policy/CSP Header
+  lines, ss-config FilesMatch, or the rewrite rules; v2 set is proven.
+- LESSON (standing rule): never ship more than ONE untested .htaccess
+  change per deploy on this host; bisect via the ladder files.
+- Recovery ladder in repo root (rename to .htaccess when uploading):
+  - htaccess-safe.txt         = proven v2 set + ss-config no-cache only
+  - htaccess-step1-rewrites   = safe + the two canonical 301 rules
+  - htaccess-step2-headers    = step1 + HSTS + Permissions-Policy + CSP-RO
+  Each step: upload -> Edge purge ALL -> test -> if 500, step back one.
+- Once we know which step passes, build.py's generator gets a v5 that
+  matches the highest passing rung (and the failing directive is dropped
+  or rewritten for LiteSpeed compatibility).

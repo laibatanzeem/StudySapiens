@@ -1,0 +1,42 @@
+# StudySapiens .htaccess - STEP 1: safe set + canonical redirects only
+# Use AFTER the safe file is confirmed working. If the site 500s with this
+# file, the culprit is one of the two Rewrite rules - rename back to the
+# safe file and tell me. If it works, canonicalization is restored; then
+# try step 2 (headers).
+
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "^ss-config\.js$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.pdf$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+  <FilesMatch "\.html?$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "^sw\.js$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # /index.html -> / (any directory), path preserved. THE_REQUEST is the
+  # client's raw request line, so this fires only for literal index.html.
+  RewriteCond %{THE_REQUEST} \s/+([^\s?]*)index\.html[\s?] [NC]
+  RewriteRule ^ https://www.studysapiens.com/%1 [R=301,L,NE]
+
+  # apex -> www (positive host match only; no scheme checks - the edge
+  # terminates TLS so the origin always sees plain HTTP).
+  RewriteCond %{HTTP_HOST} ^studysapiens\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.studysapiens.com/$1 [R=301,L,QSA]
+</IfModule>

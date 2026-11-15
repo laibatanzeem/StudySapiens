@@ -1,0 +1,28 @@
+# StudySapiens .htaccess - SAFE MODE (v2 directive set, proven 14 Nov 2026)
+# No rewrites, no HSTS/CSP/Permissions-Policy - just the blocks that ran
+# fine before. Upload this as .htaccess if the v4 file 500s the site.
+# Canonical redirects + security headers will be re-added step by step
+# once we know which directive the server rejects.
+
+DirectoryIndex index.html
+ErrorDocument 404 /404.html
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  <FilesMatch "\.(css|js|jpg|jpeg|png|webp|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "^ss-config\.js$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.pdf$">
+    Header set Cache-Control "public, max-age=86400"
+  </FilesMatch>
+  <FilesMatch "\.html?$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "^sw\.js$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
