@@ -72,6 +72,11 @@ def chapter_of(stem):
     m = CH_RE.search(stem)
     return int(m.group(1)) if m else None
 
+def _nat_key(s):
+    """Natural sort key: digit runs compare as numbers, so 'Exercise 6.10'
+    sorts after 'Exercise 6.3' (plain string sort would flip them)."""
+    return [int(t) if t.isdigit() else t for t in re.split(r"(\d+)", s)]
+
 def chapter_file_label(label, num, fallback):
     """Short row label inside a chapter card: drop brand/class/subject/chapter tokens."""
     t = re.sub(r"(?i)\bstudysapiens\b", "", label)
@@ -1185,7 +1190,7 @@ def build_subject(cid, sid):
                 for f in FILES.get((cid, sid), {}).get(k, []):
                     if f.get("ch") == num:
                         mine.append((k, f))
-            mine.sort(key=lambda x: (cats_for.index(x[0]), x[1]["label"]))
+            mine.sort(key=lambda x: (cats_for.index(x[0]), _nat_key(x[1]["label"])))
             rows = dl_rows(R, [{**f, "label": chapter_file_label(f["label"], num, cat_titles[k])} for k, f in mine])
             t_disp = f"Chapter {num}: {esc(title)}" if title else f"Chapter {num}"
             page_link = (f'<a class="btn btn-ghost btn-sm" style="margin-left:auto" '
@@ -1335,7 +1340,7 @@ def chapter_files_for(cid, sid, num):
         for f in FILES.get((cid, sid), {}).get(k, []):
             if f.get("ch") == num:
                 mine.append((k, f))
-    mine.sort(key=lambda x: (cats_for.index(x[0]), x[1]["label"]))
+    mine.sort(key=lambda x: (cats_for.index(x[0]), _nat_key(x[1]["label"])))
     return mine
 
 def build_chapter_pages(cid, sid):
@@ -1375,8 +1380,9 @@ def build_chapter_pages(cid, sid):
         content = CHAPTER_CONTENT.get((cid, sid, num)) or {}
         cats_present = []
         for k, _f in mine:
-            if k not in cats_present:
-                cats_present.append(sub_names.get(k, k))
+            nm = sub_names.get(k, k)
+            if nm not in cats_present:
+                cats_present.append(nm)
 
         # ---- intro / summary ----
         link_para = (f"<p>Looking for another {chap_word.lower()}? Use the previous / next links below, or open the "

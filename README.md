@@ -919,3 +919,24 @@ yet.** These two are deliberately deferred — flip them only when:
   Permissions-Policy, PDF Content-Disposition.
 - Recovery order for the user: (1) rename .htaccess → .htaccess.off to confirm,
   (2) upload the v2 zip (or just its .htaccess), (3) purge Edge Caching.
+
+## Upload: Class 11 Mathematics exercise solutions (15 Nov 2026)
+
+- New subject live: **Class 11 Mathematics** (PCTB 2025-26). Added the 8-unit
+  chapter list to data.py, titles verified against the owner's PDF headers
+  (1 Complex Numbers · 2 Functions and Graphs · 3 Theory of Quadratic Functions
+  · 4 Matrices and Determinants · 5 Partial Fractions · 6 Sequences and Series
+  · 7 Permutations and Combinations · 8 Mathematical Inductions and Binomial
+  Theorem).
+- 20 exercise-solutions PDFs published under files/class-11/mathematics/solutions/
+  (Ex 1.1–1.5, 2.1–2.2, 3.2, 4.1/4.3, 5.1, 6.1–6.11, 7.1–7.2, 8.1/8.4).
+  Math is the first subject with multiple files of one category per chapter
+  (Ch 6 has six), which surfaced and fixed two latent build bugs:
+  1. Exercise rows now natural-sort (Exercise 6.10 after 6.3, not before).
+  2. Chapter-page intro listed a category once per FILE ("solved exercises,
+     solved exercises, …") — now deduped per category.
+- Site: 347 → 355 pages, 609 → 629 published files, search.json 340 → 348.
+  Precheck 0 critical / 0 warnings, PDF audit 629/629 linked, forms 61/61,
+  calculators 18/18. sitemap lastmod bumped only for the 8 new math URLs.
+- Known gaps (owner aware): exercises 1.3, 3.1, 4.2, 6.2, 6.4, 6.7–6.9, 8.2,
+  8.3 not supplied yet; units beyond 8 (if any) pending confirmation.

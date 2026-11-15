@@ -546,6 +546,18 @@ CHAPTERS = {
         (11, "Special Theory of Relativity"),
         (12, "Nuclear and Particle Physics"),
     ],
+    # Class 11 Mathematics (PCTB 2025-26): 8 units, titles verified against
+    # the owner's exercise-solutions PDFs (headers: "Unit N: Title").
+    ("11", "mathematics"): [
+        (1, "Complex Numbers"),
+        (2, "Functions and Graphs"),
+        (3, "Theory of Quadratic Functions"),
+        (4, "Matrices and Determinants"),
+        (5, "Partial Fractions"),
+        (6, "Sequences and Series"),
+        (7, "Permutations and Combinations"),
+        (8, "Mathematical Inductions and Binomial Theorem"),
+    ],
     ("12", "chemistry"): [
         (17, "Group 2 Elements"),
         (18, "Transition Metals"),
