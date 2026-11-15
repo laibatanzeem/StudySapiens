@@ -491,15 +491,25 @@ let chapterPages = 0, chapterIssues = [];
   log('4.6: every board page deep-links the 3 hubs at its #bise-* anchor', boards === 9 && boardLinks === 27,
     boards + ' boards, ' + boardLinks + ' deep links');
   // 4.6: chapter pages carry contextual links + related/next blocks
+  // ("Related chapters" needs >= 2 links not already covered by prev/next,
+  //  which is impossible for subjects with < 5 chapter pages — the generator
+  //  omits the block there and prev/next + subject-page links cover it.)
   let chBad = [];
   let chCount = 0;
+  const bySubject = new Map(); // subject dir -> chapter page count
+  for (const p of walk(path.join(ROOT, 'site', 'classes'))) {
+    if (!p.includes('chapter-') || !p.endsWith('index.html')) continue;
+    const subj = path.dirname(p);
+    bySubject.set(subj, (bySubject.get(subj) || 0) + 1);
+  }
   for (const p of walk(path.join(ROOT, 'site', 'classes'))) {
     if (!p.includes('chapter-') || !p.endsWith('index.html')) continue;
     chCount++;
     const s = fs.readFileSync(p, 'utf8');
     const rel = (s.match(/Related chapters<\/h3><ul>([\s\S]*?)<\/ul>/) || [null, ''])[1];
+    const needRel = bySubject.get(path.dirname(p)) >= 5;
     const ok = s.includes('pairing-scheme/') && s.includes('past-papers/') && s.includes('tests/') &&
-      s.includes('Where to go next') && (rel.match(/<li><a /g) || []).length >= 2;
+      s.includes('Where to go next') && (!needRel || (rel.match(/<li><a /g) || []).length >= 2);
     if (!ok) chBad.push(p);
   }
   log('4.6: chapter pages: contextual links + related chapters + next steps', chBad.length === 0,

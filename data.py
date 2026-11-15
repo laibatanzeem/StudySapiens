@@ -648,6 +648,14 @@ CHAPTERS = {
         (13, "Ruba'iyat (Poem)"),
         (14, "The End of the Beginning (One-Act Play)"),
     ],
+    # Class 12 Mathematics (PCTB / PECTAA 2026-27): units 1-3 so far, titles
+    # verified against the owner's exercise-solutions PDFs (headers:
+    # "Unit N: Title"). List extends as more ALP exercises arrive.
+    ("12", "mathematics"): [
+        (1, "Graphical Representation of Functions"),
+        (2, "Further Differentiation"),
+        (3, "Integration"),
+    ],
     ("12", "chemistry"): [
         (17, "Group 2 Elements"),
         (18, "Transition Metals"),

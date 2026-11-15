@@ -1021,3 +1021,19 @@ yet.** These two are deliberately deferred — flip them only when:
   layout (19 slot heads: 14 chapter cards + 5 whole-book).
 - Site: 390 → 417 pages, 658 → 671 published files, search.json 410 entries.
   Precheck 0/0, PDF audit 671/671, forms 61/61, calculators 18/18.
+
+## Upload: Class 12 Mathematics units 1-3 (15 Nov 2026)
+
+- 12th Mathematics goes live: chapter list (units 1-3 so far, titles verified
+  from the owner's PDF headers: Graphical Representation of Functions, Further
+  Differentiation, Integration — list extends as more ALP exercises arrive)
+  + 19 exercise-solutions PDFs under files/class-12/mathematics/solutions/
+  (Ex 1.1-1.5, 2.1-2.7, 3.1-3.7; same naming as Math-11, natural sort applies).
+- Edge case surfaced & handled: Math-12 is the first subject with only 3
+  chapter pages, and the "Related chapters" picker (which excludes chapters
+  already covered by prev/next buttons) can never produce 2 links for such a
+  small set — the generator correctly omits the block there. forms-verify 4.6
+  is now subject-size-aware: the >= 2 related-links requirement applies only
+  when a subject has >= 5 chapter pages.
+- Site: 417 → 420 pages, 671 → 690 published files, search.json 413 entries.
+  Precheck 0/0, PDF audit 690/690, forms 61/61, calculators 18/18.
