@@ -672,6 +672,11 @@ CHAPTERS = {
         (10, "Normal Distribution"),
         (11, "Sampling Techniques and Sampling Distributions"),
         (12, "Estimation"),
+        (13, "Hypothesis Testing"),
+        (14, "Simple Linear Regression and Correlation"),
+        (15, "Association"),
+        (16, "Analysis of Time Series"),
+        (17, "Orientation of Computers"),
     ],
     # Class 12 Physics (PCTB / PECTAA 2026-27): chapters 13-21 (numbering
     # continues from the 11th book), titles verified against the owner's

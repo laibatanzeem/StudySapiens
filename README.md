@@ -1096,3 +1096,19 @@ yet.** These two are deliberately deferred — flip them only when:
   and is labelled accordingly on its row).
 - Site: 437 → 440 pages, 750 → 764 published files, search.json 433 entries.
   Precheck 0/0, PDF audit 764/764, forms 61/61, calculators 18/18.
+
+## Upload: Class 12 Statistics units 13-17 — subject complete (15 Nov 2026)
+
+- 18 more exercise-solutions PDFs (Ex 13.1-13.7, 14.1-14.2, 15.1-15.4,
+  16.1-16.2, 17.1-17.2; several with objective-questions parts, labelled on
+  their rows) under files/class-12/statistics/solutions/ — 32 stats-12 files
+  total across Ch 10-17.
+- Chapter list extended to 17 units, titles verified from the PDF headers:
+  Hypothesis Testing, Simple Linear Regression and Correlation, Association,
+  Analysis of Time Series, Orientation of Computers. Owner confirms the
+  subject is now complete (Ch 10-17, continuation numbering from 11th's 1-9).
+- Note: sandbox reset to base commit again mid-session (2nd time today);
+  full recovery from origin (299761e) + mtime restore from site.zip gave a
+  byte-identical rebuild before this batch was applied.
+- Site: 440 → 445 pages, 764 → 782 published files, search.json 438 entries.
+  Precheck 0/0, PDF audit 782/782, forms 61/61, calculators 18/18.
