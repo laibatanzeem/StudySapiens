@@ -64,7 +64,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/": {
-"hash": "93ead07e6b40624af695fb87ed9262e7",
+"hash": "0fcd36a957cd930d59444f7584170c0b",
 "lastmod": "2026-11-15"
 },
 "classes/10/": {
@@ -624,7 +624,63 @@
 "lastmod": "2026-11-15"
 },
 "classes/11/english/": {
-"hash": "76909d0b3ccaddb49a1bdd38d3f22100",
+"hash": "084a56a1ac684e2babcc35b1b5ecc324",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-1/": {
+"hash": "8da33d4337d207d729b19ce93a184565",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-10/": {
+"hash": "955bf29289554143c0b57b7d02f88bc1",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-11/": {
+"hash": "46b88e35d7d6c04bb222729a5e5530e1",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-12/": {
+"hash": "417090f8bd8d7559da7496bfdc726aa4",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-13/": {
+"hash": "44746512a697e50a65479e9031635dc3",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-14/": {
+"hash": "d5d7964b203cd8f8c9de947398348715",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-2/": {
+"hash": "faa8ce4704274214f7017548297da542",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-3/": {
+"hash": "b203dcc6d78b9601e3bb8aa6026d0af7",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-4/": {
+"hash": "2ca28cb0b41cdeaf6a7064b671d2b16e",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-5/": {
+"hash": "56427fd5f5455a6b8d9b952cfba8b681",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-6/": {
+"hash": "b179fb01b955f3957ce7f6d58dd4ee8b",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-7/": {
+"hash": "b61c1c5c8b5b7dd7ed0f9a5395a50555",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-8/": {
+"hash": "b3aad9585ef580974673b4a1153dc204",
+"lastmod": "2026-11-15"
+},
+"classes/11/english/chapter-9/": {
+"hash": "df2ccaafb276c564b36d9ce62637a6e4",
 "lastmod": "2026-11-15"
 },
 "classes/11/islamiat/": {
@@ -792,7 +848,7 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/": {
-"hash": "745c356b00c5a3e083e24637b2632a65",
+"hash": "85fda80e41278a9223f92bdd400d0dea",
 "lastmod": "2026-11-15"
 },
 "classes/12/biology/": {
@@ -964,7 +1020,59 @@
 "lastmod": "2026-11-15"
 },
 "classes/12/english/": {
-"hash": "534d3559dfb9f89c9f7c37e214417fe4",
+"hash": "cae653959312ad62005d6576e79a15cb",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-1/": {
+"hash": "c873a56dd36274503e5d7a3df4f61864",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-10/": {
+"hash": "3b382791cfe13a65edd5539a58d424d2",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-11/": {
+"hash": "537348c10a2c2fef8720c1f89fb28e80",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-12/": {
+"hash": "28454d4d28a9e602f9cfa2e1f35fc0a6",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-13/": {
+"hash": "39ce4bbed8592dceca91a4624929ce9d",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-2/": {
+"hash": "00ef422d7514970201881e0a2c2104c8",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-3/": {
+"hash": "9446f16843d09ee0415a1a4f86814d43",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-4/": {
+"hash": "4139ecc1069cb9421e71d062ecc0d19d",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-5/": {
+"hash": "03b761636880641af767cde81c1fe90f",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-6/": {
+"hash": "eeb6e9926e89608ee052a922f88fedbf",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-7/": {
+"hash": "64552470b8dc03d3a328a345bc63ef33",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-8/": {
+"hash": "4016a84ed31ea60b75264b2ff8f56ee6",
+"lastmod": "2026-11-15"
+},
+"classes/12/english/chapter-9/": {
+"hash": "71170f7f3127ad77f5f33a43d4f0edb2",
 "lastmod": "2026-11-15"
 },
 "classes/12/mathematics/": {

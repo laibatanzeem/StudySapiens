@@ -998,3 +998,26 @@ yet.** These two are deliberately deferred — flip them only when:
 - Site: 372 → 390 pages, 649 → 658 published files, search.json 383 entries.
   Precheck 0/0, PDF audit 658/658, forms 61/61, calculators 18/18; sitemap
   lastmod bumped only for the 18 new chapter URLs (+ touched subject/class pages).
+
+## Upload: Class 12 English + Eng-11 chapter upgrade (15 Nov 2026)
+
+- New: 12th English exercise solutions — 13 PDFs (12 units + The Pearl) under
+  files/class-12/english/solutions/ (original filenames kept). Chapter list
+  added to data.py, titles verified from the PDF headers: Journey to Taif,
+  The Last Lesson, On His Blindness (Poem), The Power of Digital Learning,
+  The Giving Tree, The Fun They Had, Because I Could Not Stop for Death (Poem),
+  The Devoted Friend, The Doll's House, All the World's a Stage (Poem),
+  A Letter to God, A Visit to the Swat Valley, The Pearl by John Steinbeck
+  (Novel — 20-page solutions file).
+- Consistency upgrade (same as CS-11 earlier today): 11th English had no
+  CHAPTERS entry — its 35 files rendered as flat whole-book lists. Added the
+  14-unit list (titles verified from the existing English11 solutions'
+  headers), so unit files now live in chapter cards with clean labels
+  ("Exercise Solutions", "MCQ Bank", "Stanza Explanations") and 14 unit pages
+  exist. Non-unit files (application/letter/story/translation models, model
+  papers, pairing scheme) stay in the whole-book section. Known gaps carried
+  over: MCQ banks for units 4/7/9/12 not yet supplied.
+- forms-verify hide-empty policy expectation updated for the new eng-11
+  layout (19 slot heads: 14 chapter cards + 5 whole-book).
+- Site: 390 → 417 pages, 658 → 671 published files, search.json 410 entries.
+  Precheck 0/0, PDF audit 671/671, forms 61/61, calculators 18/18.

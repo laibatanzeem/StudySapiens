@@ -528,7 +528,10 @@ let chapterPages = 0, chapterIssues = [];
       // cs-11 since 15 Nov 2026 has a verified chapter list: 9 chapter cards
       // + 2 whole-book slots (solutions pointer + pairing scheme) = 11 heads.
       { dir: 'computer-science', slots: 11, pats: ['CS11_Unit\\d+_Exercise-Solutions\\.pdf:9'] },
-      { dir: 'english', slots: 5, pats: ['English11_Unit\\d+_Exercise-Solutions\\.pdf:14',
+      // eng-11 since 15 Nov 2026 has a verified 14-unit chapter list:
+      // 14 chapter cards + 5 whole-book slots (sol/mcq pointers, notes models,
+      // model papers, scheme) = 19 heads.
+      { dir: 'english', slots: 19, pats: ['English11_Unit\\d+_Exercise-Solutions\\.pdf:14',
         'English11_Unit\\d+_MCQ-Bank\\.pdf:10',
         'English11_(Unit\\d+_Stanza-Explanations|Application-Models|Letter-Models|Story-Models|Translation-Practice)\\.pdf:9',
         'English11_Model-Paper-\\d\\.pdf:2'] },
@@ -548,7 +551,7 @@ let chapterPages = 0, chapterIssues = [];
       if (!ok) bad.push(dir + ' (' + nslots + ' slots; ' + bits.join(', ') + ')');
     }
     log('hide-empty policy: cs-11 + eng-11 show only live slots', bad.length === 0,
-      bad.length ? bad.join('; ') : 'cs-11: 11 slots (9 chapter cards + 2 whole-book); eng-11: 5 slots (9 notes, 14 sol, 10 MCQ, 2 model)');
+      bad.length ? bad.join('; ') : 'cs-11: 11 slots (9 chapter cards + 2 whole-book); eng-11: 19 slots (14 chapter cards + 5 whole-book)');
   }
 }
 
