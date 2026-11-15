@@ -1199,3 +1199,27 @@ yet.** These two are deliberately deferred — flip them only when:
   (no Statistics subject, urdu pages still live) — the latest zip (29d04da)
   with statistics + math/CS/English/physics/stats-12 + subject removal +
   noindex + canonicalization still needs to be uploaded and the edge purged.
+
+## Audit item "placeholder pages indexable" - verified already fixed (15 Nov 2026)
+
+- External audit reported: 8 empty + 5 scheme-only subject pages, empty
+  guess-papers/formulas/english-corner/past-papers/tests hubs, "no page uses
+  noindex", 347 sitemap URLs. That describes the STALE LIVE SNAPSHOT
+  (pre-44d3ac9), not the current build - same stale snapshot as the WAF
+  report; the latest zip has not been uploaded yet.
+- Current build (verified 15 Nov):
+  - 4 zero-file hubs carry noindex,follow + data-ss-reason marker and are
+    OUT of the sitemap: guess-papers, past-papers, formulas, english-corner
+    (dynamic gate - auto-reverts when files land).
+  - Subject pages: 0 empty, 0 scheme-only - every registered subject has
+    multiple real files (urdu/pak-studies/tarjuma/islamiat-11 removed).
+  - Chapter pages: 351 scanned, 0 with zero file links.
+  - Sitemap: 433 URLs, every one backed by real content.
+  - /tests/ deliberately kept indexable: one fully working interactive
+    quiz (study-skills-basics, ~614 words + scored questions) + ~655-word
+    hub with zero coming-soon markers - functional content, not
+    under-construction. Revisit if it still has only one quiz when AdSense
+    review is attempted.
+- Action for owner: upload the current zip + purge edge cache; the noindex
+  tags only take effect once deployed. GSC coverage will drop the 4 hubs
+  and the removed subject URLs after recrawl.
