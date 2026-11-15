@@ -1409,3 +1409,25 @@ yet.** These two are deliberately deferred — flip them only when:
 - Once we know which step passes, build.py's generator gets a v5 that
   matches the highest passing rung (and the failing directive is dropped
   or rewritten for LiteSpeed compatibility).
+
+## Post-incident analysis: what's necessary vs optional (15 Nov 2026)
+
+- Owner asked whether the .htaccess ladder is necessary. Answer recorded:
+  URGENT = edge purge only (cached 500s on /, robots.txt, sitemap.xml).
+  Recommended = safe file (restores custom 404 + cache/security headers,
+  proven set, ~zero risk). Optional = step1 rewrites (canonical 301s;
+  canonical TAGS already mitigate SEO meanwhile). Deferred = step2
+  headers (most likely outage culprit; pure hardening).
+- Deduction: on 14 Nov the rewrite rules PARSED and executed (they
+  looped - a parse error would have 500'd immediately instead), so the
+  v4 500 is more likely one of the three new Header lines (HSTS /
+  Permissions-Policy / CSP-Report-Only) than the rewrites. Step1 has
+  good odds.
+- If step1 DOES 500: theory = Hostooze edge does not preserve the www
+  Host header when proxying to origin, so the host-based apex rule self-
+  loops on every URL (matches robots.txt also failing). In that case the
+  apex->www redirect must be done at the PANEL/edge level (Hostooze
+  support), and only the index.html rule (THE_REQUEST-based, host-
+  independent, loop-safe) stays in .htaccess.
+- Canonical tags remain sitewide either way, so SEO is protected while
+  the 301s are sorted.
