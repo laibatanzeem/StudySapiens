@@ -64,7 +64,7 @@
 "lastmod": "2026-11-14"
 },
 "classes/": {
-"hash": "28dcde35353c6ec704466ee1a4e163e8",
+"hash": "e08bcde8b88ba3d4624a8a93058af410",
 "lastmod": "2026-11-15"
 },
 "classes/10/": {
@@ -460,7 +460,7 @@
 "lastmod": "2026-11-14"
 },
 "classes/11/": {
-"hash": "816c86ea89dc115f45659b9c0c20e225",
+"hash": "fe7d3e53e526f599755fd1c570ebf562",
 "lastmod": "2026-11-15"
 },
 "classes/11/biology/": {
@@ -596,15 +596,35 @@
 "lastmod": "2026-11-14"
 },
 "classes/11/mathematics/": {
-"hash": "0ebd4dc2fe2398b0dd1320152fd05390",
+"hash": "ddd763a718013dbdade1a955fc3c62b2",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-1/": {
-"hash": "ae0be1f7c410a2a99f49cc41b248b179",
+"hash": "67a64099abb6bc13b7b78103f656d954",
+"lastmod": "2026-11-15"
+},
+"classes/11/mathematics/chapter-10/": {
+"hash": "21faa883c5d7294f1748a844a90636a3",
+"lastmod": "2026-11-15"
+},
+"classes/11/mathematics/chapter-11/": {
+"hash": "40455406314b2bd1c4633a861a523183",
+"lastmod": "2026-11-15"
+},
+"classes/11/mathematics/chapter-12/": {
+"hash": "5e1283c3fb7f13f422dd06dd88aef496",
+"lastmod": "2026-11-15"
+},
+"classes/11/mathematics/chapter-13/": {
+"hash": "4fa118922648aa6e3475c71830d696d5",
+"lastmod": "2026-11-15"
+},
+"classes/11/mathematics/chapter-14/": {
+"hash": "9ead5fe96a87058ed63a0b14185bbf9b",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-2/": {
-"hash": "90445055b608bfca7d1b018c1e2c623d",
+"hash": "4501e9ffcf17f3bfb36bbc7155a18b8d",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-3/": {
@@ -620,15 +640,19 @@
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-6/": {
-"hash": "d2b77f60d0df62a1908855571888fa30",
+"hash": "540a8a6f3fb85e0a3b95f7f53d31cdfd",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-7/": {
-"hash": "78d8ca225a6c117459f0ffb33ca90d4e",
+"hash": "a16cf20af17e451d8fd71ae5a1c5bb00",
 "lastmod": "2026-11-15"
 },
 "classes/11/mathematics/chapter-8/": {
-"hash": "c5e32e41a8a80d5140757c7b2f45f148",
+"hash": "c6a200e8eac91f11d5dade72c25b052f",
+"lastmod": "2026-11-15"
+},
+"classes/11/mathematics/chapter-9/": {
+"hash": "74fc054bad244f9a4e5c3ba16073e2f9",
 "lastmod": "2026-11-15"
 },
 "classes/11/physics/": {

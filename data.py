@@ -546,8 +546,10 @@ CHAPTERS = {
         (11, "Special Theory of Relativity"),
         (12, "Nuclear and Particle Physics"),
     ],
-    # Class 11 Mathematics (PCTB 2025-26): 8 units, titles verified against
+    # Class 11 Mathematics (PCTB 2025-26): 14 units, titles verified against
     # the owner's exercise-solutions PDFs (headers: "Unit N: Title").
+    # Exercise coverage follows the ALP (Accelerated Learning Programme)
+    # selection, so non-ALP exercises are intentionally absent.
     ("11", "mathematics"): [
         (1, "Complex Numbers"),
         (2, "Functions and Graphs"),
@@ -557,6 +559,12 @@ CHAPTERS = {
         (6, "Sequences and Series"),
         (7, "Permutations and Combinations"),
         (8, "Mathematical Inductions and Binomial Theorem"),
+        (9, "Division of Polynomials"),
+        (10, "Trigonometric Identities"),
+        (11, "Trigonometric Functions and their Graphs"),
+        (12, "Limit of Sequences and Continuity"),
+        (13, "Differentiation"),
+        (14, "Vectors in Space"),
     ],
     ("12", "chemistry"): [
         (17, "Group 2 Elements"),

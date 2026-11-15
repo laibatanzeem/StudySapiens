@@ -940,3 +940,20 @@ yet.** These two are deliberately deferred — flip them only when:
   calculators 18/18. sitemap lastmod bumped only for the 8 new math URLs.
 - Known gaps (owner aware): exercises 1.3, 3.1, 4.2, 6.2, 6.4, 6.7–6.9, 8.2,
   8.3 not supplied yet; units beyond 8 (if any) pending confirmation.
+
+## Upload: Class 11 Mathematics units 9-14 (15 Nov 2026)
+
+- The 11th book has 14 units, not 8 — extended the data.py chapter list with
+  titles verified from the new PDF headers (9 Division of Polynomials ·
+  10 Trigonometric Identities · 11 Trigonometric Functions and their Graphs ·
+  12 Limit of Sequences and Continuity · 13 Differentiation ·
+  14 Vectors in Space).
+- 11 new exercise-solutions PDFs (Ex 9.2, 10.1, 11.1-11.3, 12.1, 12.3,
+  13.1-13.3, 14.2) under files/class-11/mathematics/solutions/ — 31 total.
+  The re-sent 8.4 was a byte-identical duplicate (md5 match) and was skipped.
+- Owner confirmed the exercise selection follows the ALP (Accelerated
+  Learning Programme), so non-ALP exercises are intentionally absent — not
+  pending uploads.
+- Site: 355 → 361 pages, 629 → 640 published files, search.json 354 entries.
+  Precheck 0/0, PDF audit 640/640, forms 61/61, calculators 18/18; sitemap
+  lastmod bumped only for the 6 new unit URLs.
