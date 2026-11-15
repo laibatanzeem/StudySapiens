@@ -285,6 +285,20 @@ def main():
     else:
         warn("node not found: JS syntax validation skipped")
 
+    # === ss-config.js visibility (mailto fallback is SAFE, but the owner
+    #      should see the unconfigured state in every build) ===
+    cfg_p = SITE / "assets" / "js" / "ss-config.js"
+    if cfg_p.is_file():
+        cfg_txt = cfg_p.read_text(encoding="utf-8")
+        m = re.search(r'contactAccessKey:\s*"([^"]*)"', cfg_txt)
+        if m and not m.group(1).strip():
+            info("ss-config: contactAccessKey empty - contact form uses the mailto fallback (paste Web3Forms key when ready; copy self-upgrades)")
+        m = re.search(r'newsletterEndpoint:\s*"([^"]*)"', cfg_txt)
+        if m and not m.group(1).strip():
+            info("ss-config: newsletterEndpoint empty - newsletter uses the mailto fallback (paste ESP form action when ready)")
+    else:
+        warn("site/assets/js/ss-config.js missing (forms config)")
+
     # ================= summary =================
     print("=" * 64)
     print(f"PRECHECK RESULT: {len(pages)} pages | {len(critical)} critical | {len(warnings)} warnings")

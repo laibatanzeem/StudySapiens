@@ -3302,7 +3302,7 @@ def build_contact():
     <div class="calc-wrap">
       <div class="form-card reveal-l">
         <h2 style="font-size:1.3rem;margin-bottom:6px">Send a Message</h2>
-        <p class="muted small" style="margin-bottom:20px">Fill this in and press Send — it goes straight to a teacher's inbox. No email app needed.</p>
+        <p class="muted small" style="margin-bottom:20px" data-ss-hint="contact">Fill this in and press Send — your email app opens with the message ready to go. (Or write to {EMAIL} directly — a teacher reads every message.)</p>
         <form data-mailto="{EMAIL}" data-subject="StudySapiens. Contact Form" data-ss="contact">
           <div class="f-2col">
             <div class="f-row"><label>Your name *</label><input name="name" required placeholder="e.g. Ayesha Khan"></div>
@@ -3392,7 +3392,7 @@ def build_privacy():
       </ul>
       <p>We never sell, rent or otherwise share your personal information with anyone else, and external sites we link to (eLearn Punjab, PMDC, FPSC, education boards) have their own privacy policies.</p>
       <h2>Email updates (newsletter)</h2>
-      <p id="unsubscribe">If you subscribe, your email address is passed to our email platform so we can send updates about new notes, schemes and papers. Subscribing uses <b>double opt-in</b>: you get one confirmation email and are only added after you click the link in it. Every email we send carries an <b>unsubscribe link</b> — one click and you are off the list. We send study updates, never unrelated marketing. If advertising ever appears in emails it will be clearly marked (see our <a href="../advertising/">Advertising Disclosure</a>).</p>
+      <p id="unsubscribe">If you subscribe, your email address is passed to our email platform so we can send updates about new notes, schemes and papers. Subscribing uses <b>double opt-in</b>: you get one confirmation email and are only added after you click the link in it. (Until the email platform is connected, subscribing simply emails our admin address — the same promise, person to person.) Every email we send carries an <b>unsubscribe link</b> — one click and you are off the list. We send study updates, never unrelated marketing. If advertising ever appears in emails it will be clearly marked (see our <a href="../advertising/">Advertising Disclosure</a>).</p>
       <h2>How long we keep things</h2>
       <ul>
         <li><b>Analytics events:</b> if Google Analytics is enabled, Google retains event data for up to 14 months by default (configurable in the GA property); aggregate reports may be kept longer.</li>
@@ -3564,7 +3564,7 @@ def build_sitemap_page():
 
 SW_JS = r"""
 /* StudySapiens service worker. V1 */
-const VERSION = 'ss-v16';
+const VERSION = 'ss-v17';
 const CORE = [
   './', 'classes/', 'pairing-scheme/', 'mdcat/', 'date-sheet/', 'offline/',
   'assets/css/style.css', 'assets/js/main.js', 'assets/js/ss-config.js',

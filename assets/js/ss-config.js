@@ -1,16 +1,28 @@
 /* ==========================================================================
    StudySapiens · ss-config.js — SITE SETTINGS (the only file you edit here)
    --------------------------------------------------------------------------
-   After you sign up for the services below, paste your values here and
-   re-upload this ONE file (site/assets/js/ss-config.js) — nothing else
-   changes. Until a value is empty, that form safely falls back to opening
-   the visitor's email app (the old behaviour), so the site never breaks.
+   TWO places, one rule — this file is the BUILD SOURCE (assets/js/
+   ss-config.js); the build copies it to site/assets/js/ss-config.js and
+   into site.zip.
+   • Quickest (live site): edit site/assets/js/ss-config.js in your host's
+     File Manager — the service worker fetches it network-first, so the
+     change applies on the next page view. No re-upload needed.
+   • BUT the next full zip upload OVERWRITES the server copy — so ALSO
+     paste the same values here (or send them to whoever builds the zip)
+     so they survive every rebuild. Everything below is public-by-design,
+     so keeping them in the repo is safe.
+   Until a value is empty, that form safely falls back to opening the
+   visitor's email app (the old behaviour), so the site never breaks.
 
    ⚠ SAFETY: only paste values that are MEANT to be public (form URLs and
    website "access keys"). NEVER paste a secret API key from any service —
    everything in this file is visible in the visitor's browser.
    ========================================================================== */
 window.SS_CONFIG = {
+
+  /* File version - bump this and add a line to the CHANGELOG at the
+     bottom of this file whenever you change any value here. */
+  configVersion: "1.0",
 
   /* ---- CONTACT FORM (Web3Forms — free, no account needed) --------------
      1. Go to  https://web3forms.com
@@ -50,4 +62,11 @@ window.SS_CONFIG = {
              Set this to false on the SAME DAY you enable that CMP so
              visitors do not see two banners.                                  */
   consentBanner: true
+
+  /* ---- CHANGELOG ----------------------------------------------------------
+     v1.0  15 Nov 2026  Initial versioned config. contactAccessKey and
+           newsletterEndpoint still empty -> forms use the mailto fallback,
+           and page copy shows honest fallback wording (upgraded
+           automatically in the browser once keys are pasted).
+           consentBanner: true (first-party Consent Mode v2 banner).      */
 };

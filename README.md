@@ -1267,3 +1267,36 @@ yet.** These two are deliberately deferred — flip them only when:
 - No invented people, credentials, founding dates or social profiles.
   Gates: precheck 0/0, PDF 778/778, forms 61/61, calc 18/18; sitewide
   lastmod bump (schema change on every page).
+
+## Forms audit: honest fallback copy + config versioning (15 Nov 2026)
+
+- Audit item: ss-config.js has empty contactAccessKey / newsletterEndpoint
+  (true - owner's credentials, cannot be invented), so every form uses the
+  mailto fallback, but the contact page promised "No email app needed"
+  (false) and privacy copy implied a connected ESP.
+- Fixed the FALSE copy, made the rest adaptive:
+  - Contact page hint now ships the honest fallback wording ("your email
+    app opens with the message ready"); main.js UPGRADES it to "no email
+    app needed" only when contactAccessKey is actually set (data-ss-hint).
+  - Privacy: added "(Until the email platform is connected, subscribing
+    simply emails our admin address - the same promise, person to person.)"
+    - REMOVE this parenthetical when the ESP endpoint is pasted.
+  - Runtime toasts were already mode-honest (checked, unchanged).
+- Config versioning (audit 6.2): ss-config.js now carries configVersion
+  "1.0" + a CHANGELOG block; rule: bump version + changelog line on every
+  edit of that file.
+- precheck now prints [info] lines when contact/newsletter endpoints are
+  empty, so the unconfigured state is visible in every build (mailto
+  fallback is SAFE - info, not a warning).
+- Service worker bumped ss-v16 -> ss-v17 (main.js changed).
+- IMPORTANT pipeline fact discovered: site/assets/* is GENERATED (build
+  copies assets/ -> site/assets/, minifying main.js). Never edit the site
+  copy - edits are wiped on rebuild. Same for deployment: keys pasted ONLY
+  on the server are overwritten by the next zip upload. ss-config.js header
+  now documents both paths (quick server edit + mirror into assets/js/
+  ss-config.js so keys survive rebuilds; values are public-by-design).
+- Owner to-do when ready: Web3Forms key (web3forms.com, enter
+  admin@studysapiens.com) + ESP form action with double opt-in ON
+  (MailerLite recommended in the config comments); paste BOTH into
+  assets/js/ss-config.js, bump configVersion, test submit + unsubscribe.
+- Gates: precheck 0/0 (+2 info), PDF 778/778, forms 61/61, calc 18/18.

@@ -514,6 +514,17 @@ function ssTrack(name, params) {
     mailtoCompose(form, fd);
   }));
 
+  /* Adaptive form copy: pages ship the honest mailto-fallback wording
+     ("your email app opens…"). When a real endpoint is configured in
+     ss-config.js, upgrade the hint so the "no email app needed" promise
+     is only ever shown when it is actually true. */
+  (function () {
+    const CFG = window.SS_CONFIG || {};
+    const hint = document.querySelector('[data-ss-hint="contact"]');
+    if (hint && CFG.contactAccessKey)
+      hint.textContent = "Fill this in and press Send — it goes straight to a teacher's inbox. No email app needed.";
+  })();
+
   /* "Notify me" buttons on coming-soon cards -> focus the nearest subscribe form
      and remember WHAT the student asked to be notified about (interest). */
   $$("[data-notify]").forEach(btn => btn.addEventListener("click", () => {
